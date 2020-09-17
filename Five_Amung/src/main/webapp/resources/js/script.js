@@ -1,21 +1,20 @@
 function scrollMenu() {
 	window.addEventListener('scroll', function(e) {
 		var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-			shrinkOn = 100; // 기준점인 y 픽셀. 
+			shrinkOn = 100;//y pixel 기준 
 
-		if (distanceY > shrinkOn) { // 줄어든 헤더 버전
-			$(".nav1").slideUp();
-			$("#nav-slide").slideUp();
-			$(".nav2-small").css('display', 'inline-block')
-			$(".nav2-small").slideDown();
-
-		} else { // 평소 헤더 버전
+		if (distanceY > shrinkOn) {//줄어들었을때 
+			$(".nav1").hide();
+			$(".nav2")
+			.addClass("nav2-small bounce");
+		} else {//원상태
 			$(".nav1").show();
-			$("#nav-slide").show();
-			$(".nav2-small").hide();
+			$(".nav2")
+			.removeClass("nav2-small bounce");
 		}
 	});
 }
+//파일 버튼
 $(document).ready(function() {
 	var fileTarget = $('.filebox .upload-hidden');
 
@@ -30,10 +29,3 @@ $(document).ready(function() {
 	});
 	
 });
-
-
-
-
-
-	
-
