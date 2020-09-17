@@ -1,56 +1,214 @@
 @charset "utf-8";
 
 /* 웹폰트 */
-@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css); .nanumgothic * { font-family: 'Nanum Gothic', sans-serif; }
-@font-face { font-family: 'NanumBarunGothic'; font-style: normal; font-weight: 400; src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot'); src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype'); } @font-face { font-family: 'NanumBarunGothic'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot'); src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype') } @font-face { font-family: 'NanumBarunGothic'; font-style: normal; font-weight: 300; src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot'); src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype'); } .nanumbarungothic * { font-family: 'NanumBarunGothic', sans-serif; }
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+.nanumgothic * {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+@font-face {
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+	src:
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix')
+		format('embedded-opentype'),
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff')
+		format('woff'),
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf')
+		format('truetype');
+}
+
+@font-face {
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
+	src:
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix')
+		format('embedded-opentype'),
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff')
+		format('woff'),
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf')
+		format('truetype')
+}
+
+@font-face {
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 300;
+	src:
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+	src:
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix')
+		format('embedded-opentype'),
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff')
+		format('woff'),
+		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf')
+		format('truetype');
+}
+
+.nanumbarungothic * {
+	font-family: 'NanumBarunGothic', sans-serif;
+}
+
+@font-face {
+	font-family: 'S-CoreDream-6Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
 /*reset*/
-* {margin: 0 auto;padding: 0;font-family: 나눔고딕, 'Nanum Gothic', 'NanumGothicWeb', Century Gothic, CenturyGothic, sans-serif;color : #4c4c4c;box-sizing: border-box;outline: none;}
-input:focus {outline: none;}
-input[type="button"] {cursor: pointer;}
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;vertical-align: baseline;}
+* {
+	margin: 0 auto;
+	padding: 0;
+	font-family: S-CoreDream-6Bold, Century Gothic, CenturyGothic, sans-serif;
+	color: #4c4c4c;
+	box-sizing: border-box;
+	outline: none;
+}
 
-caption, th, td {text-align: left;font-weight: normal;}
+input:focus {
+	outline: none;
+}
 
-table, td, th {vertical-align: middle;border-collapse: collapse;border-spacing: 0;}
+input[type="button"] {
+	cursor: pointer;
+}
 
-blockquote:before, blockquote:after, q:before, q:after {content: "";}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q,
+	dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+	tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
 
-blockquote {quotes: "" "";}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
 
-a img {border: none;}
+table, td, th {
+	vertical-align: middle;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
-a {text-decoration:none;color: #000;}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: "";
+}
 
-caption{position:absolute; overflow:hidden; visibility:hidden; height:0; line-height:0; z-index:-1;}
+blockquote {
+	quotes: "" "";
+}
 
-caption,.hide{overflow:hidden; visibility:hidden; height:0; line-height:0; z-index:-1; display:none;}
+a img {
+	border: none;
+}
 
-body {line-height: 1;word-break: break-all;-ms-word-break: break-all;-webkit-text-size-adjust: none;text-align: center;margin: 0 auto;}
+a {
+	text-decoration: none;
+	color: #000;
+}
 
-ul,li {list-style: none;margin: 0px;padding: 0px;}
+caption {
+	position: absolute;
+	overflow: hidden;
+	visibility: hidden;
+	height: 0;
+	line-height: 0;
+	z-index: -1;
+}
 
-img {display: inline-block;border: 0px;vertical-align: middle;}
+caption, .hide {
+	overflow: hidden;
+	visibility: hidden;
+	height: 0;
+	line-height: 0;
+	z-index: -1;
+	display: none;
+}
 
+body {
+	line-height: 1;
+	word-break: break-all;
+	-ms-word-break: break-all;
+	-webkit-text-size-adjust: none;
+	text-align: center;
+	margin: 0 auto;
+}
 
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display: block;}
+ul, li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
 
-ol,dl,menu {list-style: none;}
+img {
+	display: inline-block;
+	border: 0px;
+	vertical-align: middle;
+}
 
-blockquote,q {quotes: none;}
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section {
+	display: block;
+}
 
-blockquote:before,blockquote:after,q:before,q:after {content: '';content: none;}
+ol, dl, menu {
+	list-style: none;
+}
 
-.clearfix::after {content: '';display: block;clear: both;}
+blockquote, q {
+	quotes: none;
+}
 
-textarea {overflow: auto}
-div { margin: 0 auto;}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+
+.clearfix::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+textarea {
+	overflow: auto
+}
+
+div {
+	margin: 0 auto;
+}
 
 /* IE 8/9/10/11 기본적 세로 스크롤 막대를 제거 */
+input, select, textarea, button, optgroup {
+	font-size: 100%;
+	vertical-align: middle;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	margin: 0;
+}
 
-input,select,textarea,button,optgroup {font-size: 100%;vertical-align: middle;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;margin: 0;}
+em, address {
+	font-style: normal;
+}
 
-em,address {font-style: normal;}
-
-button {cursor: pointer;}
+button {
+	cursor: pointer;
+}
