@@ -43,9 +43,26 @@
 <body onload="javascript:scrollMenu();">
 	<div id="wrap">
 		<div class="floatmenu">
-			<a href="${pageContext.request.contextPath }/qna/qna_list.do"><img src="${pageContext.request.contextPath }/resources/img/icon_talk.png"></a>
-			<a
-				href="#"><img src="${pageContext.request.contextPath }/resources/img/icon_up.png"></a>
+			<ul>
+				<li>
+					<a href="https://open.kakao.com/o/sgJwcaxc" target="_blank">
+						<i class="fas fa-phone-alt"></i>
+						<span>전화연결</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://open.kakao.com/o/sgJwcaxc" target="_blank">
+						<img src="${pageContext.request.contextPath }/resources/img/icon_talk.png">
+						<span>카카오톡</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/img/icon_up.png">
+						<span>올라가기</span>
+					</a>
+				</li>
+			</ul>
 		</div>
 		<header>
 			<nav class="nav1">
@@ -68,7 +85,7 @@
 					</h1>
 					<div class="nav2-gnb">
 						<ul>
-							<li><a href="${pageContext.request.contextPath }/notice/notice_list.do">공지사항</a></li>
+							<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
 							<li><a href="${pageContext.request.contextPath }/reservation/private/reserveform.do">예약하기</a></li>
 							<li class="gnb-drop"><a href="#">이용안내</a>
 								<ul class="dropdown">

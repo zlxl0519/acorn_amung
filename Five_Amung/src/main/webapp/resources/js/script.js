@@ -7,10 +7,17 @@ function scrollMenu() {
 			$(".nav1").hide();
 			$(".nav2")
 			.addClass("nav2-small bounce");
+			
+			$(".dropdown")
+			.addClass("dropdown-small");
+			
 		} else {//원상태
 			$(".nav1").show();
 			$(".nav2")
 			.removeClass("nav2-small bounce");
+			
+			$(".dropdown")
+			.removeClass("dropdown-small");
 		}
 	});
 }

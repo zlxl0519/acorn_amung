@@ -14,21 +14,55 @@ html, body {
 .floatmenu {
 	position: fixed;
 	bottom: 30px;
-	right: 20px;
-	width: 50px;
+	right : 20px;
+	z-index: 999;
 }
 
 .floatmenu a {
 	display: inline-block;
+	box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.08);
+	border-radius: 50%;
+	padding : 5px;
+	transition :all 0.1s linear;
+	text-align: center;
+}
+.floatmenu a span{
+	display: none;
+	color : #fff;
+}
+
+.floatmenu a:hover {
+	border-radius: 83px;
+	padding: 5px 30px 5px 15px;
+}
+.floatmenu a:hover span{
+	display : inline-block;
 }
 
 .floatmenu a>img {
-	width: 100%;
+	width: 50px;
 	height: auto;;
 }
-
-.floatmenu a:first-child {
+.floatmenu a>i{
+	font-size: 1.8em;
+	color: #fff;
+	width: 50px;
+	height: 50px;
+	padding-top: 10px;
+}
+.floatmenu li{
+	text-align: right;
+}
+.floatmenu li {
 	margin-bottom: 10px;
+}
+.floatmenu li a{
+	background : #d6e7aa;
+}
+
+.floatmenu li:last-child a{
+	margin-bottom: 0px;
+	background : #feefbb;
 }
 
 /*header*/
@@ -115,8 +149,13 @@ html, body {
 }
 
 .nav2-small h1 {
-	width: 50px;
+	width: 43px;
 	height: auto;
+}
+
+.nav2-small h1 a{
+	display: inline-block;
+	margin-top: -4px;
 }
 
 .nav2-small h1 img {
@@ -238,7 +277,7 @@ html, body {
 }
 
 .dropdown a {
-	box-shadow: 0px 18px 30px -15px rgb(254 239 187/ 48%);
+	box-shadow: 0px 10px 9px 0px rgba(0, 0, 0, 0.08);
 	background: #fff;
 	text-align: center;
 	color: #97d2bf !important;
@@ -247,6 +286,7 @@ html, body {
 	padding: 20px 10px;
 	font-size: 16px !important;
 	font-weight: 500;
+	transition :all 0.1s linear;
 }
 
 .dropdown a:hover {
@@ -260,6 +300,7 @@ html, body {
 }
 
 .dropdown-small a {
+	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.08);
 	font-size: 13px !important;
 	width: 140px;
 	padding: 10px 10px !important;
@@ -383,20 +424,27 @@ footer .copyright {
 }
 
 .reservation-btn {
+	
+}
+
+.reservation-btn>a {
 	width: 292px;
 	height: 51px;
 	border-radius: 50px;
 	background-color: rgb(217, 230, 176);
 	display: inline-block;
-	opacity: 0.66;
 	text-align: center;
-}
-
-.reservation-btn>a {
+	box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.08);
 	font-weight: 900;
 	line-height: 3.4rem;
 	font-size: 28px;
 	color: #fff;
+	text-shadow: 0px 0px 1px #c4c4c4; 
+	transition :all 0.1s linear;
+}
+
+.reservation-btn>a:hover{
+	background: #fbefc1;
 }
 
 .main-room {
