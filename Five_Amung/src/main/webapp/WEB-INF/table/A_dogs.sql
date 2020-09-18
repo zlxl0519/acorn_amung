@@ -9,3 +9,5 @@ create table A_dogs(
 	gender varchar2(7),
 	memo CLOB
 );
+
+create sequence A_dogs_seq;

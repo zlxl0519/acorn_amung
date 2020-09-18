@@ -12,3 +12,5 @@ create table A_reserve (
 	regdate date, --예약 날짜
 	cancel char(3) default 'no' --예약 취소 여부,디폴드 값으로 no 취소시 yes 
 );
+
+create sequence A_reserve_seq;
