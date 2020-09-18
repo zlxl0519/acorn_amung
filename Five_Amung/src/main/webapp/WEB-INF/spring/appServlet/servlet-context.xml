@@ -16,12 +16,13 @@
 		현재 연결된 db가 없기 때문에 주석 처리 해둠.
 		Configuration.xml 생성 필요 =
 	-->
-	<!-- <beans:bean id="dataSource" 
+	
+	<beans:bean id="dataSource" 
 		class="org.springframework.jndi.JndiObjectFactoryBean">
 		<beans:property name="jndiName" value="java:comp/env/jdbc/myoracle"/>
 	</beans:bean>
 	
-	SqlSessionFactory 객체
+	<!-- SqlSessionFactory 객체 -->
 	<beans:bean id="sessionFactory" 
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"/>
@@ -32,7 +33,7 @@
 	<beans:bean class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg name="sqlSessionFactory" 
 			ref="sessionFactory"/>
-	</beans:bean> -->
+	</beans:bean>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
