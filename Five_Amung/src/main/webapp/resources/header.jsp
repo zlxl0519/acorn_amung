@@ -43,9 +43,26 @@
 <body onload="javascript:scrollMenu();">
 	<div id="wrap">
 		<div class="floatmenu">
-			<a href="${pageContext.request.contextPath }/qna/qna_list.do"><img src="${pageContext.request.contextPath }/resources/img/icon_talk.png"></a>
-			<a
-				href="#"><img src="${pageContext.request.contextPath }/resources/img/icon_up.png"></a>
+			<ul>
+				<li>
+					<a href="https://open.kakao.com/o/sgJwcaxc" target="_blank">
+						<i class="fas fa-phone-alt"></i>
+						<span>전화연결</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://open.kakao.com/o/sgJwcaxc" target="_blank">
+						<img src="${pageContext.request.contextPath }/resources/img/icon_talk.png">
+						<span>카카오톡</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/img/icon_up.png">
+						<span>올라가기</span>
+					</a>
+				</li>
+			</ul>
 		</div>
 		<header>
 			<nav class="nav1">
