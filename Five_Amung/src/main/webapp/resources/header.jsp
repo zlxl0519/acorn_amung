@@ -85,7 +85,7 @@
 					</h1>
 					<div class="nav2-gnb">
 						<ul>
-							<li><a href="${pageContext.request.contextPath }/notice/notice_list.do">공지사항</a></li>
+							<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
 							<li><a href="${pageContext.request.contextPath }/reservation/private/reserveform.do">예약하기</a></li>
 							<li class="gnb-drop"><a href="#">이용안내</a>
 								<ul class="dropdown">
