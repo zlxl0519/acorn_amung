@@ -3,7 +3,9 @@
  <footer>
 	<div>
 		<h2>
-			<a href="#"><img src="${pageContext.request.contextPath }/resources/img/logo_foot.png" /></a>
+			<a href="#">
+				<img src="${pageContext.request.contextPath }/resources/img/logo_foot.png" />
+			</a>
 		</h2>
 		<div class="footer-text">
 			<h3>(주) 에이멍</h3>
@@ -17,6 +19,6 @@
 		</div>
 	</div>
 </footer>
-</div><!--wrap 종료√-->
+</div><!--wrap 종료-->
 </body>
 </html>
