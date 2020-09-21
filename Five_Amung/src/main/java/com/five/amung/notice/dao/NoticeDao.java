@@ -12,11 +12,11 @@ public interface NoticeDao {
 	//글 추가
 	public void insert(NoticeDto dto);
 	//글정보 얻어오기
-	//public NoticeDto getData(int num);
+	public NoticeDto getData(int num);
 	//키워드를 활용한 글 정보 얻어오기
-	//public NoticeDto getData(NoticeDto dto);
+	public NoticeDto getData(NoticeDto dto);
 	//조회수 증가 시키기
-	//public void addViewCount(int num);
+	public void addViewCount(int num);
 	//글 삭제
 	//public void delete(int num);
 	//글 수정

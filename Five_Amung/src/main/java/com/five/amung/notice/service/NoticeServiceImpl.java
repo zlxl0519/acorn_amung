@@ -107,7 +107,50 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void getDetail(HttpServletRequest request) {
+		//파라미터로 전달되는 글 번호
+		int num = Integer.parseInt(request.getParameter("num")); //ref_group 번호
+		/*
+		검색 키워드에 돤련된 처리
+		*/
+		String keyword=request.getParameter("keyword"); //검색키워드
+		String condition=request.getParameter("condition"); //검색조건
 		
+	  	if(keyword==null){
+	  		//전달된 키워드가 없다면
+	  		keyword="";//빈문자열을 넣어준다.
+	  		condition="";
+	  	}
+		//인코딩된 키워드를 미리 만들어 둔다. 
+		String encodedK=URLEncoder.encode(keyword);
+		
+		//글 번호와 검색 키워드를 담을 CafeDto 객체 생성 CafeDto 객체 생성
+		NoticeDto dto=new NoticeDto();
+		dto.setNum(num);//글번호 담기
+		
+		if(!keyword.equals("")){ //만일 키워드가 넘어온다면 
+			if(condition.equals("title_content")){
+				//검색 키워드를 NoticeDto 객체의 필드에 담는다.
+				dto.setContent(keyword);
+				dto.setTitle(keyword);
+			}else if(condition.equals("title")){
+				dto.setTitle(keyword);
+				
+			}else if(condition.equals("category")){
+				dto.setCategory(keyword);
+			}
+		}//if 종료
+		
+		//자세히 보여줄 글 정보
+		NoticeDto resultDto = noticeDao.getData(dto);
+		
+		//view 페이지 에서 필요한 내용 HttpServletRequest에 담기
+		request.setAttribute("dto", resultDto);
+		request.setAttribute("condition", condition);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("encodedK", encodedK);
+		
+		//글 조회수 올리기
+		noticeDao.addViewCount(num);
 		
 	}//==== geDetail ====
 

@@ -7,6 +7,7 @@
 		(num,title,category,content,viewCount,regdate)
 		VALUES(A_notice_seq.NEXTVAL,#{title},#{category},#{content},0,SYSDATE)
 	</insert>
+	
 	<select id="getList" parameterType="noticeDto" resultType="noticeDto">
 		SELECT *
 		FROM
@@ -47,4 +48,45 @@
 				</when>
 			 </choose>
 	</select>
+	
+	<select id="getData" parameterType="int" resultType="noticeDto">
+		SELECT result1.*
+			FROM
+    		(SELECT num,category,title,content,viewCount,
+    				TO_CHAR(regdate, 'YYYY"년"MM"월"DD"일" HH24"시"MI"분"') AS regdate,
+    		 		LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
+    		 		LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
+   		 	 FROM A_notice) result1
+		WHERE num=#{num}
+	</select>
+	
+	<select id="getData2" parameterType="noticeDto" resultType="noticeDto">
+		SELECT result1.*
+			FROM
+    		(SELECT num,category,title,content,viewCount,
+    				TO_CHAR(regdate, 'YYYY"년"MM"월"DD"일" HH24"시"MI"분"') AS regdate,
+    		 		LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
+    		 		LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
+   		 	 FROM A_notice
+   		 	 <choose>
+				<when test="title != null and content != null">
+					WHERE title LIKE '%'||#{title}||'%' 
+					OR content Like '%'||#{content}||'%'
+				</when>
+				<when test="title != null">
+					WHERE title LIKE '%'||#{title}||'%'
+				</when>
+				<when test="category != null">
+					WHERE category LIKE '%'||#{category}||'%'
+				</when>
+			 </choose>
+   		 	 ) result1
+		WHERE num=#{num}
+	</select>
+	
+	<update id="addViewCount" parameterType="int">
+		UPDATE A_notice
+		SET viewCount = viewCount+1
+		WHERE num=#{num}
+	</update>
 </mapper>

@@ -30,11 +30,23 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Override
 	public int getCount(NoticeDto dto) {
 		return session.selectOne("notice.getCount", dto);
-	}
+	}// ==== getCount ====
 	
 	//글 정보 얻어오기
-	
+	@Override
+	public NoticeDto getData(int num) {
+		return session.selectOne("notice.getData", num);
+	}//==== getData ====
+
+	//키워드가 들어있는 CafeDto 를 전달 받아서 글 정보를 리턴하는 메소드
+	@Override
+	public NoticeDto getData(NoticeDto dto) {
+		return session.selectOne("notice.getData2", dto);
+	}//==== getData ====
 	
 	//조회수 증가
-	
+	@Override
+	public void addViewCount(int num) {
+		session.update("notice.addViewCount", num);
+	}//==== addViewCount ====
 }//==========NoticeDaoImpl==========
