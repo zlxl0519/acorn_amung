@@ -111,5 +111,4 @@
 		oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 	}
 </script>
-</div>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
