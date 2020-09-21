@@ -7,4 +7,9 @@
 		(id, pwd, email, profile, name, phone, regdate)
 		VALUES(#{id}, #{pwd}, #{email}, #{profile}, #{name}, #{phone}, SYSDATE)
 	</insert>
+	<select id="getData" parameterType="string" resultType="usersDto">
+		select id, pwd, email, profile, name, phone, to_char(regdate, 'yy.mm.dd hh24"시"mm"분"')as regdate
+		from A_member
+		where id=#{id}
+	</select>
 </mapper>

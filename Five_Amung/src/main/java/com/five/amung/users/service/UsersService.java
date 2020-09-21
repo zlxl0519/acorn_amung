@@ -3,8 +3,11 @@ package com.five.amung.users.service;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.five.amung.users.dto.UsersDto;
 
@@ -17,4 +20,7 @@ public interface UsersService {
 	public Map<String, Object> saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
 	//회원 목록 보기 요청 처리
+	
+	//로그인 처리
+	public void loginProcess(UsersDto dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, ModelAndView mView);
 }

@@ -16,8 +16,9 @@
 	<form id="loginForm" name="loginForm" action="${pageContext.request.contextPath	}/users/login.do" method="post" >
 	<div class="form-ul-wrap users-wrap">
 		<ul>
+			<input type="hidden" name="url" value="${url }" />
 			<li>
-				<input type="text" name="id" id="id"  placeholder="아이디" />
+				<input type="text" name="id" id="id" value="${savedId }" placeholder="아이디" />
 			</li>
 			
 			<li>
@@ -28,7 +29,7 @@
 		
 				<button class="btn-default mt20" type="submit">로그인</button>
 				<div class="chk-wrap">
-					<input type="checkbox" name="remember" value="remember" checked/>로그인 상태 유지
+					<input type="checkbox" name="remember" value="remember"/>로그인 상태 유지
 				</div>
 				
 				

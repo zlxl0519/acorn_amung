@@ -10,4 +10,7 @@ public interface UsersDao {
 	//ajax 프로필 사진 업로드 요청 처리
 	
 	//회원 목록 보기 요청 처리
+	
+	//아이디로 회원정보 가져오기
+	public UsersDto getData(String id);
 }

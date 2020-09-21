@@ -24,4 +24,9 @@ public class UsersDaoImpl implements UsersDao{
 		// TODO 아이디 중복 확인
 		return false;
 	}
+
+	@Override
+	public UsersDto getData(String id) {
+		return session.selectOne("users.getData", id);
+	}
 }
