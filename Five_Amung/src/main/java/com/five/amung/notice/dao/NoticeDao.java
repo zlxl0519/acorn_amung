@@ -6,9 +6,9 @@ import com.five.amung.notice.dto.NoticeDto;
 
 public interface NoticeDao {
 	//글목록
-	//public List<NoticeDto> getList(NoticeDto dto);
+	public List<NoticeDto> getList(NoticeDto dto);
 	//글의 갯수
-	//public int getCount(NoticeDto dto);
+	public int getCount(NoticeDto dto);
 	//글 추가
 	public void insert(NoticeDto dto);
 	//글정보 얻어오기

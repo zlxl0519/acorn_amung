@@ -20,6 +20,18 @@ public class NoticeDaoImpl implements NoticeDao{
 		session.insert("notice.insert", dto);
 	}//==== insert ====
 	
+	// 글 목록 리스트
+	@Override
+	public List<NoticeDto> getList(NoticeDto dto) {
+		return session.selectList("notice.getList", dto);
+	}// ==== getList ====
+	
+	// 글 갯수 얻어오기
+	@Override
+	public int getCount(NoticeDto dto) {
+		return session.selectOne("notice.getCount", dto);
+	}
+	
 	//글 정보 얻어오기
 	
 	
