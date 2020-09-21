@@ -96,7 +96,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="${pageContext.request.contextPath }/signup/signup_form.do">
+							<a href="${pageContext.request.contextPath }/users/signup_form.do">
 								회원가입
 							</a>
 						</li>
