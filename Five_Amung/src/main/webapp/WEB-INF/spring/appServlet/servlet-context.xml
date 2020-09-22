@@ -13,8 +13,6 @@
 	<!-- 
 		JNDI 데이터 소스 객체 얻어오는 설정
 		oracle 접속 정보 설정
-		현재 연결된 db가 없기 때문에 주석 처리 해둠.
-		Configuration.xml 생성 필요 =
 	-->
 	
 	<beans:bean id="dataSource" 
