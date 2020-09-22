@@ -73,7 +73,7 @@
 						<li><a href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a></li>
 						<li><a href="${pageContext.request.contextPath }/admin/list.do"><i class="fas fa-cog"></i>운영관리</a></li>
 						<li><a href="${pageContext.request.contextPath }/users/loginform.do">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath }/signup/signup_form.do">회원가입</a></li>
+						<li><a href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a></li>
 					</ul>
 				</div><!-- nav-gnb -->
 			</nav><!-- nav1 -->

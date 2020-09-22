@@ -22,6 +22,13 @@ public class UsersDaoImpl implements UsersDao{
 	@Override
 	public boolean isExist(String inputId) {
 		// TODO 아이디 중복 확인
-		return false;
+		String id=session.selectOne("users.isExist", inputId);
+		if(id==null) {
+			//존재하지 않는 아이디
+			return false;
+		}else {
+			//존재하는 아이디
+			return true;
+		}
 	}
 }
