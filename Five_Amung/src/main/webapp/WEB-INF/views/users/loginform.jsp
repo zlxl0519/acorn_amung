@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/resources/header.jsp"></jsp:include>
+<script>
+	document.title = "로그인 "; 
+</script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 폼</title>
 </head>
 <body>
 <div class="content">
@@ -34,9 +38,9 @@
 				
 				
 				<div class="a-wrap">
-					<a href="idfind_form.jsp">아이디 찾기</a>
-					<a href="pwdfind_form.jsp">비밀번호 찾기</a>
-					<a href="${pageContext.request.contextPath }/signup/signup_form.jsp">회원가입</a>
+					<a href="${pageContext.request.contextPath	}/users/idfind_form.do">아이디 찾기</a>
+					<a href="${pageContext.request.contextPath	}/users/pwdfind_form.do">비밀번호 찾기</a>
+					<a href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>
 				
 				</div>
 				
@@ -47,5 +51,21 @@
 </div> <!--form-wrap 종료 --> 
 	
 </div><!-- content 종료  -->
-</body>
-</html>
+
+<script>
+
+	$("#loginForm").on("submit", function(){
+		
+		if($("#id").val()==""){
+			alert("아이디를 입력해주세요");
+			$("#id").focus();
+			return false;
+		}else if($("#pwd").val()==""){
+			alert("비밀번호를 입력해주세요");
+			$("#pwd").focus();
+			return false;
+		}
+	});
+
+</script>
+<jsp:include page="/resources/footer.jsp"></jsp:include>

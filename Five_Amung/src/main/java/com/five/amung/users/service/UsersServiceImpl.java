@@ -1,5 +1,6 @@
 package com.five.amung.users.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -81,5 +82,34 @@ public class UsersServiceImpl implements UsersService{
 			mView.addObject("isSuccess", false);
 		}
 	}
+
+	@Override
+	public List<UsersDto> idSearch(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
+		//이름, 이메일로 아이디를 찾을때
+		String email_1=request.getParameter("email_1");
+		String email_2=request.getParameter("email_2");
+		String selectEmail=request.getParameter("selectEmail");
+		String name=request.getParameter("name");
+		String name2=request.getParameter("name2");
+		String phone=request.getParameter("phone");
+		if(name!=null && email_1 !=null) {
+			if(selectEmail.equals("etc")){
+				email_1=email_1+"@"+email_2;
+			}else{
+				email_1=email_1+"@"+selectEmail;
+			}
+			dto.setEmail(email_1);
+			dto.setName(name);
+		}else {
+			dto.setName(name2);
+			dto.setPhone(phone);
+		}
+
+		//dao 에서 dto 인자로 받아서 id 찾아오기
+		List<UsersDto> idList=usersDao.idSearchList(dto);
+		return idList;
+	}
+
+	
 
 }

@@ -12,4 +12,17 @@
 		from A_member
 		where id=#{id}
 	</select>
+	<select id="idSearch" parameterType="usersDto" resultType="usersDto">
+		select id, regdate
+		from A_member
+		<choose>
+			<when test="name != null and email !=null">
+				where name=#{name} and email=#{email}
+			</when>
+			<when test="name !=null and phone !=null">
+				where name=#{name} and phone=#{phone}
+			</when>
+		</choose>
+	</select>
+	
 </mapper>

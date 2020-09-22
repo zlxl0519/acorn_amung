@@ -1,6 +1,10 @@
 package com.five.amung.users.controller;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -90,5 +94,47 @@ public class UsersController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home.do";
+	}
+	//아이디찾기 폼 요청처리
+	@RequestMapping("/users/idfind_form")
+	public String idfindForm() {
+		
+		return "users/idfind_form";
+	}
+	//이메일로 아이디 찾는 요청처리
+	@RequestMapping("/users/idfind.do")
+	public ModelAndView idFind(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
+		//이름, 이메일을 request 로 받아가서 dto 에 담고 dao 를 이용해서 맞는 아이디를 리스트로 가져온다.
+		List<UsersDto> idList=usersService.idSearch(mView, request, dto);
+		ArrayList<Map<Object, String>> findId= new ArrayList<>();
+		for(int i=0; i<idList.size(); i++) {
+			String id=idList.get(i).getId();
+			String regdate=idList.get(i).getRegdate();
+			Map<Object, String> user=new HashMap<Object, String>();
+			user.put("id", id);
+			user.put("regdate", regdate);
+			findId.add(user);
+		}
+		mView.addObject("findId", findId);
+		mView.setViewName("users/idfind");
+		return mView;
+	}
+	//휴대폰 번호로 아이디 찾는 요청처리
+	@RequestMapping("/users/idfind2.do")
+	public ModelAndView idFind2(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
+		//휴대폰 번호, 이름으로 아이디찾기
+		List<UsersDto> idList=usersService.idSearch(mView, request, dto);
+		ArrayList<Map<Object, String>> findId= new ArrayList<>();
+		for(int i=0; i<idList.size(); i++) {
+			String id=idList.get(i).getId();
+			String regdate=idList.get(i).getRegdate();
+			Map<Object, String> user=new HashMap<Object, String>();
+			user.put("id", id);
+			user.put("regdate", regdate);
+			findId.add(user);
+		}
+		mView.addObject("findId", findId);
+		mView.setViewName("users/idfind");
+		return mView;
 	}
 }

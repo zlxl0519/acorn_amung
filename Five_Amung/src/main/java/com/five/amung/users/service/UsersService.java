@@ -1,5 +1,6 @@
 package com.five.amung.users.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,4 +24,6 @@ public interface UsersService {
 	
 	//로그인 처리
 	public void loginProcess(UsersDto dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, ModelAndView mView);
+	//이메일로 아이디찾기
+	public List<UsersDto> idSearch(ModelAndView mView, HttpServletRequest request, UsersDto dto);
 }
