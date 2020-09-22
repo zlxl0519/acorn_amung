@@ -1,5 +1,7 @@
 package com.five.amung.users.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,4 +33,17 @@ public class UsersDaoImpl implements UsersDao{
 			return true;
 		}
 	}
+
+	@Override
+	public UsersDto getData(String id) {
+		return session.selectOne("users.getData", id);
+	}
+
+	@Override
+	public List<UsersDto> idSearchList(UsersDto dto) {
+		
+		return session.selectList("users.idSearch", dto);
+	}
+
+	
 }

@@ -2,16 +2,18 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
-	
 	<typeAliases>
 		<typeAlias type="com.five.amung.users.dto.UsersDto" alias="usersDto"/>
+    <typeAlias type="com.five.amung.reserve.dto.ReserveDto" alias="reserveDto"/>
 		<typeAlias type="com.five.amung.notice.dto.NoticeDto" alias="noticeDto"/>
 	</typeAliases>
 
 	
 	<mappers>
 		<mapper resource="com/five/amung/mybatis/UsersMapper.xml"/>
+    <mapper resource="com/five/amung/mybatis/ReserveMapper.xml"/>
 		<mapper resource="com/five/amung/mybatis/NoticeMapper.xml"/>
 	</mappers>
 	
