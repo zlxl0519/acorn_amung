@@ -166,7 +166,6 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void deleteContent(int num, HttpServletRequest request) {
-		
-		
+		noticeDao.delete(num);
 	}//==== deleteContent ====
 }//======== NoticeServiceImpl ========
