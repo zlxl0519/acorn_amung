@@ -161,8 +161,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void updateContent(NoticeDto dto) {
-		
-		
+		noticeDao.update(dto);
 	}//==== updateContent ====
 
 	@Override

@@ -20,5 +20,5 @@ public interface NoticeDao {
 	//글 삭제
 	//public void delete(int num);
 	//글 수정
-	//public void update(NoticeDto dto);
+	public void update(NoticeDto dto);
 }

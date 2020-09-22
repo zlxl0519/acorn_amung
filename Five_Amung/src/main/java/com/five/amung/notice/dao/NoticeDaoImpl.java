@@ -49,4 +49,10 @@ public class NoticeDaoImpl implements NoticeDao{
 	public void addViewCount(int num) {
 		session.update("notice.addViewCount", num);
 	}//==== addViewCount ====
+	
+	//게시글 수정하기
+	@Override
+	public void update(NoticeDto dto) {
+		session.update("notice.update", dto);
+	}
 }//==========NoticeDaoImpl==========

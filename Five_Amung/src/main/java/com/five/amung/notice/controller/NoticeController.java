@@ -49,4 +49,20 @@ public class NoticeController {
 		mView.setViewName("notice/insert");
 		return mView;
 	}//==== noticeInsert =====
+	
+	//공지사항 게시글 수정 폼
+	@RequestMapping("/notice/private/updateform")
+	public ModelAndView noticeUpdateform(HttpServletRequest request, ModelAndView mView) {
+		noticeService.getDetail(request);
+		mView.setViewName("notice/updateform");
+		return mView;
+	}//==== noticeInsertForm====
+	
+	//공지사항 게시글 수정 요청 처리
+	@RequestMapping(value = "/notice/private/update", method=RequestMethod.POST)
+	public ModelAndView noticeUpdate(NoticeDto dto, ModelAndView mView, HttpSession session) {
+		noticeService.updateContent(dto);
+		mView.setViewName("notice/update");
+		return mView;
+	}//==== noticeInsert =====
 }//======== NoticeController ========
