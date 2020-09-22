@@ -9,7 +9,7 @@
 <div class="content">	
 	<h2>공지사항</h2>
 	<div class="left mb20">
-		<a href="private/insert.do" class="btn-a">글작성</a>
+		<a href="private/insertform.do" class="btn-a">글작성</a>
 	</div><!--left-->
 	<div class="table-wrap">
 		<table>

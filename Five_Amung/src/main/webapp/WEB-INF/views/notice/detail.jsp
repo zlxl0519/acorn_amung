@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/../resources/header.jsp"%><!-- header -->
 <div class="content">
-	<h2>공지사항 글 보기</h2>
+	<h2>공지사항</h2>
 	<c:if test="${not empty keyword }">
 		<p class="alert alert-success">
 			<strong>${keyword }</strong>라는 키워드로 검색한 결과에 대한 자세히 보기 입니다.
