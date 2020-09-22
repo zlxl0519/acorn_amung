@@ -26,7 +26,7 @@ public class FaqDaoImpl implements FaqDao {
 
 	@Override
 	public int getCount(FaqDto dto) {
-		return session.selectOne("cafe.getCount", dto);
+		return session.selectOne("faq.getCount", dto);
 	}
 
 }

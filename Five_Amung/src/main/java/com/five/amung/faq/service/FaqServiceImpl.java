@@ -42,6 +42,8 @@ public class FaqServiceImpl implements FaqService {
 	    String condition=request.getParameter("condition");
 	    if(keyword==null){
 	    	keyword="";
+	    }
+	    if(condition==null) {
 	    	condition="";
 	    }
 	    
@@ -52,14 +54,8 @@ public class FaqServiceImpl implements FaqService {
 	    dto.setEndRowNum(endRowNum);
 	    
 	    if(!keyword.equals("")){
-	    	if(condition.equals("qst_ans")){
+	    		dto.setCategory(condition);
 	    		dto.setQst(keyword);
-	    		dto.setAns(keyword);
-	    	}else if(condition.equals("qst")){
-	    		dto.setQst(keyword);
-	    	}else if(condition.equals("ans")){
-	    		dto.setAns(keyword);
-	    	}
 	    }
 	    
 	    List<FaqDto> list = faqDao.getList(dto);
