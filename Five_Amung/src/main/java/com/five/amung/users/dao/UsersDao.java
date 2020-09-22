@@ -18,4 +18,8 @@ public interface UsersDao {
 	
 	//usersDto 로 아이디 찾아오기
 	public List<UsersDto> idSearchList(UsersDto dto);
+	//usersDto 로 비밀번호 찾아오기
+	public String pwdSearch(UsersDto dto);
+	//비밀번호 업데이트
+	public void updatePwd(UsersDto dto);
 }

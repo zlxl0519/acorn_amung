@@ -35,7 +35,7 @@
 						<input type="text" name="name" id="name" placeholder="이름 "/>
 					</li>
 					<li>
-						<input type="text" name=""	id="phone" placeholder="연락처 " />
+						<input type="text" name="phone"	id="phone" placeholder="연락처 " />
 					</li>
 					
 				</ul>
