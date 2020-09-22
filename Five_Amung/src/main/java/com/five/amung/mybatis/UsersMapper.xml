@@ -36,5 +36,4 @@
 		FROM A_member
 		WHERE id=#{inputId}
 	</select>
-	
 </mapper>
