@@ -137,4 +137,20 @@ public class UsersController {
 		mView.setViewName("users/idfind");
 		return mView;
 	}
+	//비밀번호 찾기 폼 요청처리
+	@RequestMapping("/users/pwdfind_form")
+	public String pwdfindForm() {
+		
+		return "users/pwdfind_form";
+	}
+	//비밀번호 찾는 요청처리
+	@RequestMapping("/users/pwdfind")
+	public ModelAndView pwdFind(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
+		//1. 아이디, 이름, 휴대폰 번호 로 일치하는 비밀번호 찾기
+		
+		//2. 
+		
+		mView.setViewName("users/pwdfind");
+		return mView;
+	}
 }

@@ -26,4 +26,5 @@ public interface UsersService {
 	public void loginProcess(UsersDto dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, ModelAndView mView);
 	//이메일로 아이디찾기
 	public List<UsersDto> idSearch(ModelAndView mView, HttpServletRequest request, UsersDto dto);
+	
 }
