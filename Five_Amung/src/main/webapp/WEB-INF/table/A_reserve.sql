@@ -5,8 +5,8 @@ create table A_reserve (
 	room_name varchar2(35),--방이름
 	checkin_date date,--체크인 날짜
 	checkout_date date,--체크아웃 날짜
-	checkin_time varchar2(50),--체크인 시간
-	checkout_time varchar2(50),--체크아웃 시간
+	start_time varchar2(50),--체크인 시간
+	end_time varchar2(50),--체크아웃 시간
 	name varchar2(35),--예약자명
 	phone varchar2(15),--예약자 핸드폰 번호
 	regdate date, --예약 날짜

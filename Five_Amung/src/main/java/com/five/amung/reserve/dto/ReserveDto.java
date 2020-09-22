@@ -7,8 +7,8 @@ public class ReserveDto {
 	private String room_name;
 	private String checkin_date;
 	private String checkout_date;
-	private String checkin_time;
-	private String checkout_time;
+	private String start_time;
+	private String end_time;
 	private String name;
 	private String phone;
 	private String regdate;
@@ -17,7 +17,7 @@ public class ReserveDto {
 	public ReserveDto() {}
 
 	public ReserveDto(int num, String member_id, int dog_num, String room_name, String checkin_date,
-			String checkout_date, String checkin_time, String checkout_time, String name, String phone, String regdate,
+			String checkout_date, String start_time, String end_time, String name, String phone, String regdate,
 			String cancel) {
 		super();
 		this.num = num;
@@ -26,8 +26,8 @@ public class ReserveDto {
 		this.room_name = room_name;
 		this.checkin_date = checkin_date;
 		this.checkout_date = checkout_date;
-		this.checkin_time = checkin_time;
-		this.checkout_time = checkout_time;
+		this.start_time = start_time;
+		this.end_time = end_time;
 		this.name = name;
 		this.phone = phone;
 		this.regdate = regdate;
@@ -82,20 +82,20 @@ public class ReserveDto {
 		this.checkout_date = checkout_date;
 	}
 
-	public String getCheckin_time() {
-		return checkin_time;
+	public String getstart_time() {
+		return start_time;
 	}
 
-	public void setCheckin_time(String checkin_time) {
-		this.checkin_time = checkin_time;
+	public void setstart_time(String start_time) {
+		this.start_time = start_time;
 	}
 
-	public String getCheckout_time() {
-		return checkout_time;
+	public String getend_time() {
+		return end_time;
 	}
 
-	public void setCheckout_time(String checkout_time) {
-		this.checkout_time = checkout_time;
+	public void setend_time(String end_time) {
+		this.end_time = end_time;
 	}
 
 	public String getName() {

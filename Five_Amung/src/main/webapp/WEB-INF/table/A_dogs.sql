@@ -7,7 +7,7 @@ create table A_dogs(
 	weight varchar2(10),
 	neutral varchar2(5),
 	gender varchar2(7),
-	memo CLOB
+	etc CLOB
 );
 
 create sequence A_dogs_seq;
