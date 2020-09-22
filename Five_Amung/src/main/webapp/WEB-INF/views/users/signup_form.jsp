@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@include file="/resources/header.jsp"%><!-- header -->
 <script>
    document.title = "회원가입 페이지"; 
 </script>
@@ -25,9 +19,9 @@
 				<div class="profile-box">
 				<label for="image">프로필 이미지</label>
 					<div class="profile-img">
-						<img id="profileImage" src="${pageContext.request.contextPath }/include/img/icon_user.png"/>
+						<img id="profileImage" src="${pageContext.request.contextPath }/resources/img/icon_user.png"/>
 					</div>
-					
+		
 						<div class="profile-btn">
 							<label for="image"><i class="fas fa-images"></i></label>
 							<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
@@ -47,7 +41,6 @@
 		<input type="hidden" name="profile" id="profile" />
 		<div class="form-ul-wrap">
 		<ul>
-			
 			<li>
 				<label for="id">아이디 *</label>
 				<input type="text" name="id" id="id" maxlength="30" placeholder="5자 이상 30자 이내의 영문/숫자만 입력 가능합니다."/>
@@ -99,20 +92,70 @@
 	</div>
 	</div><!-- content 종료  -->
 	
-	<script src="${pageContext.request.contextPath }/include/js/jquery.form.min.js"></script>
+	
+	<script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 	<script>
 	
 	//========= form 에 submit 이벤트가 일어 났을때 프로필 사진을 ajax 로 제출 하도록  ====================
-		$("#profileForm").ajaxForm(function(data){
-			//프로필 이미지를 업데이트 한다.
-			$("#profileImage").attr("src", "${pageContext.request.contextPath }"+data.imageSrc);
-			//회원정보 수정폼 전송될 때 같이 전송되도록 한다.
-			$("#profile").val(data.imageSrc);
-		});
+	$("#profileForm").ajaxForm(function(data){
+		//프로필 이미지를 업데이트 한다.
+		$("#profileImage").attr("src", "${pageContext.request.contextPath }"+data.imageSrc);
+		//회원정보 수정폼 전송될 때 같이 전송되도록 한다.
+		$("#profile").val(data.imageSrc);
+	});
 	//이미지 파일을 선택했을때 change 이벤트가 일어난다.
 	$("#image").on("change", function(){
 		$("#profileForm").submit();//폼 강제 제출
 	});
+		
+	
+	//=========== 아이디 중복 확인 =======================
+	var isChecked = false;
+	
+	$("#checkBtn").on("click", function(){
+		
+		var inputId = $("#id").val();
+		isChecked = true;
+		
+		$.ajax({
+			url : "checkid.do",
+			method : "get",
+			data : "inputId="+inputId,
+			success : function(data){
+				if(data.isExist || !canUseId2){
+					$("#checkResult").text("* 사용이 불가한 아이디입니다.").css("color", "red");
+					canUseId=false;
+				}else{
+					$("#checkResult").text("* 사용 가능한 아이디입니다.").css("color","green");
+					canUseId=true;
+				}
+			}
+		}); 
+		return false;
+	});
+	
+	$("#signup").on("submit", function(){
+		if(!canUseId){
+			alert("아이디 중복을 확인하세요");
+			return false;
+		}
+	})
+		
+		
+	//=========아이디 영문/숫자 제한==============
+		var enNumCheck = RegExp(/[^A-Za-z0-9]$/);
+		$("#idAlert").hide();
+		$("#id").keyup(function(){
+			if(enNumCheck.test($("#id").val()) || $("#id").val().length < 5){
+				$("#idAlert").show();
+				$("#submit").attr("disabled", true);
+				canUseId2 = false;
+			}else{
+				$("#idAlert").hide();
+				$("#submit").removeAttr("disabled");
+				 canUseId2 = true;
+			}
+		})
 		
 		
 	var canUse = false;
@@ -137,57 +180,6 @@
 				}
 			}
 		})
-	
-		
-	//=========== 아이디 중복 확인 =======================
-		var isChecked = false;
-		
-		$("#checkBtn").on("click", function(){
-			
-			var inputId = $("#id").val();
-			isChecked = true;
-			
-			$.ajax({
-				method : "get",
-				url : "checkid.jsp",
-				data : "inputId="+inputId,
-				success : function(data){
-					if(data.isExist || !canUseId2){
-						$("#checkResult").text("* 사용이 불가한 아이디입니다.").css("color", "red");
-						canUseId=false;
-					}else{
-						$("#checkResult").text("* 사용 가능한 아이디입니다.").css("color","green");
-						canUseId=true;
-					}
-				}
-			}); 
-			return false;
-		});
-		
-		$("#signup").on("submit", function(){
-			if(!canUseId){
-				alert("아이디 중복을 확인하세요");
-				return false;
-			}
-		})
-		
-		
-		
-	//=========아이디 영문/숫자 제한==============
-		var enNumCheck = RegExp(/[^A-Za-z0-9]$/);
-		$("#idAlert").hide();
-		$("#id").keyup(function(){
-			if(enNumCheck.test($("#id").val()) || $("#id").val().length < 5){
-				$("#idAlert").show();
-				$("#submit").attr("disabled", true);
-				canUseId2 = false;
-			}else{
-				$("#idAlert").hide();
-				$("#submit").removeAttr("disabled");
-				 canUseId2 = true;
-			}
-		})
-		
 		
 		
 	//=========비밀번호 영문/숫자/특수문자 제한===========
@@ -210,10 +202,10 @@
 		
 		
 	//=========연락처 숫자 제한===========
-		var numCheck = RegExp(/[^0-9]$/);
+		var numCheck = RegExp(/^[0-9]*$/);
 		$("#phoneAlert").hide();
 		$("#phone").keyup(function(){
-			if(numCheck.test($("#phone").val())){
+			if(!numCheck.test($("#phone").val())){
 				$("#phoneAlert").show();
 				$("#submit").atter("disabled", true);
 			}else{
@@ -250,7 +242,7 @@
 				alert("이메일을 확인하세요")
 				$("#email").focus();
 				return false;
-			}else if($("#phone").val() == "" || $("#phone").val().length < 10){
+			}else if($("#phone").val() == "" || $("#phone").val().length < 9){
 				alert("연락처를 확인하세요")
 				$("#phone").focus();
 				return false;
@@ -262,7 +254,6 @@
 				return false;
 			}
 		})
-		
 	</script>
 
 
@@ -287,5 +278,4 @@
           console.log(change);
           --> result : Please visit Naver!
  --%>
-</body>
-</html>
+<%@include file="/resources/footer.jsp"%><!-- footer -->
