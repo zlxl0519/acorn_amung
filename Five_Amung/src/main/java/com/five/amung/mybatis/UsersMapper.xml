@@ -2,16 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="users">
 
+	<!-- table명 : A_member -->
+
+	<!-- 회원가입 회원 정보 insert -->
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO A_member
+		
 		(id, pwd, email, profile, name, phone, regdate)
 		VALUES(#{id}, #{pwd}, #{email}, #{profile}, #{name}, #{phone}, SYSDATE)
 	</insert>
+  
 	<select id="getData" parameterType="string" resultType="usersDto">
 		select id, pwd, email, profile, name, phone, to_char(regdate, 'yy.mm.dd hh24"시"mm"분"')as regdate
 		from A_member
 		where id=#{id}
 	</select>
+  
 	<select id="idSearch" parameterType="usersDto" resultType="usersDto">
 		select id, regdate
 		from A_member
@@ -23,6 +29,12 @@
 				where name=#{name} and phone=#{phone}
 			</when>
 		</choose>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="isExist" parameterType="string" resultType="string">
+		SELECT id
+		FROM A_member
+		WHERE id=#{inputId}
 	</select>
 	
 </mapper>
