@@ -16,11 +16,24 @@
 							<h4>호텔링 경험을 선물하세요</h4>
 						</div>
 						<div class="reservation-btn">
-							<a href="">예약하기 </a>
+							<a href="${pageContext.request.contextPath	}/reserve/reserveform.do">예약하기 </a>
 						</div>
 					</div>
 				</div><!-- main-slide-content -->
 				<img src="${pageContext.request.contextPath }/resources/img/main01.png" />
+				
+			</li>
+			<li>
+				<img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="" />
+				
+			</li>
+			<li>
+				<img src="https://images.unsplash.com/photo-1573233919790-17009f6cdbe6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2217&q=80" alt="" />
+				
+			</li>
+			<li>
+				<img src="https://images.unsplash.com/photo-1558929996-da64ba858215?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3304&q=80" alt="" />
+				
 			</li>
 		</ul>
 	</section><!-- main-slide -->
@@ -119,3 +132,4 @@
 	<!-- review -->
 </article>
 <%@include file="/resources/footer.jsp"%><!-- footer -->
+

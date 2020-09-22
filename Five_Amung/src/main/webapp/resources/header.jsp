@@ -68,49 +68,108 @@
 			<nav class="nav1">
 				<div class="nav-gnb">
 					<ul>
-						<li><a><span>ㅇㅇㅇ </span> 님 환영합니다.</a></li>
-						<li><a href="${pageContext.request.contextPath }/mypage/private/info.do">마이페이지</a></li>
-						<li><a href="${pageContext.request.contextPath }/users/logout.do">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath }/admin/list.do"><i class="fas fa-cog"></i>운영관리</a></li>
-						<li><a href="${pageContext.request.contextPath }/users/loginform.do">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath }/signup/signup_form.do">회원가입</a></li>
+           <c:choose>
+							<c:when test="${empty sessionScope.id }">
+						    <li>
+							    <a href="${pageContext.request.contextPath }/users/loginform.do">
+								    로그인
+							    </a>
+						    </li>
+						    <li>
+							    <a href="${pageContext.request.contextPath }/users/signup_form.do">
+								   회원가입
+							    </a>
+						    </li>
+              </c:when>
+              <c:otherwise>
+								<li>
+                  <a>
+                    <span>${id } </span> 님 환영합니다.
+                  </a>
+                </li>
+								<li>
+                  <a href="${pageContext.request.contextPath }/mypage/private/info.do">
+                    마이페이지
+                  </a>
+                </li>
+								<li>
+                  <a href="${pageContext.request.contextPath }/users/logout.do">
+                    로그아웃
+                  </a>
+                </li>
+								<li>
+                  <a href="${pageContext.request.contextPath }/admin/list.do">
+                    <i class="fas fa-cog"></i>
+                    운영관리
+                  </a>
+                </li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</div><!-- nav-gnb -->
 			</nav><!-- nav1 -->
 			<nav id="nav-slide" class="nav2">
 				<div>
 					<h1>
-						<a href="${pageContext.request.contextPath }/index.do"><img
-							src="${pageContext.request.contextPath }/resources/img/logo_top.png" alt="애견 호텔링 전문 : AMung" /></a>
+						<a href="${pageContext.request.contextPath }/">
+							<img
+								src="${pageContext.request.contextPath }/resources/img/logo_top.png"
+								alt="애견 호텔링 전문 : AMung" />
+						</a>
 					</h1>
 					<div class="nav2-gnb">
 						<ul>
-							<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
-							<li><a href="${pageContext.request.contextPath }/reservation/private/reserveform.do">예약하기</a></li>
-							<li class="gnb-drop"><a href="#">이용안내</a>
+							<li>
+								<a href="${pageContext.request.contextPath }/notice/list.do">
+									공지사항
+								</a>
+							</li>
+							<li>
+								<a href="${pageContext.request.contextPath }/reservation/private/reserveform.do">
+									예약하기
+								</a>
+							</li>
+							<li class="gnb-drop">
+								<a href="#">
+									이용안내
+								</a>
 								<ul class="dropdown">
 									<li>
-										<a href="${pageContext.request.contextPath }/guide/guide.do">Amung이용안내</a>
+										<a href="${pageContext.request.contextPath }/guide/guide.do">
+											Amung이용안내
+										</a>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath }/guide/service.do">AMung주요서비스</a>
+										<a href="${pageContext.request.contextPath }/guide/service.do">
+											AMung주요서비스
+										</a>
 									</li> 
 								</ul>
 							</li>
 							<li class="gnb-drop"><a href="#">커뮤니티</a>
 								<ul class="dropdown">
 									<li>
-										<a href="${pageContext.request.contextPath }/gallery/list.do">AMung의 일상</a>
+										<a href="${pageContext.request.contextPath }/gallery/list.do">
+											AMung의 일상
+										</a>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath }/review/rev_list.do">AMung 사용후기</a>
+										<a href="${pageContext.request.contextPath }/review/rev_list.do">
+											AMung 사용후기
+										</a>
 									</li> 
 									<li>
-										<a href="${pageContext.request.contextPath }/qna/qna_list.do">QnA게시판</a>
+										<a href="${pageContext.request.contextPath }/qna/qna_list.do">
+											QnA게시판
+										</a>
 									</li>
 								</ul>
 							</li>
-							<li><a href="${pageContext.request.contextPath }/faq/faq_main.do">FAQ</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath }/faq/faq_main.do">
+									FAQ
+								</a>
+							</li>
 						</ul>
 					</div><!-- nav2-gnb -->
 				</div><!-- div -->

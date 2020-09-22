@@ -1,4 +1,4 @@
-CREATE TABLE a_notice(
+CREATE TABLE A_notice(
 	num NUMBER,
 	title VARCHAR2(200) NOT NULL,
 	category VARCHAR2(100),
@@ -8,7 +8,7 @@ CREATE TABLE a_notice(
 );
 
 
-CREATE SEQUENCE a_notice_seq;
+CREATE SEQUENCE A_notice_seq;
 
 
 SELECT NUM, WRITER, TITLE,
