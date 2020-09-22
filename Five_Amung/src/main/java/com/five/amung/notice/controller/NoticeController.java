@@ -5,9 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.five.amung.notice.dto.NoticeDto;
@@ -65,4 +65,12 @@ public class NoticeController {
 		mView.setViewName("notice/update");
 		return mView;
 	}//==== noticeInsert =====
+	
+	//공지사항 게시글 삭제 요청처리
+	@RequestMapping("/notice/private/delete")
+	public ModelAndView delete(@RequestParam int num, HttpServletRequest request, ModelAndView mView) {
+		noticeService.deleteContent(num, request);
+		mView.setViewName("redirect:/notice/list.do");
+		return mView;
+	}
 }//======== NoticeController ========

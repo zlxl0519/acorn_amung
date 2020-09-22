@@ -18,7 +18,7 @@ public interface NoticeDao {
 	//조회수 증가 시키기
 	public void addViewCount(int num);
 	//글 삭제
-	//public void delete(int num);
+	public void delete(int num);
 	//글 수정
 	public void update(NoticeDto dto);
 }
