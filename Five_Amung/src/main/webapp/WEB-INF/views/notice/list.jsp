@@ -8,9 +8,11 @@
 <%--공지사항 리스트--%>
 <div class="content">	
 	<h2>공지사항</h2>
-	<div class="left mb20">
-		<a href="private/insertform.do" class="btn-a">글작성</a>
-	</div><!--left-->
+	<c:if test="${id eq 'admin'}">
+		<div class="left mb20">
+			<a href="private/insertform.do" class="btn-a">글작성</a>
+		</div><!--left-->
+	</c:if>
 	<div class="table-wrap">
 		<table>
 			<colgroup>

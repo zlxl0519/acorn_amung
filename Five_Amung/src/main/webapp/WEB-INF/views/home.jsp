@@ -132,4 +132,3 @@
 	<!-- review -->
 </article>
 <%@include file="/resources/footer.jsp"%><!-- footer -->
-

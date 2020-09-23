@@ -5,55 +5,61 @@
 <script>
 	document.title = "Amung'Notice"; 
 </script>
-<div class="content">
-<h2>공지사항 수정</h2>
-<div class="table-wrap boardList">
-	<form action="update.do?num=${param.num }" method="post">
-		<table>
-			<tr>
-				<th>
-					<label for="title">제목</label>
-				</th>
-				<td class="boardList-select">
-					<select id="sel" name="category">
-						<option value="공지사항"
-							<c:if test="${dto.category eq '공지사항' }">selected</c:if>
-						>
-						공지사항
-						</option>
-						<option value="이벤트"
-							<c:if test="${dto.category eq '이벤트' }">selected</c:if>
-						>
-						이벤트
-						</option>
-					</select>
-					<input type="text" name="title" id="title"
-							placeholder="제목을 입력해주세요."
-							value="${dto.title }"/>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					<label for="content">내용</label>
-				</th>
-				<td class="smart_content">
-					<textarea name="content" id="content" cols="30" rows="10">${dto.content }</textarea>
-				</td>
-			</tr>
-		</table>
-		<div class="left mt20"> 
-			<button id="submit" type="submit" onclick="submitContents(this);">저장</button>
-		</div>
-	</form>
-</div><!-- table-wrap -->
 
-	<div class="icon-wrap">
-		<i class="fas fa-exclamation-circle"></i>
-		<p class="form-span m20">
-			<strong>관리자만 접근 가능합니다.</strong>
-		</p>
-		<a href="${pageContext.request.contextPath }/notice/notice_list.jsp" class="btn-default">확인</a>
-	</div>
+<div class="content">
+<c:choose>
+	<c:when test="${id eq 'admin'}">
+	<h2>공지사항 수정</h2>
+	<div class="table-wrap boardList">
+		<form action="update.do?num=${param.num }" method="post">
+			<table>
+				<tr>
+					<th>
+						<label for="title">제목</label>
+					</th>
+					<td class="boardList-select">
+						<select id="sel" name="category">
+							<option value="공지사항"
+								<c:if test="${dto.category eq '공지사항' }">selected</c:if>
+							>
+							공지사항
+							</option>
+							<option value="이벤트"
+								<c:if test="${dto.category eq '이벤트' }">selected</c:if>
+							>
+							이벤트
+							</option>
+						</select>
+						<input type="text" name="title" id="title"
+								placeholder="제목을 입력해주세요."
+								value="${dto.title }"/>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="content">내용</label>
+					</th>
+					<td class="smart_content">
+						<textarea name="content" id="content" cols="30" rows="10">${dto.content }</textarea>
+					</td>
+				</tr>
+			</table>
+			<div class="left mt20"> 
+				<button id="submit" type="submit" onclick="submitContents(this);">저장</button>
+			</div>
+		</form>
+	</div><!-- table-wrap -->
+	</c:when>
+	<c:otherwise>
+		<div class="icon-wrap">
+			<i class="fas fa-exclamation-circle"></i>
+			<p class="form-span m20">
+				<strong>관리자만 접근 가능합니다.</strong>
+			</p>
+			<a href="${pageContext.request.contextPath }/notice/notice_list.jsp" class="btn-default">확인</a>
+		</div>
+	</c:otherwise>
+</c:choose>
 </div><!-- content -->
 <script>
 	$("#submit").on("click", function(){
