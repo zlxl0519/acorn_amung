@@ -27,4 +27,8 @@ public interface UsersService {
 	//이메일로 아이디찾기
 	public List<UsersDto> idSearch(ModelAndView mView, HttpServletRequest request, UsersDto dto);
 	
-}
+	// 리연 추가 -- 200923
+	// 마이페이지 / 회원정보 요청처리
+	public void getInfo(HttpSession session, ModelAndView mView);
+	
+}//======== UsersService ========
