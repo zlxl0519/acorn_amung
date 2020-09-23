@@ -136,7 +136,15 @@ public class UsersServiceImpl implements UsersService{
 		List<UsersDto> idList=usersDao.idSearchList(dto);
 		return idList;
 	}
-
-	
-
-}
+	//리연 추가 -- 20923
+	//회원정보 보기 요청처리
+	@Override
+	public void getInfo(HttpSession session, ModelAndView mView) {
+		//로그인 된 아이디를 session 객체를 이용해서 얻어온다.
+		String id = (String)session.getAttribute("id");
+		//dao를 이용해서 사용자 정보를 얻어와서
+		UsersDto dto = usersDao.getData(id);
+		//mView 객체에 담아준다.
+		mView.addObject("dto", dto);
+	}//==== getInfo ==== 
+}//======== UsersServiceImpl ========

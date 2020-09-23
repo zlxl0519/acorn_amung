@@ -166,4 +166,13 @@ public class UsersController {
 		mView.setViewName("users/pwdfind");
 		return mView;
 	}
-}
+	
+	// 리연 추가 - 20200923
+	// 한명의 회원 정보 요청 처리
+	@RequestMapping("/mypage/private/info")
+	public ModelAndView info(HttpServletRequest request, ModelAndView mView) {
+		usersService.getInfo(request.getSession(), mView);
+		mView.setViewName("mypage/info");
+		return mView;
+	}//==== info ====
+}//======== UsersController ========
