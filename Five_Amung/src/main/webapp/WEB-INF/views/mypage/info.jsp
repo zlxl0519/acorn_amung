@@ -12,9 +12,16 @@
 		<h2>MyPage</h2>
 		<div class="sub-nav-gnb">
 			<ul>
-				<li><a href="reserve_status.jsp">나의 예약</a></li>
-				<li class="active"><a href="info.jsp">나의 정보</a></li>
-				<li><a href="update_pwdokform.jsp">강아지 정보</a></li>
+				<li class="active">
+					<a href="info.do">나의 정보</a>
+				</li>
+				<li>
+					<a href="reserve/status.do">나의 예약</a>
+				</li>
+				
+				<li>
+					<a href="info/dogs.do">강아지 정보</a>
+				</li>
 			</ul>
 		</div><!-- sub-nav-gnb -->
 	</div><!-- sub-nav -->
@@ -23,7 +30,7 @@
 		<c:choose>
 			<c:when test="${empty dto.profile }">
 				<img id="profileImage"
-					src="${pageContext.request.contextPath }/include/img/icon_user.png" />
+					src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
 			</c:when>
 			<c:otherwise>
 				<img id="profileImage"
@@ -31,10 +38,10 @@
 			</c:otherwise>
 		</c:choose>
 		</div><!-- profile-img -->
-		<p><strong>${dto.name }</strong> 님의 정보입니다.</p>
+		<h3 class="info"><strong>${dto.name }</strong> 님의 정보입니다.</h3>
 		<%-- 프로필사진  업로드 폼--%>
 
-		<div class="form-ul-wrap">
+		<div class="form-ul-wrap mt30">
 			<ul>
 	
 				<li>
@@ -42,8 +49,8 @@
 					<p>${dto.id}</p>
 				</li>
 				<li>
-					<label for="id">비밀번호</label>
-					<a href="" class="btn-a btn-b">비밀번호 변경</a>
+					<label for="pwd">비밀번호</label>
+					<a href="" class="btn-pwd">비밀번호 변경</a>
 				</li>
 				<li>
 					<label for="email">이메일</label>
