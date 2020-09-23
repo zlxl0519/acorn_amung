@@ -75,6 +75,10 @@ table a:hover, table a:active {
 	font-size: 16px;
 }
 
+.f25 {
+	font-size: 25px;
+}
+
 .m0 {
 	margin: 0 !important;
 }
