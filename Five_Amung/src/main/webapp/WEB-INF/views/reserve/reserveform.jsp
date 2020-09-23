@@ -1,13 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>예약페이지</title>
-</head>
-<body>
+<jsp:include page="/resources/header.jsp"></jsp:include>
+<%--예약페이지
+
+--%>
+<div class="content">
+<div class="form-wrap">
+<p>강아지 정보</p>
+<form action="${pageContext.request.contextPath	}/dogs/info.do" method="post">
+	<div class="form-ul-wrap">
+	<ul>
+		<li>
+			<label for="dname">이름</label>
+			<input type="text" name="dname" id="dname" placeholder="반려견의 이름을 작성해주세요" />
+		</li>
+		<li>
+			<label for="dage">나이</label>
+			<input type="number" name="dage" id="dage" value="0"/><span>&nbsp;살</span>
+		</li>
+		<li>
+			<label for="breed">견종</label>
+			<input type="text" name="breed" id="breed" placeholder="견종을 작성해주세요"/>
+		</li>
+		<li>
+			<fieldset>
+				<legend>몸무게</legend>
+				<input type="radio" name="weight" value="3" />3kg 이하
+				<input type="radio" name="weight" value="6" />4kg~6kg
+				<input type="radio" name="weight" value="9" />7kg~9kg
+				<input type="radio" name="weight" value="10" />10kg~
+			</fieldset>
+		</li>
+		<li>
+			<fieldset>
+				<legend>중성화 유무</legend>
+				<input type="radio" name="neutral" value="yes" checked/> 유
+				<input type="radio" name="neutral" value="no" /> 무
+			</fieldset>	
+		</li>
+		<li>
+		
+		<fieldset>
+			<legend>성별선택</legend>
+			<input type="radio" name="gender" value="male" checked/> 남아
+			<input type="radio" name="gender" value="female" /> 여아
+		</fieldset>
+		</li>
+		<li>
+			<label for="etc">기타사항</label>
+			<textarea name="etc" id="etc" cols="60" rows="10" placeholder="반려견 호텔링 시, 요청사항이나 주의해야하는 사항을 적어주세요"></textarea>
+		</li>
+	</ul>
+	</div>
+	<p>* 강아지 정보를 꼭 저장해주세요!!</p>
+	<button type="submit">강아지 정보 저장</button>
+</form>
+
 <form action="reserve.do" method="post">
 	<p>*예약하실 룸을 먼저 선택해주세요.</p>
 	<div class="room_check">
@@ -80,7 +129,7 @@
 		</tr>
 		<tr>
 			<th>투숙 강아지 선택</th>
-			<td>강아지 이름<input type="checkbox" name="dogs" value="강아지 이름" /></td>
+			<td>강아지 이름<input type="radio" name="dogs" value="강아지 이름" /></td>
 		</tr>
 		<tr>
 			<th>총 금액</th>
@@ -102,34 +151,8 @@
 	
 	<button type="submit">예약하기</button>
 </form>
-
-<p>강아지 정보</p>
-<form action="${pageContext.request.contextPath	}/dogs/info.do" method="post">
-	<table>
-		<tr>
-			<th>이름</th>
-			<th>나이</th>
-			<th>견종</th>
-			<th>몸무게</th>
-			<th>중성화 유무</th>
-			<th>성별</th>
-			<th>기타사항</th>
-		</tr>
-		<tr>
-			<td><input type="text" name="dname" /></td>
-			<td><input type="text" name="dage" /></td>
-			<td><input type="text" name="breed" /></td>
-			<td><input type="text" name="weight" /></td>
-			<td><input type="text" name="neutral" /></td>
-			<td><input type="text" name="gender" /></td>
-			<td><input type="text" name="etc" /></td>
-		</tr>
-	</table>
-	<p>* 강아지 정보를 꼭 저장해주세요!!</p>
-	<button type="submit">강아지 정보 저장</button>
-</form>
-
-
+</div><!-- form-wrap -->
+</div><!--content -->
 
 <script>
 	//연락처 입력칸에 번호만 입력되도록한다. 
