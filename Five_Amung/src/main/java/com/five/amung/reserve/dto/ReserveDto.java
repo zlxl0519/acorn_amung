@@ -4,7 +4,7 @@ public class ReserveDto {
 	private int num;
 	private String member_id;
 	private int dog_num;
-	private String room_name;
+	//private String room_name; room_name은 RoomDto에 있습니다.
 	private String checkin_date;
 	private String checkout_date;
 	private String start_time;
@@ -12,18 +12,16 @@ public class ReserveDto {
 	private String name;
 	private String phone;
 	private String regdate;
-	private String cancel; //예약 취소 여부저장 필드 //"yes" or "no"
+	private String state; //예약대기중, 예약완료, 예약취소
 	
 	public ReserveDto() {}
 
-	public ReserveDto(int num, String member_id, int dog_num, String room_name, String checkin_date,
-			String checkout_date, String start_time, String end_time, String name, String phone, String regdate,
-			String cancel) {
+	public ReserveDto(int num, String member_id, int dog_num, String checkin_date, String checkout_date,
+			String start_time, String end_time, String name, String phone, String regdate, String state) {
 		super();
 		this.num = num;
 		this.member_id = member_id;
 		this.dog_num = dog_num;
-		this.room_name = room_name;
 		this.checkin_date = checkin_date;
 		this.checkout_date = checkout_date;
 		this.start_time = start_time;
@@ -31,7 +29,7 @@ public class ReserveDto {
 		this.name = name;
 		this.phone = phone;
 		this.regdate = regdate;
-		this.cancel = cancel;
+		this.state = state;
 	}
 
 	public int getNum() {
@@ -58,14 +56,6 @@ public class ReserveDto {
 		this.dog_num = dog_num;
 	}
 
-	public String getRoom_name() {
-		return room_name;
-	}
-
-	public void setRoom_name(String room_name) {
-		this.room_name = room_name;
-	}
-
 	public String getCheckin_date() {
 		return checkin_date;
 	}
@@ -82,19 +72,19 @@ public class ReserveDto {
 		this.checkout_date = checkout_date;
 	}
 
-	public String getstart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
 
-	public void setstart_time(String start_time) {
+	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
 
-	public String getend_time() {
+	public String getEnd_time() {
 		return end_time;
 	}
 
-	public void setend_time(String end_time) {
+	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
 
@@ -122,12 +112,13 @@ public class ReserveDto {
 		this.regdate = regdate;
 	}
 
-	public String getCancel() {
-		return cancel;
+	public String getState() {
+		return state;
 	}
 
-	public void setCancel(String cancel) {
-		this.cancel = cancel;
+	public void setState(String state) {
+		this.state = state;
 	}
+
 	
 }
