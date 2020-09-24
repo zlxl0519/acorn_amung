@@ -15,10 +15,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.five.amung.users.dto.UsersDto;
 import com.five.amung.users.service.UsersService;
@@ -175,4 +177,56 @@ public class UsersController {
 		mView.setViewName("mypage/info");
 		return mView;
 	}//==== info ====
+	
+	//회원정보 삭제
+	@RequestMapping("/mypage/private/delete")
+	public ModelAndView delete(HttpServletRequest request, ModelAndView mView) {
+		//서비스를 이용해서 사용자 정보를 삭제하고
+		usersService.deleteUser(request.getSession());
+		//view페이지로 froward 이동해서 응답
+		mView.setViewName("mypage/delete");
+		return mView;
+	}//delete
+	
+	//비밀번호 체크 폼
+	@RequestMapping("/mypage/private/info/update/check")
+	public ModelAndView pwdCheckform(HttpServletRequest request, ModelAndView mView) {
+		mView.setViewName("mypage/update_pwdokform");
+		return mView;
+	}//==== pwdCheckform ====
+	
+	//비밀번호 체크 요청처리
+	@RequestMapping(value="/mypage/private/info/update/submit", method=RequestMethod.POST)
+	public ModelAndView pwdCheck(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		usersService.checkInfo(request, dto, mView);
+		mView.setViewName("mypage/update_pwdok");
+		return mView;
+	}//==== pwdCheck ====
+	
+	//회원정보 수정 폼
+	@RequestMapping("/mypage/private/info/updateform")
+	public ModelAndView infoUpdateform(
+			@RequestParam(value = "isSuccess", 
+						  required = false, 
+						  defaultValue = "false") String isSuccess,
+			HttpServletRequest request,
+			UsersDto dto, 
+			ModelAndView mView) {
+		if(isSuccess.equals("true")) {
+			mView.setViewName("mypage/update_infoform");
+			usersService.getInfo(request.getSession(), mView);
+		}else{
+			//비밀번호가 틀렸다면
+			mView.setViewName("redirect:/mypage/private/info/update/check.do");
+		}
+		
+		return mView;
+	}//==== infoform ====
+	
+	//회원정보 수정 요청처리
+	@RequestMapping("/mypage/private/info/update")
+	public ModelAndView infoUpdate(HttpServletRequest request, ModelAndView mView) {
+		mView.setViewName("mypage/update_infoform");
+		return mView;
+	}//==== infoform ====
 }//======== UsersController ========

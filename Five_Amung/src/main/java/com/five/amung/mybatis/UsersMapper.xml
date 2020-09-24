@@ -36,4 +36,18 @@
 		FROM A_member
 		WHERE id=#{inputId}
 	</select>
+	
+	<!-- 리연 추가 -->
+	<!-- 회원 정보 삭제 -->
+	<delete id="delete" parameterType="string">
+		DELETE
+		FROM A_member
+		WHERE id=#{id}
+	</delete>
+	<!--  -->
+	<select id="checkPwd" parameterType="usersDto" resultType="int">
+		SELECT COUNT(*)
+		FROM A_member
+		WHERE id=#{id} and pwd=#{pwd}
+	</select>
 </mapper>

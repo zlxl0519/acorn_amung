@@ -147,4 +147,34 @@ public class UsersServiceImpl implements UsersService{
 		//mView 객체에 담아준다.
 		mView.addObject("dto", dto);
 	}//==== getInfo ==== 
+
+	@Override
+	public void deleteUser(HttpSession session) {
+		//세션에 저장된 아이디를 읽어와서
+		String id = (String)session.getAttribute("id");
+		//삭제
+		usersDao.delete(id);
+		//로그아웃 처리
+		session.invalidate();
+	}//==== deleteUser ==== 
+
+		
+	@Override
+	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		String id = (String)request.getSession().getAttribute("id");
+		UsersDto resultDto=usersDao.getData(id);
+		
+		String encodedPwd=resultDto.getPwd();
+		String inputPwd=dto.getPwd();
+		
+		//DB 비밀번호와 input 비밀번호 비교
+		boolean result=BCrypt.checkpw(inputPwd, encodedPwd);
+		if(result == true) {//비밀번호와 
+			request.getSession().setAttribute("id", id);
+			mView.addObject("isSuccess", true);
+		}else {
+			mView.addObject("isSuccess", false);
+		}
+		return result;
+	}//==== checkInfo ==== 
 }//======== UsersServiceImpl ========

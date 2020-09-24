@@ -30,5 +30,8 @@ public interface UsersService {
 	// 리연 추가 -- 200923
 	// 마이페이지 / 회원정보 요청처리
 	public void getInfo(HttpSession session, ModelAndView mView);
-	
+	// 회원정보 삭제 요청처리
+	public void deleteUser(HttpSession session);
+	// 회원 정보 수정 시 비밀번호 체크 요청처리
+	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView);
 }//======== UsersService ========
