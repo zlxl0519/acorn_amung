@@ -74,7 +74,7 @@
 	
 		</div>
 	
-		<a href="update/pwd.do" class="btn-default">개인정보 수정</a>
+		<a href="info/update/check.do" class="btn-default">개인정보 수정</a>
 		<a href="javascript:deleteConfirm()" class="btn-default btn-gray">탈퇴</a>
 	</div><!-- form-wrap -->
 </div><!-- content -->

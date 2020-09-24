@@ -22,4 +22,5 @@ public interface UsersDao {
 	//리연 추가
 	//회원 정보 삭제
 	public void delete(String id);
+	public boolean checkPwd(UsersDto dto);
 }//======== UsersDao ========
