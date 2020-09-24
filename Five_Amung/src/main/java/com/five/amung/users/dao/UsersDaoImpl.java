@@ -44,6 +44,12 @@ public class UsersDaoImpl implements UsersDao{
 		
 		return session.selectList("users.idSearch", dto);
 	}
-
 	
-}
+	//리연 추가 - 200923
+	//회원 정보 삭제
+	@Override
+	public void delete(String id) {
+		session.delete("users.delete", id);
+	}//====delete====
+
+}//======== UsersDaoImpl ========

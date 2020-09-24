@@ -18,4 +18,8 @@ public interface UsersDao {
 	
 	//usersDto 로 아이디 찾아오기
 	public List<UsersDto> idSearchList(UsersDto dto);
-}
+	
+	//리연 추가
+	//회원 정보 삭제
+	public void delete(String id);
+}//======== UsersDao ========

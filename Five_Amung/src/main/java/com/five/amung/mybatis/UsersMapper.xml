@@ -36,4 +36,11 @@
 		FROM A_member
 		WHERE id=#{inputId}
 	</select>
+	
+	<!-- 리연 추가 -->
+	<!-- 회원 정보 삭제 -->
+	<delete id="delete" parameterType="string">
+		delete FROM A_member
+		WHERE id=#{id}
+	</delete>
 </mapper>

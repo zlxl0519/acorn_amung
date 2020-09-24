@@ -175,4 +175,21 @@ public class UsersController {
 		mView.setViewName("mypage/info");
 		return mView;
 	}//==== info ====
+	
+	//회원정보 삭제
+	@RequestMapping("/mypage/private/delete")
+	public ModelAndView delete(HttpServletRequest request, ModelAndView mView) {
+		//서비스를 이용해서 사용자 정보를 삭제하고
+		usersService.deleteUser(request.getSession());
+		//view페이지로 froward 이동해서 응답
+		mView.setViewName("mypage/delete");
+		return mView;
+	}//delete
+	
+	//비밀번호 체크
+	@RequestMapping("/mypage/private/info/update/pwd")
+	public ModelAndView pwdCheck(HttpServletRequest request, ModelAndView mView) {
+		mView.setViewName("mypage/update_pwdokform");
+		return mView;
+	}//==== info ====
 }//======== UsersController ========
