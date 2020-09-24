@@ -214,6 +214,7 @@ public class UsersController {
 			ModelAndView mView) {
 		if(isSuccess.equals("true")) {
 			mView.setViewName("mypage/update_infoform");
+			usersService.getInfo(request.getSession(), mView);
 		}else{
 			//비밀번호가 틀렸다면
 			mView.setViewName("redirect:/mypage/private/info/update/check.do");
