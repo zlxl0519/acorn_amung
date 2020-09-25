@@ -53,6 +53,7 @@ public class UsersDaoImpl implements UsersDao{
 	public void delete(String id) {
 		session.delete("users.delete", id);
 	}//====delete====
+	
 	//비밀번호 체크
 	@Override
 	public boolean checkPwd(UsersDto dto) {
@@ -61,5 +62,17 @@ public class UsersDaoImpl implements UsersDao{
 		if(count == 1) result=true;
 		return result;
 	}//==== checkPwd ====
+	
+	//회원 정보 수정
+	@Override
+	public void update(UsersDto dto) {
+		session.update("users.update", dto);
+	}//==== update ====
+	
+	//회원 정보 : 비밀번호 수정
+	@Override
+	public void updatePwd(UsersDto dto) {
+		
+	}//==== updatePwd ====
 
 }//======== UsersDaoImpl ========

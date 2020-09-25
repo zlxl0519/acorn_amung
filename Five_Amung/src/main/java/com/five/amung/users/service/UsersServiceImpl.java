@@ -144,8 +144,18 @@ public class UsersServiceImpl implements UsersService{
 		String id = (String)session.getAttribute("id");
 		//dao를 이용해서 사용자 정보를 얻어와서
 		UsersDto dto = usersDao.getData(id);
+		
+			
+		String email = dto.getEmail();
+		// @를 기준으로 배열에 담는다.
+		String[] mail= email.split("@");
+		
+		System.out.println(mail[0]+"@"+mail[1]);
+
 		//mView 객체에 담아준다.
 		mView.addObject("dto", dto);
+		mView.addObject("mail1", mail[0]);
+		mView.addObject("mail2", mail[1]);
 	}//==== getInfo ==== 
 
 	@Override
@@ -158,7 +168,7 @@ public class UsersServiceImpl implements UsersService{
 		session.invalidate();
 	}//==== deleteUser ==== 
 
-		
+	//회원정보 수정 시 필요한 비밀번호 체크
 	@Override
 	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
 		String id = (String)request.getSession().getAttribute("id");
@@ -177,4 +187,23 @@ public class UsersServiceImpl implements UsersService{
 		}
 		return result;
 	}//==== checkInfo ==== 
+	
+	//회원정보 수정
+	@Override
+	public void updateUser(HttpServletRequest request, UsersDto dto) {
+		String id = (String)request.getSession().getAttribute("id");
+		String email=request.getParameter("email01")+"@"+request.getParameter("email02");
+		//UsersDto에 담고
+		dto.setId(id);
+		dto.setEmail(email);
+		//dao를 이용해서 수정 반영하기
+		usersDao.update(dto);
+	}//==== updateUser ====
+	
+	//비밀번호 수정
+	@Override
+	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView) {
+		// TODO Auto-generated method stub
+		
+	}//==== updateUserPwd ====
 }//======== UsersServiceImpl ========

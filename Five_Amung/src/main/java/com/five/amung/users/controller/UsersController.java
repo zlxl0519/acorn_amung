@@ -213,20 +213,25 @@ public class UsersController {
 			UsersDto dto, 
 			ModelAndView mView) {
 		if(isSuccess.equals("true")) {
-			mView.setViewName("mypage/update_infoform");
 			usersService.getInfo(request.getSession(), mView);
+			
+			mView.setViewName("mypage/update_infoform");
 		}else{
 			//비밀번호가 틀렸다면
 			mView.setViewName("redirect:/mypage/private/info/update/check.do");
 		}
 		
-		return mView;
-	}//==== infoform ====
+	return mView;
+	}//==== infoUpdateform ====
 	
 	//회원정보 수정 요청처리
 	@RequestMapping("/mypage/private/info/update")
-	public ModelAndView infoUpdate(HttpServletRequest request, ModelAndView mView) {
-		mView.setViewName("mypage/update_infoform");
+	public ModelAndView infoUpdate(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		//프로필 이미지 링크 확인
+		System.out.println("update profile:"+dto.getProfile());
+		//service 객체를 이용해서 개인 정보를 수정한다.
+		usersService.updateUser(request, dto);
+		mView.setViewName("redirect:/mypage/private/info.do");
 		return mView;
-	}//==== infoform ====
+	}//==== infoUpdate ====
 }//======== UsersController ========

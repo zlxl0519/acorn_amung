@@ -42,7 +42,7 @@
 			</div><!-- form-ul-wrap -->
 		</form>
 
-		<form action="update.jsp" method="post" id="signup">
+		<form action="update.do" method="post" id="signup">
 			<input type="hidden" name="profile" id="profile" value="${dto.profile }"/>
 			<div class="form-ul-wrap">
 				<ul>
@@ -58,15 +58,15 @@
 					</li>
 					<li class="updateform">
 						<label for="email">이메일</label>
-						<input type="text" name="email01" id="email01" value="" />
+						<input type="text" name="email01" id="email01" value="${mail1 }" />
 						<span>&nbsp;&nbsp;@</span>
-						<input type="text" id="email02" name="email02" list="domains" placeholder="도메인입력/선택" value="" />
+						<input type="text" id="email02" name="email02" list="domains" placeholder="도메인입력/선택" value="${mail2 }" />
 							<select id="domains" name="email02">
-								<option value="">직접선택</option>
-								<option value="naver.com">naver.com</option>
-								<option value="daum.net">daum.net</option>
-								<option value="gmail.com">gmail.com</option>
-								<option value="kakao.com">kakao.com</option>
+								<option>직접입력 </option>
+								<option value="naver.com"<c:if test="${mail2 eq 'naver.com' }">selected</c:if>>naver.com</option>
+								<option value="daum.net"<c:if test="${mail2 eq 'daum.net' }">selected</c:if>>daum.net</option>
+								<option value="gmail.com"<c:if test="${mail2 eq 'gmail.com' }">selected</c:if>>gmail.com</option>
+								<option value="kakao.com"<c:if test="${mail2 eq 'kakao.com' }">selected</c:if>>kakao.com</option>
 							</select>
 					</li>
 					<li>
@@ -81,6 +81,7 @@
 					</li>
 				</ul>
 			</div>
+			<button type="submit" id="submit" class="btn-default">수정하기</button>
 		</form>
 	</div><!-- form-wrap -->
 	<script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
@@ -89,13 +90,43 @@
 	$("#profileForm").ajaxForm(function(data){
 		//프로필 이미지를 업데이트 한다.
 		$("#profileImage").attr("src", "${pageContext.request.contextPath }"+data.imageSrc);
-		console.log("이미지 안바끼냐--");
 		//회원정보 수정폼 전송될 때 같이 전송되도록 한다.
 		$("#profile").val(data.imageSrc);
 	});
 	//이미지 파일을 선택했을때 change 이벤트가 일어난다.
 	$("#image").on("change", function(){
 		$("#profileForm").submit();//폼 강제 제출
+	});
+	
+	//이메일 입력방식 선택 
+	$('#domains').change(function(){
+		$("#domains option:selected").each(function () {
+			if(
+				$(this).index()== 0){ //직접입력일 경우 
+					$("#email02").val(""); //값 초기화
+					$("#email02").removeAttr("disabled");//활성화 
+				}else{ //직접입력이 아닐경우 
+					console.log(this.index);
+					$("#email02").val("");
+					$("#email02").val($(this).text()); //선택값 입력 
+					$("#email02").attr("disabled",true); //비활성화 
+					} }); });
+	
+	var canUse = false;
+	$("#submit").on("click", function(){
+		if($("#email01").val() == "" || $("#email02").val() == ""){
+			alert("이메일을 확인하세요")
+			$("#email").focus();
+			return false;
+		}else if($("#phone").val() == "" || $("#phone").val().length < 9){
+			alert("연락처를 확인하세요")
+			$("#phone").focus();
+			return false;
+		}else if($("#name").val() == ""){
+			alert("이름을 확인하세요")
+			$("#name").focus();
+			return false;
+		}
 	});
 	</script>
 </div><!-- content -->
