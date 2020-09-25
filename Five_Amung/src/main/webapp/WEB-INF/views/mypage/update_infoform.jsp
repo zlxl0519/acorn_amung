@@ -33,7 +33,11 @@
 							
 								<div class="profile-btn">
 									<label for="image"><i class="fas fa-images"></i></label>
-									<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
+									<input
+									type="file"
+									name="image"
+									id="image"
+									accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
 								</div>
 								
 						</div><!-- Profile-box -->
@@ -54,7 +58,8 @@
 					</li>
 					<li>
 						<label for="pwd">비밀번호</label>
-							<a href="" class="btn-pwd">비밀번호 변경</a>
+							<a href="${pageContext.request.contextPath }/mypage/private/info/updatepwd.do"
+								class="btn-pwd">비밀번호 변경</a>
 					</li>
 					<li class="updateform">
 						<label for="email">이메일</label>
@@ -112,7 +117,6 @@
 					$("#email02").attr("disabled",true); //비활성화 
 					} }); });
 	
-	var canUse = false;
 	$("#submit").on("click", function(){
 		if($("#email01").val() == "" || $("#email02").val() == ""){
 			alert("이메일을 확인하세요")

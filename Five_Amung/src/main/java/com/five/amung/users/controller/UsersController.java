@@ -234,4 +234,15 @@ public class UsersController {
 		mView.setViewName("redirect:/mypage/private/info.do");
 		return mView;
 	}//==== infoUpdate ====
+	
+	//비밀번호 업데이트 폼
+	@RequestMapping("/mypage/private/info/updatepwd")
+	public ModelAndView infoPwdUpdateform(
+			HttpServletRequest request,
+			UsersDto dto, 
+			ModelAndView mView) {
+			mView.setViewName("mypage/update_infopwd");
+			return mView;
+	}//==== infoPwdUpdateform ====
+	
 }//======== UsersController ========

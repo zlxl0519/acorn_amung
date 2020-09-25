@@ -50,7 +50,7 @@
 				</li>
 				<li>
 					<label for="pwd">비밀번호</label>
-					<a href="" class="btn-pwd">비밀번호 변경</a>
+					<a href="../info/updatepwd.do" class="btn-pwd">비밀번호 변경</a>
 				</li>
 				<li>
 					<label for="email">이메일</label>
