@@ -4,6 +4,7 @@ public class DogsDto {
 	private int num;
 	private String member_id;
 	private String dname;
+	private int dage;
 	private String breed;
 	private String weight;
 	private String neutral;
@@ -12,12 +13,13 @@ public class DogsDto {
 	
 	public DogsDto() {}
 
-	public DogsDto(int num, String member_id, String dname, String breed, String weight, String neutral, String gender,
-			String etc) {
+	public DogsDto(int num, String member_id, String dname, int dage, String breed, String weight, String neutral,
+			String gender, String etc) {
 		super();
 		this.num = num;
 		this.member_id = member_id;
 		this.dname = dname;
+		this.dage = dage;
 		this.breed = breed;
 		this.weight = weight;
 		this.neutral = neutral;
@@ -47,6 +49,14 @@ public class DogsDto {
 
 	public void setDname(String dname) {
 		this.dname = dname;
+	}
+
+	public int getDage() {
+		return dage;
+	}
+
+	public void setDage(int dage) {
+		this.dage = dage;
 	}
 
 	public String getBreed() {
