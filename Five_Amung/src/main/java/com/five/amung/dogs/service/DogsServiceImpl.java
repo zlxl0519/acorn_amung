@@ -45,4 +45,10 @@ public class DogsServiceImpl implements DogsService{
 		
 		return map;
 	}
+
+	@Override
+	public DogsDto getData(int num) {
+		//강아지 정보를 받아온다.(dao)
+		return dogsDao.getData(num);
+	}
 }

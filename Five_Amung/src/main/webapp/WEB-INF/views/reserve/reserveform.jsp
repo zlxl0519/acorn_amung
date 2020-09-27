@@ -54,7 +54,8 @@
 					params:$scope.reserveData
 					
 				}).success(function(data){
-					console.log(data);
+					
+					$scope.price=data.price;
 				});
 			}
 		};
@@ -193,12 +194,13 @@
 		<tr data-ng-repeat="tmp in dogList">
 			<td>
 				{{tmp.dname}}
-				<input data-ng-change="isChecked('dog')" id="dog" data-ng-model="reserveData.dog_num" type="radio" name="dog" value="{{tmp.num}}" />
+				<input data-ng-change="isChecked('dog')" id="dog" 
+					data-ng-model="reserveData.dog_num" type="radio" name="dog" value="{{tmp.num}}" />
 			</td>
 		</tr>
 		<tr>
 			<th>총 금액</th>
-			<td><input type="text" name="price" value="" />원</td>
+			<td><input type="hidden" name="price" ng-value="price" />{{price}}원</td>
 		</tr>
 		<tr>
 			<th>예약자명</th>

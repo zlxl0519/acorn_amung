@@ -10,6 +10,7 @@
 		<typeAlias type="com.five.amung.notice.dto.NoticeDto" alias="noticeDto"/>
     	<typeAlias type="com.five.amung.faq.dto.FaqDto" alias="faqDto"/>
     	<typeAlias type="com.five.amung.dogs.dto.DogsDto" alias="dogsDto"/>
+    	<typeAlias type="com.five.amung.reserve.dto.RoomPriceDto" alias="roomPriceDto"/>
 	</typeAliases>
 
 	

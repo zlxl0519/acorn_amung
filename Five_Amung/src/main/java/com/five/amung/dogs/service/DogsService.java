@@ -11,5 +11,7 @@ public interface DogsService {
 	public void insert(HttpServletRequest request, DogsDto dto);
 	//map 으로 강아지 정보 리턴
 	public Map<String, Object> getList(HttpServletRequest request, DogsDto dto);
+	//강아지 번호로 강아지 정보 가져오기
+	public DogsDto getData(int num);
 	
 }
