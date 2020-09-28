@@ -6,17 +6,20 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.five.amung.users.dto.UsersDto" alias="usersDto"/>
-    <typeAlias type="com.five.amung.reserve.dto.ReserveDto" alias="reserveDto"/>
+    	<typeAlias type="com.five.amung.reserve.dto.ReserveDto" alias="reserveDto"/>
 		<typeAlias type="com.five.amung.notice.dto.NoticeDto" alias="noticeDto"/>
-    <typeAlias type="com.five.amung.faq.dto.FaqDto" alias="faqDto"/>
+    	<typeAlias type="com.five.amung.faq.dto.FaqDto" alias="faqDto"/>
+    	<typeAlias type="com.five.amung.dogs.dto.DogsDto" alias="dogsDto"/>
+    	<typeAlias type="com.five.amung.reserve.dto.RoomPriceDto" alias="roomPriceDto"/>
 	</typeAliases>
 
 	
 	<mappers>
 		<mapper resource="com/five/amung/mybatis/UsersMapper.xml"/>
-    <mapper resource="com/five/amung/mybatis/ReserveMapper.xml"/>
+    	<mapper resource="com/five/amung/mybatis/ReserveMapper.xml"/>
 		<mapper resource="com/five/amung/mybatis/NoticeMapper.xml"/>
-    <mapper resource="com/five/amung/mybatis/FaqMapper.xml"/>
+    	<mapper resource="com/five/amung/mybatis/FaqMapper.xml"/>
+    	<mapper resource="com/five/amung/mybatis/DogsMapper.xml"/>
 	</mappers>
 	
 </configuration>

@@ -159,11 +159,9 @@ public class UsersController {
 	}
 	//비밀번호 찾는 요청처리
 	@RequestMapping("/users/pwdfind")
-	public ModelAndView pwdFind(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
-		//1. 아이디, 이름, 휴대폰 번호 로 일치하는 비밀번호 찾기
+	public ModelAndView pwdFind(ModelAndView mView, UsersDto dto) {
 		
-		//2. 
-		
+		usersService.pwdSearch(mView, dto);
 		mView.setViewName("users/pwdfind");
 		return mView;
 	}
