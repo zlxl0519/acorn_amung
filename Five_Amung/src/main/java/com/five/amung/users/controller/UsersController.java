@@ -120,7 +120,7 @@ public class UsersController {
 	public ModelAndView idFind(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
 		//이름, 이메일을 request 로 받아가서 dto 에 담고 dao 를 이용해서 맞는 아이디를 리스트로 가져온다.
 		List<UsersDto> idList=usersService.idSearch(mView, request, dto);
-		ArrayList<Map<Object, String>> findId= new ArrayList<>();
+		ArrayList<Map<Object, String>> findId= new ArrayList<Map<Object,String>>();
 		for(int i=0; i<idList.size(); i++) {
 			String id=idList.get(i).getId();
 			String regdate=idList.get(i).getRegdate();
@@ -138,7 +138,7 @@ public class UsersController {
 	public ModelAndView idFind2(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
 		//휴대폰 번호, 이름으로 아이디찾기
 		List<UsersDto> idList=usersService.idSearch(mView, request, dto);
-		ArrayList<Map<Object, String>> findId= new ArrayList<>();
+		ArrayList<Map<Object, String>> findId= new ArrayList<Map<Object,String>>();
 		for(int i=0; i<idList.size(); i++) {
 			String id=idList.get(i).getId();
 			String regdate=idList.get(i).getRegdate();
