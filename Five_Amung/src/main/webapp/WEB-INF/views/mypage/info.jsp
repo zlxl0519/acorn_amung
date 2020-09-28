@@ -50,7 +50,7 @@
 				</li>
 				<li>
 					<label for="pwd">비밀번호</label>
-					<a href="${pageContext.request.contextPath }/mypage/private/info/updatepwd.do"
+					<a href="${pageContext.request.contextPath }/mypage/private/info/pwd/updateform.do"
 					class="btn-pwd">
 					비밀번호 변경
 					</a>
