@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.five.amung.users.dto.UsersDto;
 import com.five.amung.users.service.UsersService;
@@ -235,14 +234,21 @@ public class UsersController {
 		return mView;
 	}//==== infoUpdate ====
 	
-	//비밀번호 업데이트 폼
+	//비밀번호 수정 폼
 	@RequestMapping("/mypage/private/info/updatepwd")
-	public ModelAndView infoPwdUpdateform(
-			HttpServletRequest request,
-			UsersDto dto, 
-			ModelAndView mView) {
-			mView.setViewName("mypage/update_infopwd");
-			return mView;
-	}//==== infoPwdUpdateform ====
+	public ModelAndView pwdUpdateform(ModelAndView mView) {
+		mView.setViewName("mypage/update_infopwd");
+		return mView;
+	}
+	
+	//비밀번호 수정 반영 요청 처리
+	@RequestMapping("/users/private/pwd_update")
+	public ModelAndView pwdUpdate(ModelAndView mView, UsersDto dto, HttpServletRequest request) {
+		//service객체를 이용해서 새로운 비밀번호로 수정한다.
+		usersService.updateUserPwd(request.getSession(), dto, mView);
+		//view페이지로 forward 이동해서 응답한다. 
+		mView.setViewName("users/private/pwd_update");
+		return mView;
+	}
 	
 }//======== UsersController ========
