@@ -22,17 +22,17 @@
 			$http({
 				url:"/amung/dogs/insert.do",
 				method:"post",
-				params:$scope.dagData,
+				params:$scope.dogData,
 				headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
-			}).success(function(data){
-				$scope.isSuccess=true;
-				
-				if(isSuccess){
-					alert("강아지 정보가 저장되었습니다.");
-				}else{
-					alert("강아지 정보 저장에 실패했습니다.");
-				}
-			});
+				}).success(function(data){
+					$scope.isSuccess=true;
+					
+					if($scope.isSuccess){
+						alert("강아지 정보가 저장되었습니다.");
+					}else{
+						alert("강아지 정보 저장에 실패했습니다.");
+					}
+				});
 		}
 		
 		//방, 체크인, 체크아웃, 강아지 선택한 데이터들
@@ -63,9 +63,9 @@
 	});
 </script>
 <div class="content" data-ng-app="myApp">
-<div class="form-wrap" data-ng-controller="dogCtrl">
+<div data-ng-controller="dogCtrl">
 <p>강아지 정보</p>
-<form action="${pageContext.request.contextPath	}/dogs/info.do" method="post">
+<form ng-submit="send()">
 	<div class="form-ul-wrap">
 	<ul>
 		<li>
@@ -117,20 +117,43 @@
 <form action="reserve.do" method="post">
 
 	<p>*예약하실 룸을 먼저 선택해주세요.</p>
-	<div class="room_check">
-		<label for="standad">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="standard" name="room" id="room"/>
-		</label>
-		<label for="deluxe">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="deluxe" name="room" id="room"/>
-		</label>
-		<label for="premium">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="premium" name="room" id="room"/>
-		</label>
-	</div>
+	<ul class="room_check">
+		<li>
+			<label for="standad">
+				<input
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="standard"
+					name="standard"
+					id="room"/>
+			</label>
+		</li>
+		<li>
+			<label for="deluxe">
+				<input
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="deluxe"
+					name="deluxe"
+					id="room"/>
+			</label>
+		</li>
+		<li>
+			<label for="premium">
+			프리미엄
+				<img src="http://www.bowraum.com/images/v6/services/01_hotel/A3.jpg" alt="premium"/>
+				<input
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="premium"
+					name="premium"
+					id="room"/>
+			</label>
+		</li>
+	</ul>
 	
 	<dl>
 		<dt>숙박기간</dt>
@@ -190,8 +213,9 @@
 			<th>투숙기간</th>
 			<td></td>
 		</tr>
-		<th>투숙 강아지 선택</th>
+		
 		<tr data-ng-repeat="tmp in dogList">
+			<th>투숙 강아지 선택</th>
 			<td>
 				{{tmp.dname}}
 				<input data-ng-change="isChecked('dog')" id="dog" 
@@ -265,7 +289,7 @@
 			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
 			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
 			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/include/img/icon_cal.png",
+			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
 			buttonImageOnly:true,
 			buttonText:"날짜 선택",
 			onClose: function(selectedDate){
@@ -282,7 +306,7 @@
 			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
 			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
 			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/include/img/icon_cal.png",
+			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
 			buttonImageOnly:true,
 			buttonText:"날짜 선택"	,
 			onClose: function(selectedDate){
