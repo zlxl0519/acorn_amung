@@ -22,4 +22,10 @@ public interface UsersDao {
 	public String pwdSearch(UsersDto dto);
 	//비밀번호 업데이트
 	public void updatePwd(UsersDto dto);
-}
+}	
+	//리연 추가
+	//회원 정보 삭제
+	public void delete(String id);
+	public boolean checkPwd(UsersDto dto);
+}//======== UsersDao ========
+

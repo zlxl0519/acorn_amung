@@ -136,9 +136,20 @@ public class UsersServiceImpl implements UsersService{
 		List<UsersDto> idList=usersDao.idSearchList(dto);
 		return idList;
 	}
+	//리연 추가 -- 20923
+	//회원정보 보기 요청처리
+	@Override
+	public void getInfo(HttpSession session, ModelAndView mView) {
+		//로그인 된 아이디를 session 객체를 이용해서 얻어온다.
+		String id = (String)session.getAttribute("id");
+		//dao를 이용해서 사용자 정보를 얻어와서
+		UsersDto dto = usersDao.getData(id);
+		//mView 객체에 담아준다.
+		mView.addObject("dto", dto);
+	}//==== getInfo ==== 
 
 	@Override
-	public void pwdSearch(ModelAndView mView, UsersDto dto) {
+  public void pwdSearch(ModelAndView mView, UsersDto dto) {
 		System.out.println(dto.getId());
 		//1. 아이디, 이름, 휴대폰 번호 로 일치하는 비밀번호 찾기(dao 사용)
 		String pwd=usersDao.pwdSearch(dto);
@@ -169,6 +180,31 @@ public class UsersServiceImpl implements UsersService{
 		mView.addObject("isSuccess", isSuccess);
 	}
 
-	
+	public void deleteUser(HttpSession session) {
+		//세션에 저장된 아이디를 읽어와서
+		String id = (String)session.getAttribute("id");
+		//삭제
+		usersDao.delete(id);
+		//로그아웃 처리
+		session.invalidate();
+	}//==== deleteUser ==== 
 
-}
+	@Override
+	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		String id = (String)request.getSession().getAttribute("id");
+		UsersDto resultDto=usersDao.getData(id);
+		
+		String encodedPwd=resultDto.getPwd();
+		String inputPwd=dto.getPwd();
+		
+		//DB 비밀번호와 input 비밀번호 비교
+		boolean result=BCrypt.checkpw(inputPwd, encodedPwd);
+		if(result == true) {//비밀번호와 
+			request.getSession().setAttribute("id", id);
+			mView.addObject("isSuccess", true);
+		}else {
+			mView.addObject("isSuccess", false);
+		}
+		return result;
+	}//==== checkInfo ==== 
+}//======== UsersServiceImpl ========

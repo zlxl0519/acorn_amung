@@ -95,15 +95,17 @@
 			</div>
 		</div><!-- mt20 -->
 		<div class="center">
-			<!-- 로그인 중인 id가 글 작성 시의 id와 같을 때에만 수정, 삭제 기능 볼 수 있도록은 회원가입 완료 된 후 처리 예정-->
-			<a class="btn-a btn-out-b"
+			<!-- 로그인 중인 id가 글 작성 시의 id와 같을 때에만 수정, 삭제-->
+			<c:if test="${id eq 'admin'}">
+				<a class="btn-a btn-out-b"
 				href="private/updateform.do?num=${dto.num }">
 				수정
-			</a>
-			<a class="btn-a btn-gray"
-				href="javascript:deleteConfirm(${dto.num })">
-				삭제
-			</a>
+				</a>
+				<a class="btn-a btn-gray"
+					href="javascript:deleteConfirm(${dto.num })">
+					삭제
+				</a>
+			</c:if>
 			<a class="btn-a"
 				href="list.do">
 				목록
