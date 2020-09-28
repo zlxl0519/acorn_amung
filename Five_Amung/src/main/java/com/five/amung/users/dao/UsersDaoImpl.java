@@ -46,7 +46,18 @@ public class UsersDaoImpl implements UsersDao{
 		
 		return session.selectList("users.idSearch", dto);
 	}
-	
+
+	@Override
+	public String pwdSearch(UsersDto dto) {
+		
+		return session.selectOne("users.pwdSearch", dto);
+	}
+
+	@Override
+	public void updatePwd(UsersDto dto) {
+		session.update("users.updatePwd", dto);
+	}
+
 	//리연 추가
 	//회원 정보 삭제
 	@Override

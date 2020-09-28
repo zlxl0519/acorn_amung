@@ -149,6 +149,37 @@ public class UsersServiceImpl implements UsersService{
 	}//==== getInfo ==== 
 
 	@Override
+  public void pwdSearch(ModelAndView mView, UsersDto dto) {
+		System.out.println(dto.getId());
+		//1. 아이디, 이름, 휴대폰 번호 로 일치하는 비밀번호 찾기(dao 사용)
+		String pwd=usersDao.pwdSearch(dto);
+		
+		//작업 성공여부
+		boolean isSuccess=false;
+		String newPwd = "";
+		//비밀번호를 찾았다면
+		if(pwd != null) {
+			//2. 임시 비밀번호 랜덤으로 생성
+			for (int i = 0; i < 12; i++) {
+				newPwd += (char) ((Math.random() * 26) + 97);
+			}
+
+				//새 비밀번호를 암호화
+				BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+				String encodednewPwd=encoder.encode(newPwd);
+				//새 비밀번호를 dto 에 다시 담기
+				dto.setNewPwd(encodednewPwd);
+				//DB에 비밀번호 반영하기
+				usersDao.updatePwd(dto);
+				//성공
+				isSuccess=true;
+			
+		}
+		//3. 임시 비밀번호 ModelAndView 에 담기
+		mView.addObject("newPwd", newPwd);
+		mView.addObject("isSuccess", isSuccess);
+	}
+
 	public void deleteUser(HttpSession session) {
 		//세션에 저장된 아이디를 읽어와서
 		String id = (String)session.getAttribute("id");
@@ -158,7 +189,6 @@ public class UsersServiceImpl implements UsersService{
 		session.invalidate();
 	}//==== deleteUser ==== 
 
-		
 	@Override
 	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
 		String id = (String)request.getSession().getAttribute("id");

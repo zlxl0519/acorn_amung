@@ -1,42 +1,154 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>예약페이지</title>
-</head>
-<body>
+<jsp:include page="/resources/header.jsp"></jsp:include>
+<%--예약페이지
+
+--%>
+<script>
+	var myApp=angular.module("myApp", []);
+	myApp.controller("dogCtrl", function($scope, $http){
+		$http({
+			url:"/amung/dogs/getList.do",
+			method:"get"
+		}).success(function(data){
+			
+			$scope.dogList=data.dogList;
+		});
+		
+		$scope.isSuccess=false;
+		$scope.dogData={};
+		$scope.send=function(){
+			$http({
+				url:"/amung/dogs/insert.do",
+				method:"post",
+				params:$scope.dagData,
+				headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
+			}).success(function(data){
+				$scope.isSuccess=true;
+				
+				if(isSuccess){
+					alert("강아지 정보가 저장되었습니다.");
+				}else{
+					alert("강아지 정보 저장에 실패했습니다.");
+				}
+			});
+		}
+		
+		//방, 체크인, 체크아웃, 강아지 선택한 데이터들
+		$scope.reserveData={};
+		
+		//방, 체크인, 체크아웃, 강아지 선택 여부 조사
+		$scope.selected={};
+		$scope.isChecked=function(str){
+			$scope.selected[str]=true;
+			var count=0;
+			for(key in $scope.selected){
+				count++;
+			}
+			if(count==4){//방, 체크인, 체크아웃, 강아지를 다 선택했다면
+				
+				$http({
+					url:"/amung/reserve/getPrice.do",
+					method:"get",
+					params:$scope.reserveData
+					
+				}).success(function(data){
+					
+					$scope.price=data.price;
+				});
+			}
+		};
+	
+	});
+</script>
+<div class="content" data-ng-app="myApp">
+<div class="form-wrap" data-ng-controller="dogCtrl">
+<p>강아지 정보</p>
+<form action="${pageContext.request.contextPath	}/dogs/info.do" method="post">
+	<div class="form-ul-wrap">
+	<ul>
+		<li>
+			<label for="dname">이름</label>
+			<input data-ng-model="dogData.dname" type="text" name="dname" id="dname" placeholder="반려견의 이름을 작성해주세요" />
+		</li>
+		<li>
+			<label for="dage">나이</label>
+			<input data-ng-model="dogData.dage" type="number" name="dage" id="dage" value="0"/><span>&nbsp;살</span>
+		</li>
+		<li>
+			<label for="breed">견종</label>
+			<input data-ng-model="dogData.breed" type="text" name="breed" id="breed" placeholder="견종을 작성해주세요"/>
+		</li>
+		<li>
+			<fieldset>
+				<legend>몸무게</legend>
+				<input data-ng-model="dogData.weight"  type="radio" name="weight" value="3" />3kg 이하
+				<input data-ng-model="dogData.weight" type="radio" name="weight" value="6" />4kg~6kg
+				<input data-ng-model="dogData.weight" type="radio" name="weight" value="9" />7kg~9kg
+				<input data-ng-model="dogData.weight" type="radio" name="weight" value="10" />10kg~
+			</fieldset>
+		</li>
+		<li>
+			<fieldset>
+				<legend>중성화 유무</legend>
+				<input data-ng-model="dogData.neutral" type="radio" name="neutral" value="yes" checked/> 유
+				<input data-ng-model="dogData.neutral" type="radio" name="neutral" value="no" /> 무
+			</fieldset>	
+		</li>
+		<li>
+		
+		<fieldset>
+			<legend>성별선택</legend>
+			<input data-ng-model="dogData.gender" type="radio" name="gender" value="male" checked/> 남아
+			<input data-ng-model="dogData.gender" type="radio" name="gender" value="female" /> 여아
+		</fieldset>
+		</li>
+		<li>
+			<label for="etc">기타사항</label>
+			<textarea data-ng-model="dogData.etc" name="etc" id="etc" cols="60" rows="10" placeholder="반려견 호텔링 시, 요청사항이나 주의해야하는 사항을 적어주세요"></textarea>
+		</li>
+	</ul>
+	</div>
+	<p>* 강아지 정보를 꼭 저장해주세요!!</p>
+	<button type="submit">강아지 정보 저장</button>
+</form>
+
 <form action="reserve.do" method="post">
+
 	<p>*예약하실 룸을 먼저 선택해주세요.</p>
 	<div class="room_check">
 		<label for="standad">
-			<input type="radio" value="standad" name="room" price="" />
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="standard" name="room" id="room"/>
 		</label>
 		<label for="deluxe">
-			<input type="radio" value="deluxe" name="room" price="" />
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="deluxe" name="room" id="room"/>
 		</label>
 		<label for="premium">
-			<input type="radio" value="premium" name="room" price="" />
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="premium" name="room" id="room"/>
 		</label>
 	</div>
 	
 	<dl>
 		<dt>숙박기간</dt>
 		<dd>
-			<input type="text" name="checkin" id="checkin" placeholder="입실" 
+			<input data-ng-change="isChecked('checkin')" data-ng-model="reserveData.checkin_date" 
+				type="text" name="checkin" id="checkin" placeholder="입실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'"/>
 		</dd>
 		<dd>
-			<input type="text" name="checkout" id="checkout" placeholder="퇴실" 
+			<input data-ng-change="isChecked('checkout')" data-ng-model="reserveData.checkout_date" 
+				type="text" name="checkout" id="checkout" placeholder="퇴실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'" />
 		</dd>
 	</dl>
 	<dl>
 		<dt>입실시간</dt>
 		<dd>
-			<select name="start_time" id="start_time">
+			<select data-ng-model="reserveData.start_time" name="start_time" id="start_time">
 				<option value="">[옵션]시간을 선택해주세요.</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
@@ -56,7 +168,7 @@
 	<dl>
 		<dt>퇴실시간</dt>
 		<dd>
-			<select name="end_time" id="end_time">
+			<select data-ng-model="reserveData.end_time" name="end_time" id="end_time">
 				<option value="">[옵션]시간을 선택해주세요.</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
@@ -78,13 +190,17 @@
 			<th>투숙기간</th>
 			<td></td>
 		</tr>
-		<tr>
-			<th>투숙 강아지 선택</th>
-			<td>강아지 이름<input type="checkbox" name="dogs" value="강아지 이름" /></td>
+		<th>투숙 강아지 선택</th>
+		<tr data-ng-repeat="tmp in dogList">
+			<td>
+				{{tmp.dname}}
+				<input data-ng-change="isChecked('dog')" id="dog" 
+					data-ng-model="reserveData.dog_num" type="radio" name="dog" value="{{tmp.num}}" />
+			</td>
 		</tr>
 		<tr>
 			<th>총 금액</th>
-			<td><input type="text" name="price" value="" />원</td>
+			<td><input type="hidden" name="price" ng-value="price" />{{price}}원</td>
 		</tr>
 		<tr>
 			<th>예약자명</th>
@@ -102,34 +218,8 @@
 	
 	<button type="submit">예약하기</button>
 </form>
-
-<p>강아지 정보</p>
-<form action="${pageContext.request.contextPath	}/dogs/info.do" method="post">
-	<table>
-		<tr>
-			<th>이름</th>
-			<th>나이</th>
-			<th>견종</th>
-			<th>몸무게</th>
-			<th>중성화 유무</th>
-			<th>성별</th>
-			<th>기타사항</th>
-		</tr>
-		<tr>
-			<td><input type="text" name="dname" /></td>
-			<td><input type="text" name="dage" /></td>
-			<td><input type="text" name="breed" /></td>
-			<td><input type="text" name="weight" /></td>
-			<td><input type="text" name="neutral" /></td>
-			<td><input type="text" name="gender" /></td>
-			<td><input type="text" name="etc" /></td>
-		</tr>
-	</table>
-	<p>* 강아지 정보를 꼭 저장해주세요!!</p>
-	<button type="submit">강아지 정보 저장</button>
-</form>
-
-
+</div><!-- form-wrap -->
+</div><!--content -->
 
 <script>
 	//연락처 입력칸에 번호만 입력되도록한다. 
@@ -198,7 +288,7 @@
 			onClose: function(selectedDate){
 				//체크아웃 datepicker 가 닫힐때
 				//체크인 의 선택할수 있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-				$("#checkin").datepicker("option","maxDate",dateText);
+				$("#checkin").datepicker("option","maxDate",selectedDate);
 			}
 		});
 		
@@ -206,5 +296,4 @@
 	});
 	
 </script>
-</body>
-</html>
+<jsp:include page="/resources/footer.jsp"></jsp:include>
