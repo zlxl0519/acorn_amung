@@ -36,4 +36,10 @@ public interface UsersService {
 	public void deleteUser(HttpSession session);
 	// 회원 정보 수정 시 비밀번호 체크 요청처리
 	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView);
+	
+	// 회원정보 수정
+	public void updateUser(HttpServletRequest request, UsersDto dto);
+	
+	//비밀번호 수정
+	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView);
 }//======== UsersService ========

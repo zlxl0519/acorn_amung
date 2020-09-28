@@ -136,20 +136,9 @@ public class UsersServiceImpl implements UsersService{
 		List<UsersDto> idList=usersDao.idSearchList(dto);
 		return idList;
 	}
-	//리연 추가 -- 20923
-	//회원정보 보기 요청처리
+	
 	@Override
-	public void getInfo(HttpSession session, ModelAndView mView) {
-		//로그인 된 아이디를 session 객체를 이용해서 얻어온다.
-		String id = (String)session.getAttribute("id");
-		//dao를 이용해서 사용자 정보를 얻어와서
-		UsersDto dto = usersDao.getData(id);
-		//mView 객체에 담아준다.
-		mView.addObject("dto", dto);
-	}//==== getInfo ==== 
-
-	@Override
-  public void pwdSearch(ModelAndView mView, UsersDto dto) {
+	public void pwdSearch(ModelAndView mView, UsersDto dto) {
 		System.out.println(dto.getId());
 		//1. 아이디, 이름, 휴대폰 번호 로 일치하는 비밀번호 찾기(dao 사용)
 		String pwd=usersDao.pwdSearch(dto);
@@ -163,23 +152,45 @@ public class UsersServiceImpl implements UsersService{
 			for (int i = 0; i < 12; i++) {
 				newPwd += (char) ((Math.random() * 26) + 97);
 			}
-
-				//새 비밀번호를 암호화
-				BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-				String encodednewPwd=encoder.encode(newPwd);
-				//새 비밀번호를 dto 에 다시 담기
-				dto.setNewPwd(encodednewPwd);
-				//DB에 비밀번호 반영하기
-				usersDao.updatePwd(dto);
-				//성공
-				isSuccess=true;
-			
+	
+			//새 비밀번호를 암호화
+			BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+			String encodednewPwd=encoder.encode(newPwd);
+			//새 비밀번호를 dto 에 다시 담기
+			dto.setNewPwd(encodednewPwd);
+			//DB에 비밀번호 반영하기
+			usersDao.updatePwd(dto);
+			//성공
+			isSuccess=true;
 		}
 		//3. 임시 비밀번호 ModelAndView 에 담기
 		mView.addObject("newPwd", newPwd);
 		mView.addObject("isSuccess", isSuccess);
 	}
+	
+	//리연 추가 -- 20923
+	//회원정보 보기 요청처리
+	@Override
+	public void getInfo(HttpSession session, ModelAndView mView) {
+		//로그인 된 아이디를 session 객체를 이용해서 얻어온다.
+		String id = (String)session.getAttribute("id");
+		//dao를 이용해서 사용자 정보를 얻어와서
+		UsersDto dto = usersDao.getData(id);
+		
+			
+		String email = dto.getEmail();
+		// @를 기준으로 배열에 담는다.
+		String[] mail= email.split("@");
+		
+		System.out.println(mail[0]+"@"+mail[1]);
 
+		//mView 객체에 담아준다.
+		mView.addObject("dto", dto);
+		mView.addObject("mail1", mail[0]);
+		mView.addObject("mail2", mail[1]);
+	}//==== getInfo ==== 
+
+	@Override
 	public void deleteUser(HttpSession session) {
 		//세션에 저장된 아이디를 읽어와서
 		String id = (String)session.getAttribute("id");
@@ -189,6 +200,7 @@ public class UsersServiceImpl implements UsersService{
 		session.invalidate();
 	}//==== deleteUser ==== 
 
+	//회원정보 수정 시 필요한 비밀번호 체크
 	@Override
 	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
 		String id = (String)request.getSession().getAttribute("id");
@@ -207,4 +219,23 @@ public class UsersServiceImpl implements UsersService{
 		}
 		return result;
 	}//==== checkInfo ==== 
+	
+	//회원정보 수정
+	@Override
+	public void updateUser(HttpServletRequest request, UsersDto dto) {
+		String id = (String)request.getSession().getAttribute("id");
+		String email=request.getParameter("email01")+"@"+request.getParameter("email02");
+		//UsersDto에 담고
+		dto.setId(id);
+		dto.setEmail(email);
+		//dao를 이용해서 수정 반영하기
+		usersDao.update(dto);
+	}//==== updateUser ====
+	
+	//비밀번호 수정
+	@Override
+	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView) {
+		// TODO Auto-generated method stub
+		
+	}//==== updateUserPwd ====
 }//======== UsersServiceImpl ========

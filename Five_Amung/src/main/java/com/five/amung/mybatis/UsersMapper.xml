@@ -59,10 +59,16 @@
 		FROM A_member
 		WHERE id=#{id}
 	</delete>
-	<!--  -->
+	<!-- 비밀번호체크 -->
 	<select id="checkPwd" parameterType="usersDto" resultType="int">
 		SELECT COUNT(*)
 		FROM A_member
 		WHERE id=#{id} and pwd=#{pwd}
 	</select>
+	<!-- 회원 정보 수정 -->
+	<update id="update" parameterType="usersDto">
+		UPDATE A_member
+		SET email=#{email}, profile=#{profile}, name=#{name}, phone=#{phone}
+		WHERE id=#{id}
+	</update>
 </mapper>

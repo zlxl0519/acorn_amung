@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.five.amung.users.dto.UsersDto;
 import com.five.amung.users.service.UsersService;
@@ -211,20 +210,43 @@ public class UsersController {
 			UsersDto dto, 
 			ModelAndView mView) {
 		if(isSuccess.equals("true")) {
-			mView.setViewName("mypage/update_infoform");
 			usersService.getInfo(request.getSession(), mView);
+			
+			mView.setViewName("mypage/update_infoform");
 		}else{
 			//비밀번호가 틀렸다면
 			mView.setViewName("redirect:/mypage/private/info/update/check.do");
 		}
 		
-		return mView;
-	}//==== infoform ====
+	return mView;
+	}//==== infoUpdateform ====
 	
 	//회원정보 수정 요청처리
 	@RequestMapping("/mypage/private/info/update")
-	public ModelAndView infoUpdate(HttpServletRequest request, ModelAndView mView) {
-		mView.setViewName("mypage/update_infoform");
+	public ModelAndView infoUpdate(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		//프로필 이미지 링크 확인
+		System.out.println("update profile:"+dto.getProfile());
+		//service 객체를 이용해서 개인 정보를 수정한다.
+		usersService.updateUser(request, dto);
+		mView.setViewName("redirect:/mypage/private/info.do");
 		return mView;
-	}//==== infoform ====
+	}//==== infoUpdate ====
+	
+	//비밀번호 수정 폼
+	@RequestMapping("/mypage/private/info/updatepwd")
+	public ModelAndView pwdUpdateform(ModelAndView mView) {
+		mView.setViewName("mypage/update_infopwd");
+		return mView;
+	}
+	
+	//비밀번호 수정 반영 요청 처리
+	@RequestMapping("/users/private/pwd_update")
+	public ModelAndView pwdUpdate(ModelAndView mView, UsersDto dto, HttpServletRequest request) {
+		//service객체를 이용해서 새로운 비밀번호로 수정한다.
+		usersService.updateUserPwd(request.getSession(), dto, mView);
+		//view페이지로 forward 이동해서 응답한다. 
+		mView.setViewName("users/private/pwd_update");
+		return mView;
+	}
+	
 }//======== UsersController ========
