@@ -31,4 +31,11 @@ public class ReserveServiceImpl implements ReserveService{
 		map.put("price", resultPrice);
 		return map;
 	}
+	@Override
+	public Map<String, Object> getTerm(RoomPriceDto dto) {
+		int term=reserveDao.getTerm(dto);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("term", -term);
+		return map;
+	}
 }

@@ -24,10 +24,10 @@ public class ReserveController {
 	@Autowired
 	private DogsService dogsService;
 	
-	@RequestMapping("/reserve/reserveform")
+	@RequestMapping("/reserve/reserve_home")
 	public ModelAndView reserveform(ModelAndView mView) {
 		
-		mView.setViewName("reserve/reserveform");
+		mView.setViewName("reserve/reserve_home");
 		return mView;
 	}
 	
@@ -43,6 +43,13 @@ public class ReserveController {
 		//2. 전송된 값을 이용해서 서비스에서 가격을 담아온다.
 		Map<String, Object> map=reserveService.getPrice(dto);
 		
+		return map;
+	}
+	
+	@RequestMapping(value = "/reserve/getTerm", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getTerm(RoomPriceDto dto){
+		Map<String, Object> map=reserveService.getTerm(dto);
 		return map;
 	}
 }
