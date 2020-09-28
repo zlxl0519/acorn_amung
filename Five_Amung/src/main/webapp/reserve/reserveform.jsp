@@ -7,15 +7,15 @@
 	<div class="room_check">
 		<label for="standad">
 			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="standard" name="room" id="room"/>
+				value="standard" name="room_name" id="room"/>
 		</label>
 		<label for="deluxe">
 			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="deluxe" name="room" id="room"/>
+				value="deluxe" name="room_name" id="room"/>
 		</label>
 		<label for="premium">
 			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="premium" name="room" id="room"/>
+				value="premium" name="room_name" id="room"/>
 		</label>
 	</div>
 	
@@ -23,12 +23,12 @@
 		<dt>숙박기간</dt>
 		<dd>
 			<input data-ng-change="isChecked('checkin')" data-ng-model="reserveData.checkin_date" 
-				type="text" name="checkin" id="checkin" placeholder="입실" 
+				type="text" name="checkin_date" id="checkin" placeholder="입실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'"/>
 		</dd>
 		<dd>
 			<input data-ng-change="isChecked('checkout')" data-ng-model="reserveData.checkout_date" 
-				type="text" name="checkout" id="checkout" placeholder="퇴실" 
+				type="text" name="checkout_date" id="checkout" placeholder="퇴실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'" />
 		</dd>
 	</dl>
@@ -82,13 +82,17 @@
 			<td>
 				{{tmp.dname}}
 				<input data-ng-change="isChecked('dog')" id="dog" 
-					data-ng-model="reserveData.dog_num" type="radio" name="dog" value="{{tmp.num}}" />
+					data-ng-model="reserveData.dog_num" type="radio" name="dog_num" value="{{tmp.num}}" />
 			</td>
 		</tr>
 		<tr>
 			<th>총 금액</th>
-			<td><input type="hidden" name="price" value="{{price}}" />{{price}}원</td>
+			<td><input type="hidden" name="room_price" value="{{price}}" />{{price}}원</td>
 		</tr>
+		<p>
+			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)
+			홍길동 우리은행 xxxx-xxx-xxxx	
+		</p>
 		<tr>
 			<th>예약자명</th>
 			<td>
