@@ -47,7 +47,6 @@ public class ReserveController {
 		
 		return map;
 	}
-}
 
 	// 리연 추가 - 20200923 일단 페이지만 추가함
 	// 마이페이지 / 예약현황
@@ -57,4 +56,3 @@ public class ReserveController {
 		return mView;
 	}//==== reserveStatus ====
 }//======== ReServeController ========
-
