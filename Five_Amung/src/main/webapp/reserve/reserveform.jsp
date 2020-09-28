@@ -75,7 +75,7 @@
 	<table>
 		<tr>
 			<th>투숙기간</th>
-			<td></td>
+			<td>{{term}}일  {{reserveData.checkin_date}}~{{reserveData.checkout_date}}</td>
 		</tr>
 		<th>투숙 강아지 선택</th>
 		<tr data-ng-repeat="tmp in dogList">

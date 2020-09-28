@@ -33,7 +33,10 @@ public class ReserveServiceImpl implements ReserveService{
 	}
 	@Override
 	public Map<String, Object> getTerm(RoomPriceDto dto) {
+		//1. 기간을 계산 해서 숙박 일을 저장해서 보낸다.
 		int term=reserveDao.getTerm(dto);
+		//2. 체크인 , 체크아웃 기간을 저장해서 보낸다.
+		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("term", -term);
 		return map;

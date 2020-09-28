@@ -65,7 +65,8 @@
 					$scope.price=data.price;
 				});
 			}
-			if($scope.selected[checkin]==true && $scope.selected[checkout]==true){
+			
+			if($scope.selected.checkin==true && $scope.selected.checkout==true){
 				
 				$http({
 					url:"/amung/reserve/getTerm.do",
@@ -73,6 +74,7 @@
 					params:$scope.reserveData
 				}).success(function(data){
 					console.log(data);
+					$scope.term=data.term;
 					
 				});
 			}
