@@ -166,7 +166,7 @@ public class UsersController {
 		return mView;
 	}
 	
-	// 리연 추가 - 20200923
+	// 리연 추가
 	// 한명의 회원 정보 요청 처리
 	@RequestMapping("/mypage/private/info")
 	public ModelAndView info(HttpServletRequest request, ModelAndView mView) {
@@ -233,20 +233,19 @@ public class UsersController {
 	}//==== infoUpdate ====
 	
 	//비밀번호 수정 폼
-	@RequestMapping("/mypage/private/info/updatepwd")
+	@RequestMapping("/mypage/private/info/pwd/updateform")
 	public ModelAndView pwdUpdateform(ModelAndView mView) {
-		mView.setViewName("mypage/update_infopwd");
+		mView.setViewName("mypage/update_infopwdform");
 		return mView;
-	}
+	}//==== pwdUpdateForm ====
 	
 	//비밀번호 수정 반영 요청 처리
-	@RequestMapping("/users/private/pwd_update")
+	@RequestMapping("/mypage/private/info/pwd/update")
 	public ModelAndView pwdUpdate(ModelAndView mView, UsersDto dto, HttpServletRequest request) {
 		//service객체를 이용해서 새로운 비밀번호로 수정한다.
 		usersService.updateUserPwd(request.getSession(), dto, mView);
 		//view페이지로 forward 이동해서 응답한다. 
-		mView.setViewName("users/private/pwd_update");
+		mView.setViewName("mypage/update_infopwd");
 		return mView;
-	}
-	
+	}//==== pwdUdate ==== 
 }//======== UsersController ========
