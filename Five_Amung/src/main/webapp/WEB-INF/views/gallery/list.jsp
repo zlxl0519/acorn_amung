@@ -14,9 +14,13 @@
 							<img src="${pageContext.request.contextPath }${tmp.imagePath}"/>
 						</a>
 					</div>
-					<p>${tmp.subCaption }</p>
-					<div class="caption"><p>${tmp.caption}</p></div>
-					<p>${tmp.regdate }</p>
+					
+					<div class="caption">
+						<p>${tmp.caption }</p>
+						<strong class="sub">${tmp.subCaption}</strong><br/>
+						<span class="date">${tmp.regdate }</span>
+					</div>
+					
 				</li>
 			</c:forEach>
 		</ul>
