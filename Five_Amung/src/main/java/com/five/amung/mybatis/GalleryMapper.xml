@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gallery">
+
+	<!-- 리스트 불러오기 -->
+	<select id="getList" parameterType="galleryDto" resultType="galleryDto">
+		select * from
+			(select result1.*, rownum as rnum
+				from (select num, id, caption, subCaption, content, imagePath, hit, TO_CHAR(regdate, 'YYYY-MM-DD') AS "regdate" from A_gallery
+						order by regdate desc) result1)
+		where rnum between #{startRowNum} and #{endRowNum}
+	</select>
+
+
+	<!-- 전체 row의 갯수를 리턴해주는 메소드 -->
+	<select id="getCount" parameterType="galleryDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM A_gallery
+	</select>
+
+
+	<!-- 글 추가 -->
+	<insert id="insert" parameterType="galleryDto">
+		insert into A_gallery
+		(num, id, caption, subCaption, content, imagePath, hit, regdate)
+		values(A_gallery_seq.nextval, #{id, jdbcType=VARCHAR}, #{caption, jdbcType=VARCHAR}, #{subCaption, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{imagePath, jdbcType=VARCHAR}, #{hit}, SYSDATE)
+	</insert>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from A_gallery
+		where num=#{num}
+	</delete>
+	
+	<!-- 글 수정 -->
+	<update id="update" parameterType="galleryDto">
+		update A_gallery
+		set caption=#{caption}, content=#{content}, imagePath=#{imagePath}, regdate=SYSDATE 
+	</update>
+	
+	<!-- 상세보기 -->
+	<select id="getData" parameterType="int" resultType="galleryDto">
+		select result1.* from
+			(select num, id, caption, subCaption, content, imagePath, hit, TO_CHAR(regdate, 'YYYY-MM-DD') AS "regdate",
+			lag(num,1,0) over (order by num desc) as prevNum,
+			lead(num,1,0) over (order by num desc) as nextNum
+			from A_gallery) result1
+		where num=#{num}
+	</select>
+	
+	<!-- 조회수 올리기 -->
+	<update id="viewCount" parameterType="int">
+		update A_gallery
+		set hit=hit+1
+		where num=#{num}
+	</update>
+	
+</mapper>
