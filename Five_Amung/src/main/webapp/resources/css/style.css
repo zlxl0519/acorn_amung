@@ -75,6 +75,10 @@ table a:hover, table a:active {
 	font-size: 16px;
 }
 
+.f25 {
+	font-size: 25px;
+}
+
 .m0 {
 	margin: 0 !important;
 }
@@ -455,6 +459,18 @@ select {
 	color: #bbc5c2;
 	font-size: 13px;
 	margin: 10px 0 0 70px;
+}
+
+.btn-pwd {
+	margin-left: 20px;
+	background: #D6E7A4;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: #fff;
+}
+
+.btn-pwd:hover{
+	color: #000;
 }
 
 .form-ul-wrap {
@@ -1112,6 +1128,13 @@ li.profile-wrap {
 	height: 100% !important;
 	object-fit: cover;
 	z-index: 2;
+}
+
+.info {
+	display:inline-block;
+	font-size : 2em;
+	transform: translateY(-186%);
+	margin-left: 19px;
 }
 
 .profile-btn {

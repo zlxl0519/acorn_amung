@@ -2,6 +2,24 @@
 
 /* 웹폰트 */
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+/*여기어때*/
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'S-CoreDream-8Heavy';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
 .nanumgothic * {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -69,7 +87,7 @@
 * {
 	margin: 0 auto;
 	padding: 0;
-	font-family: S-CoreDream-6Bold, Century Gothic, CenturyGothic, sans-serif;
+	font-family: 'NanumBarunGothic', Century Gothic, CenturyGothic, sans-serif;
 	color: #4c4c4c;
 	box-sizing: border-box;
 	outline: none;

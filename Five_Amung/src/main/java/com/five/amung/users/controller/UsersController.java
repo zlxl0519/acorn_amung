@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -119,7 +120,7 @@ public class UsersController {
 	public ModelAndView idFind(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
 		//이름, 이메일을 request 로 받아가서 dto 에 담고 dao 를 이용해서 맞는 아이디를 리스트로 가져온다.
 		List<UsersDto> idList=usersService.idSearch(mView, request, dto);
-		ArrayList<Map<Object, String>> findId= new ArrayList<>();
+		ArrayList<Map<Object, String>> findId= new ArrayList<Map<Object,String>>();
 		for(int i=0; i<idList.size(); i++) {
 			String id=idList.get(i).getId();
 			String regdate=idList.get(i).getRegdate();
@@ -137,7 +138,7 @@ public class UsersController {
 	public ModelAndView idFind2(ModelAndView mView, HttpServletRequest request, UsersDto dto) {
 		//휴대폰 번호, 이름으로 아이디찾기
 		List<UsersDto> idList=usersService.idSearch(mView, request, dto);
-		ArrayList<Map<Object, String>> findId= new ArrayList<>();
+		ArrayList<Map<Object, String>> findId= new ArrayList<Map<Object,String>>();
 		for(int i=0; i<idList.size(); i++) {
 			String id=idList.get(i).getId();
 			String regdate=idList.get(i).getRegdate();
@@ -164,4 +165,87 @@ public class UsersController {
 		mView.setViewName("users/pwdfind");
 		return mView;
 	}
-}
+	
+	// 리연 추가
+	// 한명의 회원 정보 요청 처리
+	@RequestMapping("/mypage/private/info")
+	public ModelAndView info(HttpServletRequest request, ModelAndView mView) {
+		usersService.getInfo(request.getSession(), mView);
+		mView.setViewName("mypage/info");
+		return mView;
+	}//==== info ====
+	
+	//회원정보 삭제
+	@RequestMapping("/mypage/private/delete")
+	public ModelAndView delete(HttpServletRequest request, ModelAndView mView) {
+		//서비스를 이용해서 사용자 정보를 삭제하고
+		usersService.deleteUser(request.getSession());
+		//view페이지로 froward 이동해서 응답
+		mView.setViewName("mypage/delete");
+		return mView;
+	}//delete
+	
+	//비밀번호 체크 폼
+	@RequestMapping("/mypage/private/info/update/check")
+	public ModelAndView pwdCheckform(HttpServletRequest request, ModelAndView mView) {
+		mView.setViewName("mypage/update_pwdokform");
+		return mView;
+	}//==== pwdCheckform ====
+	
+	//비밀번호 체크 요청처리
+	@RequestMapping(value="/mypage/private/info/update/submit", method=RequestMethod.POST)
+	public ModelAndView pwdCheck(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		usersService.checkInfo(request, dto, mView);
+		mView.setViewName("mypage/update_pwdok");
+		return mView;
+	}//==== pwdCheck ====
+	
+	//회원정보 수정 폼
+	@RequestMapping("/mypage/private/info/updateform")
+	public ModelAndView infoUpdateform(
+			@RequestParam(value = "isSuccess", 
+						  required = false, 
+						  defaultValue = "false") String isSuccess,
+			HttpServletRequest request,
+			UsersDto dto, 
+			ModelAndView mView) {
+		if(isSuccess.equals("true")) {
+			usersService.getInfo(request.getSession(), mView);
+			
+			mView.setViewName("mypage/update_infoform");
+		}else{
+			//비밀번호가 틀렸다면
+			mView.setViewName("redirect:/mypage/private/info/update/check.do");
+		}
+		
+	return mView;
+	}//==== infoUpdateform ====
+	
+	//회원정보 수정 요청처리
+	@RequestMapping("/mypage/private/info/update")
+	public ModelAndView infoUpdate(HttpServletRequest request, UsersDto dto, ModelAndView mView) {
+		//프로필 이미지 링크 확인
+		System.out.println("update profile:"+dto.getProfile());
+		//service 객체를 이용해서 개인 정보를 수정한다.
+		usersService.updateUser(request, dto);
+		mView.setViewName("redirect:/mypage/private/info.do");
+		return mView;
+	}//==== infoUpdate ====
+	
+	//비밀번호 수정 폼
+	@RequestMapping("/mypage/private/info/pwd/updateform")
+	public ModelAndView pwdUpdateform(ModelAndView mView) {
+		mView.setViewName("mypage/update_infopwdform");
+		return mView;
+	}//==== pwdUpdateForm ====
+	
+	//비밀번호 수정 반영 요청 처리
+	@RequestMapping("/mypage/private/info/pwd/update")
+	public ModelAndView pwdUpdate(ModelAndView mView, UsersDto dto, HttpServletRequest request) {
+		//service객체를 이용해서 새로운 비밀번호로 수정한다.
+		usersService.updateUserPwd(request.getSession(), dto, mView);
+		//view페이지로 forward 이동해서 응답한다. 
+		mView.setViewName("mypage/update_infopwd");
+		return mView;
+	}//==== pwdUdate ==== 
+}//======== UsersController ========
