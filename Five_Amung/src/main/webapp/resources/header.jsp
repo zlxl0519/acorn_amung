@@ -33,6 +33,7 @@
 <!--script -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/angular.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cdd137b0b885c589d0ff1e9d01738a4"></script>
 <!-- jquery ui datepicker -->
@@ -68,41 +69,41 @@
 			<nav class="nav1">
 				<div class="nav-gnb">
 					<ul>
-           <c:choose>
+					<c:choose>
 							<c:when test="${empty sessionScope.id }">
-						    <li>
-							    <a href="${pageContext.request.contextPath }/users/loginform.do">
-								    로그인
-							    </a>
-						    </li>
-						    <li>
-							    <a href="${pageContext.request.contextPath }/users/signup_form.do">
-								   회원가입
-							    </a>
-						    </li>
-              </c:when>
-              <c:otherwise>
-								<li>
-                  <a>
-                    <span>${id } </span> 님 환영합니다.
-                  </a>
-                </li>
-								<li>
-                  <a href="${pageContext.request.contextPath }/mypage/private/info.do">
-                    마이페이지
-                  </a>
-                </li>
-								<li>
-                  <a href="${pageContext.request.contextPath }/users/logout.do">
-                    로그아웃
-                  </a>
-                </li>
-								<li>
-                  <a href="${pageContext.request.contextPath }/admin/list.do">
-                    <i class="fas fa-cog"></i>
-                    운영관리
-                  </a>
-                </li>
+							<li>
+								<a href="${pageContext.request.contextPath }/users/loginform.do">
+									로그인
+								</a>
+							</li>
+							<li>
+								<a href="${pageContext.request.contextPath }/users/signup_form.do">
+									회원가입
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+						<li>
+							<a>
+								<span>${id }</span> 님 환영합니다.
+							</a>
+						</li>
+						<li>
+							<a href="${pageContext.request.contextPath }/mypage/private/info.do">
+								마이페이지
+							</a>
+							</li>
+							<li>
+							<a href="${pageContext.request.contextPath }/users/logout.do">
+								로그아웃
+							</a>
+							</li>
+							<li>
+								<a href="${pageContext.request.contextPath }/admin/list.do">
+								<i class="fas fa-cog"></i>
+								운영관리
+								</a>
+							</li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -125,7 +126,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="${pageContext.request.contextPath }/reservation/private/reserveform.do">
+								<a href="${pageContext.request.contextPath	}/reserve/reserveform.do">
 									예약하기
 								</a>
 							</li>

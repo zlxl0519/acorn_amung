@@ -94,7 +94,9 @@ public class NoticeServiceImpl implements NoticeService{
 			endPageNum=totalPageCount; //보정해준다. 
 		}
 		
+		String id=(String)request.getSession().getAttribute("id");
 		//EL에서 사용할 값을 미리 request에 담아두기
+		request.setAttribute("id", id);
 		request.setAttribute("list", list);
 		request.setAttribute("startPageNum", startPageNum);
 		request.setAttribute("endPageNum", endPageNum);
@@ -166,6 +168,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void deleteContent(int num, HttpServletRequest request) {
+		
 		noticeDao.delete(num);
 	}//==== deleteContent ====
 }//======== NoticeServiceImpl ========

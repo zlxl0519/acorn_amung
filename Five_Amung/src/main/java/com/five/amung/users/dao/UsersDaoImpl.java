@@ -1,6 +1,8 @@
 package com.five.amung.users.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,36 @@ public class UsersDaoImpl implements UsersDao{
 		return session.selectList("users.idSearch", dto);
 	}
 
+	@Override
+	public String pwdSearch(UsersDto dto) {
+		
+		return session.selectOne("users.pwdSearch", dto);
+	}
+
+	@Override
+	public void updatePwd(UsersDto dto) {
+		session.update("users.updatePwd", dto);
+	}
+
+	//리연 추가
+	//회원 정보 삭제
+	@Override
+	public void delete(String id) {
+		session.delete("users.delete", id);
+	}//====delete====
 	
-}
+	//비밀번호 체크
+	@Override
+	public boolean checkPwd(UsersDto dto) {
+		boolean result = false;
+		int count = session.selectOne("users.checkPwd", dto);
+		if(count == 1) result=true;
+		return result;
+	}//==== checkPwd ====
+	
+	//회원 정보 수정
+	@Override
+	public void update(UsersDto dto) {
+		session.update("users.update", dto);
+	}//==== update ====
+}//======== UsersDaoImpl ========
