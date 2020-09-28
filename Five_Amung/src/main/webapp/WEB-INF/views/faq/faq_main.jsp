@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html;  charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>        
+<%
+	String id = (String)session.getAttribute("id");
+	String admin = "admin";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +21,7 @@
 		<h3>자주 물어보시는 질문들입니다.</h3>
 		<p>
 			검색해도 나오지 않는 질문이 있으시다면 
-			<a href="${pageContext.request.contextPath }/qna/qna_list.jsp">
+			<a href="${pageContext.request.contextPath }/qna/qna_list.do">
 			   <strong class="f_blue f16">QnA</strong>
 			</a>
 			게시판을 찾아주세요.
@@ -86,9 +90,16 @@
           </c:if>
           </ul>     
      </div>
+     
+     <!-- 관리자 계정일 경우 faq 등록 버튼 노출 -->
+     <c:if test="${id eq admin}">
+     	<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
+     		<button>새 faq 등록하기</button>
+     	</a>
+     </c:if>
 
 
-<script src="${pageContext.request.contextPath }/include/js/jquery.form.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
 $(document).ready(function(){
 	  $(".accordion-a").hide();
