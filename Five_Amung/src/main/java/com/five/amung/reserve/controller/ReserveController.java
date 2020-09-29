@@ -1,6 +1,5 @@
 package com.five.amung.reserve.controller;
 
-
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,10 +25,10 @@ public class ReserveController {
 	@Autowired
 	private DogsService dogsService;
 	
-	@RequestMapping("/reserve/reserveform")
+	@RequestMapping("/reserve/reserve_home")
 	public ModelAndView reserveform(ModelAndView mView) {
 		
-		mView.setViewName("reserve/reserveform");
+		mView.setViewName("reserve/reserve_home");
 		return mView;
 	}
 	
@@ -47,7 +46,38 @@ public class ReserveController {
 		
 		return map;
 	}
+	
+	@RequestMapping(value = "/reserve/getTerm", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getTerm(RoomPriceDto dto){
+		Map<String, Object> map=reserveService.getTerm(dto);
+		return map;
+	}
 
+	@RequestMapping("/reserve/reserve")
+	public ModelAndView reserve(ModelAndView mView, ReserveDto dto, RoomPriceDto roomDto, HttpServletRequest request) {
+		int num=dto.getDog_num();
+		DogsDto dogDto=dogsService.getData(num);
+		String weight=dogDto.getWeight();
+		roomDto.setWeight(weight);
+		//1. 방이름, 강아지 몸무게에 해당되는 방 번호를 불러온다.(dto 에 담는다.)
+		int room_num=reserveService.getRoomNum(roomDto);
+		dto.setRoom_num(room_num);
+		
+		//방 예약 현황을 바꾸고 예약 DB 저장하기 (성공여부 담아서출력)
+		reserveService.reserve(request, dto);
+		
+		//4. 예약정보 DB 에서 예약한 사항을 가져온다(예약자 아이디, 강아지번호, 방번호 로)
+		ReserveDto getDto=reserveService.getData(dto);
+		
+		//5. 방번호로 방 정보 가져오기
+		RoomDto getRoomDto=reserveService.getRoomData(room_num);
+		mView.addObject("roomDto", getRoomDto);
+		mView.addObject("reserveDto", getDto);
+		mView.setViewName("reserve/reserve");
+		return mView;
+	}
+	
 	// 리연 추가 - 20200923 일단 페이지만 추가함
 	// 마이페이지 / 예약현황
 	@RequestMapping("/mypage/private/reserve/status")

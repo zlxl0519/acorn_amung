@@ -1,170 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:include page="/resources/header.jsp"></jsp:include>
-<%--예약페이지
-
---%>
-<script>
-	var myApp=angular.module("myApp", []);
-	myApp.controller("dogCtrl", function($scope, $http){
-		$http({
-			url:"/amung/dogs/getList.do",
-			method:"get"
-		}).success(function(data){
-			
-			$scope.dogList=data.dogList;
-		});
-		
-		$scope.isSuccess=false;
-		$scope.dogData={};
-		$scope.send=function(){
-			$http({
-				url:"/amung/dogs/insert.do",
-				method:"post",
-				params:$scope.dogData,
-				headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
-				}).success(function(data){
-					$scope.isSuccess=true;
-					
-					if($scope.isSuccess){
-						alert("강아지 정보가 저장되었습니다.");
-					}else{
-						alert("강아지 정보 저장에 실패했습니다.");
-					}
-				});
-		}
-		
-		//방, 체크인, 체크아웃, 강아지 선택한 데이터들
-		$scope.reserveData={};
-		
-		//방, 체크인, 체크아웃, 강아지 선택 여부 조사
-		$scope.selected={};
-		$scope.isChecked=function(str){
-			$scope.selected[str]=true;
-			var count=0;
-			for(key in $scope.selected){
-				count++;
-			}
-			if(count==4){//방, 체크인, 체크아웃, 강아지를 다 선택했다면
-				
-				$http({
-					url:"/amung/reserve/getPrice.do",
-					method:"get",
-					params:$scope.reserveData
-					
-				}).success(function(data){
-					
-					$scope.price=data.price;
-				});
-			}
-		};
-	
-	});
-</script>
-<div class="content" data-ng-app="myApp">
-<div data-ng-controller="dogCtrl">
-<p>강아지 정보</p>
-<form ng-submit="send()">
-	<div class="form-ul-wrap">
-	<ul>
-		<li>
-			<label for="dname">이름</label>
-			<input data-ng-model="dogData.dname" type="text" name="dname" id="dname" placeholder="반려견의 이름을 작성해주세요" />
-		</li>
-		<li>
-			<label for="dage">나이</label>
-			<input data-ng-model="dogData.dage" type="number" name="dage" id="dage" value="0"/><span>&nbsp;살</span>
-		</li>
-		<li>
-			<label for="breed">견종</label>
-			<input data-ng-model="dogData.breed" type="text" name="breed" id="breed" placeholder="견종을 작성해주세요"/>
-		</li>
-		<li>
-			<fieldset>
-				<legend>몸무게</legend>
-				<input data-ng-model="dogData.weight"  type="radio" name="weight" value="3" />3kg 이하
-				<input data-ng-model="dogData.weight" type="radio" name="weight" value="6" />4kg~6kg
-				<input data-ng-model="dogData.weight" type="radio" name="weight" value="9" />7kg~9kg
-				<input data-ng-model="dogData.weight" type="radio" name="weight" value="10" />10kg~
-			</fieldset>
-		</li>
-		<li>
-			<fieldset>
-				<legend>중성화 유무</legend>
-				<input data-ng-model="dogData.neutral" type="radio" name="neutral" value="yes" checked/> 유
-				<input data-ng-model="dogData.neutral" type="radio" name="neutral" value="no" /> 무
-			</fieldset>	
-		</li>
-		<li>
-		
-		<fieldset>
-			<legend>성별선택</legend>
-			<input data-ng-model="dogData.gender" type="radio" name="gender" value="male" checked/> 남아
-			<input data-ng-model="dogData.gender" type="radio" name="gender" value="female" /> 여아
-		</fieldset>
-		</li>
-		<li>
-			<label for="etc">기타사항</label>
-			<textarea data-ng-model="dogData.etc" name="etc" id="etc" cols="60" rows="10" placeholder="반려견 호텔링 시, 요청사항이나 주의해야하는 사항을 적어주세요"></textarea>
-		</li>
-	</ul>
-	</div>
-	<p>* 강아지 정보를 꼭 저장해주세요!!</p>
-	<button type="submit">강아지 정보 저장</button>
-</form>
-
 <form action="reserve.do" method="post">
 
 	<p>*예약하실 룸을 먼저 선택해주세요.</p>
-	<ul class="room_check">
-		<li>
-			<label for="standad">
-				<input
-					data-ng-change="isChecked('room')"
-					data-ng-model="reserveData.room_name"
-					type="radio" 
-					value="standard"
-					name="standard"
-					id="room"/>
-			</label>
-		</li>
-		<li>
-			<label for="deluxe">
-				<input
-					data-ng-change="isChecked('room')"
-					data-ng-model="reserveData.room_name"
-					type="radio" 
-					value="deluxe"
-					name="deluxe"
-					id="room"/>
-			</label>
-		</li>
-		<li>
-			<label for="premium">
-			프리미엄
-				<img src="http://www.bowraum.com/images/v6/services/01_hotel/A3.jpg" alt="premium"/>
-				<input
-					data-ng-change="isChecked('room')"
-					data-ng-model="reserveData.room_name"
-					type="radio" 
-					value="premium"
-					name="premium"
-					id="room"/>
-			</label>
-		</li>
-	</ul>
+	<div class="room_check">
+		<label for="standad">
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="standard" name="room_name" id="room"/>
+		</label>
+		<label for="deluxe">
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="deluxe" name="room_name" id="room"/>
+		</label>
+		<label for="premium">
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="premium" name="room_name" id="room"/>
+		</label>
+	</div>
 	
 	<dl>
 		<dt>숙박기간</dt>
 		<dd>
 			<input data-ng-change="isChecked('checkin')" data-ng-model="reserveData.checkin_date" 
-				type="text" name="checkin" id="checkin" placeholder="입실" 
+				type="text" name="checkin_date" id="checkin" placeholder="입실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'"/>
 		</dd>
 		<dd>
 			<input data-ng-change="isChecked('checkout')" data-ng-model="reserveData.checkout_date" 
-				type="text" name="checkout" id="checkout" placeholder="퇴실" 
+				type="text" name="checkout_date" id="checkout" placeholder="퇴실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'" />
 		</dd>
 	</dl>
@@ -211,21 +75,24 @@
 	<table>
 		<tr>
 			<th>투숙기간</th>
-			<td></td>
+			<td>{{term}}일  {{reserveData.checkin_date}}~{{reserveData.checkout_date}}</td>
 		</tr>
-		
+		<th>투숙 강아지 선택</th>
 		<tr data-ng-repeat="tmp in dogList">
-			<th>투숙 강아지 선택</th>
 			<td>
 				{{tmp.dname}}
 				<input data-ng-change="isChecked('dog')" id="dog" 
-					data-ng-model="reserveData.dog_num" type="radio" name="dog" value="{{tmp.num}}" />
+					data-ng-model="reserveData.dog_num" type="radio" name="dog_num" value="{{tmp.num}}" />
 			</td>
 		</tr>
 		<tr>
 			<th>총 금액</th>
-			<td><input type="hidden" name="price" ng-value="price" />{{price}}원</td>
+			<td><input type="hidden" name="room_price" value="{{price}}" />{{price}}원</td>
 		</tr>
+		<p>
+			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)
+			홍길동 우리은행 xxxx-xxx-xxxx	
+		</p>
 		<tr>
 			<th>예약자명</th>
 			<td>
@@ -242,8 +109,7 @@
 	
 	<button type="submit">예약하기</button>
 </form>
-</div><!-- form-wrap -->
-</div><!--content -->
+
 
 <script>
 	//연락처 입력칸에 번호만 입력되도록한다. 
@@ -320,4 +186,3 @@
 	});
 	
 </script>
-<jsp:include page="/resources/footer.jsp"></jsp:include>
