@@ -315,6 +315,7 @@ html, body {
 
 /*footer*/
 #wrap footer {
+	clear: both;
 	margin: 100px 0 0;
 	width: 100%;
 	display: inline-block;
@@ -324,6 +325,7 @@ html, body {
 
 #wrap footer>div {
 	width: 1281px;
+	background: #3f3f3f;
 }
 
 footer * {
@@ -1066,4 +1068,20 @@ footer .copyright {
 	font-size: 16px !important;
 	font-weight: 300;
 	line-height: 1.8em;
+}
+
+/* 강아지 정보 */
+.dog-list{
+	width: 100%;
+	text-align:left;
+}
+
+.dog-list>li{
+	display: inline-block;
+	width: 100%;
+	border-radius: 5px;
+	background: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
 }

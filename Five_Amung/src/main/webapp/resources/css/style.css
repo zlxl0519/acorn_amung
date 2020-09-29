@@ -375,8 +375,11 @@ select {
 }
 
 /*sub-nav*/
-.sub-nav-gnb {
+.sub-nav {
 	float: left;
+	clear: both;
+}
+.sub-nav-gnb {
 }
 
 .sub-nav-gnb ul {
@@ -405,7 +408,11 @@ select {
 	font-size: 20px;
 	font-weight: bold;
 }
-
+.sub-content{
+	float:left;
+	padding: 0 20px;
+	width: 980px;
+}
 /* 하단 버튼 */
 .bottom-list {
 	
@@ -1198,4 +1205,50 @@ li.profile-wrap {
 	overflow: hidden;
 	clip: rect(0, 0, 0, 0);
 	border: 0;
+}
+
+.info-box{
+	width: 300px;
+	padding: 20px;
+	text-align: left;
+	margin-bottom: 30px;
+	background: #fff;
+	border-radius: 0.1875rem;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.info-box .profile-img{
+	width: 80px;
+	height: 80px;
+}
+
+.info-box .info-name{
+	transform: translateY(-8px);
+	margin : 0px 0 0 20px;
+	text-align: left;
+	display: inline-block;
+	line-height: 2em;
+}
+
+.info-box .info-name h5{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	line-height: 2rem;
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+.info-box .info-name h6{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	line-height: 1.5rem;
+	font-size: 1.25rem;
+	color:#90929e;
 }
