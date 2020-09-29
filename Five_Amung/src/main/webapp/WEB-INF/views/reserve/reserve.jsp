@@ -36,6 +36,7 @@
 					<td>${reserveDto.room_price }</td>
 				</tr>
 			</table>
+			<p><a href="">확인</a></p>
 		</c:otherwise>
 	</c:choose>
 </body>
