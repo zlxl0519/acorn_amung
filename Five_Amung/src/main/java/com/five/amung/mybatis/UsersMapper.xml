@@ -17,7 +17,7 @@
 		from A_member
 		where id=#{id}
 	</select>
-  
+  	<!-- 아이디 찾기 -->
 	<select id="idSearch" parameterType="usersDto" resultType="usersDto">
 		select id, regdate
 		from A_member
@@ -30,10 +30,46 @@
 			</when>
 		</choose>
 	</select>
+	
+
+	<!-- 비밀번호 찾기 -->
+	<select id="pwdSearch" parameterType="usersDto" resultType="string">
+		select pwd
+		from A_member
+		where id=#{id} and name=#{name} and phone=#{phone}
+	</select>
+
 	<!-- 아이디 중복 체크 -->
 	<select id="isExist" parameterType="string" resultType="string">
 		SELECT id
 		FROM A_member
 		WHERE id=#{inputId}
 	</select>
+  
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd" parameterType="usersDto">
+		update A_member
+		set pwd=#{newPwd}
+		where id=#{id}
+	</update>
+
+	<!-- 리연 추가 -->
+	<!-- 회원 정보 삭제 -->
+	<delete id="delete" parameterType="string">
+		DELETE
+		FROM A_member
+		WHERE id=#{id}
+	</delete>
+	<!-- 비밀번호체크 -->
+	<select id="checkPwd" parameterType="usersDto" resultType="int">
+		SELECT COUNT(*)
+		FROM A_member
+		WHERE id=#{id} and pwd=#{pwd}
+	</select>
+	<!-- 회원 정보 수정 -->
+	<update id="update" parameterType="usersDto">
+		UPDATE A_member
+		SET email=#{email}, profile=#{profile}, name=#{name}, phone=#{phone}
+		WHERE id=#{id}
+	</update>
 </mapper>

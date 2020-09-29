@@ -1,42 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>예약페이지</title>
-</head>
-<body>
 <form action="reserve.do" method="post">
+
 	<p>*예약하실 룸을 먼저 선택해주세요.</p>
 	<div class="room_check">
 		<label for="standad">
-			<input type="radio" value="standad" name="room" price="" />
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="standard" name="room_name" id="room"/>
 		</label>
 		<label for="deluxe">
-			<input type="radio" value="deluxe" name="room" price="" />
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="deluxe" name="room_name" id="room"/>
 		</label>
 		<label for="premium">
-			<input type="radio" value="premium" name="room" price="" />
+			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
+				value="premium" name="room_name" id="room"/>
 		</label>
 	</div>
 	
 	<dl>
 		<dt>숙박기간</dt>
 		<dd>
-			<input type="text" name="checkin" id="checkin" placeholder="입실" 
+			<input data-ng-change="isChecked('checkin')" data-ng-model="reserveData.checkin_date" 
+				type="text" name="checkin_date" id="checkin" placeholder="입실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'"/>
 		</dd>
 		<dd>
-			<input type="text" name="checkout" id="checkout" placeholder="퇴실" 
+			<input data-ng-change="isChecked('checkout')" data-ng-model="reserveData.checkout_date" 
+				type="text" name="checkout_date" id="checkout" placeholder="퇴실" 
 				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'" />
 		</dd>
 	</dl>
 	<dl>
 		<dt>입실시간</dt>
 		<dd>
-			<select name="start_time" id="start_time">
+			<select data-ng-model="reserveData.start_time" name="start_time" id="start_time">
 				<option value="">[옵션]시간을 선택해주세요.</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
@@ -56,7 +55,7 @@
 	<dl>
 		<dt>퇴실시간</dt>
 		<dd>
-			<select name="end_time" id="end_time">
+			<select data-ng-model="reserveData.end_time" name="end_time" id="end_time">
 				<option value="">[옵션]시간을 선택해주세요.</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
@@ -76,16 +75,24 @@
 	<table>
 		<tr>
 			<th>투숙기간</th>
-			<td></td>
+			<td>{{term}}일  {{reserveData.checkin_date}}~{{reserveData.checkout_date}}</td>
 		</tr>
-		<tr>
-			<th>투숙 강아지 선택</th>
-			<td>강아지 이름<input type="checkbox" name="dogs" value="강아지 이름" /></td>
+		<th>투숙 강아지 선택</th>
+		<tr data-ng-repeat="tmp in dogList">
+			<td>
+				{{tmp.dname}}
+				<input data-ng-change="isChecked('dog')" id="dog" 
+					data-ng-model="reserveData.dog_num" type="radio" name="dog_num" value="{{tmp.num}}" />
+			</td>
 		</tr>
 		<tr>
 			<th>총 금액</th>
-			<td><input type="text" name="price" value="" />원</td>
+			<td><input type="hidden" name="room_price" value="{{price}}" />{{price}}원</td>
 		</tr>
+		<p>
+			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)
+			홍길동 우리은행 xxxx-xxx-xxxx	
+		</p>
 		<tr>
 			<th>예약자명</th>
 			<td>
@@ -102,33 +109,6 @@
 	
 	<button type="submit">예약하기</button>
 </form>
-
-<p>강아지 정보</p>
-<form action="${pageContext.request.contextPath	}/dogs/info.do" method="post">
-	<table>
-		<tr>
-			<th>이름</th>
-			<th>나이</th>
-			<th>견종</th>
-			<th>몸무게</th>
-			<th>중성화 유무</th>
-			<th>성별</th>
-			<th>기타사항</th>
-		</tr>
-		<tr>
-			<td><input type="text" name="dname" /></td>
-			<td><input type="text" name="dage" /></td>
-			<td><input type="text" name="breed" /></td>
-			<td><input type="text" name="weight" /></td>
-			<td><input type="text" name="neutral" /></td>
-			<td><input type="text" name="gender" /></td>
-			<td><input type="text" name="etc" /></td>
-		</tr>
-	</table>
-	<p>* 강아지 정보를 꼭 저장해주세요!!</p>
-	<button type="submit">강아지 정보 저장</button>
-</form>
-
 
 
 <script>
@@ -175,7 +155,7 @@
 			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
 			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
 			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/include/img/icon_cal.png",
+			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
 			buttonImageOnly:true,
 			buttonText:"날짜 선택",
 			onClose: function(selectedDate){
@@ -192,13 +172,13 @@
 			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
 			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
 			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/include/img/icon_cal.png",
+			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
 			buttonImageOnly:true,
 			buttonText:"날짜 선택"	,
 			onClose: function(selectedDate){
 				//체크아웃 datepicker 가 닫힐때
 				//체크인 의 선택할수 있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-				$("#checkin").datepicker("option","maxDate",dateText);
+				$("#checkin").datepicker("option","maxDate",selectedDate);
 			}
 		});
 		
@@ -206,5 +186,3 @@
 	});
 	
 </script>
-</body>
-</html>

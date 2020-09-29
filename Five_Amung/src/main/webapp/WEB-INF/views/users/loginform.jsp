@@ -20,8 +20,9 @@
 	<form id="loginForm" name="loginForm" action="${pageContext.request.contextPath	}/users/login.do" method="post" >
 	<div class="form-ul-wrap users-wrap">
 		<ul>
-			<input type="hidden" name="url" value="${url }" />
+			
 			<li>
+				<input type="hidden" name="url" value="${url }" />
 				<input type="text" name="id" id="id" value="${savedId }" placeholder="아이디" />
 			</li>
 			
