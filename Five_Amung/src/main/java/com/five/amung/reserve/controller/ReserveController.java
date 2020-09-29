@@ -67,8 +67,6 @@ public class ReserveController {
 		//방 예약 현황을 바꾸고 예약 DB 저장하기 (성공여부 담아서출력)
 		reserveService.reserve(mView ,request, dto);
 		
-		
-		
 		//4. 방번호로 방 정보 가져오기
 		RoomDto getRoomDto=reserveService.getRoomData(room_num);
 		mView.addObject("roomDto", getRoomDto);

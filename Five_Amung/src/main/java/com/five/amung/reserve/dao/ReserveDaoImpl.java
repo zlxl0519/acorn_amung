@@ -1,5 +1,7 @@
 package com.five.amung.reserve.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,5 +59,16 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public RoomDto getRoomData(int num) {
 		return session.selectOne("reserve.getRoomData", num);
+	}
+
+	@Override
+	public List<ReserveDto> getList(ReserveDto dto) {
+		
+		return session.selectList("reserve.getList", dto);
+	}
+
+	@Override
+	public int getCount(ReserveDto dto) {
+		return session.selectOne("reserve.getCount", dto);
 	}
 }

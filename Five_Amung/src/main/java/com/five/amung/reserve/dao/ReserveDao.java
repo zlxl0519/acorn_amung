@@ -1,5 +1,7 @@
 package com.five.amung.reserve.dao;
 
+import java.util.List;
+
 import com.five.amung.dogs.dto.DogsDto;
 import com.five.amung.reserve.dto.ReserveDto;
 import com.five.amung.reserve.dto.RoomDto;
@@ -26,4 +28,9 @@ public interface ReserveDao {
 	
 	//방 번호 방 정보 가져오기
 	public RoomDto getRoomData(int num);
+	
+	//예약정보 다 가져오기
+	public List<ReserveDto> getList(ReserveDto dto);
+	
+	public int getCount(ReserveDto dto);
 }
