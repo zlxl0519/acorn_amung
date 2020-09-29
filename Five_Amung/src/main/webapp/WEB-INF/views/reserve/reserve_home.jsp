@@ -9,7 +9,7 @@
 	var myApp=angular.module("myApp", ["ngRoute"]);
 	myApp.controller("dogCtrl", function($scope, $http, $location){
 		
-		$scope.isSuccess=false;
+		
 		$scope.dogData={};
 		$scope.send=function(){
 			$http({
@@ -18,12 +18,13 @@
 				params:$scope.dogData,
 				headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
 			}).success(function(data){
-				$scope.isSuccess=true;
 				
-				if($scope.isSuccess){
-					alert("강아지 정보가 저장되었습니다.");
+				$scope.isExist=data;
+				
+				if($scope.isExist=="true"){
+					alert("이미 존재하는 강아지 정보 입니다.");
 				}else{
-					alert("강아지 정보 저장에 실패했습니다.");
+					alert("강아지 정보가 저장되었습니다.");
 				}
 				//강아지 정보 저장 후 예약 폼으로 redirect
 				$location.path("/reserveform");
@@ -91,11 +92,13 @@
 </script>
 <div class="content" data-ng-app="myApp">
 	<div class="form-wrap">
-		<h1>예약 페이지 입니다.</h1>
-		<p>
-			강아지 정보가 없을 시 예약하지 못합니다.
-			강아지 정보를 먼저 입력해주세요!!
-		</p>
+		<h1>알림 사항!</h1>
+		<ul>
+			<li>1. 호텔 만실 또는 촉박한 기간으로 예약 확정되지 못할 경우 자동으로 예약이 취소될 수 있습니다.</li>
+			<li>2. 예약 후 24시간 내에 입금하지 않으실 경우 자동으로 취소 처리 됩니다.</li>
+			<li>3. 입금 후 취소 시 전화나 qna 게시판에 비밀글로 남겨주세요.</li>
+			<li>4. 마이페이지 내역에 강아지 정보가 없다면 강아지 정보를 입력해 주세요.</li>
+		</ul>
 		<ul class="nav"><!-- # 은 페이지 내에서의 이동 -->
 			<li><a href="#dog_form">강아지 정보 저장</a></li>
 			<li><a href="#reserveform">예약하기</a></li>
