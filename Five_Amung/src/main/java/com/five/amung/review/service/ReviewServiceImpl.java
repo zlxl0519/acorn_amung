@@ -51,7 +51,20 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void saveContent(ReviewDto dto) {
+	public void saveContent(HttpServletRequest request) {
+		String id = request.getParameter("writer");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String profile = reviewDao.selectProfile(id);
+		int rating = Integer.parseInt(request.getParameter("rating"));
+		
+		ReviewDto dto = new ReviewDto();
+		dto.setWriter(id);
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setProfile(profile);
+		dto.setRating(rating);
+		
 		reviewDao.insert(dto);
 	}
 
@@ -87,6 +100,37 @@ public class ReviewServiceImpl implements ReviewService {
 	    request.setAttribute("list", list);
 	    request.setAttribute("pageNum", pageNum);
 	    request.setAttribute("totalPageCount", totalPageCount);
+	}
+
+
+	@Override
+	public void moreList(HttpServletRequest request) {
+		//파라미터로 전달된 pageNum을 읽어 온다.
+		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+		
+		final int PAGE_ROW_COUNT=5;
+				
+		//보여줄 페이지 데이터의 시작 ResultSet row 번호
+		int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+		//보여줄 페이지 데이터의 끝 ResultSet row 번호
+		int endRowNum=pageNum*PAGE_ROW_COUNT;
+
+		ReviewDto dto = new ReviewDto();
+		dto.setStartRowNum(startRowNum);
+		dto.setEndRowNum(endRowNum);
+		
+		List<ReviewDto> list = reviewDao.getList(dto);
+		int totalRow = reviewDao.getCount(dto);
+				
+		//전체 페이지의 갯수 구하기
+		int totalPageCount=
+				(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		
+	
+	    //EL에서 사용할 값을 미리 request에 담아두기
+	    request.setAttribute("list", list);
+	    request.setAttribute("pageNum", pageNum);
+	    request.setAttribute("totalPageCount", totalPageCount);			
 	}
 
 }

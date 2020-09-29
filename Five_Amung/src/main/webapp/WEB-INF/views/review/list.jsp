@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>   
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %> 
+
+<%@include file="/../resources/header.jsp"%><!-- header -->  
+
 <div class="content center">
 	<h3 class="review"><strong>실시간</strong> 에이멍 후기 <i class="fas fa-comment-dots"></i></h3>
 	<div class="left mb20">
@@ -33,16 +36,16 @@
 							<c:when test="${not empty tmp.profile}">
 								<img id="profileImage" src="${pageContext.request.contextPath}${tmp.profile}"/>
 							</c:when>
-							<c:when test="${empty tmp.profile}">
+							<c:otherwise>
 								<img id="profileImage" src="${pageContext.request.contextPath}/include/img/icon_user.png"/>
-							</c:when>
+							</c:otherwise>
 						</c:choose>
 					</div>
 					<div class="review-users">
 					<p>
 						<c:choose>
 							<c:when test="${not empty tmp.writer}">${tmp.writer }</c:when>
-							<c:when test="${empty tmp.writer}">익명의 리뷰어</c:when>
+							<c:otherwise>익명의 리뷰어</c:otherwise>
 						</c:choose>
 					</p>
 					<span>${tmp.title } <br/></span>
@@ -69,6 +72,7 @@
 		</li>
 	</c:forEach>
 	</ul>
+</div><!-- content -->	
 
 <script>
 	//페이지가 처음 로딩될때 1page 를 보여준다고 가정
@@ -105,5 +109,5 @@
 		}
 	});	
 </script>
-          
-</div><!-- content -->
+
+<%@include file="/../resources/footer.jsp"%><!-- footer -->

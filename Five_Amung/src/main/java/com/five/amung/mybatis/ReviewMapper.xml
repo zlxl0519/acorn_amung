@@ -61,4 +61,9 @@
 		delete from A_review
 		where num=#{num}
 	</delete>
+	
+	<select id="getProfile" parameterType="string" resultType="string">
+		select profile from A_member 
+		where id=#{id}
+	</select>
 </mapper>

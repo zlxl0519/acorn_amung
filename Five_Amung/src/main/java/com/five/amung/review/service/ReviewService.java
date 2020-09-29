@@ -15,12 +15,16 @@ public interface ReviewService {
 	public void getDetail(HttpServletRequest request);
 	
 	//글 작성
-	public void saveContent(ReviewDto dto);
+	public void saveContent(HttpServletRequest request);
 	
 	//글 수정
 	public void updateContent(ReviewDto dto);
 	
 	//글 삭제
 	public void deleteContent(int num, HttpServletRequest request);
+	
+	//리스트 페이징 추가 응답
+	public void moreList(HttpServletRequest request);
+	
 	
 }

@@ -1,20 +1,10 @@
 <%@ page language="java" contentType="text/html;  charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>        
-<%
-	String id = (String)session.getAttribute("id");
-	String admin = "admin";
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Faq</title>
-<link rel="stylesheet"  href="${pageContext.request.contextPath  }/resources/css/bootstrap.css" />
-</head>
-<body>
-<div class="content">
-	
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %> 
+       
+<%@include file="/../resources/header.jsp"%><!-- header -->
+
+<div class="content">	
 	<h2>FAQ</h2>
 	
 	<div class="left">
@@ -92,25 +82,24 @@
      </div>
      
      <!-- 관리자 계정일 경우 faq 등록 버튼 노출 -->
-     <c:if test="${id eq admin}">
+     <c:if test="${id eq 'admin'}">
      	<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
      		<button>새 faq 등록하기</button>
      	</a>
      </c:if>
 
 
-<script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
-<script>
-$(document).ready(function(){
-	  $(".accordion-a").hide();
-	  $(".accordion-q").click(function(){
-	    $(this).next().slideToggle(300);
-	    $(".accordion-q").not(this).next().slideUp(300);
-	    return false;});
-	  $(".accordion-q").eq(0).trigger("click");
-	});
-</script>
+
+	<script>
+	$(document).ready(function(){
+		  $(".accordion-a").hide();
+		  $(".accordion-q").click(function(){
+		    $(this).next().slideToggle(300);
+		    $(".accordion-q").not(this).next().slideUp(300);
+		    return false;});
+		  $(".accordion-q").eq(0).trigger("click");
+		});
+	</script>
 
 </div>
-</body>
-</html>
+<%@include file="/../resources/footer.jsp"%><!-- footer -->

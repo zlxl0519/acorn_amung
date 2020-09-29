@@ -24,6 +24,9 @@ public interface ReviewDao {
 	
 	//글 삭제하기
 	public void delete(int num);
+	
+	//프로필 조회하기
+	public String selectProfile(String id);
 
 	
 }

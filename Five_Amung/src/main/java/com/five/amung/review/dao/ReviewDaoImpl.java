@@ -16,43 +16,48 @@ public class ReviewDaoImpl implements ReviewDao {
 
 	@Override
 	public List<ReviewDto> getList(ReviewDto dto) {
-		return session.selectList("cafe.getList", dto);
+		return session.selectList("review.getList", dto);
 	}
 
 	@Override
 	public int getCount(ReviewDto dto) {
-		return session.selectOne("cafe.getCount", dto);
+		return session.selectOne("review.getCount", dto);
 	}
 
 	@Override
 	public List<ReviewDto> getMyList(ReviewDto dto) {
-		return session.selectList("cafe.getMyList", dto);
+		return session.selectList("review.getMyList", dto);
 	}
 
 	@Override
 	public int getMyCount(ReviewDto dto) {
-		return session.selectOne("cafe.getMyCount", dto);
+		return session.selectOne("review.getMyCount", dto);
 	}
 
 	@Override
 	public ReviewDto getData(int num) {
-		return session.selectOne("cafe.getData", num);
+		return session.selectOne("review.getData", num);
 	}
 
 
 	@Override
 	public void insert(ReviewDto dto) {
-		session.insert("cafe.insert", dto);
+		session.insert("review.insert", dto);
 	}
 
 	@Override
 	public void update(ReviewDto dto) {
-		session.update("cafe.update", dto);
+		session.update("review.update", dto);
 	}
 
 	@Override
 	public void delete(int num) {
-		session.delete("cafe.delete", num);
+		session.delete("review.delete", num);
+	}
+
+	@Override
+	public String selectProfile(String id) {
+		return session.selectOne("review.getProfile", id);
 	}
 
 	

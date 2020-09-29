@@ -55,11 +55,8 @@ public class ReviewController {
 	
 	//글 작성하기
 	@RequestMapping(value="/review/private/insert", method=RequestMethod.POST)
-	public ModelAndView insert(ModelAndView mView, ReviewDto dto,
-			HttpSession session) {
-		String id=(String)session.getAttribute("id");
-		dto.setWriter(id);
-		reviewService.saveContent(dto);
+	public ModelAndView insert(ModelAndView mView, HttpServletRequest request) {
+		reviewService.saveContent(request);
 		mView.setViewName("review/insert");
 		return mView;
 	}	
@@ -75,7 +72,9 @@ public class ReviewController {
 	
 	//글 수정하기
 	@RequestMapping(value="/review/private/update", method=RequestMethod.POST)
-	public ModelAndView update(ModelAndView mView, ReviewDto dto) {
+	public ModelAndView update(HttpServletRequest request, ModelAndView mView, ReviewDto dto) {
+		int rating = Integer.parseInt(request.getParameter("rating"));
+		dto.setRating(rating);
 		reviewService.updateContent(dto);
 		mView.setViewName("review/update");
 		return mView;
@@ -89,4 +88,14 @@ public class ReviewController {
 		mView.setViewName("redirect:/review/list.do");
 		return mView;
 	}
+	
+	//스크롤 ajax 요청
+	@RequestMapping("/review/rev_ajax_list")
+	public ModelAndView ajaxCommentList(HttpServletRequest request,
+			ModelAndView mView) {
+		reviewService.moreList(request);
+		mView.setViewName("review/rev_ajax_list");
+		return mView;
+	}
+	
 }
