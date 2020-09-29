@@ -39,8 +39,13 @@ public class ReserveDaoImpl implements ReserveDao{
 	}
 
 	@Override
-	public void insertReserve(ReserveDto dto) {
-		session.insert("reserve.insertReserve", dto);
+	public boolean insertReserve(ReserveDto dto) {
+		int num=session.insert("reserve.insertReserve", dto);
+		if(num==1) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override

@@ -65,15 +65,14 @@ public class ReserveController {
 		dto.setRoom_num(room_num);
 		
 		//방 예약 현황을 바꾸고 예약 DB 저장하기 (성공여부 담아서출력)
-		reserveService.reserve(request, dto);
+		reserveService.reserve(mView ,request, dto);
 		
-		//4. 예약정보 DB 에서 예약한 사항을 가져온다(예약자 아이디, 강아지번호, 방번호 로)
-		ReserveDto getDto=reserveService.getData(dto);
 		
-		//5. 방번호로 방 정보 가져오기
+		
+		//4. 방번호로 방 정보 가져오기
 		RoomDto getRoomDto=reserveService.getRoomData(room_num);
 		mView.addObject("roomDto", getRoomDto);
-		mView.addObject("reserveDto", getDto);
+		
 		mView.setViewName("reserve/reserve");
 		return mView;
 	}

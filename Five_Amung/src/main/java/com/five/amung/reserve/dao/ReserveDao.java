@@ -19,7 +19,7 @@ public interface ReserveDao {
 	public void updateRoomReserveState(ReserveDto dto);
 	
 	//예약 사항 예약DB에 저장
-	public void insertReserve(ReserveDto dto);
+	public boolean insertReserve(ReserveDto dto);
 	
 	//예약정보 가져오기(한 줄만)
 	public ReserveDto getData(ReserveDto dto);

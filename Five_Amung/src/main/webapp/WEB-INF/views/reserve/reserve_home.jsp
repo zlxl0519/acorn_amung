@@ -42,6 +42,8 @@
 			
 			$scope.dogList=data.dogList;
 		});
+		//투숙기간 보이게 하는 데이터
+		$scope.showed=false;
 		
 		//방, 체크인, 체크아웃, 강아지 선택한 데이터들
 		$scope.reserveData={};
@@ -66,9 +68,8 @@
 					$scope.price=data.price;
 				});
 			}
-			
 			if($scope.selected.checkin==true && $scope.selected.checkout==true){
-				
+				$scope.showed=true;
 				$http({
 					url:"/amung/reserve/getTerm.do",
 					method:"get",
@@ -80,6 +81,8 @@
 				});
 			}
 		};
+		
+		
 	});
 	
 	//싱글 페이지 라우터를 사용하기 위한 설정
@@ -107,79 +110,4 @@
 	</div><!-- form-wrap -->
 </div><!--content -->
 
-<script>
-	//연락처 입력칸에 번호만 입력되도록한다. 
-	$("#phone2").on("keyup", function(){
-		$(this).val($(this).val().replace(/[^0-9]/g,""));
-	});
-	
-		
-	//반려견이름, 반려견종, 반려견나이, 체크인, 체크아웃 입력 안했을시 폼전송 막기
-	$("#reserveForm").on("submit", function(){
-		if($("#dogName").val()==""){
-			alert("반려견 이름을 입력해주세요");
-			$("#dogName").focus();
-			return false;
-		
-		}else if($("#dogBreed").val()==""){
-			alert("반려견종을 입력해주세요");
-			$("#dogBreed").focus();
-			return false;
-		
-		}else if($("#dogAge").val()==""){
-			alert("반려견 나이를 입력해주세요");
-			$("#dogAge").focus();
-			return false;
-		
-		}else if($("#checkin").val()==""){
-			alert("체크인 날짜를 입력해주세요");
-			$("#checkin").focus();
-			return false;
-		
-		}else if($("#checkout").val()==""){
-			alert("체크아웃 날짜를 입력해주세요");
-			$("#checkout").focus();
-			return false;
-		}
-	});
-
-	$(function(){
-		$("#checkin").datepicker({
-			minDate:0, //오늘포함한 이후 날짜만 활성화
-			dateFormat: 'yy-mm-dd',//yyyy-mm-dd 모양으로 바꿈
-			dayNamesMin:['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
-			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
-			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
-			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
-			buttonImageOnly:true,
-			buttonText:"날짜 선택",
-			onClose: function(selectedDate){
-				//체크인 datepicker 가 닫힐때
-				//체크아웃의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-				$("#checkout").datepicker("option", "minDate", selectedDate);
-			}
-		});
-		
-		$("#checkout").datepicker({
-			minDate:0, //오늘포함한 이후 날짜만 활성화
-			dateFormat: 'yy-mm-dd',//yyyy-mm-dd 모양으로 바꿈
-			dayNamesMin:['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
-			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
-			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
-			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
-			buttonImageOnly:true,
-			buttonText:"날짜 선택"	,
-			onClose: function(selectedDate){
-				//체크아웃 datepicker 가 닫힐때
-				//체크인 의 선택할수 있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-				$("#checkin").datepicker("option","maxDate",selectedDate);
-			}
-		});
-		
-
-	});
-	
-</script>
 <jsp:include page="/resources/footer.jsp"></jsp:include>
