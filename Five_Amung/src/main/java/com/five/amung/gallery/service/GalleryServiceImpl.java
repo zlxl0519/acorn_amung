@@ -3,6 +3,7 @@ package com.five.amung.gallery.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +62,7 @@ public class GalleryServiceImpl implements GalleryService{
 		//2. 글 목록을 응답한다.
 		request.setAttribute("list", list);
 	    request.setAttribute("pageNum", pageNum);
+	    request.setAttribute("totalRow", totalRow);
 	    request.setAttribute("totalPageCount", totalPageCount);
 	}
 
@@ -149,4 +151,60 @@ public class GalleryServiceImpl implements GalleryService{
 		request.setAttribute("list", list);
 		//2. 글 목록을 응답한다.
 	}
+
+	//===============================운영자===============================================
+
+	@Override
+	public void getAdminList(HttpServletRequest request) {
+		// TODO 어드민용 리스트
+		String id = (String)request.getSession().getAttribute("id");
+		
+		//보여줄 페이지의 번호
+		int pageNum=1;
+		
+		//보여줄 페이지 데이터의 시작 ResultSet row 번호
+		int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+		//보여줄 페이지 데이터의 끝 ResultSet row 번호
+		int endRowNum=pageNum*PAGE_ROW_COUNT;
+
+		//=============검색 키워드에 관련된 처리================
+		
+	     String keyword=request.getParameter("keyword"); //검색 키워드
+	     if(keyword==null){//전달된 키워드가 없다면 
+	        keyword=""; //빈 문자열을 넣어준다. 
+	     }
+	     //인코딩된 키워드를 미리 만들어 둔다. 
+	     String encodedK=URLEncoder.encode(keyword);		
+
+	 	//===========dao, dto 생성해서 데이터 set ============================
+		GalleryDto dto=new GalleryDto();
+		dto.setStartRowNum(startRowNum);
+		dto.setEndRowNum(endRowNum);
+		
+		//===========키워드 처리================================
+		
+		if(!keyword.equals("")){ //만일 키워드가 넘어온다면 
+			dto.setCaption(keyword);
+		}//없을 땐??
+		
+		
+		//전체 row 의 갯수를 읽어온다.
+		int totalRow=galleryDao.getCount(dto);
+		//전체 페이지의 갯수 구하기
+		int totalPageCount=
+		(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		
+		//1. DB 에서 글 목록을 얻어온다.
+		List<GalleryDto> list=galleryDao.getList(dto);
+		//2. 글 목록을 응답한다.
+		request.setAttribute("list", list);
+	    request.setAttribute("pageNum", pageNum);
+	    request.setAttribute("totalRow", totalRow);
+	    request.setAttribute("totalPageCount", totalPageCount);
+		
+	}
+	
+
+	
+	
 }

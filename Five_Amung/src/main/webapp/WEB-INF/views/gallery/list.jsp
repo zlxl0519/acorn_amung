@@ -5,7 +5,7 @@
 
 <div class="content">
 	<h2>호텔 일상</h2>
-		<a href="${pageContext.request.contextPath }/gallery/upload_form.do"><button>새 글 작성</button></a>
+		<a href="${pageContext.request.contextPath }/gallery/admin/upload_form.do"><button>새 글 작성</button></a>
 		<ul class="gallery-list">
 			<c:forEach var="tmp" items="${list }">
 				<li>
@@ -21,9 +21,12 @@
 			</c:forEach>
 		</ul>
 		
-		<div class="btn-down">
-			<a href="javascript:void(0);" id="nextBtn" ><i class="fas fa-chevron-down"></i></a>
-		</div><!-- btn-down -->
+		<c:if test="${totalRow gt 6 }">
+			<div class="btn-down">
+				<a href="javascript:void(0);" id="nextBtn" ><i class="fas fa-chevron-down"></i></a>
+			</div><!-- btn-down -->		
+		</c:if>
+
 
 </div>
 <script>

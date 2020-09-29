@@ -26,4 +26,9 @@ public interface GalleryService {
 	public void getDetail(HttpServletRequest request);
 	//페이징 처리용 ajax list
 	public void getAjaxList(int pageNum, HttpServletRequest request);
+	
+	//=========운영자=================================================
+	
+	//리스트
+	public void getAdminList(HttpServletRequest request);
 }

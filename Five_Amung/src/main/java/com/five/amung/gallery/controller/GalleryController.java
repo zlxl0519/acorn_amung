@@ -33,12 +33,12 @@ public class GalleryController {
 		return mView;
 	}
 	
-	@RequestMapping("/gallery/upload_form")
+	@RequestMapping("/gallery/admin/upload_form")
 	public String upload_form() {
-		return "gallery/upload_form";
+		return "gallery/admin/upload_form";
 	}
 	
-	@RequestMapping(value="/gallery/upload", method=RequestMethod.POST)
+	@RequestMapping(value="/gallery/admin/upload", method=RequestMethod.POST)
 	public ModelAndView upload(GalleryDto dto, ModelAndView mView, HttpServletRequest request, 
 			HttpServletResponse response, @RequestParam MultipartFile image) throws IOException {
 		galleryService.saveContent(dto, request, response, image);
@@ -61,6 +61,13 @@ public class GalleryController {
 		return mView;
 	}
 	
+	//=====================================운영자===========================================
 	
+	@RequestMapping("/gallery/admin/list_admin")
+	public ModelAndView list_admin(HttpServletRequest request, ModelAndView mView) {
+		galleryService.getAdminList(request);
+		mView.setViewName("gallery/admin/list_admin");
+		return mView;
+	}
 
 }
