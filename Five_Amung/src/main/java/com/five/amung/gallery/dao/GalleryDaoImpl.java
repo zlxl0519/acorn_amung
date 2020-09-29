@@ -42,6 +42,7 @@ public class GalleryDaoImpl implements GalleryDao{
 	@Override
 	public void update(GalleryDto dto) {
 		// TODO 글 수정
+		
 		session.update("gallery.update", dto);
 	}
 

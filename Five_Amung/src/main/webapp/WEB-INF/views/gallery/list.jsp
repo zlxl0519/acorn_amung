@@ -57,8 +57,5 @@
 			});	
 	});
 	
-	$("#test").on("click", function(){
-		alert("확인");
-	})
 </script>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->

@@ -21,7 +21,8 @@ public interface GalleryService {
 	//삭제
 	public void deleteContent(int num, HttpServletRequest request);
 	//수정
-	public void updateContent(GalleryDto dto, HttpServletRequest request);
+	public void updateContent(GalleryDto dto, HttpServletRequest request, 
+			HttpServletResponse response, MultipartFile mFile);
 	//상세보기
 	public void getDetail(HttpServletRequest request);
 	//페이징 처리용 ajax list
@@ -31,4 +32,6 @@ public interface GalleryService {
 	
 	//리스트
 	public void getAdminList(HttpServletRequest request);
+	//페이징 처리용 ajax list
+	public void getAjaxAdminList(int pageNum, HttpServletRequest request);
 }

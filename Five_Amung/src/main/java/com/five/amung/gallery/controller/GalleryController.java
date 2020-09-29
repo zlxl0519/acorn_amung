@@ -38,14 +38,6 @@ public class GalleryController {
 		return "gallery/admin/upload_form";
 	}
 	
-	@RequestMapping(value="/gallery/admin/upload", method=RequestMethod.POST)
-	public ModelAndView upload(GalleryDto dto, ModelAndView mView, HttpServletRequest request, 
-			HttpServletResponse response, @RequestParam MultipartFile image) throws IOException {
-		galleryService.saveContent(dto, request, response, image);
-		mView.setViewName("redirect:/gallery/list.do");
-		return mView;
-	}
-	
 	@RequestMapping("/gallery/ajax_list")
 	@ResponseBody
 	public ModelAndView ajax_list(@RequestParam int pageNum, HttpServletRequest request, ModelAndView mView){
@@ -67,6 +59,44 @@ public class GalleryController {
 	public ModelAndView list_admin(HttpServletRequest request, ModelAndView mView) {
 		galleryService.getAdminList(request);
 		mView.setViewName("gallery/admin/list_admin");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/ajax_list_admin")
+	@ResponseBody
+	public ModelAndView ajax_list_admin(@RequestParam int pageNum, HttpServletRequest request, ModelAndView mView) {
+		galleryService.getAjaxAdminList(pageNum, request);
+		mView.setViewName("gallery/admin/ajax_list_admin");
+		return mView;
+	}
+	
+	@RequestMapping(value="/gallery/admin/upload", method=RequestMethod.POST)
+	public ModelAndView upload(GalleryDto dto, ModelAndView mView, HttpServletRequest request, 
+			HttpServletResponse response, @RequestParam MultipartFile image) throws IOException {
+		galleryService.saveContent(dto, request, response, image);
+		mView.setViewName("redirect:/gallery/list.do");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/update_form")
+	public ModelAndView update_form(ModelAndView mView, HttpServletRequest request) {
+		galleryService.getDetail(request);
+		mView.setViewName("gallery/admin/update_form");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/update")
+	public ModelAndView update(GalleryDto dto, ModelAndView mView, HttpServletRequest request,
+			HttpServletResponse response, @RequestParam MultipartFile image) {
+		galleryService.updateContent(dto, request, response, image);
+		mView.setViewName("redirect:/gallery/admin/list_admin.do");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/delete")
+	public ModelAndView delete(int num, ModelAndView mView, HttpServletRequest request) {
+		galleryService.deleteContent(num, request);
+		mView.setViewName("redirect:/gallery/admin/list_admin.do");
 		return mView;
 	}
 

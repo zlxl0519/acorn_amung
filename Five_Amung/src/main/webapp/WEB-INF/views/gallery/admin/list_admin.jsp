@@ -60,7 +60,7 @@
 		
 		currentPage++;
 		
-		if(${keyword} == ""){
+		if($("#serch").val == ""){
 			$.ajax({
 				url : "ajax_list_admin.do",
 				method : "get",
