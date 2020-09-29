@@ -5,7 +5,13 @@
 
 <div class="content">
 	<h2>호텔 일상</h2>
-		<a href="${pageContext.request.contextPath }/gallery/upload_form.do"><button>새 글 작성</button></a>
+		<div class="left">
+			<a href="upload_form.do"
+				class="btn-a">
+				새 글 작성
+			</a>
+		</div>
+			
 		<ul class="gallery-list">
 			<c:forEach var="tmp" items="${list }">
 				<li>

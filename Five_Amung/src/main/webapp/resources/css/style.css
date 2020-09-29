@@ -854,7 +854,11 @@ select {
 }
 
 .gallery-list .caption span.date{
-	font-size: 1em;
+	font-size: 0.8em;
+	float: left;
+	clear: both;
+	color: #a5a1a1;
+	font-weight: bold;
 }
 
 .gallery-list li {
