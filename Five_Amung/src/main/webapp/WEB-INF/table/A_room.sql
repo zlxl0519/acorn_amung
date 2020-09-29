@@ -8,10 +8,10 @@ constraint A_rooms_num_pk primary key(num)
 
 create sequence A_room_seq;
 
-insert into A_room(num,room_name,weight, room_reserve_state) values(1, 'standade','3', 'no');
-insert into A_room(num,room_name,weight, room_reserve_state) values(2, 'standade','6', 'no');
-insert into A_room(num,room_name,weight, room_reserve_state) values(3, 'standade','9', 'no');
-insert into A_room(num,room_name,weight, room_reserve_state) values(4, 'standade','10','no');
+insert into A_room(num,room_name,weight, room_reserve_state) values(1, 'standard','3', 'no');
+insert into A_room(num,room_name,weight, room_reserve_state) values(2, 'standard','6', 'no');
+insert into A_room(num,room_name,weight, room_reserve_state) values(3, 'standard','9', 'no');
+insert into A_room(num,room_name,weight, room_reserve_state) values(4, 'standard','10','no');
 
 insert into A_room(num,room_name,weight, room_reserve_state) values(5, 'deluxe','3','no');
 insert into A_room(num,room_name,weight, room_reserve_state) values(6, 'deluxe','6', 'no');

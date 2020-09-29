@@ -10,4 +10,33 @@
 		select to_date(#{checkin_date}, 'yyyy-mm-dd')-to_date(#{checkout_date}, 'yyyy-mm-dd')
 		from dual
 	</select>
+	<select id="getRoomNum" parameterType="roomPriceDto" resultType="int">
+		select num
+		from A_room
+		where room_name=#{room_name} and weight=#{weight}
+	</select>
+	<update id="updateRoomReserveState" parameterType="reserveDto">
+		update A_room
+		set room_reserve_state='yes'
+		where num=#{room_num}
+	</update>
+	<insert id="insertReserve" parameterType="reserveDto">
+		insert into A_reserve
+		(num, member_id, dog_num, room_num, checkin_date, checkout_date, 
+			start_time, end_time, name, phone, room_price, regdate, state)
+		values(A_reserve_seq.nextval, #{member_id}, #{dog_num}, #{room_num}, #{checkin_date},
+			#{checkout_date}, #{start_time}, #{end_time}, #{name}, #{phone}, #{room_price}, sysdate, '예약대기중')
+		
+	</insert>
+	<select id="getData" parameterType="reserveDto" resultType="reserveDto">
+		select num, member_id, dog_num, room_num, checkin_date, checkout_date, start_time, end_time, name, phone, 
+		room_price, regdate, state
+		from A_reserve
+		where member_id=#{member_id} and dog_num=#{dog_num} and room_num=#{room_num}
+	</select>
+	<select id="getRoomData" parameterType="int" resultType="com.five.amung.reserve.dto.RoomDto">
+		select num, room_name, weight, room_reserve_state
+		from A_room
+		where num=#{num}
+	</select>
 </mapper>

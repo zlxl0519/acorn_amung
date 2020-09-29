@@ -4,6 +4,7 @@ public class ReserveDto {
 	private int num;
 	private String member_id;
 	private int dog_num;
+	private int room_num;
 	//private String room_name; room_name은 RoomDto에 있습니다.
 	private String checkin_date;
 	private String checkout_date;
@@ -13,15 +14,18 @@ public class ReserveDto {
 	private String phone;
 	private String regdate;
 	private String state; //예약대기중, 예약완료, 예약취소
+	private int room_price;
 	
 	public ReserveDto() {}
 
-	public ReserveDto(int num, String member_id, int dog_num, String checkin_date, String checkout_date,
-			String start_time, String end_time, String name, String phone, String regdate, String state) {
+	public ReserveDto(int num, String member_id, int dog_num, int room_num, String checkin_date, String checkout_date,
+			String start_time, String end_time, String name, String phone, String regdate, String state,
+			int room_price) {
 		super();
 		this.num = num;
 		this.member_id = member_id;
 		this.dog_num = dog_num;
+		this.room_num = room_num;
 		this.checkin_date = checkin_date;
 		this.checkout_date = checkout_date;
 		this.start_time = start_time;
@@ -30,6 +34,7 @@ public class ReserveDto {
 		this.phone = phone;
 		this.regdate = regdate;
 		this.state = state;
+		this.room_price = room_price;
 	}
 
 	public int getNum() {
@@ -54,6 +59,14 @@ public class ReserveDto {
 
 	public void setDog_num(int dog_num) {
 		this.dog_num = dog_num;
+	}
+
+	public int getRoom_num() {
+		return room_num;
+	}
+
+	public void setRoom_num(int room_num) {
+		this.room_num = room_num;
 	}
 
 	public String getCheckin_date() {
@@ -118,6 +131,14 @@ public class ReserveDto {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public int getRoom_price() {
+		return room_price;
+	}
+
+	public void setRoom_price(int room_price) {
+		this.room_price = room_price;
 	}
 
 	
