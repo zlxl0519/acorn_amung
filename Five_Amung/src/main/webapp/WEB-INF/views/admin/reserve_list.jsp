@@ -11,6 +11,7 @@
 	<table>
 		<thead>
 			<tr>
+				<th>예약 번호</th>
 				<th>아이디</th>
 				<th>예약자명</th>
 				<th>휴대폰 번호</th>
@@ -27,6 +28,7 @@
 		<tbody>
 		<c:forEach var="tmp" items="${reserveList }">
 			<tr>
+				<td>${tmp.num }</td>
 				<td>${tmp.member_id }</td>
 				<td>${tmp.name }</td>
 				<td>${tmp.phone}</td>
@@ -42,5 +44,25 @@
 		</c:forEach>		
 		</tbody>
 	</table>
+	<div class="page-display">
+		<ul class="pagination pagination-sm">
+		<c:if test="${startPageNum ne 1 }">
+			<li class="page-item"><a class="page-link" href="reserve_list.do?pageNum=${startPageNum-1 }&condition=${condition }&keyword=${encodedK }">Prev</a></li>
+		</c:if>
+		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+			<c:choose>
+				<c:when test="${i eq pageNum }">
+					<li class="page-item active"><a class="page-link" href="reserve_list.do?pageNum=${i }&condition=${condition }&keyword=${encodedK }">${i }</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link" href="reserve_list.do?pageNum=${i }&condition=${condition }&keyword=${encodedK }">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${endPageNum lt totalPageCount }">
+			<li class="page-item"><a class="page-link" href="reserve_list.do?pageNum=${endPageNum+1 }&condition=${condition }&keyword=${encodedK }">Next</a></li>
+		</c:if>
+		</ul>	
+	</div>
 </body>
 </html>
