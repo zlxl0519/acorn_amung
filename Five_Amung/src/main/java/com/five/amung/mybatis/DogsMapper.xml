@@ -17,4 +17,9 @@
 		from A_dogs
 		where num=#{num}
 	</select>
+	<select id="getDogsData" parameterType="dogsDto" resultType="dogsDto">
+		select num, member_id, dname, dage, breed, weight, neutral, gender, etc
+		from A_dogs
+		where member_id=#{member_id}
+	</select>
 </mapper>

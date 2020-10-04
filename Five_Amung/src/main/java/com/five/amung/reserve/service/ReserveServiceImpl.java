@@ -52,7 +52,7 @@ public class ReserveServiceImpl implements ReserveService{
 	}
 	@Transactional
 	@Override
-	public void reserve(HttpServletRequest request, ReserveDto dto) {
+	public void reserve(ModelAndView mView, HttpServletRequest request, ReserveDto dto) {
 		//1. 예약자 아이디를 읽어와서 dto 에 저장한다.
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setMember_id(id);
@@ -61,7 +61,8 @@ public class ReserveServiceImpl implements ReserveService{
 		//3. 예약정보를 DB 에 저장한다.
 		//(예약자 아이디, 강아지 번호,방번호, 체크인날, 체크아웃날, 체크인시간, 
 		//체크아웃시간, 예약자명, 핸드폰번호, 결제금액, 예약날짜, 예약상태(대기중, 완료, 취소))
-		reserveDao.insertReserve(dto);
+		boolean isSuccess=reserveDao.insertReserve(dto);
+		mView.addObject("isSuccess", isSuccess);
 	}
 	@Override
 	public ReserveDto getData(ReserveDto dto) {

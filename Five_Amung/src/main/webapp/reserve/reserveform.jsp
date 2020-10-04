@@ -7,15 +7,15 @@
 	<div class="room_check">
 		<label for="standad">
 			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="standard" name="room_name" id="room"/>
+				value="standard" name="room_name" />
 		</label>
 		<label for="deluxe">
 			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="deluxe" name="room_name" id="room"/>
+				value="deluxe" name="room_name" />
 		</label>
 		<label for="premium">
 			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="premium" name="room_name" id="room"/>
+				value="premium" name="room_name" />
 		</label>
 	</div>
 	
@@ -75,13 +75,13 @@
 	<table>
 		<tr>
 			<th>투숙기간</th>
-			<td>{{term}}일  {{reserveData.checkin_date}}~{{reserveData.checkout_date}}</td>
+			<td data-ng-show="showed">[  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}</td>
 		</tr>
 		<th>투숙 강아지 선택</th>
 		<tr data-ng-repeat="tmp in dogList">
 			<td>
 				{{tmp.dname}}
-				<input data-ng-change="isChecked('dog')" id="dog" 
+				<input data-ng-change="isChecked('dog')" 
 					data-ng-model="reserveData.dog_num" type="radio" name="dog_num" value="{{tmp.num}}" />
 			</td>
 		</tr>
@@ -152,6 +152,8 @@
 			minDate:0, //오늘포함한 이후 날짜만 활성화
 			dateFormat: 'yy-mm-dd',//yyyy-mm-dd 모양으로 바꿈
 			dayNamesMin:['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
 			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
 			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
@@ -169,6 +171,8 @@
 			minDate:0, //오늘포함한 이후 날짜만 활성화
 			dateFormat: 'yy-mm-dd',//yyyy-mm-dd 모양으로 바꿈
 			dayNamesMin:['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
 			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
 			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.

@@ -24,12 +24,13 @@
 		insert into A_reserve
 		(num, member_id, dog_num, room_num, checkin_date, checkout_date, 
 			start_time, end_time, name, phone, room_price, regdate, state)
-		values(A_reserve_seq.nextval, #{member_id}, #{dog_num}, #{room_num}, #{checkin_date},
-			#{checkout_date}, #{start_time}, #{end_time}, #{name}, #{phone}, #{room_price}, sysdate, '예약대기중')
+		values(A_reserve_seq.nextval, #{member_id}, #{dog_num}, #{room_num}, to_date(#{checkin_date}, 'yyyy-mm-dd'),
+			to_date(#{checkout_date}, 'yyyy-mm-dd'), #{start_time}, #{end_time}, #{name}, #{phone}, #{room_price}, sysdate, '예약대기중')
 		
 	</insert>
 	<select id="getData" parameterType="reserveDto" resultType="reserveDto">
-		select num, member_id, dog_num, room_num, checkin_date, checkout_date, start_time, end_time, name, phone, 
+		select num, member_id, dog_num, room_num, to_char(checkin_date, 'yyyy-mm-dd') as checkin_date, 
+		to_char(checkout_date, 'yyyy-mm-dd') as checkout_date, start_time, end_time, name, phone, 
 		room_price, regdate, state
 		from A_reserve
 		where member_id=#{member_id} and dog_num=#{dog_num} and room_num=#{room_num}
@@ -38,5 +39,58 @@
 		select num, room_name, weight, room_reserve_state
 		from A_room
 		where num=#{num}
+	</select>
+	<!-- 관리자가 예약 리스트 보는 -->
+	<select id="getList" parameterType="reserveDto" resultType="reserveDto">
+		select *
+		from	
+			(select result1.* , rownum as rnum
+			from	
+				(select reserve.num as num, reserve.member_id as member_id, dogs.dname as dname, room.room_name as room_name, 
+				to_char(reserve.checkin_date, 'yyyy-mm-dd') as checkin_date, 
+				to_char(reserve.checkout_date, 'yyyy-mm-dd') as checkout_date, reserve.start_time as start_time, 
+				reserve.end_time as end_time, reserve.name as name, reserve.phone as phone, 
+				reserve.room_price, reserve.regdate as regdate, reserve.state as state
+				from A_dogs dogs inner join A_reserve reserve
+					on dogs.num = reserve.dog_num
+						inner join A_room room
+					on reserve.room_num = room.num
+				<choose>
+					<when test="room_name != null"><!-- 파라미터 타입으로 전달된 데이터를 읽을수 있다. -->
+						WHERE room_name LIKE '%'||#{room_name}||'%' 
+					</when>
+					<when test="name != null">
+						WHERE name LIKE '%'||#{name}||'%'
+					</when>
+					<when test="member_id != null">
+						WHERE member_id LIKE '%'||#{member_id}||'%'
+					</when>
+					<when test="state != null">
+						WHERE state LIKE '%'||#{state}||'%'
+					</when>
+				</choose>
+				order by num desc) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	<select id="getCount" parameterType="reserveDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM A_dogs dogs inner join A_reserve reserve
+					on dogs.num = reserve.dog_num
+						inner join A_room room
+					on reserve.room_num = room.num
+		<choose>
+			<when test="room_name != null"><!-- 파라미터 타입으로 전달된 데이터를 읽을수 있다. -->
+				WHERE room_name LIKE '%'||#{room_name}||'%' 
+			</when>
+			<when test="name != null">
+				WHERE name LIKE '%'||#{name}||'%'
+			</when>
+			<when test="member_id != null">
+				WHERE member_id LIKE '%'||#{member_id}||'%'
+			</when>
+			<when test="state != null">
+				WHERE state LIKE '%'||#{state}||'%'
+			</when>
+		</choose>
 	</select>
 </mapper>

@@ -20,7 +20,7 @@ public interface ReserveService {
 	public int getRoomNum(RoomPriceDto dto);
 	
 	//예약하기
-	public void reserve(HttpServletRequest request, ReserveDto dto);
+	public void reserve(ModelAndView mView, HttpServletRequest request, ReserveDto dto);
 	
 	//방금 예약한 예약정보 가져오기
 	public ReserveDto getData(ReserveDto dto);

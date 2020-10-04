@@ -9,7 +9,7 @@
 	var myApp=angular.module("myApp", ["ngRoute"]);
 	myApp.controller("dogCtrl", function($scope, $http, $location){
 		
-		$scope.isSuccess=false;
+		
 		$scope.dogData={};
 		$scope.send=function(){
 			$http({
@@ -18,12 +18,13 @@
 				params:$scope.dogData,
 				headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
 			}).success(function(data){
-				$scope.isSuccess=true;
 				
-				if($scope.isSuccess){
-					alert("강아지 정보가 저장되었습니다.");
+				$scope.isExist=data;
+				
+				if($scope.isExist=="true"){
+					alert("이미 존재하는 강아지 정보 입니다.");
 				}else{
-					alert("강아지 정보 저장에 실패했습니다.");
+					alert("강아지 정보가 저장되었습니다.");
 				}
 				//강아지 정보 저장 후 예약 폼으로 redirect
 				$location.path("/reserveform");
@@ -41,6 +42,8 @@
 			
 			$scope.dogList=data.dogList;
 		});
+		//투숙기간 보이게 하는 데이터
+		$scope.showed=false;
 		
 		//방, 체크인, 체크아웃, 강아지 선택한 데이터들
 		$scope.reserveData={};
@@ -65,9 +68,8 @@
 					$scope.price=data.price;
 				});
 			}
-			
 			if($scope.selected.checkin==true && $scope.selected.checkout==true){
-				
+				$scope.showed=true;
 				$http({
 					url:"/amung/reserve/getTerm.do",
 					method:"get",
@@ -79,6 +81,8 @@
 				});
 			}
 		};
+		
+		
 	});
 	
 	//싱글 페이지 라우터를 사용하기 위한 설정
@@ -91,11 +95,13 @@
 </script>
 <div class="content" data-ng-app="myApp">
 	<div class="form-wrap">
-		<h1>예약 페이지 입니다.</h1>
-		<p>
-			강아지 정보가 없을 시 예약하지 못합니다.
-			강아지 정보를 먼저 입력해주세요!!
-		</p>
+		<h1>알림 사항!</h1>
+		<ul>
+			<li>1. 호텔 만실 또는 촉박한 기간으로 예약 확정되지 못할 경우 자동으로 예약이 취소될 수 있습니다.</li>
+			<li>2. 예약 후 24시간 내에 입금하지 않으실 경우 자동으로 취소 처리 됩니다.</li>
+			<li>3. 입금 후 취소 시 전화나 qna 게시판에 비밀글로 남겨주세요.</li>
+			<li>4. 마이페이지 내역에 강아지 정보가 없다면 강아지 정보를 입력해 주세요.</li>
+		</ul>
 		<ul class="nav"><!-- # 은 페이지 내에서의 이동 -->
 			<li><a href="#dog_form">강아지 정보 저장</a></li>
 			<li><a href="#reserveform">예약하기</a></li>
@@ -104,79 +110,4 @@
 	</div><!-- form-wrap -->
 </div><!--content -->
 
-<script>
-	//연락처 입력칸에 번호만 입력되도록한다. 
-	$("#phone2").on("keyup", function(){
-		$(this).val($(this).val().replace(/[^0-9]/g,""));
-	});
-	
-		
-	//반려견이름, 반려견종, 반려견나이, 체크인, 체크아웃 입력 안했을시 폼전송 막기
-	$("#reserveForm").on("submit", function(){
-		if($("#dogName").val()==""){
-			alert("반려견 이름을 입력해주세요");
-			$("#dogName").focus();
-			return false;
-		
-		}else if($("#dogBreed").val()==""){
-			alert("반려견종을 입력해주세요");
-			$("#dogBreed").focus();
-			return false;
-		
-		}else if($("#dogAge").val()==""){
-			alert("반려견 나이를 입력해주세요");
-			$("#dogAge").focus();
-			return false;
-		
-		}else if($("#checkin").val()==""){
-			alert("체크인 날짜를 입력해주세요");
-			$("#checkin").focus();
-			return false;
-		
-		}else if($("#checkout").val()==""){
-			alert("체크아웃 날짜를 입력해주세요");
-			$("#checkout").focus();
-			return false;
-		}
-	});
-
-	$(function(){
-		$("#checkin").datepicker({
-			minDate:0, //오늘포함한 이후 날짜만 활성화
-			dateFormat: 'yy-mm-dd',//yyyy-mm-dd 모양으로 바꿈
-			dayNamesMin:['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
-			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
-			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
-			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
-			buttonImageOnly:true,
-			buttonText:"날짜 선택",
-			onClose: function(selectedDate){
-				//체크인 datepicker 가 닫힐때
-				//체크아웃의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-				$("#checkout").datepicker("option", "minDate", selectedDate);
-			}
-		});
-		
-		$("#checkout").datepicker({
-			minDate:0, //오늘포함한 이후 날짜만 활성화
-			dateFormat: 'yy-mm-dd',//yyyy-mm-dd 모양으로 바꿈
-			dayNamesMin:['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
-			changeYear:true, // 달력 년도 select 박스로 선택하게 하기
-			changeMonth:true, // 달력 월 select 박스로 선택하게 하기
-			showOn:"both", //버튼클릭하거나 포커스가 가면 달력이 나온다.
-			buttonImage:"${pageContext.request.contextPath }/resources/img/icon_cal.png",
-			buttonImageOnly:true,
-			buttonText:"날짜 선택"	,
-			onClose: function(selectedDate){
-				//체크아웃 datepicker 가 닫힐때
-				//체크인 의 선택할수 있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-				$("#checkin").datepicker("option","maxDate",selectedDate);
-			}
-		});
-		
-
-	});
-	
-</script>
 <jsp:include page="/resources/footer.jsp"></jsp:include>

@@ -1,5 +1,7 @@
 package com.five.amung.reserve.dao;
 
+import java.util.List;
+
 import com.five.amung.dogs.dto.DogsDto;
 import com.five.amung.reserve.dto.ReserveDto;
 import com.five.amung.reserve.dto.RoomDto;
@@ -19,11 +21,16 @@ public interface ReserveDao {
 	public void updateRoomReserveState(ReserveDto dto);
 	
 	//예약 사항 예약DB에 저장
-	public void insertReserve(ReserveDto dto);
+	public boolean insertReserve(ReserveDto dto);
 	
 	//예약정보 가져오기(한 줄만)
 	public ReserveDto getData(ReserveDto dto);
 	
 	//방 번호 방 정보 가져오기
 	public RoomDto getRoomData(int num);
+	
+	//예약정보 다 가져오기
+	public List<ReserveDto> getList(ReserveDto dto);
+	
+	public int getCount(ReserveDto dto);
 }
