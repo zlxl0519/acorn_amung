@@ -2,6 +2,7 @@ package com.five.amung.users.dao;
 
 import java.util.List;
 
+import com.five.amung.dogs.dto.DogsDto;
 import com.five.amung.users.dto.UsersDto;
 
 public interface UsersDao {
@@ -12,6 +13,11 @@ public interface UsersDao {
 	//ajax 프로필 사진 업로드 요청 처리
 	
 	//회원 목록 보기 요청 처리
+	public List<UsersDto> getList(UsersDto dto);
+	//row 갯수를 가져오기
+	public int getCount(UsersDto dto);
+	//강아지 정보 보기 요청 처리
+	public List<DogsDto> getDogList(String member_id);
 	
 	//아이디로 회원정보 가져오기
 	public UsersDto getData(String id);
