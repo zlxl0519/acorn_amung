@@ -34,4 +34,9 @@ public class DogsDaoImpl implements DogsDao{
 		
 		return session.selectList("dogs.getDogsData", dto);
 	}
+
+	@Override
+	public int getCheck(DogsDto dto) {
+		return session.selectOne("dogs.getCheck", dto);
+	}
 }

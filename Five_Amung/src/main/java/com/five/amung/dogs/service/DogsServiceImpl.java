@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.five.amung.dogs.dao.DogsDao;
 import com.five.amung.dogs.dto.DogsDto;
@@ -44,17 +47,24 @@ public class DogsServiceImpl implements DogsService{
 	}
 
 	@Override
-	public Map<String, Object> getList(HttpServletRequest request, DogsDto dto) {
+	public Map<String, Object> getList(HttpServletRequest request, DogsDto dto, ModelAndView mView) {
 		
 		String member_id=(String)request.getSession().getAttribute("id");
 		dto.setMember_id(member_id);
 		
 		//dao 로 강아지 리스트를 가지고 온다.
 		List<DogsDto> dogList=dogsDao.getList(dto);
-		
+
 		Map<String, Object> map=new HashMap<String, Object>();
+		int dogCheck = dogsDao.getCheck(dto);
+		if(dogCheck != 0) {
+			mView.addObject("isSuccess", true);
+		}else {
+			mView.addObject("isSuccess", false);
+		}
 		map.put("dogList", dogList);
 		request.setAttribute("dogList", dogList);
+		
 		return map;
 	}
 
@@ -63,4 +73,5 @@ public class DogsServiceImpl implements DogsService{
 		//강아지 정보를 받아온다.(dao)
 		return dogsDao.getData(num);
 	}
+
 }

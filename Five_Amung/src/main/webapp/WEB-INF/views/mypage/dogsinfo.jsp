@@ -41,12 +41,16 @@
 		</div><!-- sub-nav-gnb -->
 	</div><!-- sub-nav -->
 	<div class="sub-content">
-		<ul class="dog-list">
-			<c:forEach var="tmp" items="${dogList }">
+		<c:choose>
+			<c:when test="${isSuccess eq true}">
+			<ul class="dog-list">
+				<c:forEach var="tmp" items="${dogList }">
 				<li> 
 					<ul>
 						<li>
-							이름 : ${tmp.dname }
+							<h2>
+								${tmp.dname }
+							</h2>
 						</li>
 						<li>
 						성별 :
@@ -105,15 +109,25 @@
 							</c:choose>
 						</li>
 					</ul>
-					<div class="">
+					<div class="right">
 						<a href="" class="btn-a btn-b">수정</a>
 						<a href="" class="btn-a">삭제</a>
 					</div>
-					
-					
 				</li>
-			</c:forEach>
-		</ul>
+				</c:forEach>
+			</ul>
+			</c:when>
+			<c:otherwise>
+			<div class="icon-wrap">
+				<i class="fas fa-bomb"></i>
+				<h3>
+					<strong>강아지 정보를 등록하지 않았습니다.</strong>
+				</h3>
+				<a href="${pageContext.request.contextPath }/reserve/reserve_home.do" class="btn-a mt20">등록하러가기</a>
+			</div>
+				
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div><!-- content -->
 <%@include file="/../resources/footer.jsp"%><!-- footer -->

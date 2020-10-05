@@ -37,9 +37,9 @@ public class DogsController {
 	
 	@RequestMapping(value = "/dogs/getList", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getList(HttpServletRequest request, DogsDto dto){
+	public Map<String, Object> getList(HttpServletRequest request, DogsDto dto, ModelAndView mView){
 		
-		Map<String,Object> map=dogsService.getList(request, dto);
+		Map<String,Object> map=dogsService.getList(request, dto, mView);
 		
 		return map;
 	}
@@ -47,9 +47,10 @@ public class DogsController {
 	//리연 추가
 	//마이페이지 - 강아지 정보보기
 	@RequestMapping("/mypage/private/info/dogs")
+	@ResponseBody
 	public ModelAndView info(HttpServletRequest request, DogsDto dto, ModelAndView mView) {
 		usersService.getInfo(request.getSession(), mView);
-		dogsService.getList(request, dto);
+		dogsService.getList(request, dto, mView);
 		mView.setViewName("mypage/dogsinfo");
 		return mView;
 	}//==== info ====
