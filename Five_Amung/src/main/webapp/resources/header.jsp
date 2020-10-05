@@ -139,12 +139,12 @@
 								</a>
 								<ul class="dropdown">
 									<li>
-										<a href="${pageContext.request.contextPath }/guide/guide.do">
+										<a href="${pageContext.request.contextPath }/guide/guide.jsp">
 											Amung이용안내
 										</a>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath }/guide/service.do">
+										<a href="${pageContext.request.contextPath }/guide/service.jsp">
 											AMung주요서비스
 										</a>
 									</li> 
