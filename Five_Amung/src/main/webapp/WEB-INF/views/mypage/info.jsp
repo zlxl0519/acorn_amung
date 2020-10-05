@@ -50,7 +50,10 @@
 				</li>
 				<li>
 					<label for="pwd">비밀번호</label>
-					<a href="" class="btn-pwd">비밀번호 변경</a>
+					<a href="${pageContext.request.contextPath }/mypage/private/info/pwd/updateform.do"
+					class="btn-pwd">
+					비밀번호 변경
+					</a>
 				</li>
 				<li>
 					<label for="email">이메일</label>
@@ -74,7 +77,7 @@
 	
 		</div>
 	
-		<a href="update_pwdokform.jsp" class="btn-default">개인정보 수정</a>
+		<a href="info/update/check.do" class="btn-default">개인정보 수정</a>
 		<a href="javascript:deleteConfirm()" class="btn-default btn-gray">탈퇴</a>
 	</div><!-- form-wrap -->
 </div><!-- content -->
@@ -83,7 +86,7 @@ function deleteConfirm(){
 	
 	var isDelete = confirm("탈퇴하시겠습니까?");
 	if (isDelete) {
-		location.href = "${pageContext.request.contextPath }/mypage/private/delete.jsp";
+		location.href = "${pageContext.request.contextPath }/mypage/private/delete.do?id=${id}";
 	}else {
 		return false
 	}

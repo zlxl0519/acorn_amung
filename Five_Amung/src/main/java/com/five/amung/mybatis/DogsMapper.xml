@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dogs">
+	<insert id="insert" parameterType="dogsDto">
+		insert into A_dogs
+		(num, member_id, dname, dage, breed, weight, neutral, gender, etc)
+		values(A_dogs_seq.nextval,#{member_id} ,#{dname}, #{dage}, 
+		#{breed},#{weight}, #{neutral}, #{gender}, #{etc})
+	</insert>
+	<select id="getList" parameterType="dogsDto" resultType="dogsDto">
+		select num, member_id, dname, dage, breed, weight, neutral, gender, etc
+		from A_dogs
+		where member_id=#{member_id}
+	</select>
+	<select id="getData" parameterType="int" resultType="dogsDto">
+		select num, member_id, dname, dage, breed, weight, neutral, gender, etc
+		from A_dogs
+		where num=#{num}
+	</select>
+	<select id="getDogsData" parameterType="dogsDto" resultType="dogsDto">
+		select num, member_id, dname, dage, breed, weight, neutral, gender, etc
+		from A_dogs
+		where member_id=#{member_id}
+	</select>
+</mapper>

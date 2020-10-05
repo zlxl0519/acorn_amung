@@ -26,9 +26,20 @@ public interface UsersService {
 	public void loginProcess(UsersDto dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, ModelAndView mView);
 	//이메일로 아이디찾기
 	public List<UsersDto> idSearch(ModelAndView mView, HttpServletRequest request, UsersDto dto);
+	//비밀번호 찾기 (임시비밀번호로 저장하고 알려주기)
+	public void pwdSearch(ModelAndView mView, UsersDto dto);
 	
 	// 리연 추가 -- 200923
 	// 마이페이지 / 회원정보 요청처리
 	public void getInfo(HttpSession session, ModelAndView mView);
+	// 회원정보 삭제 요청처리
+	public void deleteUser(HttpSession session);
+	// 회원 정보 수정 시 비밀번호 체크 요청처리
+	public boolean checkInfo(HttpServletRequest request, UsersDto dto, ModelAndView mView);
 	
+	// 회원정보 수정
+	public void updateUser(HttpServletRequest request, UsersDto dto);
+	
+	//비밀번호 수정
+	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView);
 }//======== UsersService ========

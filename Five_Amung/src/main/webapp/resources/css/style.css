@@ -825,12 +825,15 @@ select {
 	text-align: left;
 }
 
-.gallery-list .caption p {
+.gallery-list .caption {
 	padding: 14px 10px;
-	font-size: 1.2em;
-	font-weight: 600;
 	text-align: center;
-	line-height: 3.85em;;
+	
+}
+.gallery-list .caption p {
+	font-size: 1.4em;
+	font-weight: 600;
+	line-height: 1.6em;;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -838,12 +841,32 @@ select {
 	-webkit-box-orient: vertical;
 }
 
+.gallery-list .caption strong.sub{
+	font-size: 1em;
+	font-weight: 400;
+	line-height: 1.2em;;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	color: #909090;
+}
+
+.gallery-list .caption span.date{
+	font-size: 0.8em;
+	float: left;
+	clear: both;
+	color: #a5a1a1;
+	font-weight: bold;
+}
+
 .gallery-list li {
 	position: relative;
 	text-align: center;
 	display: inline-block;
 	width: 31%;
-	height: 450px;
+	height: 470px;
 	background: #fff;
 	margin: 20px 20px 0 0;
 	box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);

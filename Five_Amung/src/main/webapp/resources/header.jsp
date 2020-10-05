@@ -33,11 +33,13 @@
 <!--script -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/angular.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/angular-route.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cdd137b0b885c589d0ff1e9d01738a4"></script>
 <!-- jquery ui datepicker -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 </head>
 
 <body onload="javascript:scrollMenu();">
@@ -125,7 +127,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="${pageContext.request.contextPath }/reservation/private/reserveform.do">
+								<a href="${pageContext.request.contextPath	}/reserve/reserve_home.do">
 									예약하기
 								</a>
 							</li>
