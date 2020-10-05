@@ -11,7 +11,7 @@
 		<p>
 			검색해도 나오지 않는 질문이 있으시다면 
 			<a href="${pageContext.request.contextPath }/qna/qna_list.do">
-			   <strong class="f_blue f16">QnA</strong>
+				<strong class="f_blue f16">QnA</strong>
 			</a>
 			게시판을 찾아주세요.
 		</p>
@@ -19,24 +19,22 @@
 	
 	
 	<!-- 검색 폼 -->
-	
+	<div class="search-form">
 	<form action="faq_main.do" method="get">
-          <label for="condition">검색조건</label>
-          <select name="condition" id="condition">
-			  <option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
-              <option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
-              <option value="service" <c:if  test="${condition eq 'service'  }">selected</c:if>>시설/서비스</option>
-              <option value="cash" <c:if  test="${condition eq 'cash'  }">selected</c:if>>요금/결제</option>
-              <option value="etc" <c:if  test="${condition eq 'etc'  }">selected</c:if>>기타</option>
-          </select>
-          <label for="keyword">
-          		<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
-          		<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
-          </label>
-     </form>   
+		<select name="condition" id="condition">
+			<option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
+			<option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
+			<option value="service" <c:if  test="${condition eq 'service'  }">selected</c:if>>시설/서비스</option>
+			<option value="cash" <c:if  test="${condition eq 'cash'  }">selected</c:if>>요금/결제</option>
+			<option value="etc" <c:if  test="${condition eq 'etc'  }">selected</c:if>>기타</option>
+		</select>
+		<label for="keyword">
+				<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
+				<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
+		</label>
+	</form>   
+	</div>
 	
- 
-     
 	<!-- faq 아코디언형 게시판 부분 -->
 	<ul class="accordion-wrap">
 		<c:forEach var="tmp" items="${list }">
@@ -64,38 +62,45 @@
 			</li>
 		</c:forEach> 
 	</ul>
-     
-    <!-- 페이징 처리 --> 
-    <div class="page-display">
-          <ul class="pagination pagination-sm">
-          <c:if test="${startPageNum ne 1 }">
-              <li class="page-item"><a class="page-link"  href="faq_main.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a></li>
-          </c:if>
-          <c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
-              <c:choose>
-                   <c:when test="${i eq pageNum }">
-                        <li class="page-item active"><a  class="page-link" href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
-                   </c:when>
-                   <c:otherwise>
-                        <li class="page-item"><a  class="page-link" href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
-                   </c:otherwise>
-              </c:choose>
-          </c:forEach>
-          <c:if test="${endPageNum lt totalPageCount }">
-              <li class="page-item"><a class="page-link"  href="faq_main.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a></li>
-          </c:if>
-          </ul>     
-     </div>
-     
-     <!-- 관리자 계정일 경우 faq 등록 버튼 노출 -->
-     <c:if test="${id eq 'admin'}">
-     	<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
-     		<button>새 faq 등록하기</button>
-     	</a>
-     </c:if>
-
-
-
+	<!-- 관리자 계정일 경우 faq 등록 버튼 노출 -->
+	<c:if test="${id eq 'admin'}">
+	<div class="left mt20">
+		<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
+			<button>새 faq 등록하기</button>
+		</a>
+	</div>
+	</c:if>
+	 
+	<!-- 페이징 처리 --> 
+	<div class="page-display">
+		<ul class="pagination pagination-sm">
+		<c:if test="${startPageNum ne 1 }">
+			<li class="page-item"><a class="page-link"  href="faq_main.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a></li>
+		</c:if>
+		<c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
+			<c:choose>
+				<c:when test="${i eq pageNum }">
+					<li class="page-item active">
+						<a  class="page-link" 
+							href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
+						</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item">
+						<a  class="page-link" 
+							href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${endPageNum lt totalPageCount }">
+			<li class="page-item">
+				<a  class="page-link"
+					href="faq_main.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a>
+			</li>
+		</c:if>
+		</ul>
+	</div>
 	<script>
 	$(document).ready(function(){
 		  $(".accordion-a").hide();
