@@ -860,8 +860,8 @@ footer .copyright {
 	cursor: pointer;
 	border-radius: 10px;
 	display: inline-block;
-	width: 32%;
-	height: 500px;
+	width: 23%;
+	height: 300px;
 	background: #fff;
 	margin-right: 20px;
 	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
@@ -873,7 +873,7 @@ footer .copyright {
 
 .admin span {
 	position: relative;
-	margin: 90px 0 30px 0;
+	margin: 20px 0 30px 0;
 	display: inline-block;
 	text-align: center;
 	background: #ffe26a;
@@ -908,6 +908,13 @@ footer .copyright {
 
 .admin div:first-child p {
 	color: #8abcc3;
+}
+
+.admin div:nth-child(3) span {
+	background: #f3c7be;
+}
+.admin div:nth-child(3) p {
+	color: #f3c7be;
 }
 
 .admin div:last-child span {

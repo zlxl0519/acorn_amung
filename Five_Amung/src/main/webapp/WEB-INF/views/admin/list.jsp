@@ -3,13 +3,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/resources/header.jsp"></jsp:include>
 <div class="content admin">
-	<div onClick="location.href ='../signup/list.jsp'">
+	<div onClick="location.href ='../signup/list.do'">
 		<span>
 			<i class="fas fa-users"></i>
 		</span>
 		<p>회원 리스트</p>
 	</div>
-	<div onClick="location.href ='../gallery/admin/list_admin.jsp'">
+	<div onClick="location.href ='../gallery/admin/list_admin.do'">
 		<span>
 		<i class="fas fa-camera-retro"></i>
 		</span>
@@ -19,11 +19,11 @@
 	</div>
 	<div onClick="location.href ='reserve_list.do'">
 		<span>
-		<i class="fas fa-edit"></i>
+		<i class="fas fa-calendar-check"></i>
 		</span>
 		<p>예약 내역 리스트</p>
 	</div>
-	<div onClick="location.href ='../notice/notice_list.jsp'">
+	<div onClick="location.href ='../notice/list.do'">
 		<span>
 		<i class="fas fa-edit"></i>
 		</span>
