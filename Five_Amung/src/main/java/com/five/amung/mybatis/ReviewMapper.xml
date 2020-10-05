@@ -38,11 +38,11 @@
 		select result1.*
 		from
 			(select num, writer, profile, title, rating,
-			 TO_CHAR(regdate, 'YY/MM/DD') AS regdate, content
-			 LAG(num,1,0) over (order by num desc) as prevNum
+			 TO_CHAR(regdate, 'YY/MM/DD') AS regdate, content,
+			 LAG(num,1,0) over (order by num desc) as prevNum,
 			 LEAD(num,1,0) over (order by num desc) as nextNum
-			 from A_review) result1)
-		where num = #{num}
+			 from A_review) result1
+		where num=#{num}
 	</select>
 	
 	<insert id="insert" parameterType="reviewDto">

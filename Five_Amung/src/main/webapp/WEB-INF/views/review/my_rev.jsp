@@ -7,7 +7,7 @@
 	<h3 class="review"><strong>${id} </strong>님의 소중한 후기 <i class="fas fa-comment-dots"></i></h3>
 	<div class="left mb20">
 		<a href="${pageContext.request.contextPath}/review/private/insertform.do"><button>작성하기</button></a>
-		<a href="list.do"><button class="btn-g">목록으로</button></a>
+		<a href="rev_list.do"><button class="btn-g">목록으로</button></a>
 	</div>
 
 	<ul class="review-ul">
@@ -95,7 +95,7 @@
 			currentPage++; //페이지를 1 증가 시키고 
 			//해당 페이지의 내용을 ajax  요청을 해서 받아온다. 
 			$.ajax({
-				url:"rev_ajax_list.do",
+				url:"my_rev_ajax_list.do",
 				method:"get",
 				data:{pageNum:currentPage},
 				success:function(data){
