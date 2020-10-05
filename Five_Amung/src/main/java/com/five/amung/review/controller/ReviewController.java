@@ -18,11 +18,11 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	//글 목록 보기
-	@RequestMapping("/review/list")
+	@RequestMapping("/review/rev_list")
 	public ModelAndView getList(HttpServletRequest request,
 			ModelAndView mView) {
 		reviewService.getList(request);
-		mView.setViewName("review/list");
+		mView.setViewName("review/rev_list");
 		return mView;
 	}
 	
@@ -30,15 +30,13 @@ public class ReviewController {
 	@RequestMapping("/review/my_rev")
 	public ModelAndView getMyList(HttpServletRequest request,
 			ModelAndView mView, ReviewDto dto) {
-		String id=(String)request.getSession().getAttribute("id");
-		dto.setWriter(id);
 		reviewService.getMyList(request);
 		mView.setViewName("review/my_rev");
 		return mView;
 	}
 	
 	//글 하나 자세히 보기
-	@RequestMapping("/review/detail")
+	@RequestMapping("/review/content")
 	public ModelAndView detail(HttpServletRequest request,
 			ModelAndView mView) {
 		reviewService.getDetail(request);
@@ -81,20 +79,29 @@ public class ReviewController {
 	}	
 	
 	//글 삭제하기
-	@RequestMapping("/review/private/delete")
+	@RequestMapping("/review/delete")
 	public ModelAndView delete(int num, HttpServletRequest request,
 			ModelAndView mView) {
 		reviewService.deleteContent(num, request);
-		mView.setViewName("redirect:/review/list.do");
+		mView.setViewName("redirect:/review/rev_list.do");
 		return mView;
 	}
 	
 	//스크롤 ajax 요청
 	@RequestMapping("/review/rev_ajax_list")
-	public ModelAndView ajaxCommentList(HttpServletRequest request,
+	public ModelAndView ajaxList(HttpServletRequest request,
 			ModelAndView mView) {
 		reviewService.moreList(request);
 		mView.setViewName("review/rev_ajax_list");
+		return mView;
+	}
+	
+	//내 글 보기 스크롤 ajax 요청
+	@RequestMapping("/review/my_rev_ajax_list")
+	public ModelAndView myajaxList(HttpServletRequest request,
+			ModelAndView mView) {
+		reviewService.moreList2(request);
+		mView.setViewName("review/my_rev_ajax_list");
 		return mView;
 	}
 	

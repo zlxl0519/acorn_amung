@@ -26,5 +26,8 @@ public interface ReviewService {
 	//리스트 페이징 추가 응답
 	public void moreList(HttpServletRequest request);
 	
+	//내 글 보기 페이징 
+	public void moreList2(HttpServletRequest request);
+	
 	
 }

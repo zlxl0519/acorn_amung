@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 	alert("글을 수정했습니다.");
-	location.href="${pageContext.request.contextPath}/review/detail.do?num=${param.num}";
+	location.href="${pageContext.request.contextPath}/review/content.do?num=${param.num}";
 </script>

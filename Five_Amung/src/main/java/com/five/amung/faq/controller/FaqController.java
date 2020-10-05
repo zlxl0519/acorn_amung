@@ -25,16 +25,16 @@ public class FaqController {
 		return mView;
 	}
 	
-	@RequestMapping("/faq/admin/insertform")
+	@RequestMapping("/faq/faq_insertform")
 	public ModelAndView insertForm(ModelAndView mView) {
-		mView.setViewName("faq/admin/insertform");
+		mView.setViewName("faq/faq_insertform");
 		return mView;
 	}
 	
-	@RequestMapping(value="/faq/admin/insert", method=RequestMethod.POST)
+	@RequestMapping(value="/faq/faq_insert", method=RequestMethod.POST)
 	public ModelAndView insert(FaqDto dto, ModelAndView mView, HttpSession session) {
 		faqService.saveContent(dto);
-		mView.setViewName("faq/admin/insert");
+		mView.setViewName("faq/faq_insert");
 		return mView;
 	}
 }
