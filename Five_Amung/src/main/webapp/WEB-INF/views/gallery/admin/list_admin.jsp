@@ -33,15 +33,18 @@
 							<img src="${pageContext.request.contextPath }${tmp.imagePath}"/>
 						</a>
 					</div>
-					<p>${tmp.subCaption }</p>
-					<div class="caption"><p>${tmp.caption}</p></div>
-					<p>${tmp.regdate }</p>
-					<div class="gallery-btn">
-					<div>
-						<a href="update_form.do?num=${tmp.num }" class="btn-default">수정</a>
-						<a href="delete.do?num=${tmp.num }" class="btn-default btn-gray">삭제</a>
+					
+					<div class="caption">
+						<p>${tmp.caption }</p>
+						<strong class="sub">${tmp.subCaption}</strong><br/>
+						<span class="date">${tmp.regdate }</span>
 					</div>
-				</div>
+					<div class="gallery-btn">
+						<div>
+							<a href="update_form.do?num=${tmp.num }" class="btn-default">수정</a>
+							<a href="delete.do?num=${tmp.num }" class="btn-default btn-gray">삭제</a>
+						</div>
+					</div>
 				</li>
 			</c:forEach>
 		</ul>
