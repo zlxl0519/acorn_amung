@@ -1,5 +1,6 @@
 package com.five.amung.dogs.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,14 +26,13 @@ public class DogsController {
 	
 	@RequestMapping(value = "/dogs/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> insert(HttpServletRequest request, DogsDto dto){
+	public boolean insert(HttpServletRequest request, DogsDto dto){
+		Map<String, Object> map=new HashMap<String, Object>();
 		//1. 강아지 정보를 입력한다.
-		dogsService.insert(request, dto);
+		//그 아이디에 같은 강아지 이름 존재여부
+		boolean isExist=dogsService.insert(request, dto);
 		
-		//2. 강아지 정보를 map 으로 리턴한다.
-		Map<String,Object> map=dogsService.getList(request, dto);
-		
-		return map;
+		return isExist;
 	}
 	
 	@RequestMapping(value = "/dogs/getList", method=RequestMethod.GET)

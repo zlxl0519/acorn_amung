@@ -7,6 +7,9 @@
 		select * from
 			(select result1.*, rownum as rnum
 				from (select num, id, caption, subCaption, content, imagePath, hit, TO_CHAR(regdate, 'YYYY-MM-DD') AS "regdate" from A_gallery
+						<if test="caption != null">
+							where caption like '%'||#{caption}||'%'
+						</if>
 						order by regdate desc) result1)
 		where rnum between #{startRowNum} and #{endRowNum}
 	</select>
@@ -16,6 +19,9 @@
 	<select id="getCount" parameterType="galleryDto" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM A_gallery
+	<if test="caption != null">
+		where caption like '%'||#{caption}||'%'
+	</if>
 	</select>
 
 
@@ -35,7 +41,9 @@
 	<!-- 글 수정 -->
 	<update id="update" parameterType="galleryDto">
 		update A_gallery
-		set caption=#{caption}, content=#{content}, imagePath=#{imagePath}, regdate=SYSDATE 
+		set caption=#{caption, jdbcType=VARCHAR}, subCaption=#{subCaption, jdbcType=VARCHAR}, 
+			content=#{content, jdbcType=VARCHAR}, imagePath=#{imagePath, jdbcType=VARCHAR}, regdate=SYSDATE 
+		where num=#{num}
 	</update>
 	
 	<!-- 상세보기 -->

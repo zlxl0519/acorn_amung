@@ -1,23 +1,17 @@
 <%@ page language="java" contentType="text/html;  charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>        
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Faq</title>
-<link rel="stylesheet"  href="${pageContext.request.contextPath  }/resources/css/bootstrap.css" />
-</head>
-<body>
-<div class="content">
-	
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %> 
+       
+<%@include file="/../resources/header.jsp"%><!-- header -->
+
+<div class="content">	
 	<h2>FAQ</h2>
 	
 	<div class="left">
 		<h3>자주 물어보시는 질문들입니다.</h3>
 		<p>
 			검색해도 나오지 않는 질문이 있으시다면 
-			<a href="${pageContext.request.contextPath }/qna/qna_list.jsp">
+			<a href="${pageContext.request.contextPath }/qna/qna_list.do">
 			   <strong class="f_blue f16">QnA</strong>
 			</a>
 			게시판을 찾아주세요.
@@ -86,20 +80,26 @@
           </c:if>
           </ul>     
      </div>
+     
+     <!-- 관리자 계정일 경우 faq 등록 버튼 노출 -->
+     <c:if test="${id eq 'admin'}">
+     	<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
+     		<button>새 faq 등록하기</button>
+     	</a>
+     </c:if>
 
 
-<script src="${pageContext.request.contextPath }/include/js/jquery.form.min.js"></script>
-<script>
-$(document).ready(function(){
-	  $(".accordion-a").hide();
-	  $(".accordion-q").click(function(){
-	    $(this).next().slideToggle(300);
-	    $(".accordion-q").not(this).next().slideUp(300);
-	    return false;});
-	  $(".accordion-q").eq(0).trigger("click");
-	});
-</script>
+
+	<script>
+	$(document).ready(function(){
+		  $(".accordion-a").hide();
+		  $(".accordion-q").click(function(){
+		    $(this).next().slideToggle(300);
+		    $(".accordion-q").not(this).next().slideUp(300);
+		    return false;});
+		  $(".accordion-q").eq(0).trigger("click");
+		});
+	</script>
 
 </div>
-</body>
-</html>
+<%@include file="/../resources/footer.jsp"%><!-- footer -->

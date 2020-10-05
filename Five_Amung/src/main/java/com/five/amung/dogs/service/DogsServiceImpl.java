@@ -18,7 +18,7 @@ public class DogsServiceImpl implements DogsService{
 	private DogsDao dogsDao;
 
 	@Override
-	public void insert(HttpServletRequest request, DogsDto dto) {
+	public boolean insert(HttpServletRequest request, DogsDto dto) {
 		String member_id=(String)request.getSession().getAttribute("id");
 		dto.setMember_id(member_id);
 		String etc=request.getParameter("etc");
@@ -26,8 +26,21 @@ public class DogsServiceImpl implements DogsService{
 			dto.setEtc("");
 		}
 		
-		//dto 를 인자로 받아 dao를 이용해서 정보를 저장한다.
-		dogsDao.insert(dto);
+		//같은 아이디에 같은 강아지 정보 존재 여부 
+		boolean isExist=false;
+		//true 일시 이미 저장된 강아지 정보 입니다. 라고 나오게 하기
+		List<DogsDto> resultDto=dogsDao.getDogsData(dto);
+		for(int i=0; i<resultDto.size(); i++) {
+			String dname=resultDto.get(i).getDname();
+			if(dname.equals(dto.getDname())) {
+				isExist=true;
+			}
+		}
+		if(isExist==false) {
+			//dto 를 인자로 받아 dao를 이용해서 정보를 저장한다.
+			dogsDao.insert(dto);
+		}
+		return isExist;
 	}
 
 	@Override

@@ -5,13 +5,13 @@
 
 <div class="content">
 	<h2>호텔 일상</h2>
+		<a href="${pageContext.request.contextPath }/gallery/admin/upload_form.do"><button>새 글 작성</button></a>
 		<div class="left">
 			<a href="upload_form.do"
 				class="btn-a">
 				새 글 작성
 			</a>
 		</div>
-			
 		<ul class="gallery-list">
 			<c:forEach var="tmp" items="${list }">
 				<li>
@@ -31,9 +31,12 @@
 			</c:forEach>
 		</ul>
 		
-		<div class="btn-down">
-			<a href="javascript:void(0);" id="nextBtn" ><i class="fas fa-chevron-down"></i></a>
-		</div><!-- btn-down -->
+		<c:if test="${totalRow gt 6 }">
+			<div class="btn-down">
+				<a href="javascript:void(0);" id="nextBtn" ><i class="fas fa-chevron-down"></i></a>
+			</div><!-- btn-down -->		
+		</c:if>
+
 
 </div>
 <script>
@@ -54,8 +57,5 @@
 			});	
 	});
 	
-	$("#test").on("click", function(){
-		alert("확인");
-	})
 </script>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
