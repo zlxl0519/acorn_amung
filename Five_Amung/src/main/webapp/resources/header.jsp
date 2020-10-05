@@ -158,12 +158,12 @@
 										</a>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath }/review/rev_list.do">
+										<a href="${pageContext.request.contextPath }/review/list.do">
 											AMung 사용후기
 										</a>
 									</li> 
 									<li>
-										<a href="${pageContext.request.contextPath }/qna/qna_list.do">
+										<a href="${pageContext.request.contextPath }/qna/list.do">
 											QnA게시판
 										</a>
 									</li>
