@@ -41,12 +41,16 @@
 		</div><!-- sub-nav-gnb -->
 	</div><!-- sub-nav -->
 	<div class="sub-content">
-		<ul class="dog-list">
-			<c:forEach var="tmp" items="${dogList }">
+		<c:choose>
+			<c:when test="${isSuccess eq true}">
+			<ul class="dog-list">
+				<c:forEach var="tmp" items="${dogList }">
 				<li> 
 					<ul>
 						<li>
-							이름 : ${tmp.dname }
+							<h2>
+								${tmp.dname }
+							</h2>
 						</li>
 						<li>
 						성별 :
@@ -93,27 +97,45 @@
 								</c:otherwise>
 							</c:choose>
 						</li>
-						<li>
-							특이사항
+						<li class="dog-etc">
+							<h4>특이사항</h4>
 							<c:choose>
 								<c:when test="${empty tmp.etc }">
-									특이사항이 없습니다.
+									<pre>특이사항이 없습니다.</pre>
 								</c:when>
 								<c:otherwise>
-									${tmp.etc }
+									<pre>${tmp.etc }</pre>
 								</c:otherwise>
 							</c:choose>
 						</li>
 					</ul>
-					<div class="">
-						<a href="" class="btn-a btn-b">수정</a>
-						<a href="" class="btn-a">삭제</a>
+					<div class="info-hover">
+						<!-- <a href="" class="btn-a btn-b">수정</a> -->
+						<a href="javascript:deleteConfirm(${tmp.num })" class="btn-a">삭제</a>
 					</div>
-					
-					
 				</li>
-			</c:forEach>
-		</ul>
+				</c:forEach>
+			</ul>
+			</c:when>
+			<c:otherwise>
+			<div class="icon-wrap">
+				<i class="fas fa-bomb"></i>
+				<h3>
+					<strong>강아지 정보를 등록하지 않았습니다.</strong>
+				</h3>
+				<a href="${pageContext.request.contextPath }/reserve/reserve_home.do" class="btn-a mt20">등록하러가기</a>
+			</div>
+				
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div><!-- content -->
+<script>
+	function deleteConfirm(num){
+		var isDelete = confirm(num+"번 글을 삭제하시겠습니까?");
+		if(isDelete){
+			location.href="${pageContext.request.contextPath }/mypage/private/info/dogs/delete.do?num="+num;
+		}
+	}
+</script>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->

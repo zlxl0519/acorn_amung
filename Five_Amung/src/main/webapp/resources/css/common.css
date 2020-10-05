@@ -1088,7 +1088,35 @@ footer .copyright {
 	width: 100%;
 	border-radius: 5px;
 	background: #fff;
-	padding: 20px;
+	padding: 30px;
 	margin-bottom: 20px;
 	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.dog-list>li ul li {
+	line-height: 1.8em;
+}
+.dog-list>li ul li h2{
+	color: #97d2bf;
+}
+.dog-etc h4{
+	color: #97d2bf;
+	font-size: 17px;
+	font-weight: bold;
+}
+.dog-etc p, .dog-etc pre {
+	width: 100%;
+	background:#f0f0f0;
+	padding: 20px;
+	border-radius : 5px;
+}
+.info-hover{
+	display:none;
+}
+.dog-list>li:hover .info-hover{
+	position: absolute;
+	right : 30px;
+	top: 30px;
+	display: block;
 }

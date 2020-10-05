@@ -16,24 +16,15 @@
 		</c:when>
 		<c:otherwise>
 			<i class="fas fa-lock-open"></i>
-		 	<table>
-		 		<thead>
-		 			<tr>
-		 				<th>아이디</th>
-		 				<th>가입 일자</th>
-		 			</tr>
-		 		</thead>
-		 		<tbody>
-		 			<c:forEach var="tmp" items="${findId }">
-			 			<tr>
-			 				<td>${tmp.id }</td>
-			 				<td>${tmp.regdate }</td>
-			 			</tr>
-		 			</c:forEach>
-		 		</tbody>
-		 	</table>
+			<p class="form-span m0">
+				<c:forEach var="tmp" items="${findId }">
+				아이디: <strong>${tmp.id }</strong><br/>
+			 	가입날짜 : <strong>${tmp.regdate }</strong>
+		 		</c:forEach>
+		 	</p>
+		 	
 			<div>
-				<button onclick="location.href='${pageContext.request.contextPath }/users/loginform.do'" class="btn-default">로그인하러가기 </button>
+				<button onclick="location.href='${pageContext.request.contextPath }/users/loginform.do'" class="btn-default">로그인 </button>
 			</div>
 		</c:otherwise>
 	</c:choose>
