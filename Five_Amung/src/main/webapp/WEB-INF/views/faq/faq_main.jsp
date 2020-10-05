@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html;  charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %> 
-       
-<%@include file="/../resources/header.jsp"%><!-- header -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="/resources/header.jsp"%><!-- header -->
 
 <div class="content">	
 	<h2>FAQ</h2>
@@ -46,7 +45,14 @@
 					<div class="q">
 						<h6></h6>
 					</div>
-					<p>${tmp.category }</p>
+					<p>
+						<c:choose>
+							<c:when test="${tmp.category eq 'room' }">객실/예약</c:when>
+							<c:when test="${tmp.category eq 'service' }">시설/서비스</c:when>
+							<c:when test="${tmp.category eq 'cash' }">요금/결제</c:when>
+							<c:when test="${tmp.category eq 'etc' }">기타</c:when>
+						</c:choose>
+					</p>
 					<a href="">${tmp.qst }</a>
 				</div>
 				<div class="accordion-a">
@@ -68,15 +74,15 @@
           <c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
               <c:choose>
                    <c:when test="${i eq pageNum }">
-                        <li class="page-item active"><a  class="page-link" href="faq_main..do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
+                        <li class="page-item active"><a  class="page-link" href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
                    </c:when>
                    <c:otherwise>
-                        <li class="page-item"><a  class="page-link" href="faq_main..do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
+                        <li class="page-item"><a  class="page-link" href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
                    </c:otherwise>
               </c:choose>
           </c:forEach>
           <c:if test="${endPageNum lt totalPageCount }">
-              <li class="page-item"><a class="page-link"  href="faq_main..do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a></li>
+              <li class="page-item"><a class="page-link"  href="faq_main.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a></li>
           </c:if>
           </ul>     
      </div>

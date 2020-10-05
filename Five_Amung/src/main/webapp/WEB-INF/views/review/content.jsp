@@ -34,8 +34,8 @@
 						<div class="review-wrap-users">
 							<div class="review-profile">
 								<c:choose>
-									<c:when test="${not empty tmp.profile}">
-										<img id="profileImage" src="${pageContext.request.contextPath}${tmp.profile}"/>
+									<c:when test="${not empty dto.profile}">
+										<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}"/>
 									</c:when>
 									<c:otherwise>
 										<img id="profileImage" src="${pageContext.request.contextPath}/include/img/icon_user.png"/>
@@ -45,30 +45,30 @@
 							<div class="review-users">
 							<p>
 								<c:choose>
-									<c:when test="${not empty tmp.writer}">${tmp.writer }</c:when>
+									<c:when test="${not empty dto.writer}">${dto.writer }</c:when>
 									<c:otherwise>익명의 리뷰어</c:otherwise>
 								</c:choose>
 							</p>
-							<span>${tmp.title } <br/></span>
+							<span>${dto.title } <br/></span>
 							</div>
 						</div><!-- review-wrap-users -->
 						<!-- 별점 -->
 						<div>
 							<p>
 								<c:choose>
-									<c:when test="${tmp.rating eq 1 }">★☆☆☆☆</c:when>
-									<c:when test="${tmp.rating eq 2 }">★★☆☆☆</c:when>
-									<c:when test="${tmp.rating eq 3 }">★★★☆☆</c:when>
-									<c:when test="${tmp.rating eq 4 }">★★★★☆</c:when>
-									<c:when test="${tmp.rating eq 5 }">★★★★★</c:when>
+									<c:when test="${dto.rating eq 1 }">★☆☆☆☆</c:when>
+									<c:when test="${dto.rating eq 2 }">★★☆☆☆</c:when>
+									<c:when test="${dto.rating eq 3 }">★★★☆☆</c:when>
+									<c:when test="${dto.rating eq 4 }">★★★★☆</c:when>
+									<c:when test="${dto.rating eq 5 }">★★★★★</c:when>
 								</c:choose>
 							</p>
 						</div>
 						<div class="review-wrap-con mt30">
-							<p>${tmp.content }
+							<p>
+								${dto.content }
 							</p>
 						</div><!-- review-wrap-con -->
-						<div class="right mt20"><a class="review-btn" href="content.do?num=${tmp.num }">더보기</a></div>
 					</div><!-- review-wrap -->
 				</li>
 			</ul>
@@ -83,14 +83,14 @@
 				<c:if test="${dto.writer eq id }">
 					<a href="private/updateform.do?num=${dto.num }" class="btn-a">수정</a>
 				</c:if>
-				<c:if test="${dto.writer eq id or dto.writer eq 'admin' }">
+				<c:if test="${dto.writer eq id or id eq 'admin' }">
 					<a href="javascript:deleteConfirm();" class="btn-a btn-g">삭제</a>
 				</c:if>
 					
 			
 				</div>
 				<div class="center">
-					<a href="list.do" class="review-btn2"><b>+</b> 전체 후기 보기</a>
+					<a href="rev_list.do" class="review-btn2"><b>+</b> 전체 후기 보기</a>
 				</div>
 					
 </div><!-- content -->
