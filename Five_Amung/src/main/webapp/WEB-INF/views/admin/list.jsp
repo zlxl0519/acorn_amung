@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/resources/header.jsp"></jsp:include>
 <div class="content admin">
-	<div onClick="location.href ='../signup/list.do'">
+	<div onClick="location.href ='../users/admin/user_list.do'">
 		<span>
 			<i class="fas fa-users"></i>
 		</span>
