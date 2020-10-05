@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<h3>${id}님의 반려견 정보</h3>
 <table>
 	<thead>
 		<tr>
@@ -28,3 +29,5 @@
 		</c:forEach>		
 	</tbody>
 </table>
+
+<a href='javascript:window.close();'><button>닫기</button></a>
