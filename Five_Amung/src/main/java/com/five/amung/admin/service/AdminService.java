@@ -9,4 +9,5 @@ import com.five.amung.reserve.dto.RoomPriceDto;
 
 public interface AdminService {
 	public void getList(HttpServletRequest request, ReserveDto dto, RoomPriceDto roomPriceDto);
+	public void reserveCancle(ModelAndView mView, HttpServletRequest request);
 }

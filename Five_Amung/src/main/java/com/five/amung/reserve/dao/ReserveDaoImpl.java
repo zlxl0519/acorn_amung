@@ -51,9 +51,9 @@ public class ReserveDaoImpl implements ReserveDao{
 	}
 
 	@Override
-	public ReserveDto getData(ReserveDto dto) {
+	public ReserveDto getData(int num) {
 		
-		return session.selectOne("reserve.getData", dto);
+		return session.selectOne("reserve.getData", num);
 	}
 
 	@Override
@@ -70,5 +70,25 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public int getCount(ReserveDto dto) {
 		return session.selectOne("reserve.getCount", dto);
+	}
+
+	@Override
+	public boolean reserveCancle(int num) {
+		int successNum=session.update("reserve.reserveCancle", num);
+		if(successNum==1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public int getReserveRoomNum(int num) {
+		return session.selectOne("reserve.getReserveRoomNum", num);
+	}
+
+	@Override
+	public void updateRoomState(int roomNum) {
+		session.update("reserve.updateRoomState", roomNum);
 	}
 }

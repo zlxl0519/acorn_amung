@@ -23,7 +23,7 @@ public class AdminServiceImpl implements AdminService{
 	private DogsDao dogsDao;
 	
 	//한 페이지에 나타낼 row 의 갯수
-	final int PAGE_ROW_COUNT=5;
+	final int PAGE_ROW_COUNT=10;
 	//하단 디스플레이 페이지 갯수
 	final int PAGE_DISPLAY_COUNT=5;
 
@@ -107,6 +107,22 @@ public class AdminServiceImpl implements AdminService{
 		request.setAttribute("condition", condition);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("encodedK", encodedK);
+	}
+
+	@Override
+	public void reserveCancle(ModelAndView mView, HttpServletRequest request) {
+		//예약 번호
+		int num=Integer.parseInt(request.getParameter("num"));
+		//1. reserveDB 에서 예약상태를 예약 취소로 업데이트 한다.(num getparameter 받아옴)
+		boolean isSuccess=reserveDao.reserveCancle(num);
+		//2. 예약 번호에 맞는 방번호를 가져온다.
+		ReserveDto dto=reserveDao.getData(num);
+		int roomNum=dto.getRoom_num();
+		//예약 취소 상태이면 방 번호로 방이 예약 가능하게 바뀜 room state 도 바뀌게 하기
+		if(isSuccess) {
+			reserveDao.updateRoomState(roomNum);
+		}
+		
 	}
 	
 	
