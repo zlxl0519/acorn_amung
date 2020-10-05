@@ -97,20 +97,20 @@
 								</c:otherwise>
 							</c:choose>
 						</li>
-						<li>
-							특이사항
+						<li class="dog-etc">
+							<h4>특이사항</h4>
 							<c:choose>
 								<c:when test="${empty tmp.etc }">
-									특이사항이 없습니다.
+									<pre>특이사항이 없습니다.</pre>
 								</c:when>
 								<c:otherwise>
-									${tmp.etc }
+									<pre>${tmp.etc }</pre>
 								</c:otherwise>
 							</c:choose>
 						</li>
 					</ul>
-					<div class="right">
-						<a href="" class="btn-a btn-b">수정</a>
+					<div class="info-hover">
+						<!-- <a href="" class="btn-a btn-b">수정</a> -->
 						<a href="" class="btn-a">삭제</a>
 					</div>
 				</li>
