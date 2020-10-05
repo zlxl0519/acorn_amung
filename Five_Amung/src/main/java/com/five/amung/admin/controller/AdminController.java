@@ -28,4 +28,13 @@ public class AdminController {
 		return mView;
 	}
 	
+	@RequestMapping("/admin/reserve_cancle")
+	public ModelAndView reserveCancle(ModelAndView mView, HttpServletRequest request) {
+		//1. reserveDB 에서 예약상태를 예약 취소로 업데이트 한다.
+		
+		// 예약 취소 상태이면 그제야 방이 예약 가능하게 바뀜 room state 도 바뀌게 하기
+		
+		mView.setViewName("redirect: /admin/reserve_list");
+		return mView;
+	}
 }

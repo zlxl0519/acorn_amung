@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>/admin/reserve_list.jsp</title>
-</head>
-<body>
+<jsp:include page="/resources/header.jsp"></jsp:include>
+<%--예약페이지
+
+--%>
+<div class="content">
 	<table>
 		<thead>
 			<tr>
@@ -23,6 +21,7 @@
 				<th>예약 날짜</th>
 				<th>예약 취소</th>
 				<th>예약 확인</th>
+				<th>예약 현황</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,8 +37,9 @@
 				<td>${tmp.dname }</td>
 				<td>${tmp.room_price }</td>
 				<td>${tmp.regdate }</td>
-				<td><button>예약 취소</button></td>
-				<td><button>예약 확인</button></td>
+				<td><a href="${pageContext.request.contextPath}/admin/reserve_cancle.do?num=${tmp.num}">예약 취소</a></td>
+				<td><a href="${pageContext.request.contextPath}/admin/reserve_ok.do?num=${tmp.num}">예약 확인</a></td>
+				<td>${tmp.state }</td>
 			</tr>
 		</c:forEach>		
 		</tbody>
@@ -64,5 +64,5 @@
 		</c:if>
 		</ul>	
 	</div>
-</body>
-</html>
+</div><!--content -->
+<jsp:include page="/resources/footer.jsp"></jsp:include>
