@@ -158,7 +158,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath }/review/list.do">
+										<a href="${pageContext.request.contextPath }/review/rev_list.do">
 											AMung 사용후기
 										</a>
 									</li> 
