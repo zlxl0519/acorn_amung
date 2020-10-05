@@ -25,6 +25,7 @@ public class GalleryDaoImpl implements GalleryDao{
 	public void insert(GalleryDto dto) {
 		// TODO 게시물 추가
 		session.insert("gallery.insert", dto);
+
 	}
 
 	@Override
