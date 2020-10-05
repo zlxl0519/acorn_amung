@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<select id="getList" parameterType="reviewDto" resultType="reviewDto">
+		select * from
+			(select result1.*, rownum as rnum
+				from (select num, writer, profile, title, rating, regdate, content
+					  from A_review
+					  order by num desc)
+				result1)
+		where rnum between #{startRowNum} and #{endRowNum}	
+	</select>
+	
+	<select id="getCount" parameterType="reviewDto" resultType="int">
+		select nvl(max(rownum), 0)
+		from A_review
+	</select>
+	
+	<select id="getMyList" parameterType="reviewDto" resultType="reviewDto">
+		select * from
+			(select result1.*, rownum as rnum
+				from (select num, writer, profile, title, rating,
+					  TO_CHAR(regdate, 'YY/MM/DD') AS regdate, content
+					  from A_review
+					  where writer = #{writer}
+					  order by num desc)
+				result1)
+		where rnum between #{startRowNum} and #{endRowNum}	
+	</select>
+	
+	<select id="getMyCount" parameterType="reviewDto" resultType="int">
+		select nvl(max(rownum), 0)
+		from A_review 
+		where writer = #{writer}
+	</select>
+	
+	<select id="getData" parameterType="int" resultType="reviewDto">
+		select result1.*
+		from
+			(select num, writer, profile, title, rating,
+			 TO_CHAR(regdate, 'YY/MM/DD') AS regdate, content
+			 LAG(num,1,0) over (order by num desc) as prevNum
+			 LEAD(num,1,0) over (order by num desc) as nextNum
+			 from A_review) result1)
+		where num = #{num}
+	</select>
+	
+	<insert id="insert" parameterType="reviewDto">
+		insert into A_review
+		(num, writer, profile, title, content, regdate, rating)
+		values(A_review_seq.NEXTVAL, #{writer}, #{profile}, #{title}, #{content}, sysdate, #{rating})
+	</insert>
+	
+	<update id="update" parameterType="reviewDto">
+		update A_review
+		set title=#{title}, content=#{content}, rating=#{rating}
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from A_review
+		where num=#{num}
+	</delete>
+	
+	<select id="getProfile" parameterType="string" resultType="string">
+		select profile from A_member 
+		where id=#{id}
+	</select>
+</mapper>
