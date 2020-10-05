@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,4 +55,13 @@ public class DogsController {
 		mView.setViewName("mypage/dogsinfo");
 		return mView;
 	}//==== info ====
+	
+	//마이페이지 -- 강아지 정보 삭제하기
+	@RequestMapping("/mypage/private/info/dogs/delete")
+	public ModelAndView dogDelete(@RequestParam int num,HttpServletRequest request, DogsDto dto, ModelAndView mView) {
+		dogsService.delete(num, dto, request);
+		mView.setViewName("redirect:/mypage/private/info/dogs.do");
+		return mView;
+	}//==== info ====
+	
 }// ======== DogsController ========

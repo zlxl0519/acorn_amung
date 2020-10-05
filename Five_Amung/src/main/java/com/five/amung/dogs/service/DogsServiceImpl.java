@@ -74,4 +74,11 @@ public class DogsServiceImpl implements DogsService{
 		return dogsDao.getData(num);
 	}
 
-}
+	@Override
+	public void delete(int num, DogsDto dto, HttpServletRequest request) {
+		dto.setNum(num);
+		String member_id=(String)request.getSession().getAttribute("id");
+		dto.setMember_id(member_id);
+		dogsDao.delete(dto);
+	}
+}//======== DogsServiceImpl ========

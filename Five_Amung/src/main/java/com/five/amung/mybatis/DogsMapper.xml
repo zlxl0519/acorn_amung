@@ -27,5 +27,8 @@
 		from A_dogs
 		where member_id=#{member_id}
 	</select>
-
+	<delete id="delete" parameterType="dogsDto">
+		delete FROM A_dogs
+		WHERE num=#{num} and member_id=#{member_id}
+	</delete>
 </mapper>

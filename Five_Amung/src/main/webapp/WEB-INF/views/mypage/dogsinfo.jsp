@@ -111,7 +111,7 @@
 					</ul>
 					<div class="info-hover">
 						<!-- <a href="" class="btn-a btn-b">수정</a> -->
-						<a href="" class="btn-a">삭제</a>
+						<a href="javascript:deleteConfirm(${tmp.num })" class="btn-a">삭제</a>
 					</div>
 				</li>
 				</c:forEach>
@@ -130,4 +130,12 @@
 		</c:choose>
 	</div>
 </div><!-- content -->
+<script>
+	function deleteConfirm(num){
+		var isDelete = confirm(num+"번 글을 삭제하시겠습니까?");
+		if(isDelete){
+			location.href="${pageContext.request.contextPath }/mypage/private/info/dogs/delete.do?num="+num;
+		}
+	}
+</script>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->

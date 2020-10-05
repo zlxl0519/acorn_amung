@@ -14,4 +14,6 @@ public interface DogsDao {
 	
 	//검색한 아이디로 강아지 정보가 존재하는지 체크 없으면 0 출력
 	public int getCheck(DogsDto dto);
+	
+	public void delete(DogsDto dto);
 }

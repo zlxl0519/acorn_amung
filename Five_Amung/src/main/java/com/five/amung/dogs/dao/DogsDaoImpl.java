@@ -39,4 +39,9 @@ public class DogsDaoImpl implements DogsDao{
 	public int getCheck(DogsDto dto) {
 		return session.selectOne("dogs.getCheck", dto);
 	}
-}
+
+	@Override
+	public void delete(DogsDto dto) {
+		session.delete("dogs.delete", dto);
+	}
+}// ======== DogsDaoImpl ========
