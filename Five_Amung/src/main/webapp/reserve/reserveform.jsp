@@ -4,20 +4,56 @@
 <form action="reserve.do" method="post">
 
 	<p>*예약하실 룸을 먼저 선택해주세요.</p>
-	<div class="room_check">
-		<label for="standad">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="standard" name="room_name" />
-		</label>
-		<label for="deluxe">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="deluxe" name="room_name" />
-		</label>
-		<label for="premium">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="premium" name="room_name" />
-		</label>
-	</div>
+	<ul class="room_check">
+		<li>
+			<span class="room-cover"></span>
+			<img src="http://www.bowraum.com/images/v6/services/01_hotel/A1.jpg" />
+			<div class="room-radio">
+				<input
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="standard"
+					name="room_name"
+					id="standard"
+					/>
+				<label for="standard">d</label>
+			</div>
+		</li>
+		<li>
+			<span class="room-cover"></span>
+			<img src="http://www.bowraum.com/images/v6/services/01_hotel/A2.jpg" />
+			<div class="room-radio">
+				<input 
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="deluxe"
+					name="room_name"
+					id="deluxe"
+					/>
+				<label for="deluxe">d</label>
+			</div>
+			
+		</li>
+		<li>
+			<span class="room-cover"></span>
+			<img src="http://www.bowraum.com/images/v6/services/01_hotel/A3.jpg" />
+			<div class="room-radio">
+				<input 
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="premium"
+					name="room_name"
+					id="premium"
+					/>
+				<label for="premium">d</label>
+			</div>
+		</li>
+		
+		
+	</ul>
 	
 	<dl>
 		<dt>숙박기간</dt>

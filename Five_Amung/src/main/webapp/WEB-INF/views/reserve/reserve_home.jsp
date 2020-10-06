@@ -105,9 +105,19 @@
 			<li>마이페이지 내역에 강아지 정보가 없다면 강아지 정보를 입력해 주세요.</li>
 		</ol>
 	</div>
-		<ul class="nav"><!-- # 은 페이지 내에서의 이동 -->
-			<li><a href="#dog_form">강아지 정보 저장</a></li>
-			<li><a href="#reserveform">예약하기</a></li>
+		<ul class="round-nav"><!-- # 은 페이지 내에서의 이동 -->
+			<li onClick="location.href ='#dog_form'">
+				<div>
+					<i class="fas fa-paw"></i>
+					<p>강아지<br/>정보 저장</p>
+				</div>
+			</li>
+			<li onClick="location.href ='#reserveform'">
+				<div>
+					<i class="fas fa-calendar-alt"></i>
+					<p>예약하기</p>
+				</div>
+			</li>
 		</ul>
 		<div data-ng-view></div>
 </div><!--content -->
