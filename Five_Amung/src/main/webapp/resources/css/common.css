@@ -829,7 +829,6 @@ footer .copyright {
 }
 
 .review-text .review-wrap {
-	height: 600px;
 	text-align: left;
 }
 
@@ -848,7 +847,7 @@ footer .copyright {
 }
 
 .review-text .review-wrap div textarea {
-	height: 423px;
+	height: 300px;
 }
 
 /*관리자*/

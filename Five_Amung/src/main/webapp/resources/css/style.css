@@ -1252,3 +1252,38 @@ li.profile-wrap {
 	font-size: 1.25rem;
 	color:#90929e;
 }
+
+
+/* mini-notice 작은 알림박스*/
+.mini-notice {
+	background:#f6f6f6;
+	width: 100%;
+	border-radius: 10px; 
+	text-align: left;
+	padding: 30px;
+	clear: both;
+	position: relative;
+}
+
+.mini-notice h3 {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-block;
+}
+.mini-notice h3 i{
+	font-size: 5em;
+	color: #a72222;
+}
+.mini-notice ol{
+	display: inline-block;
+	list-style: decimal;
+	transform: translateX(17%);
+}
+.mini-notice ol li{
+	list-style: decimal;
+	line-height: 2em;
+	font-size: 1.3em;
+	font-weight: 700;
+	color: #595959;
+}

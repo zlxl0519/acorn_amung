@@ -21,11 +21,11 @@
 					</div>
 					<div class="mt20">
 						<label for="qst">질문</label>
-						<input type="text" name="qst" id="qst" />
+						<textarea name="qst" id="qst" class="mt20" placeholder="질문을 입력해주세요!"></textarea>
 					</div>
-					<div class="mt20">
+					<div class="mt20 mb20">
 						<label for="ans">답변</label>
-						<textarea name="ans" id="ans" class="mt20" cols="40" rows="20" placeholder="답변을 입력해주세요!" onfocus="this.placeholder=''" onblur="this.placeholder='답변을 입력해주세요!'"></textarea>
+						<textarea name="ans" id="ans" class="mt20" placeholder="답변을 입력해주세요!" onfocus="this.placeholder=''" onblur="this.placeholder='답변을 입력해주세요!'"></textarea>
 					</div>
 				</div>
 			</li>
@@ -37,17 +37,17 @@
 	</div>
 	
 <script>
-   $("#submit").on("click", function(){
-      if($("#qst").val() == ""){
-         alert("질문을 입력해주세요")
-         $("#qst").focus();
-         return false;
-      } else if($("#ans").val() == ""){
-    	  alert("답변을 입력해주세요")
-          $("#ans").focus();
-          return false;
-      }
-   });
+	$("#submit").on("click", function(){
+		if($("#qst").val() == ""){
+			alert("질문을 입력해주세요")
+			$("#qst").focus();
+			return false;
+		} else if($("#ans").val() == ""){
+			alert("답변을 입력해주세요")
+			$("#ans").focus();
+			return false;
+		}
+	});
 </script>	
 
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
