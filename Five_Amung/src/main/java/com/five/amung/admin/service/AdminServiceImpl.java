@@ -73,16 +73,7 @@ public class AdminServiceImpl implements AdminService{
 		//예약 리스트를 다 가져온다.(reserveDao)
 		List<ReserveDto> reserveList=reserveDao.getList(dto);
 		
-		for(int i=0; i<reserveList.size(); i++) {
-			String checkin_date=reserveList.get(i).getCheckin_date();
-			String checkout_date=reserveList.get(i).getCheckout_date();
-			roomPriceDto.setCheckin_date(checkin_date);
-			roomPriceDto.setCheckout_date(checkout_date);
-			//2. 숙박기간 을 가져와서 modelAndview 에 담는다.
-			int term=reserveDao.getTerm(roomPriceDto);
-			//숙박기간
-			request.setAttribute("term", term);
-		}
+		
 		//전체 row 의 갯수를 담을 변수// 전체 row 의 갯수를 알아야지 페이지를 나눌수 있다.
 		int totalRow=reserveDao.getCount(dto);
 		

@@ -64,4 +64,12 @@ public class DogsController {
 		return mView;
 	}//==== info ====
 	
+	@RequestMapping("/admin/dog_one_info")
+	public ModelAndView dogOneInfo(@RequestParam int num, ModelAndView mView) {
+		// service 에서 강아지 번호로 강아지 정보를 ModelAndView 에 담아온다.
+		DogsDto dto=dogsService.getData(num);
+		mView.addObject("dogDto", dto);
+		mView.setViewName("admin/dog_one_info");
+		return mView;
+	}
 }// ======== DogsController ========

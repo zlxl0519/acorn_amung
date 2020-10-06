@@ -50,7 +50,7 @@
 				to_char(reserve.checkin_date, 'yyyy-mm-dd') as checkin_date, 
 				to_char(reserve.checkout_date, 'yyyy-mm-dd') as checkout_date, reserve.start_time as start_time, 
 				reserve.end_time as end_time, reserve.name as name, reserve.phone as phone, 
-				reserve.room_price, reserve.regdate as regdate, reserve.state as state
+				reserve.room_price, reserve.regdate as regdate, reserve.state as state, reserve.dog_num as dog_num
 				from A_dogs dogs inner join A_reserve reserve
 					on dogs.num = reserve.dog_num
 						inner join A_room room
