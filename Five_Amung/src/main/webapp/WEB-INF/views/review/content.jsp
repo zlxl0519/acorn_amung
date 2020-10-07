@@ -9,7 +9,7 @@
 	
 	<div class="content-review">
 		<c:if test="${dto.prevNum ne 0 }">
-			<a href="content.do?num=${dto.getPrevNum()}" class="review-arrow"><i class="fas fa-chevron-left"></i></a>
+			<a href="content.do?num=${dto.prevNum}" class="review-arrow"><i class="fas fa-chevron-left"></i></a>
 		</c:if>
 		
 			<ul class="review-ul">
@@ -73,7 +73,7 @@
 				</li>
 			</ul>
 		<c:if test="${dto.nextNum ne 0 }">
-			<a href="content.do?num=${dto.getNextNum()}" class="review-arrow"><i class="fas fa-chevron-right"></i></a>
+			<a href="content.do?num=${dto.nextNum}" class="review-arrow"><i class="fas fa-chevron-right"></i></a>
 		</c:if>
 		
 	</div><!-- content-review -->

@@ -19,22 +19,24 @@
 	
 	
 	<!-- 검색 폼 -->
-	
-	<form action="faq_main.do" method="get">
-          <label for="condition">검색조건</label>
-          <select name="condition" id="condition">
-			  <option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
-              <option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
-              <option value="service" <c:if  test="${condition eq 'service'  }">selected</c:if>>시설/서비스</option>
-              <option value="cash" <c:if  test="${condition eq 'cash'  }">selected</c:if>>요금/결제</option>
-              <option value="etc" <c:if  test="${condition eq 'etc'  }">selected</c:if>>기타</option>
-          </select>
-          <label for="keyword">
-          		<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
-          		<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
-          </label>
-     </form>   
-	
+	<div class="search-form">
+		<form action="faq_main.do" method="get">
+			<div class="search-wrap">
+	          <label for="condition">검색조건</label>
+	          <select name="condition" id="condition">
+				  <option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
+	              <option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
+	              <option value="service" <c:if  test="${condition eq 'service'  }">selected</c:if>>시설/서비스</option>
+	              <option value="cash" <c:if  test="${condition eq 'cash'  }">selected</c:if>>요금/결제</option>
+	              <option value="etc" <c:if  test="${condition eq 'etc'  }">selected</c:if>>기타</option>
+	          </select>
+	          <label for="keyword">
+	          		<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
+	          		<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
+	          </label>
+	         </div>
+	     </form>   
+	</div>
  
      
 	<!-- faq 아코디언형 게시판 부분 -->
@@ -88,11 +90,13 @@
      </div>
      
      <!-- 관리자 계정일 경우 faq 등록 버튼 노출 -->
-     <c:if test="${id eq 'admin'}">
-     	<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
-     		<button>새 faq 등록하기</button>
-     	</a>
-     </c:if>
+     <div class="center">
+	     <c:if test="${id eq 'admin'}">
+	     	<a href="${pageContext.request.contextPath }/faq/faq_insertform.do">
+	     		<button>새 faq 등록하기</button>
+	     	</a>
+	     </c:if>
+     </div>
 
 
 
