@@ -57,7 +57,7 @@
 		</li>
 	</ul>
 	<div class="reserve-container">
-		<div>
+		<div class="reserve-box1">
 			<dl>
 				<dt>숙박기간</dt>
 				<dd>
@@ -72,7 +72,7 @@
 				</dd>
 			</dl>
 		</div>
-		<div>
+		<div class="reserve-box2">
 			<dl>
 				<dt>입실시간</dt>
 				<dd>
@@ -93,7 +93,7 @@
 					</select>
 				</dd>
 			</dl>
-			<dl>
+			<dl class="ml10">
 				<dt>퇴실시간</dt>
 				<dd>
 					<select data-ng-model="reserveData.end_time" name="end_time" id="end_time">
@@ -115,48 +115,50 @@
 			</dl>
 		</div>
 		
-		<dl>
-			<dt>투숙기간</dt>
-			<dd data-ng-show="showed">
-			[  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}
-			</dd>
-		</dl>
-		<dl>
-			<dt>투숙 강아지 선택</dt>
-			<dd data-ng-repeat="tmp in dogList">
-					<input data-ng-change="isChecked('dog')" 
-						data-ng-model="reserveData.dog_num"
-						type="radio"
-						name="dog_num"
-						value="{{tmp.num}}" />
-					{{tmp.dname}}
-			</dd>
-		</dl>
-		<tr>
-			<th>총 금액</th>
-			<td><input type="hidden" name="room_price" value="{{price}}" />{{price}}원</td>
-		</tr>
-		
-		<tr>
-			<th>예약자명</th>
-			<td>
-				<input type="text" name="name" id="name"/>
-			</td>
-		</tr>
-		<tr>
-			<th>휴대폰 번호</th>
-			<td>
-				<input type="text" name="phone" id="phone" />
-			</td>
-		</tr>
-	</table>
-		<p>
-			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)<br/>
-			홍길동 우리은행 xxxx-xxx-xxxx	
-		</p>
+		<div class="reserve-box3">
+			<h5>
+			투숙기간 : 
+			<strong data-ng-show="showed">
+			 [  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}
+			</strong>
+			</h5>
+			<h5>
+				<input type="hidden" name="room_price" value="{{price}}" />
+				총 금액 : <strong>{{price}}</strong>원
+			</h5>
+			<ul>
+				<li>
+					<label for="name">예약자 명: </label>
+					<input type="text" name="name" id="name"/>
+					
+				</li>
+				<li>
+					<label for="phone">휴대폰 번호 : </label>
+					<input type="text" name="phone" id="phone" />
+				</li>
+	
+			</ul>
+			<h6>
+				결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)<br/>
+				<strong>우리은행 xxxx-xxx-xxxx	 홍길동</strong>
+			</h6>
+		</div>
+			<dl class="dogs-select">
+				<dt>투숙 강아지 선택</dt>
+				<dd data-ng-repeat="tmp in dogList">
+						<input data-ng-change="isChecked('dog')" 
+							data-ng-model="reserveData.dog_num"
+							type="radio"
+							name="dog_num"
+							value="{{tmp.num}}" />
+						{{tmp.dname}}
+				</dd>
+			</dl>
+	</div>
+	<div class="leftf mt20 ml20">
+		<button type="submit">예약하기</button>
 	</div>
 	
-	<button type="submit">예약하기</button>
 </form>
 
 
