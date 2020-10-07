@@ -98,9 +98,19 @@
 		set state='예약취소'
 		where num=#{num}
 	</update>
-	<update id="updateRoomState" parameterType="int">
+	<update id="updateNoRoomState" parameterType="int">
 		update A_room
 		set room_reserve_state='no'
+		where num=#{room_num}
+	</update>
+	<update id="reserveOk" parameterType="int">
+		update A_reserve
+		set state='예약확인'
+		where num=#{num}
+	</update>
+	<update id="updateYesRoomState" parameterType="int">
+		update A_room
+		set room_reserve_state='yes'
 		where num=#{room_num}
 	</update>
 </mapper>

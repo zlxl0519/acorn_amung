@@ -88,7 +88,22 @@ public class ReserveDaoImpl implements ReserveDao{
 	}
 
 	@Override
-	public void updateRoomState(int roomNum) {
-		session.update("reserve.updateRoomState", roomNum);
+	public void updateNoRoomState(int roomNum) {
+		session.update("reserve.updateNoRoomState", roomNum);
+	}
+
+	@Override
+	public boolean reserveOk(int num) {
+		int successNum=session.update("reserve.reserveOk", num);
+		if(successNum==1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public void updateYesRoomState(int roomNum) {
+		session.update("reserve.updateYesRoomState", roomNum);
 	}
 }

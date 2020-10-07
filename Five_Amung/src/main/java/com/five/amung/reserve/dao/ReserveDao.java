@@ -41,6 +41,12 @@ public interface ReserveDao {
 	public boolean reserveCancle(int num);
 	
 	//방 번호로 방 예약 상태를 no 로 바꾼다.
-	public void updateRoomState(int roomNum);
+	public void updateNoRoomState(int roomNum);
+	
+	//예약 번호로 예약 상태 확인으로 바꾸기
+	public boolean reserveOk(int num);
+	
+	//방 번호로 방 예약 상태를 yes 로 바꾼다.
+	public void updateYesRoomState(int roomNum);
 	
 }

@@ -34,4 +34,11 @@ public class AdminController {
 		mView.setViewName("redirect: /amung/admin/reserve_list.do");
 		return mView;
 	}
+	
+	@RequestMapping("/admin/reserve_ok")
+	public ModelAndView reserveOk(ModelAndView mView, HttpServletRequest request) {
+		adminService.reserveOk(mView, request);
+		mView.setViewName("redirect:/admin/reserve_list.do");
+		return mView;
+	}
 }
