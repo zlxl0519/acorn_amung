@@ -2,97 +2,141 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <form action="reserve.do" method="post">
-
-	<p>*예약하실 룸을 먼저 선택해주세요.</p>
-	<div class="room_check">
-		<label for="standad">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="standard" name="room_name" />
-		</label>
-		<label for="deluxe">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="deluxe" name="room_name" />
-		</label>
-		<label for="premium">
-			<input data-ng-change="isChecked('room')" data-ng-model="reserveData.room_name" type="radio" 
-				value="premium" name="room_name" />
-		</label>
+	<div class="left room-h4">
+		<h4>* 예약하실 룸을 먼저 선택해주세요.</h4>
 	</div>
-	
-	<dl>
-		<dt>숙박기간</dt>
-		<dd>
-			<input data-ng-change="isChecked('checkin')" data-ng-model="reserveData.checkin_date" 
-				type="text" name="checkin_date" id="checkin" placeholder="입실" 
-				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'"/>
-		</dd>
-		<dd>
-			<input data-ng-change="isChecked('checkout')" data-ng-model="reserveData.checkout_date" 
-				type="text" name="checkout_date" id="checkout" placeholder="퇴실" 
-				onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'" />
-		</dd>
-	</dl>
-	<dl>
-		<dt>입실시간</dt>
-		<dd>
-			<select data-ng-model="reserveData.start_time" name="start_time" id="start_time">
-				<option value="">[옵션]시간을 선택해주세요.</option>
-				<option value="10">10시</option>
-				<option value="11">11시</option>
-				<option value="12">12시</option>
-				<option value="13">13시</option>
-				<option value="14">14시</option>
-				<option value="15">15시</option>
-				<option value="16">16시</option>
-				<option value="17">17시</option>
-				<option value="18">18시</option>
-				<option value="19">19시</option>
-				<option value="20">20시</option>
-				<option value="21">21시</option>
-			</select>
-		</dd>
-	</dl>
-	<dl>
-		<dt>퇴실시간</dt>
-		<dd>
-			<select data-ng-model="reserveData.end_time" name="end_time" id="end_time">
-				<option value="">[옵션]시간을 선택해주세요.</option>
-				<option value="10">10시</option>
-				<option value="11">11시</option>
-				<option value="12">12시</option>
-				<option value="13">13시</option>
-				<option value="14">14시</option>
-				<option value="15">15시</option>
-				<option value="16">16시</option>
-				<option value="17">17시</option>
-				<option value="18">18시</option>
-				<option value="19">19시</option>
-				<option value="20">20시</option>
-				<option value="21">21시</option>
-			</select>
-		</dd>
-	</dl>
-	<table>
-		<tr>
-			<th>투숙기간</th>
-			<td data-ng-show="showed">[  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}</td>
-		</tr>
-		<th>투숙 강아지 선택</th>
-		<tr data-ng-repeat="tmp in dogList">
-			<td>
-				{{tmp.dname}}
-				<input data-ng-change="isChecked('dog')" 
-					data-ng-model="reserveData.dog_num" type="radio" name="dog_num" value="{{tmp.num}}" />
-			</td>
-		</tr>
+	<ul class="room_check" ng-switch="reserveData.room_name">
+		<li>
+			<span ng-switch-when="standard" class="room-cover"></span>
+			<img src="http://www.bowraum.com/images/v6/services/01_hotel/A1.jpg" />
+			<div class="room-radio">
+				<input
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="standard"
+					name="room_name"
+					id="standard"
+					/>
+				<label for="standard"></label>
+				<h3>Standard<br/>Room</h3>
+			</div>
+		</li>
+		<li>
+			<span ng-switch-when="deluxe" class="room-cover"></span>
+			<img src="http://www.bowraum.com/images/v6/services/01_hotel/A2.jpg" />
+			<div class="room-radio">
+				<input 
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="deluxe"
+					name="room_name"
+					id="deluxe"
+					/>
+				<label for="deluxe"></label>
+				<h3>Deluxe<br/>Room</h3>
+			</div>
+			
+		</li>
+		<li>
+			<span ng-switch-when="premium" class="room-cover"></span>
+			<img src="http://www.bowraum.com/images/v6/services/01_hotel/A3.jpg" />
+			<div class="room-radio">
+				<input 
+					data-ng-change="isChecked('room')"
+					data-ng-model="reserveData.room_name"
+					type="radio" 
+					value="premium"
+					name="room_name"
+					id="premium"
+					/>
+				<label for="premium"></label>
+				<h3>Premium<br/>Room</h3>
+			</div>
+		</li>
+	</ul>
+	<div class="reserve-container">
+		<div>
+			<dl>
+				<dt>숙박기간</dt>
+				<dd>
+					<input data-ng-change="isChecked('checkin')" data-ng-model="reserveData.checkin_date" 
+						type="text" name="checkin_date" id="checkin" placeholder="입실" 
+						onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'"/>
+				</dd>
+				<dd>
+					<input data-ng-change="isChecked('checkout')" data-ng-model="reserveData.checkout_date" 
+						type="text" name="checkout_date" id="checkout" class="ml10" placeholder="퇴실" 
+						onfocus="this.placeholder=''" onblur="this.placeholder='YYYY/MM/DD'" />
+				</dd>
+			</dl>
+		</div>
+		<div>
+			<dl>
+				<dt>입실시간</dt>
+				<dd>
+					<select data-ng-model="reserveData.start_time" name="start_time" id="start_time">
+						<option value="">[옵션]시간을 선택해주세요.</option>
+						<option value="10">10시</option>
+						<option value="11">11시</option>
+						<option value="12">12시</option>
+						<option value="13">13시</option>
+						<option value="14">14시</option>
+						<option value="15">15시</option>
+						<option value="16">16시</option>
+						<option value="17">17시</option>
+						<option value="18">18시</option>
+						<option value="19">19시</option>
+						<option value="20">20시</option>
+						<option value="21">21시</option>
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt>퇴실시간</dt>
+				<dd>
+					<select data-ng-model="reserveData.end_time" name="end_time" id="end_time">
+						<option value="">[옵션]시간을 선택해주세요.</option>
+						<option value="10">10시</option>
+						<option value="11">11시</option>
+						<option value="12">12시</option>
+						<option value="13">13시</option>
+						<option value="14">14시</option>
+						<option value="15">15시</option>
+						<option value="16">16시</option>
+						<option value="17">17시</option>
+						<option value="18">18시</option>
+						<option value="19">19시</option>
+						<option value="20">20시</option>
+						<option value="21">21시</option>
+					</select>
+				</dd>
+			</dl>
+		</div>
+		
+		<dl>
+			<dt>투숙기간</dt>
+			<dd data-ng-show="showed">
+			[  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}
+			</dd>
+		</dl>
+		<dl>
+			<dt>투숙 강아지 선택</dt>
+			<dd data-ng-repeat="tmp in dogList">
+					<input data-ng-change="isChecked('dog')" 
+						data-ng-model="reserveData.dog_num"
+						type="radio"
+						name="dog_num"
+						value="{{tmp.num}}" />
+					{{tmp.dname}}
+			</dd>
+		</dl>
 		<tr>
 			<th>총 금액</th>
 			<td><input type="hidden" name="room_price" value="{{price}}" />{{price}}원</td>
 		</tr>
-		<p>
-			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)
-			홍길동 우리은행 xxxx-xxx-xxxx	
-		</p>
+		
 		<tr>
 			<th>예약자명</th>
 			<td>
@@ -106,6 +150,11 @@
 			</td>
 		</tr>
 	</table>
+		<p>
+			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)<br/>
+			홍길동 우리은행 xxxx-xxx-xxxx	
+		</p>
+	</div>
 	
 	<button type="submit">예약하기</button>
 </form>
