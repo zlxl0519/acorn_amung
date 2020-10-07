@@ -54,7 +54,7 @@ public class DogsServiceImpl implements DogsService{
 		
 		//dao 로 강아지 리스트를 가지고 온다.
 		List<DogsDto> dogList=dogsDao.getList(dto);
-
+    
 		Map<String, Object> map=new HashMap<String, Object>();
 		int dogCheck = dogsDao.getCheck(dto);
 		if(dogCheck != 0) {
@@ -64,7 +64,7 @@ public class DogsServiceImpl implements DogsService{
 		}
 		map.put("dogList", dogList);
 		request.setAttribute("dogList", dogList);
-		
+
 		return map;
 	}
 

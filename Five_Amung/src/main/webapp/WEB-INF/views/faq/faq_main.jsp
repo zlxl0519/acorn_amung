@@ -20,21 +20,21 @@
 	
 	<!-- 검색 폼 -->
 	<div class="search-form">
-	<form action="faq_main.do" method="get">
-		<select name="condition" id="condition">
-			<option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
-			<option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
-			<option value="service" <c:if  test="${condition eq 'service'  }">selected</c:if>>시설/서비스</option>
-			<option value="cash" <c:if  test="${condition eq 'cash'  }">selected</c:if>>요금/결제</option>
-			<option value="etc" <c:if  test="${condition eq 'etc'  }">selected</c:if>>기타</option>
-		</select>
-		<label for="keyword">
+		<form action="faq_main.do" method="get">
+			<select name="condition" id="condition">
+				<option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
+				<option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
+				<option value="service" <c:if  test="${condition eq 'service'  }">selected</c:if>>시설/서비스</option>
+				<option value="cash" <c:if  test="${condition eq 'cash'  }">selected</c:if>>요금/결제</option>
+				<option value="etc" <c:if  test="${condition eq 'etc'  }">selected</c:if>>기타</option>
+			</select>
+			<label for="keyword">
 				<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
 				<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
-		</label>
-	</form>   
+			</label>
+		</form>   
 	</div>
-	
+
 	<!-- faq 아코디언형 게시판 부분 -->
 	<ul class="accordion-wrap">
 		<c:forEach var="tmp" items="${list }">
@@ -73,29 +73,29 @@
 	 
 	<!-- 페이징 처리 --> 
 	<div class="page-display">
-		<ul class="pagination pagination-sm">
+		<ul>
 		<c:if test="${startPageNum ne 1 }">
-			<li class="page-item"><a class="page-link"  href="faq_main.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a></li>
+			<li><a href="faq_main.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a></li>
 		</c:if>
 		<c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
 			<c:choose>
 				<c:when test="${i eq pageNum }">
-					<li class="page-item active">
-						<a  class="page-link" 
+					<li active">
+						<a 
 							href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
 						</li>
 				</c:when>
 				<c:otherwise>
-					<li class="page-item">
-						<a  class="page-link" 
+					<li>
+						<a
 							href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${endPageNum lt totalPageCount }">
-			<li class="page-item">
-				<a  class="page-link"
+			<li>
+				<a
 					href="faq_main.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a>
 			</li>
 		</c:if>
