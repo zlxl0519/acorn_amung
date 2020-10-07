@@ -80,7 +80,7 @@
 		<c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
 			<c:choose>
 				<c:when test="${i eq pageNum }">
-					<li active">
+					<li class="active">
 						<a 
 							href="faq_main.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
 						</li>
