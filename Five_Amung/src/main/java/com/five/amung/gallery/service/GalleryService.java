@@ -2,6 +2,7 @@ package com.five.amung.gallery.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.five.amung.gallery.dto.GalleryCommentDto;
 import com.five.amung.gallery.dto.GalleryDto;
 
 public interface GalleryService {
@@ -34,4 +36,17 @@ public interface GalleryService {
 	public void getAdminList(HttpServletRequest request);
 	//페이징 처리용 ajax list
 	public void getAjaxAdminList(int pageNum, HttpServletRequest request);
+	
+	
+	//=========댓글=================================================
+	
+	public void saveComment(HttpServletRequest request);//댓글 저장 
+	
+	public void deleteComment(HttpServletRequest request); //댓글 삭제
+	
+	public void updateComment(GalleryCommentDto dto); //댓글 수정
+	
+	public void moreCommentList(HttpServletRequest request);//댓글 추가 응답
+	
+	
 }

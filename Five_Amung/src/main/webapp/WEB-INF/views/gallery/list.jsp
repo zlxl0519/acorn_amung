@@ -22,7 +22,14 @@
 					
 					<div class="caption">
 						<p>${tmp.caption }</p>
-						<strong class="sub">${tmp.subCaption}</strong><br/>
+						<c:choose>
+							<c:when test="${empty tmp.subCaption }">
+								<strong class="sub">&nbsp&nbsp</strong><br/>
+							</c:when>
+							<c:otherwise>
+								<strong class="sub">${tmp.subCaption}</strong><br/>
+							</c:otherwise>
+						</c:choose>
 						<span class="date">${tmp.regdate }</span>
 					</div>
 					

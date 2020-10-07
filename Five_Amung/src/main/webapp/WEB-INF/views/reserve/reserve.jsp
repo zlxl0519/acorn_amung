@@ -12,7 +12,7 @@
 		<c:when test="${isSuccess }">
 			<script>
 				alert("예약이 되었습니다.");
-				location.href="${pageContext.request.contextPath}/myPage";
+				location.href="${pageContext.request.contextPath}/mypage/private/reserve/status.do";
 			</script>
 		</c:when>
 		<c:otherwise>
