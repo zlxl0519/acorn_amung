@@ -94,20 +94,32 @@
 	});
 </script>
 <div class="content" data-ng-app="myApp">
-	<div class="form-wrap">
-		<h1>알림 사항!</h1>
-		<ul>
-			<li>1. 호텔 만실 또는 촉박한 기간으로 예약 확정되지 못할 경우 자동으로 예약이 취소될 수 있습니다.</li>
-			<li>2. 예약 후 24시간 내에 입금하지 않으실 경우 자동으로 취소 처리 됩니다.</li>
-			<li>3. 입금 후 취소 시 전화나 qna 게시판에 비밀글로 남겨주세요.</li>
-			<li>4. 마이페이지 내역에 강아지 정보가 없다면 강아지 정보를 입력해 주세요.</li>
-		</ul>
-		<ul class="nav"><!-- # 은 페이지 내에서의 이동 -->
-			<li><a href="#dog_form">강아지 정보 저장</a></li>
-			<li><a href="#reserveform">예약하기</a></li>
+	<div class="mini-notice">
+		<h3>
+			<i class="fas fa-exclamation-circle"></i>
+		</h3>
+		<ol>
+			<li>호텔 만실 또는 촉박한 기간으로 예약 확정되지 못할 경우 자동으로 예약이 취소될 수 있습니다.</li>
+			<li>예약 후 24시간 내에 입금하지 않으실 경우 자동으로 취소 처리 됩니다.</li>
+			<li>입금 후 취소 시 전화나 <a href="${pageContext.request.contextPath }/qna/list.do" class="f_red">QnA</a> 게시판에 비밀글로 남겨주세요.</li>
+			<li>마이페이지 내역에 강아지 정보가 없다면 강아지 정보를 입력해 주세요.</li>
+		</ol>
+	</div>
+		<ul class="round-nav"><!-- # 은 페이지 내에서의 이동 -->
+			<li onClick="location.href ='#dog_form'">
+				<div>
+					<i class="fas fa-paw"></i>
+					<p>강아지<br/>정보 저장</p>
+				</div>
+			</li>
+			<li onClick="location.href ='#reserveform'">
+				<div>
+					<i class="fas fa-calendar-alt"></i>
+					<p>예약하기</p>
+				</div>
+			</li>
 		</ul>
 		<div data-ng-view></div>
-	</div><!-- form-wrap -->
 </div><!--content -->
 
 <jsp:include page="/resources/footer.jsp"></jsp:include>

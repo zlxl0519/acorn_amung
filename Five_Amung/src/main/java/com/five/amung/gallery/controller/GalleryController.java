@@ -1,6 +1,7 @@
 package com.five.amung.gallery.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.five.amung.gallery.dto.GalleryCommentDto;
 import com.five.amung.gallery.dto.GalleryDto;
 import com.five.amung.gallery.service.GalleryService;
 
@@ -99,5 +101,40 @@ public class GalleryController {
 		mView.setViewName("redirect:/gallery/admin/list_admin.do");
 		return mView;
 	}
+	
+	
+	//=====================================댓글===========================================
+	
+	@RequestMapping(value= "/gallery/private/comment_insert", method= RequestMethod.POST)
+	public ModelAndView commentInsert(@RequestParam int ref_group,HttpServletRequest request, ModelAndView mView) {
+		galleryService.saveComment(request);
+		mView.setViewName("redirect:/gallery/content.do?num="+ref_group);
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/private/comment_delete")
+	public ModelAndView commentDelete(@RequestParam int ref_group, HttpServletRequest request, ModelAndView mView) {
+		galleryService.deleteComment(request);
+		mView.setViewName("redirect:/gallery/content.do?num="+ref_group);
+		return mView;
+	}
+	
+	@RequestMapping(value="/gallery/private/comment_update", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> commentUpdate(GalleryCommentDto dto){
+		galleryService.updateComment(dto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("num", dto.getNum());
+		map.put("content", dto.getContent());
+		return map;
+	}
+	
+	@RequestMapping("/gallery/ajax_comment_list")
+	public ModelAndView ajaxCommentList(HttpServletRequest request, ModelAndView mView) {
+		galleryService.moreCommentList(request);
+		mView.setViewName("gallery/ajax_comment_list");
+		return mView;
+	}
+	
 
 }

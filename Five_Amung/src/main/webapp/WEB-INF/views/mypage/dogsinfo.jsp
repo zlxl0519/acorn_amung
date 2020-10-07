@@ -35,7 +35,7 @@
 				</li>
 				
 				<li class="active">
-					<a href="info/dogs.do">강아지 정보</a>
+					<a href="dogs.do">강아지 정보</a>
 				</li>
 			</ul>
 		</div><!-- sub-nav-gnb -->
