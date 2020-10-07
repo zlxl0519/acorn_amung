@@ -1310,6 +1310,12 @@ li.profile-wrap {
 	position: relative;
 	cursor: pointer;
 }
+.round-nav li:hover,
+.round-nav li:active,
+.round-nav li:visited
+{
+	box-shadow: inset 0px 0px 19px -6px rgb(0 0 0 / 15%);
+}
 .round-nav li div {
 	position: absolute;
 	top: 50%;
@@ -1481,7 +1487,7 @@ input[name="checkout_date"]::placeholder {
 .dogs-select {
 	margin-left: 20px;
 	background:url("../img/main04.png") 33% top no-repeat #fff2c7;
-	background-size: 182%;
+	background-size: cover;
 	padding: 20px;
 	border-radius: 5px;
 	width: 457px;
