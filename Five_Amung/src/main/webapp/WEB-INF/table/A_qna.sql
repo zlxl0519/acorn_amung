@@ -14,7 +14,7 @@ CONSTRAINT A_qna_num_pk PRIMARY KEY(num)
 CREATE SEQUENCE A_qna_seq;
 
 -- qna 댓글 테이블 
-CREATE A_qna_comment(
+CREATE TABLE  A_qna_comment(
    num NUMBER PRIMARY KEY, --댓글의 글번호
    writer VARCHAR2(100), --댓글 작성자의 아이디
    content VARCHAR2(500), --댓글 내용

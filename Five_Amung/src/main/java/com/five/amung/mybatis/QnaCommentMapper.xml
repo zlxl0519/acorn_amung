@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnaComment">
+	<select id="getList" parameterType="qnaCommentDto" resultType="qnaCommentDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT num, writer, content, target_id, ref_group,
+					comment_group, deleted, A_qna_comment.regdate, profile
+				FROM A_qna_comment
+				INNER JOIN A_member
+				ON A_qna_comment.writer=A_member.id
+				WHERE ref_group=#{ref_group}
+				ORDER BY comment_group ASC, num ASC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}	
+	</select>
+	
+	<update id="delete" parameterType="int">
+		UPDATE A_qna_comment
+		SET deleted='yes'
+		WHERE num=#{num}
+	</update>
+	
+	<insert id="insert" parameterType="qnaCommentDto">
+		INSERT INTO A_qna_comment
+		(num, writer, content, target_id, ref_group, comment_group, regdate)
+		VALUES(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group},
+			#{comment_group}, SYSDATE)
+	</insert>
+	
+	<select id="getSequence" resultType="int">
+		SELECT A_qna_comment_seq.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	<update id="update" parameterType="qnaCommentDto">
+		UPDATE A_qna_comment
+		SET content=#{content}
+		WHERE num=#{num}
+	</update>
+	
+	<select id="getData" parameterType="int" resultType="qnaCommentDto">
+		SELECT num, writer, content, ref_group, comment_group, deleted, regdate
+		FROM A_qna_comment
+		WHERE num=#{num}
+	</select>
+	
+	<select id="getCount" parameterType="int" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM A_qna_comment
+		WHERE ref_group=#{ref_group}
+	</select>
+	
+	<!-- 댓글 수 올리기 (댓글 입력 시)-->
+	<update id="addComment" parameterType="int">
+		UPDATE A_qna
+		SET comm=comm+1
+		WHERE num=#{num}
+	</update>
+	
+	<!-- 댓글 수 내리기 (삭제 시) -->
+	<update id="reduceComment" parameterType="int">
+		UPDATE A_qna
+		SET comm=comm-1
+		WHERE num=#{num}
+	</update>
+	
+	<!-- 관리자 댓글 달렸는지 여부 -->
+	<update id="ifDone" parameterType="int">
+		UPDATE A_qna
+		SET done=1
+		WHERE num=#{num}
+	</update>
+</mapper>
