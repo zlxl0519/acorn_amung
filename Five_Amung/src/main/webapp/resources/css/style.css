@@ -93,6 +93,9 @@ table a:hover, table a:active {
 .ml10{
 	margin-left: 10px!important;
 }
+.ml20{
+	margin-left: 20px!important;
+}
 .m20 {
 	margin: 20px 0 !important;
 }
@@ -1451,7 +1454,7 @@ input[name="checkout_date"]::placeholder {
 }
 .reserve-container {
 	margin-top: 20px;
-	padding: 0 20px;
+	padding: 0 0 0 20px;
 	text-align: left;
 }
 .reserve-container input, .reserve-container select{
@@ -1468,4 +1471,61 @@ input[name="checkout_date"]::placeholder {
 }
 .reserve-container dl dd{
 	display: inline-block;;
+}
+.reserve-box1{
+	clear: both;
+}
+.reserve-box1 dl{
+	float: left;
+}
+.dogs-select {
+	margin-left: 20px;
+	background:url("../img/main04.png") 33% top no-repeat #fff2c7;
+	background-size: 182%;
+	padding: 20px;
+	border-radius: 5px;
+	width: 457px;
+	box-sizing: border-box;
+	box-shadow: inset 0px 0px 19px -6px rgba(245,219,155,1);
+}
+.dogs-select dd{
+	display: block!important;
+	padding: 10px 0;
+}
+.reserve-box2{
+	float:left;
+	margin-top: 20px;
+	clear:both;
+}
+
+.reserve-box3{
+	float:left;
+	margin-top: 20px;
+	clear:both;
+}
+.reserve-box3 h5{
+	line-height: 1.5em;
+	font-size: 1.5em;
+}
+
+.reserve-box3 h6 {
+	width: 100%;
+	line-height: 1.5em;
+	font-size: 1em;
+	color: #819f2d;
+	border-top: 1px dashed #f0f0f0;
+	padding-top: 10px;
+	display: inline-block;
+}
+.reserve-box3 ul{
+	margin-top: 20px;
+}
+.reserve-box3 ul li{
+	margin-bottom: 20px;
+}
+.reserve-box3 label{
+	font-size: 1em;
+	font-weight: bold;
+	color : #5f5f5f;
+	margin: 10px 0;
 }
