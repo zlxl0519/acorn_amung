@@ -21,6 +21,7 @@
 	<!-- 검색 폼 -->
 	<div class="search-form">
 		<form action="faq_main.do" method="get">
+		<div class="search-wrap">
 			<select name="condition" id="condition">
 				<option value="all" <c:if  test="${condition eq 'all'  }">selected</c:if>>전체 카테고리</option>				
 				<option value="room" <c:if  test="${condition eq 'room'  }">selected</c:if>>객실/예약</option>
@@ -32,7 +33,9 @@
 				<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
 				<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
 			</label>
-		</form>   
+		</div>
+			
+		</form>
 	</div>
 
 	<!-- faq 아코디언형 게시판 부분 -->
