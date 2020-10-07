@@ -76,15 +76,11 @@ public class UsersController {
 	@ResponseBody
 	public ModelAndView dogInfo(@RequestParam String member_id, ModelAndView mView, HttpServletRequest request) {
 		usersService.getDogList(member_id, request);
+		mView.addObject("id", member_id);
 		mView.setViewName("users/admin/dog_info");
 		return mView;
 	}
 	
-	//test
-	@RequestMapping("/users/admin/test")
-	public String test() {
-		return "users/admin/test";
-	}
 	
   //seunghui
 	//로그인폼 요청처리

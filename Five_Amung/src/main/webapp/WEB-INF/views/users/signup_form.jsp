@@ -75,7 +75,7 @@
 	            </datalist>
 			</li>
 			<li>
-				<label for="name">성함 *</label>
+				<label for="name">이름 *</label>
 				<input type="text" name="name" id="name" />
 			</li>
 			<li>
@@ -231,24 +231,28 @@
 				$("#pwd").focus();
 				return false;
 			}else if($("#pwd").val().length < 8){
-				alert("특수문자는 8자 이상 16자리 이하의 영문/숫자/특수문자 ~!@#$%^&* 만 사용가능합니다.")
+				alert("비밀번호는 8자 이상 16자리 이하의 영문/숫자/특수문자 ~!@#$%^&* 만 사용가능합니다.")
 				$("#pwd").focus();
 				return false;
 			}else if(!pattern1.test($("#pwd").val())||!pattern2.test($("#pwd").val())||!pattern3.test($("#pwd").val())){
-				alert("특수문자는 8자 이상 16자리 이하의 영문/숫자/특수문자 ~!@#$%^&* 만 사용가능합니다.")
+				alert("비밀번호는 8자 이상 16자리 이하의 영문/숫자/특수문자 ~!@#$%^&* 만 사용가능합니다.")
 				$("#pwd").focus();
 				return false;
 			}else if($("#email01").val() == "" || $("#email02").val() == ""){
 				alert("이메일을 확인하세요")
 				$("#email").focus();
 				return false;
-			}else if($("#phone").val() == "" || $("#phone").val().length < 9){
+			}else if($("#phone").val() == "" || $("#phone").val().length < 9 || !numCheck.test($("#phone").val())){
 				alert("연락처를 확인하세요")
 				$("#phone").focus();
 				return false;
 			}else if($("#name").val() == ""){
 				alert("이름을 확인하세요")
 				$("#name").focus();
+			}else if($("#name").val().length > 13){
+				alert("본명을 작성해주세요");
+				$("#name").focus();
+				return false;
 			}else if(!canUse){
 				alert("잘못입력하신 가입란이 있습니다. 다시 확인해주세요.")
 				return false;
