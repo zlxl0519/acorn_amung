@@ -7,7 +7,7 @@
 			<p class="form-span m20">
 				<strong>작성하신 글이 저장되었습니다.</strong>
 			</p>
-		<a href="qna_list.do" class="btn-default">목록으로</a>
+		<a href="../qna_list.do" class="btn-default">목록으로</a>
 		</div>
 	</div>
 	
