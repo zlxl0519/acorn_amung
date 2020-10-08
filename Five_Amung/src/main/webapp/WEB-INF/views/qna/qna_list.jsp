@@ -60,7 +60,7 @@
 							<td class="board_title left"><a href="content.do?num=${tmp.num }">
 								${tmp.title } [${tmp.comm}]
 								<c:if test="${tmp.done ne 0 }">
-									답변 완료
+									-답변완료
 								</c:if>
 							</a></td>
 							<td>${tmp.writer }</td>
