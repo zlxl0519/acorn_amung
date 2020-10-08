@@ -24,4 +24,7 @@ public interface ReserveService {
 	
 	//방번호로 방 정보 가져오기
 	public RoomDto getRoomData(int num);
-}
+	
+	//마이페이지 : 예약현황
+	public void getList(HttpServletRequest request, ReserveDto dto);
+}//======== ReserveService ========

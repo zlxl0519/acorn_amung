@@ -70,4 +70,9 @@ public class ReserveServiceImpl implements ReserveService{
 		return reserveDao.getRoomData(num);
 	}
 	
-}
+	//예약현황
+	@Override
+	public void getList(HttpServletRequest request, ReserveDto dto) {
+		
+	}//====getList====
+}//======== ReserveServiceImpl ========

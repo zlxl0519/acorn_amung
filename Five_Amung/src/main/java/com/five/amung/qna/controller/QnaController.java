@@ -1,5 +1,8 @@
 package com.five.amung.qna.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.five.amung.qna.dto.QnaCommentDto;
 import com.five.amung.qna.dto.QnaDto;
 import com.five.amung.qna.service.QnaService;
 import com.five.amung.review.dto.ReviewDto;
@@ -92,4 +97,47 @@ public class QnaController {
 		return mView;
 	}
 	
+	//댓글작성
+	@RequestMapping(value = "/qna/private/comment_insert", 
+			method=RequestMethod.POST)
+	public ModelAndView commentInsert(HttpServletRequest request,
+			ModelAndView mView, @RequestParam int ref_group) {
+		//새 댓글을 저장하고 
+		qnaService.saveComment(request);
+		//보고 있던 글 자세히 보기로 다시 리다일렉트 이동 시킨다.
+		mView.setViewName("redirect:/qna/content.do?num="+ref_group);
+		return mView;
+	}
+	
+	//댓글 삭제
+	@RequestMapping("/qna/private/comment_delete")
+	public ModelAndView commentDelete(HttpServletRequest request,
+			ModelAndView mView, @RequestParam int ref_group) {
+		qnaService.deleteComment(request);
+		mView.setViewName("redirect:/qna/content.do?num="+ref_group);
+		return mView;
+	}
+	
+	//댓글 수정 ajax 요청에 대한 요청 처리 
+	@RequestMapping(value = "/qna/private/comment_update", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> commentUpdate(QnaCommentDto dto){
+		//댓글을 수정 반영하고 
+		qnaService.updateComment(dto);
+		//JSON 문자열을 클라이언트에게 응답한다.
+		Map<String, Object> map=new HashMap<>();
+		map.put("num", dto.getNum());
+		map.put("content", dto.getContent());
+		return map;
+	}
+	
+	
+	@RequestMapping("/qna/ajax_comment_list")
+	public ModelAndView ajaxCommentList(HttpServletRequest request,
+			ModelAndView mView) {
+		qnaService.moreCommentList(request);
+		mView.setViewName("qna/ajax_comment_list");
+		return mView;
+	}	
 }

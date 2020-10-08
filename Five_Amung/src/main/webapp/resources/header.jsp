@@ -163,7 +163,7 @@
 										</a>
 									</li> 
 									<li>
-										<a href="${pageContext.request.contextPath }/qna/list.do">
+										<a href="${pageContext.request.contextPath }/qna/qna_list.do">
 											QnA게시판
 										</a>
 									</li>
