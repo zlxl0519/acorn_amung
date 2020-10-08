@@ -1,7 +1,10 @@
 package com.five.amung.qna.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
+import com.five.amung.qna.dto.QnaCommentDto;
 import com.five.amung.qna.dto.QnaDto;
 
 public interface QnaService {
@@ -22,6 +25,17 @@ public interface QnaService {
 	
 	//자기 글 목록
 	public void getMyList(HttpServletRequest request);
-		
+	
+	//댓글 저장
+	public void saveComment(HttpServletRequest request);
+	
+	//댓글 삭제
+	public void deleteComment(HttpServletRequest request);
+	
+	//댓글 수정
+	public void updateComment(QnaCommentDto dto);
+	
+	//댓글 추가 응답
+	public void moreCommentList(HttpServletRequest request);
 	
 }
