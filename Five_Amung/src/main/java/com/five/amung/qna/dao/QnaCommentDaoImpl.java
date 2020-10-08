@@ -49,4 +49,14 @@ public class QnaCommentDaoImpl implements QnaCommentDao {
 		return session.selectOne("qnaComment.getCount", ref_group);
 	}
 
+	@Override
+	public void addComment(QnaCommentDto dto) {
+		session.update("qnaComment.addComment", dto);
+	}
+
+	@Override
+	public void reduceComment(int num) {
+		session.update("qnaComment.reduceComment", num);
+	}
+
 }

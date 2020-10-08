@@ -25,4 +25,11 @@ public interface QnaCommentDao {
 		
 		//댓글의 갯수를 리턴하는 메소드
 		public int getCount(int ref_group);
+		
+		//댓글 추가에 따른 댓글 수 증가 메소드
+		public void addComment(QnaCommentDto dto);
+		
+		//댓글 삭제에 따른 댓글 수 감소 메소드
+		public void reduceComment(int num);
+		
 }

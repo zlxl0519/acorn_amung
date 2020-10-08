@@ -53,23 +53,23 @@
 	</select>
 	
 	<!-- 댓글 수 올리기 (댓글 입력 시)-->
-	<update id="addComment" parameterType="int">
+	<update id="addComment" parameterType="qnaCommentDto">
 		UPDATE A_qna
-		SET comm=comm+1
-		WHERE num=#{num}
+		<choose>
+			<when test="writer != 'admin'">
+				SET comm=comm+1
+			</when>
+			<otherwise>
+				SET comm=comm+1, done=1
+			</otherwise>
+		</choose>
+		WHERE num=#{ref_group}
 	</update>
 	
 	<!-- 댓글 수 내리기 (삭제 시) -->
 	<update id="reduceComment" parameterType="int">
 		UPDATE A_qna
 		SET comm=comm-1
-		WHERE num=#{num}
-	</update>
-	
-	<!-- 관리자 댓글 달렸는지 여부 -->
-	<update id="ifDone" parameterType="int">
-		UPDATE A_qna
-		SET done=1
 		WHERE num=#{num}
 	</update>
 </mapper>
