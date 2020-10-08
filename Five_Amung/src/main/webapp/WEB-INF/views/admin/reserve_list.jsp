@@ -6,6 +6,18 @@
 
 --%>
 <div class="content">
+	<hr style="clear:left;"/>
+	<form action="${pageContext.request.contextPath	}/admin/reserve_list.do" method="get">
+		<label for="condition">검색 조건</label>
+		<select name="condition" id="condition"><%--아래 if 는 condition이 각각의 value 값과 맞을때 계속 선택되어있게 한다. --%>
+			<option value="room_name" <c:if test="${condition eq 'room_name' }">selected</c:if>>예약 방 이름</option>
+			<option value="name" <c:if test="${condition eq 'name' }">selected</c:if>>예약자명</option>
+			<option value="member_id" <c:if test="${condition eq 'member_id' }">selected</c:if>>예약자 아이디</option>
+			<option value="state" <c:if test="${condition eq 'state' }">selected</c:if>>예약 현황</option>
+		</select>
+		<input value="${keyword }" type="text" name="keyword" placeholder="검색어..."/>
+		<button type="submit">검색</button>
+	</form>	
 	<table>
 		<thead>
 			<tr>
@@ -20,7 +32,6 @@
 				<th>가격</th>
 				<th>예약 날짜</th>
 				<th>예약 상태</th>
-
 				<th>예약 현황</th>
 			</tr>
 		</thead>
