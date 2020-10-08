@@ -135,6 +135,5 @@ public class GalleryController {
 		mView.setViewName("gallery/ajax_comment_list");
 		return mView;
 	}
-	
 
 }

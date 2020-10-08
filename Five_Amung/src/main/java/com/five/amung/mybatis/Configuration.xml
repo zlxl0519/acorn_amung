@@ -14,6 +14,7 @@
     	<typeAlias type="com.five.amung.dogs.dto.DogsDto" alias="dogsDto"/>
     	<typeAlias type="com.five.amung.reserve.dto.RoomPriceDto" alias="roomPriceDto"/>
     	<typeAlias type="com.five.amung.gallery.dto.GalleryCommentDto" alias="galleryCommentDto"/>
+    	<typeAlias type="com.five.amung.popup.dto.PopupDto" alias="popupDto"/>
 	</typeAliases>
 
 	
@@ -27,6 +28,7 @@
     	<mapper resource="com/five/amung/mybatis/FaqMapper.xml"/>
     	<mapper resource="com/five/amung/mybatis/DogsMapper.xml"/>
     	<mapper resource="com/five/amung/mybatis/GalleryCommentMapper.xml"/>
+    	<mapper resource="com/five/amung/mybatis/PopupMapper.xml"/>
 	</mappers>
 	
 </configuration>
