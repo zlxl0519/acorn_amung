@@ -8,6 +8,7 @@ regdate DATE,
 hit NUMBER, --조회수
 comm NUMBER, -- 댓글 수 
 done NUMBER, -- 답변 완료 여부
+prv NUMBER, -- 비밀글 여부
 CONSTRAINT A_qna_num_pk PRIMARY KEY(num)
 );
 
