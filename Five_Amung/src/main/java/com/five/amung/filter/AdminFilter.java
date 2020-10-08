@@ -59,7 +59,7 @@ public class AdminFilter implements Filter{
 			if(query==null) {//전송 파라미터가 없다면
 				encodedUrl = URLEncoder.encode(url);
 				
-				
+			
 			}else {
 				encodedUrl=URLEncoder.encode(url+"?"+query);
 			}

@@ -18,6 +18,7 @@ public interface UsersDao {
 	public int getCount(UsersDto dto);
 	//강아지 정보 보기 요청 처리
 	public List<DogsDto> getDogList(String member_id);
+
 	
 	//아이디로 회원정보 가져오기
 	public UsersDto getData(String id);
