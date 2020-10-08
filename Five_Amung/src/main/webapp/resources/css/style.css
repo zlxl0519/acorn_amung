@@ -1535,3 +1535,12 @@ input[name="checkout_date"]::placeholder {
 	color : #5f5f5f;
 	margin: 10px 0;
 }
+
+/* 댓글 갯수 */
+.comment-icon{
+	display:inline-block;
+	color:#fff!important;
+	padding: 5px 10px;
+	background:#d6e7aa;
+	border-radius: 100%;
+}
