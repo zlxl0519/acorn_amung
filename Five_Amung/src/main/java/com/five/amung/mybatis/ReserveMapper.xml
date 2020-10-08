@@ -63,7 +63,7 @@
 						WHERE name LIKE '%'||#{name}||'%'
 					</when>
 					<when test="member_id != null">
-						WHERE member_id LIKE '%'||#{member_id}||'%'
+						WHERE reserve.member_id LIKE '%'||#{member_id}||'%'
 					</when>
 					<when test="state != null">
 						WHERE state LIKE '%'||#{state}||'%'
@@ -86,7 +86,7 @@
 				WHERE name LIKE '%'||#{name}||'%'
 			</when>
 			<when test="member_id != null">
-				WHERE member_id LIKE '%'||#{member_id}||'%'
+				WHERE reserve.member_id LIKE '%'||#{member_id}||'%'
 			</when>
 			<when test="state != null">
 				WHERE state LIKE '%'||#{state}||'%'

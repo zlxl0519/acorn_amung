@@ -4,7 +4,6 @@
 <p>강아지 정보</p>
 <form data-ng-submit="insert()" id="dogForm" novalidate>
 	<div class="form-ul-wrap">
-	{{isCheck}}
 	<ul>
 		<li>
 			<label for="dname">이름</label>
@@ -47,7 +46,7 @@
 				<input data-ng-model="dogData.weight"  type="radio" name="weight" value="3" required/>3kg 이하
 				<input data-ng-model="dogData.weight" type="radio" name="weight" value="6" required/>4kg~6kg
 				<input data-ng-model="dogData.weight" type="radio" name="weight" value="9" required/>7kg~9kg
-				<input data-ng-model="dogData.weight" type="radio" name="weight" value="10" required/>10kg~
+				<input data-ng-model="dogData.weight" type="radio" name="weight" value="10" required/>10kg 이상
 			</fieldset>
 		</li>
 		<li>
