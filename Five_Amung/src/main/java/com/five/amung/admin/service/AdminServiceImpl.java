@@ -1,16 +1,22 @@
 package com.five.amung.admin.service;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.five.amung.dogs.dao.DogsDao;
 import com.five.amung.dogs.dto.DogsDto;
+import com.five.amung.popup.dao.PopupDao;
+import com.five.amung.popup.dto.PopupDto;
 import com.five.amung.reserve.dao.ReserveDao;
 import com.five.amung.reserve.dto.ReserveDto;
 import com.five.amung.reserve.dto.RoomPriceDto;
@@ -21,9 +27,11 @@ public class AdminServiceImpl implements AdminService{
 	private ReserveDao reserveDao;
 	@Autowired
 	private DogsDao dogsDao;
+	@Autowired
+	private PopupDao popDao;
 	
 	//한 페이지에 나타낼 row 의 갯수
-	final int PAGE_ROW_COUNT=5;
+	final int PAGE_ROW_COUNT=10;
 	//하단 디스플레이 페이지 갯수
 	final int PAGE_DISPLAY_COUNT=5;
 
@@ -73,16 +81,7 @@ public class AdminServiceImpl implements AdminService{
 		//예약 리스트를 다 가져온다.(reserveDao)
 		List<ReserveDto> reserveList=reserveDao.getList(dto);
 		
-		for(int i=0; i<reserveList.size(); i++) {
-			String checkin_date=reserveList.get(i).getCheckin_date();
-			String checkout_date=reserveList.get(i).getCheckout_date();
-			roomPriceDto.setCheckin_date(checkin_date);
-			roomPriceDto.setCheckout_date(checkout_date);
-			//2. 숙박기간 을 가져와서 modelAndview 에 담는다.
-			int term=reserveDao.getTerm(roomPriceDto);
-			//숙박기간
-			request.setAttribute("term", term);
-		}
+		
 		//전체 row 의 갯수를 담을 변수// 전체 row 의 갯수를 알아야지 페이지를 나눌수 있다.
 		int totalRow=reserveDao.getCount(dto);
 		
@@ -108,7 +107,82 @@ public class AdminServiceImpl implements AdminService{
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("encodedK", encodedK);
 	}
-	
-	
 
+	@Override
+	public void insertPopup(PopupDto dto, HttpServletRequest request, 
+			HttpServletResponse response, MultipartFile mFile) {
+		// TODO popup 등록
+		
+		//원본 파일명
+		String orgFileName=mFile.getOriginalFilename();
+		// webapp/upload 폴더 까지의 실제 경로(서버의 파일시스템 상에서의 경로)
+		String realPath=request.getServletContext().getRealPath("/upload");
+		//저장할 파일의 상세 경로
+		String filePath=realPath+File.separator;
+		//디렉토리를 만들 파일 객체 생성
+		File upload=new File(filePath);
+		if(!upload.exists()) {//만일 디렉토리가 존재하지 않으면 
+			upload.mkdir(); //만들어 준다.
+		}
+		//저장할 파일 명을 구성한다.
+		String saveFileName=
+				System.currentTimeMillis()+orgFileName;
+		try {
+			//upload 폴더에 파일을 저장한다.
+			mFile.transferTo(new File(filePath+saveFileName));
+			System.out.println(filePath+saveFileName);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		String imagePath = "/upload/"+saveFileName;
+		dto.setImagePath(imagePath);
+		popDao.insert(dto);
+	}
+
+	@Override
+	public void getPopupData(HttpServletRequest request) {
+		// TODO popup 리스트 가져오기
+		PopupDto dto =popDao.getData();
+		request.setAttribute("dto", dto);
+	}
+
+	@Override
+	public void delete() {
+		// TODO 기존 것들 삭제
+		popDao.delete();
+	}
+
+
+	public void reserveCancle(ModelAndView mView, HttpServletRequest request) {
+		//예약 번호
+		int num=Integer.parseInt(request.getParameter("num"));
+		//1. reserveDB 에서 예약상태를 예약 취소로 업데이트 한다.(num getparameter 받아옴)
+		boolean isSuccess=reserveDao.reserveCancle(num);
+		//2. 예약 번호에 맞는 방번호를 가져온다.
+		ReserveDto dto=reserveDao.getData(num);
+		int roomNum=dto.getRoom_num();
+		//예약 취소 상태이면 방 번호로 방이 예약 가능하게 바뀜 room state 도 바뀌게 하기
+		if(isSuccess) {
+			reserveDao.updateNoRoomState(roomNum);
+		}
+		
+	}
+
+	@Override
+	public void reserveOk(ModelAndView mView, HttpServletRequest request) {
+		//예약 번호
+		int num=Integer.parseInt(request.getParameter("num"));
+		//1. reserveDB 에서 예약상태를 예약 확인로 업데이트 한다.(num getParameter 받아옴)
+		boolean isSuccess=reserveDao.reserveOk(num);
+		//2. 예약 번호에 맞는 방번호를 가져온다.
+		ReserveDto dto=reserveDao.getData(num);
+		int roomNum=dto.getRoom_num();
+		//예약 취소 상태이면 방 번호로 방이 예약 가능하게 바뀜 room state 도 바뀌게 하기
+		if(isSuccess) {
+			reserveDao.updateYesRoomState(roomNum);
+		}
+	}
+
+	
 }

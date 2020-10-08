@@ -128,4 +128,13 @@
 	</section>
 	<!-- review -->
 </article>
+
+<script>
+//팝업 띄우는 함수 
+
+	let canPopup = ${canPopup}
+	if(canPopup && ${not empty dto}){
+			window.open("admin/popup.do","${dto.title}","width=${dto.window_width},height=${dto.window_height},top=${dto.location_top},left=${dto.location_left}");	
+	}
+</script>
 <%@include file="/resources/footer.jsp"%><!-- footer -->

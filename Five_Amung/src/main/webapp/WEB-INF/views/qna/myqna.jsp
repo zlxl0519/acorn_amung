@@ -15,13 +15,13 @@
 	<div class="table-wrap">
 			<table>
 			<colgroup>
-	        	<col width="100px"/>
-	        	<col width="50%"/>
-	        	<col width=""/>
-	       		<col width="200px"/>
-	        	<col width="100px"/>
-	   		</colgroup>
-				<thead>
+				<col width="100px" />
+				<col width="50%" />
+				<col width="" />
+				<col width="200px" />
+				<col width="100px" />
+			</colgroup>
+			<thead>
 					<tr>
 						<th>글번호</th>
 						<th>제목</th>
@@ -39,7 +39,7 @@
 									<c:when test="${tmp.prv eq 1 }">
 										<c:if test="${tmp.writer eq id or id eq 'admin' }">
 											<a href="content.do?num=${tmp.num }">
-												${tmp.title } [${tmp.comm}]
+												${tmp.title } <span class="comment-icon">${tmp.comm}</span>
 												<c:if test="${tmp.done ne 0 }">
 												-답변완료
 												</c:if>
@@ -50,7 +50,7 @@
 										</c:if>
 										<c:if test="${tmp.writer ne id or id ne 'admin' }">
 											<a href="secret_content.do?num=${tmp.num }">
-												${tmp.title } [${tmp.comm}]
+												${tmp.title } <span class="comment-icon">${tmp.comm}</span>
 												<c:if test="${tmp.done ne 0 }">
 												-답변완료
 												</c:if>
@@ -87,28 +87,34 @@
 		
 		
 		<!-- 페이징 처리 --> 
-	    <div class="page-display">
-	          <ul class="pagination pagination-sm">
-	          <c:if test="${startPageNum ne 1 }">
-	              <li class="page-item"><a class="page-link"  href="myqna.do?pageNum=${startPageNum-1  }">Prev</a></li>
-	          </c:if>
-	          <c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
-	              <c:choose>
-	                   <c:when test="${i eq pageNum }">
-	                        <li class="page-item active"><a  class="page-link" href="myqna.do?pageNum=${i  }">${i  }</a></li>
-	                   </c:when>
-	                   <c:otherwise>
-	                        <li class="page-item"><a  class="page-link" href="myqna.do?pageNum=${i  }">${i  }</a></li>
-	                   </c:otherwise>
-	              </c:choose>
-	          </c:forEach>
-	          <c:if test="${endPageNum lt totalPageCount }">
-	              <li class="page-item"><a class="page-link"  href="myqna.do?pageNum=${endPageNum+1  }">Next</a></li>
-	          </c:if>
-	          </ul>     
-	     </div><!-- 페이징처리 -->
-     
- 
+		<div class="page-display">
+			<ul>
+				<c:if test="${startPageNum ne 1 }">
+					<li>
+						<a href="myqna.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+					<c:choose>
+						<c:when test="${i eq pageNum }">
+							<li class="active">
+								<a href="myqna.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li>
+								<a href="myqna.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${endPageNum lt totalPageCount }">
+					<li>
+						<a href="myqna.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div><!-- 페이징처리 -->
 </div> <!-- content -->
 
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
