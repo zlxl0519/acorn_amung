@@ -7,7 +7,7 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT num, writer, title, content, hit, regdate, comm, done 
+				(SELECT num, writer, title, content, hit, regdate, comm, done, prv 
 				FROM A_qna
 				<choose>
 					<when test="title != null and content != null">
@@ -45,7 +45,7 @@
 	<select id="getData" parameterType="int" resultType="qnaDto">
 		SELECT result1.*
 		FROM
-			(SELECT num, writer, title, comm, done, content, hit,
+			(SELECT num, writer, title, comm, done, prv, content, hit,
 				TO_CHAR(regdate, 'YYYY.MM.DD HH24:MI') AS regdate,
 				LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
 				LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
@@ -56,7 +56,7 @@
 	<select id="getData2" parameterType="qnaDto" resultType="qnaDto">
 		SELECT result1.*
 		FROM
-			(SELECT num, writer, title, comm, done, content, hit,
+			(SELECT num, writer, title, comm, done, prv, content, hit,
 				TO_CHAR(regdate, 'YYYY.MM.DD HH24:MI') AS regdate,
 				LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
 				LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
@@ -79,14 +79,14 @@
 	
 	<insert id="insert" parameterType="qnaDto">
 		INSERT INTO A_qna
-		(num, writer, title, comm, done, content, hit, regdate)
+		(num, writer, title, comm, done, prv, content, hit, regdate)
 		VALUES(A_qna_seq.NEXTVAL, #{writer}, #{title}, #{comm},
-			#{done}, #{content}, #{hit}, SYSDATE)
+			#{done}, #{prv}, #{content}, #{hit}, SYSDATE)
 	</insert>
 	
 	<update id="update" parameterType="qnaDto">
 		UPDATE A_qna
-		SET title=#{title}, content=#{content}
+		SET title=#{title}, content=#{content}, prv=#{prv}
 		WHERE num=#{num}
 	</update>
 	
@@ -100,7 +100,7 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT num, writer, title, content, hit, regdate, comm, done 
+				(SELECT num, writer, title, content, hit, regdate, comm, done, prv 
 				FROM A_qna
 				WHERE writer = #{writer}
 				ORDER BY num DESC) result1)

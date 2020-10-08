@@ -29,5 +29,16 @@
 		</span>
 		<p>amung 공지사항 관리</p>
 	</div>
+	<div onClick="location.href = 'popup_upload.do'">
+		<span>
+		<i class="far fa-window-restore"></i>
+		</span>
+		<p>팝업 등록</p>
+	</div>
+	<div onClick="location.href = '${pageContext.request.contextPath }/faq/faq_insertform.do'">
+		<span>
+		</span>
+		<p>faq 게시판 관리</p>
+	</div>
 </div><!-- admin -->
 <jsp:include page="/resources/footer.jsp"></jsp:include>

@@ -149,9 +149,10 @@
 						<input data-ng-change="isChecked('dog')" 
 							data-ng-model="reserveData.dog_num"
 							type="radio"
+							id="dog{{tmp.num}}"
 							name="dog_num"
 							value="{{tmp.num}}" />
-						{{tmp.dname}}
+						<label for="dog{{tmp.num}}">{{tmp.dname}}</label>
 				</dd>
 			</dl>
 	</div>

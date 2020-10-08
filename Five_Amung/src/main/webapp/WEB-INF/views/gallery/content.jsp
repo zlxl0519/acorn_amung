@@ -276,7 +276,7 @@
 		if(isLogin == false){
 			alert("로그인 페이지로 이동합니다.")
 			location.href="${pageContext.request.contextPath }/users/loginform.do?"+
-					"url=${pageContext.request.contextPath }/cafe/detail.do?num=${dto.num}";
+					"url=${pageContext.request.contextPath }/gallery/content.do?num=${dto.num}";
 		}
 		
 		var selector="#comment"+$(this).attr("data-num");
@@ -300,7 +300,7 @@
 		if(isLogin == false){
 			alert("로그인 페이지로 이동합니다.")
 			location.href="${pageContext.request.contextPath }/users/loginform.do?"+
-					"url=${pageContext.request.contextPath }/cafe/detail.do?num=${dto.num}";
+					"url=${pageContext.request.contextPath }/gallery/content.do?num=${dto.num}";
 			return false; //폼 전송 막기 		
 		}
 	});

@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reserve">
+	<select id="getInfoCheck" parameterType="reserveDto" resultType="int">
+		select Count(*)
+		from A_reserve
+		where member_id=#{member_id}
+	</select>
+	<select id="getInfoList" parameterType="reserveDto" resultType="reserveDto">
+		select result1.* , rownum as rnum
+			FROM
+			(SELECT
+				reserve.num as num,
+				reserve.member_id as member_id,
+				dogs.dname as dname, room.room_name as room_name,
+				TO_CHAR(reserve.checkin_date, 'YYYY"년 "MM"월 "DD"일"') as checkin_date,
+				TO_CHAR(reserve.checkout_date, 'YYYY"년 "MM"월 "DD"일"') as checkout_date,
+				reserve.start_time as start_time,
+				reserve.end_time as end_time,
+				reserve.name as name,
+				reserve.phone as phone,
+				reserve.room_price,
+				TO_CHAR(reserve.regdate, 'YYYY"년 "MM"월 "DD"일 "HH24"시 "MI"분"') as regdate,
+				reserve.state as state,
+				reserve.dog_num as dog_num
+			FROM A_dogs dogs
+			INNER JOIN A_reserve reserve ON dogs.num = reserve.dog_num
+			INNER JOIN A_room room ON reserve.room_num = room.num
+			WHERE reserve.member_id=#{member_id}
+			
+			<choose>
+				<when test="room_name != null"><!-- 파라미터 타입으로 전달된 데이터를 읽을수 있다. -->
+					WHERE room_name LIKE '%'||#{room_name}||'%'
+				</when>
+				<when test="name != null">
+					WHERE name LIKE '%'||#{name}||'%'
+				</when>
+				<when test="state != null">
+					WHERE state LIKE '%'||#{state}||'%'
+				</when>
+			</choose>
+			ORDER BY NUM DESC ) result1
+	</select>
 	<select id="getPrice" parameterType="roomPriceDto" resultType="int">
 		select price
 		from A_room_price

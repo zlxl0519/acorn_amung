@@ -9,6 +9,7 @@ public class QnaDto {
 	private int hit;
 	private int comm;
 	private int done;
+	private int prv;
 	
 	private int startRowNum;
 	private int endRowNum;
@@ -18,7 +19,7 @@ public class QnaDto {
 	public QnaDto() {}
 
 	public QnaDto(int num, String writer, String title, String content, String regdate, int hit, int comm, int done,
-			int startRowNum, int endRowNum, int prevNum, int nextNum) {
+			int prv, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -28,6 +29,7 @@ public class QnaDto {
 		this.hit = hit;
 		this.comm = comm;
 		this.done = done;
+		this.prv = prv;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
@@ -98,6 +100,14 @@ public class QnaDto {
 		this.done = done;
 	}
 
+	public int getPrv() {
+		return prv;
+	}
+
+	public void setPrv(int prv) {
+		this.prv = prv;
+	}
+
 	public int getStartRowNum() {
 		return startRowNum;
 	}
@@ -129,6 +139,5 @@ public class QnaDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-	
 	
 }

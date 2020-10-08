@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +23,6 @@ import com.five.amung.users.service.UsersService;
 public class ReserveController {
 	@Autowired
 	private ReserveService reserveService;
-	
 	@Autowired
 	private DogsService dogsService;
 	@Autowired
@@ -81,9 +81,11 @@ public class ReserveController {
 	// 리연 추가 - 
 	// 마이페이지 / 예약현황
 	@RequestMapping("/mypage/private/reserve/status")
-	public ModelAndView reserveStatus(HttpServletRequest request, DogsDto dto,  ModelAndView mView) {
+	@ResponseBody
+	public ModelAndView reserveStatus(HttpServletRequest request, ReserveDto dto,
+			ModelAndView mView) {
 		usersService.getInfo(request.getSession(), mView);
-		dogsService.getList(request, dto, mView);
+		reserveService.getList(request, dto);
 		mView.setViewName("mypage/reserve_status");
 		return mView;
 	}//==== reserveStatus ====

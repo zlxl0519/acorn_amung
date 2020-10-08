@@ -48,8 +48,8 @@
 				<td><a href="javascript:void(0);" onclick="PopupCenter('dog_one_info.do?num=${tmp.dog_num }','팝업창', 700, 500);">${tmp.dname }</a></td>
 				<td>${tmp.room_price }</td>
 				<td>${tmp.regdate }</td>
-				<td><a href="${pageContext.request.contextPath}/admin/reserve_cancle.do?num=${tmp.num}">예약 취소</a></td>
-				<td><a href="${pageContext.request.contextPath}/admin/reserve_ok.do?num=${tmp.num}">예약 확인</a></td>
+				<td><a href="javascript:deleteAlert(${tmp.num })">예약 취소</a></td>
+				<td><a href="javascript:checkAlert(${tmp.num })">예약 확인</a></td>
 				<td>${tmp.state }</td>
 			</tr>
 		</c:forEach>		
@@ -95,5 +95,14 @@
 		    newWindow.focus();
 		}
 	}	
+	function deleteAlert(num){
+		alert("예약 취소하시겠습니까?");
+		location.href="${pageContext.request.contextPath}/admin/reserve_cancle.do?num="+num;
+	}
+	
+	function checkAlert(num){
+		alert("예약확인하겠습니까?");
+		location.href="${pageContext.request.contextPath}/admin/reserve_ok.do?num="+num;
+	}
 </script>
 <jsp:include page="/resources/footer.jsp"></jsp:include>

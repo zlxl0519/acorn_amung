@@ -54,7 +54,7 @@ public class QnaController {
 	@RequestMapping(value = "/qna/private/insert", method=RequestMethod.POST)
 	public ModelAndView insert(QnaDto dto, ModelAndView mView, HttpSession session) {
 		//dto 에 글 작성자 담기 
-		String id=(String)session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
 		dto.setWriter(id);
 		qnaService.saveContent(dto);
 		mView.setViewName("qna/insert");
@@ -140,4 +140,12 @@ public class QnaController {
 		mView.setViewName("qna/ajax_comment_list");
 		return mView;
 	}	
+	
+	//비밀글 
+	//글 작성하기 폼
+	@RequestMapping("/qna/secret_content")
+	public ModelAndView secretContent(ModelAndView mView) {
+		mView.setViewName("qna/secret_content");
+		return mView;
+	}
 }
