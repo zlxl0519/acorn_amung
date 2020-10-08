@@ -8,28 +8,61 @@
 <script>
 	var myApp=angular.module("myApp", ["ngRoute"]);
 	myApp.controller("dogCtrl", function($scope, $http, $location){
-		
-		
+		$scope.isCheck=true;
+		$scope.checkInput=function(){
+			
+			if($("#dname").val()==""){
+				alert("강아지 이름을 입력해 주세요");
+				$("#dname").focus();
+				$scope.isCheck=false;
+				
+			}else if($("#dage").val()==""){
+				alert("강아지 나이를 입력해 주세요");
+				$("#dage").focus();
+				$scope.isCheck=false;
+			
+			}else if($("#breed").val()==""){
+				alert("견종을 입력해 주세요");
+				$("#breed").focus();
+				$scope.isCheck=false;
+				
+			}else if($('input:radio[name="weight"]').is(":checked")==false){
+				alert("몸무게를 선택해 주세요");
+				$scope.isCheck=false;
+				
+			}else if($('input:radio[name="neutral"]').is(":checked")==false){
+				alert("중성화 유무를 선택해 주세요");
+				$scope.isCheck=false;
+				
+			}else if($('input:radio[name="gender"]').is(":checked")==false){
+				alert("성별을 선택해 주세요");
+				$scope.isCheck=false;
+			}else{
+				$scope.isCheck=true;	
+			}
+		}
 		$scope.dogData={};
-		$scope.send=function(){
-			$http({
-				url:"/amung/dogs/insert.do",
-				method:"post",
-				params:$scope.dogData,
-				headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
-			}).success(function(data){
-				
-				$scope.isExist=data;
-				
-				if($scope.isExist=="true"){
-					alert("이미 존재하는 강아지 정보 입니다.");
-				}else{
-					alert("강아지 정보가 저장되었습니다.");
-				}
-				//강아지 정보 저장 후 예약 폼으로 redirect
-				$location.path("/reserveform");
-				
-			});
+		$scope.insert=function(){
+			if($scope.isCheck === true){
+				$http({
+					url:"/amung/dogs/insert.do",
+					method:"post",
+					params:$scope.dogData,
+					headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}
+				}).success(function(data){
+					
+					$scope.isExist=data;
+					
+					if($scope.isExist=="true"){
+						alert("이미 존재하는 강아지 정보 입니다.");
+					}else{
+						alert("강아지 정보가 저장되었습니다.");
+					}
+					//강아지 정보 저장 후 예약 폼으로 redirect
+					$location.path("/reserveform");
+					
+				});	
+			}
 		}
 	
 	});

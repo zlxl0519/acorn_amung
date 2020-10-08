@@ -65,11 +65,6 @@ public class ReserveServiceImpl implements ReserveService{
 		mView.addObject("isSuccess", isSuccess);
 	}
 	@Override
-	public ReserveDto getData(ReserveDto dto) {
-		
-		return reserveDao.getData(dto);
-	}
-	@Override
 	public RoomDto getRoomData(int num) {
 		
 		return reserveDao.getRoomData(num);
