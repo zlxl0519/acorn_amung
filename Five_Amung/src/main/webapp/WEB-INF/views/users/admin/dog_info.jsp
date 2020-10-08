@@ -26,7 +26,7 @@
 				<td>${tmp.gender }</td>
 				<td>${tmp.etc }</td>
 			</tr>
-		</c:forEach>		
+		</c:forEach>
 	</tbody>
 </table>
 

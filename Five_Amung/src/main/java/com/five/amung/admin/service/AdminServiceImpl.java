@@ -1,16 +1,22 @@
 package com.five.amung.admin.service;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.five.amung.dogs.dao.DogsDao;
 import com.five.amung.dogs.dto.DogsDto;
+import com.five.amung.popup.dao.PopupDao;
+import com.five.amung.popup.dto.PopupDto;
 import com.five.amung.reserve.dao.ReserveDao;
 import com.five.amung.reserve.dto.ReserveDto;
 import com.five.amung.reserve.dto.RoomPriceDto;
@@ -21,6 +27,8 @@ public class AdminServiceImpl implements AdminService{
 	private ReserveDao reserveDao;
 	@Autowired
 	private DogsDao dogsDao;
+	@Autowired
+	private PopupDao popDao;
 	
 	//한 페이지에 나타낼 row 의 갯수
 	final int PAGE_ROW_COUNT=10;
@@ -101,6 +109,51 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public void insertPopup(PopupDto dto, HttpServletRequest request, 
+			HttpServletResponse response, MultipartFile mFile) {
+		// TODO popup 등록
+		
+		//원본 파일명
+		String orgFileName=mFile.getOriginalFilename();
+		// webapp/upload 폴더 까지의 실제 경로(서버의 파일시스템 상에서의 경로)
+		String realPath=request.getServletContext().getRealPath("/upload");
+		//저장할 파일의 상세 경로
+		String filePath=realPath+File.separator;
+		//디렉토리를 만들 파일 객체 생성
+		File upload=new File(filePath);
+		if(!upload.exists()) {//만일 디렉토리가 존재하지 않으면 
+			upload.mkdir(); //만들어 준다.
+		}
+		//저장할 파일 명을 구성한다.
+		String saveFileName=
+				System.currentTimeMillis()+orgFileName;
+		try {
+			//upload 폴더에 파일을 저장한다.
+			mFile.transferTo(new File(filePath+saveFileName));
+			System.out.println(filePath+saveFileName);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		String imagePath = "/upload/"+saveFileName;
+		dto.setImagePath(imagePath);
+		popDao.insert(dto);
+	}
+
+	@Override
+	public void getPopupData(HttpServletRequest request) {
+		// TODO popup 리스트 가져오기
+		PopupDto dto =popDao.getData();
+		request.setAttribute("dto", dto);
+	}
+
+	@Override
+	public void delete() {
+		// TODO 기존 것들 삭제
+		popDao.delete();
+	}
+
+
 	public void reserveCancle(ModelAndView mView, HttpServletRequest request) {
 		//예약 번호
 		int num=Integer.parseInt(request.getParameter("num"));
@@ -130,5 +183,6 @@ public class AdminServiceImpl implements AdminService{
 			reserveDao.updateYesRoomState(roomNum);
 		}
 	}
+
 	
 }

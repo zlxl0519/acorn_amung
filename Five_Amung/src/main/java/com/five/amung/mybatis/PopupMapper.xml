@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popup">
+
+	<insert id="insert" parameterType="popupDto">
+		insert into A_popup
+		(num, title, window_width, window_height, location_top, location_left, imagePath)
+		values(A_popup_seq.nextval, #{title}, #{window_width}, #{window_height}, #{location_top}, #{location_left}, #{imagePath})
+	</insert>
+	
+	<select id="getData" resultType="popupDto">
+		select * from A_popup
+		where num=(select max(num) from A_popup)
+	</select>
+
+	<delete id="delete">
+		delete from A_popup
+	</delete>
+</mapper>
