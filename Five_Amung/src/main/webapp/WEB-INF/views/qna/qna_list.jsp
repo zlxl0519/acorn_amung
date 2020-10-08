@@ -61,8 +61,8 @@
 								<a href="content.do?num=${tmp.num }">
 									${tmp.title } <span class="comment-icon">${tmp.comm}</span>
 									<c:if test="${tmp.done ne 0 }">
-										답변 완료
-									</c:if>
+									-답변완료
+								</c:if>
 								</a>
 							</td>
 							<td>${tmp.writer }</td>

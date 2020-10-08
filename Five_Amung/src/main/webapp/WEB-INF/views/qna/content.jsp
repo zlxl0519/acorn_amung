@@ -64,7 +64,7 @@
 					<td colspan="7">
 						${dto.title } 
 							<c:if test="${dto.done ne 0 }">
-								답변 완료
+								-답변완료
 							</c:if>
 					</td>
 				</tr>
@@ -137,7 +137,14 @@
 													<img id="profileImage" src="${pageContext.request.contextPath}/include/img/icon_user.png"/>
 												</c:otherwise>
 											</c:choose>
-											<span>${tmp.writer }</span>
+											<c:choose>
+												<c:when test="${tmp.writer eq 'admin' }">
+													<span>관리자</span>
+												</c:when>
+												<c:otherwise>
+													<span>${tmp.writer }</span>
+												</c:otherwise>
+											</c:choose>
 											<c:if test="${tmp.num ne tmp.comment_group }">
 												<i>${tmp.target_id }</i>
 											</c:if>
