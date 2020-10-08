@@ -6,7 +6,7 @@
 	document.title = "Amung' mypage"; 
 </script>
 <div class="content">
-<%-- 	<div class="sub-nav">
+<div class="sub-nav">
 		<div class="info-box">
 			<div class="profile-img">
 				<c:choose>
@@ -30,17 +30,72 @@
 				<li>
 					<a href="../info.do">나의 정보</a>
 				</li>
-				<li>
-					<a href="../reserve/status.do">나의 예약</a>
+				<li class="active">
+					<a href="status.do">나의 예약</a>
 				</li>
 				
-				<li class="active">
-					<a href="dogs.do">강아지 정보</a>
+				<li>
+					<a href="../info/dogs.do">강아지 정보</a>
 				</li>
 			</ul>
 		</div><!-- sub-nav-gnb -->
 	</div><!-- sub-nav -->
 	<div class="sub-content">
-	</div> --%>
+		<c:choose>
+			<c:when test="${isSuccess eq true}">
+				<div>
+				<h2 class="mt20"><strong>전체 예약 : </strong>${reserveCheck }</h2>
+				
+				</div>
+				
+				<ul class="dog-list">
+					<c:forEach var="tmp" items="${reserveList }">
+					<li>
+						<ul>
+							<li>
+							예약자명 : ${tmp.name }
+							</li>
+							<li>
+							연락처 : ${tmp.phone}
+							</li>
+							<li>
+							방이름 : ${tmp.room_name }
+							</li>
+							<li>
+							투숙 기간 : ${tmp.checkin_date } ${tmp.start_time } ~ <br/>
+							${tmp.checkout_date } ${tmp.end_time }
+							</li>
+							<li>
+							가격 : ${tmp.room_price }
+							</li>
+							<li>
+							예약 날짜 : ${tmp.regdate }
+							</li>
+							<li>
+							예약 현황 : ${tmp.state }
+							</li>
+						</ul>
+						
+						
+						
+						
+						
+						
+						
+					</li>
+					</c:forEach>
+				</ul>
+			</c:when>
+			<c:otherwise>
+				<div class="icon-wrap">
+					<i class="fas fa-bomb"></i>
+					<h3>
+						<strong>예약 내역이 없습니다.</strong>
+					</h3>
+					<a href="${pageContext.request.contextPath }/reserve/reserve_home.do" class="btn-a mt20">예약하러가기</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</div> <!-- sub-content -->
 </div><!-- content -->
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
