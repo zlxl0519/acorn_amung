@@ -17,14 +17,17 @@ public interface ReserveDao {
 	//방이름 , 몸무게에 따른 방 번호 구하기
 	public int getRoomNum(RoomPriceDto dto);
 	
-	//방 예약 여부 업데이트
+	//예약 번호에 따른 방 번호 구하기
+	public int getReserveRoomNum(int num);
+	
+	//방 예약 여부 업데이트 yes 로 업데이트
 	public void updateRoomReserveState(ReserveDto dto);
 	
 	//예약 사항 예약DB에 저장
 	public boolean insertReserve(ReserveDto dto);
 	
-	//예약정보 가져오기(한 줄만)
-	public ReserveDto getData(ReserveDto dto);
+	//예약정보 가져오기(예약 번호로)
+	public ReserveDto getData(int num);
 	
 	//방 번호 방 정보 가져오기
 	public RoomDto getRoomData(int num);
@@ -33,4 +36,17 @@ public interface ReserveDao {
 	public List<ReserveDto> getList(ReserveDto dto);
 	
 	public int getCount(ReserveDto dto);
+	
+	//예약 번호로 예약 상태 취소로 바꾸기
+	public boolean reserveCancle(int num);
+	
+	//방 번호로 방 예약 상태를 no 로 바꾼다.
+	public void updateNoRoomState(int roomNum);
+	
+	//예약 번호로 예약 상태 확인으로 바꾸기
+	public boolean reserveOk(int num);
+	
+	//방 번호로 방 예약 상태를 yes 로 바꾼다.
+	public void updateYesRoomState(int roomNum);
+	
 }

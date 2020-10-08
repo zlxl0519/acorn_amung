@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<form action="reserve.do" method="post">
+<form action="${pageContext.request.contextPath }/mypage/private/reserve/status.do" method="post" id="reserveForm">
 	<div class="left room-h4">
 		<h4>* 예약하실 룸을 먼저 선택해주세요.</h4>
 	</div>
@@ -57,7 +57,7 @@
 		</li>
 	</ul>
 	<div class="reserve-container">
-		<div>
+		<div class="reserve-box1">
 			<dl>
 				<dt>숙박기간</dt>
 				<dd>
@@ -72,7 +72,7 @@
 				</dd>
 			</dl>
 		</div>
-		<div>
+		<div class="reserve-box2">
 			<dl>
 				<dt>입실시간</dt>
 				<dd>
@@ -93,7 +93,7 @@
 					</select>
 				</dd>
 			</dl>
-			<dl>
+			<dl class="ml10">
 				<dt>퇴실시간</dt>
 				<dd>
 					<select data-ng-model="reserveData.end_time" name="end_time" id="end_time">
@@ -115,75 +115,66 @@
 			</dl>
 		</div>
 		
-		<dl>
-			<dt>투숙기간</dt>
-			<dd data-ng-show="showed">
-			[  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}
-			</dd>
-		</dl>
-		<dl>
-			<dt>투숙 강아지 선택</dt>
-			<dd data-ng-repeat="tmp in dogList">
-					<input data-ng-change="isChecked('dog')" 
-						data-ng-model="reserveData.dog_num"
-						type="radio"
-						name="dog_num"
-						value="{{tmp.num}}" />
-					{{tmp.dname}}
-			</dd>
-		</dl>
-		<tr>
-			<th>총 금액</th>
-			<td><input type="hidden" name="room_price" value="{{price}}" />{{price}}원</td>
-		</tr>
-		
-		<tr>
-			<th>예약자명</th>
-			<td>
-				<input type="text" name="name" id="name"/>
-			</td>
-		</tr>
-		<tr>
-			<th>휴대폰 번호</th>
-			<td>
-				<input type="text" name="phone" id="phone" />
-			</td>
-		</tr>
-	</table>
-		<p>
-			결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)<br/>
-			홍길동 우리은행 xxxx-xxx-xxxx	
-		</p>
+		<div class="reserve-box3">
+			<h5>
+			투숙기간 : 
+			<strong data-ng-show="showed">
+			 [  {{ term }} 일 ] {{reserveData.checkin_date}}~{{reserveData.checkout_date}}
+			</strong>
+			</h5>
+			<h5>
+				<input type="hidden" name="room_price" value="{{price}}" />
+				총 금액 : <strong>{{price}}</strong>원
+			</h5>
+			<ul>
+				<li>
+					<label for="name">예약자 명: </label>
+					<input type="text" name="name" id="name"/>
+					
+				</li>
+				<li>
+					<label for="phone">휴대폰 번호 : </label>
+					<input type="text" name="phone" id="phone" />
+				</li>
+	
+			</ul>
+			<h6>
+				결제는 계좌이체로 부탁드립니다.(예약명과 계좌이름이 동일해야 합니다.)<br/>
+				<strong>우리은행 xxxx-xxx-xxxx	 홍길동</strong>
+			</h6>
+		</div>
+			<dl class="dogs-select">
+				<dt>투숙 강아지 선택</dt>
+				<dd data-ng-repeat="tmp in dogList">
+						<input data-ng-change="isChecked('dog')" 
+							data-ng-model="reserveData.dog_num"
+							type="radio"
+							name="dog_num"
+							value="{{tmp.num}}" />
+						{{tmp.dname}}
+				</dd>
+			</dl>
+	</div>
+	<div class="leftf mt20 ml20">
+		<button type="submit">예약하기</button>
 	</div>
 	
-	<button type="submit">예약하기</button>
 </form>
 
 
 <script>
 	//연락처 입력칸에 번호만 입력되도록한다. 
-	$("#phone2").on("keyup", function(){
+	$("#phone").on("keyup", function(){
 		$(this).val($(this).val().replace(/[^0-9]/g,""));
 	});
 	
 		
-	//반려견이름, 반려견종, 반려견나이, 체크인, 체크아웃 입력 안했을시 폼전송 막기
+	//방선택, 체크인날짜, 체크아웃 날짜, 입실시간, 퇴실시간, 투숙 강아지 선택, 예약자명, 휴대폰 번호 입력 안했을시 폼전송 막기
 	$("#reserveForm").on("submit", function(){
-		if($("#dogName").val()==""){
-			alert("반려견 이름을 입력해주세요");
-			$("#dogName").focus();
+		if($('input:radio[name="room_name"]').is(":checked")==false){
+			alert("방을 선택해 주세요");
 			return false;
-		
-		}else if($("#dogBreed").val()==""){
-			alert("반려견종을 입력해주세요");
-			$("#dogBreed").focus();
-			return false;
-		
-		}else if($("#dogAge").val()==""){
-			alert("반려견 나이를 입력해주세요");
-			$("#dogAge").focus();
-			return false;
-		
+			
 		}else if($("#checkin").val()==""){
 			alert("체크인 날짜를 입력해주세요");
 			$("#checkin").focus();
@@ -193,7 +184,31 @@
 			alert("체크아웃 날짜를 입력해주세요");
 			$("#checkout").focus();
 			return false;
+			
+		}else if($("#start_time").val()==""){
+			alert("입실시간을 선택해 주세요");
+			$("#start_time").focus();
+			return false;
+			
+		}else if($("#end_time").val()==""){
+			alert("퇴실시간을 선택해 주세요");
+			$("#end_time").focus();
+			return false;
+		}else if($('input:radio[name="dog_num"]').is(":checked")==false){
+			alert("투숙 강아지를 선택해 주세요");
+			return false;
+			
+		}else if($("#name").val()==""){
+			alert("예약자명을 입력해 주세요");
+			$("#name").focus();
+			return false;
+			
+		}else if($("#phone").val()==""){
+			alert("휴대폰 번호를 입력해 주세요");
+			$("#phone").focus();
+			return false;
 		}
+		
 	});
 
 	$(function(){

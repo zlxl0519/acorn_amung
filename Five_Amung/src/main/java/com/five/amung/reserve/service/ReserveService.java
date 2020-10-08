@@ -22,9 +22,9 @@ public interface ReserveService {
 	//예약하기
 	public void reserve(ModelAndView mView, HttpServletRequest request, ReserveDto dto);
 	
-	//방금 예약한 예약정보 가져오기
-	public ReserveDto getData(ReserveDto dto);
-	
 	//방번호로 방 정보 가져오기
 	public RoomDto getRoomData(int num);
-}
+	
+	//마이페이지 : 예약현황
+	public void getList(HttpServletRequest request, ReserveDto dto);
+}//======== ReserveService ========

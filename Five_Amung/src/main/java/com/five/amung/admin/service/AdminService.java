@@ -17,4 +17,6 @@ public interface AdminService {
 	
 	public void getPopupData(HttpServletRequest request);
 	public void delete();
+	public void reserveCancle(ModelAndView mView, HttpServletRequest request);
+	public void reserveOk(ModelAndView mView, HttpServletRequest request);
 }
