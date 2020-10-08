@@ -106,4 +106,26 @@ public class ReserveDaoImpl implements ReserveDao{
 	public void updateYesRoomState(int roomNum) {
 		session.update("reserve.updateYesRoomState", roomNum);
 	}
-}
+
+	//리연추가
+	// 마이 페이지 : 예약현황
+	@Override
+	public List<ReserveDto> getInfoList(ReserveDto dto) {
+		return session.selectList("reserve.getInfoList", dto);
+	}//==== getInfoList ====
+
+	@Override
+	public int getInfoCheck(ReserveDto dto) {
+		return session.selectOne("reserve.getInfoCheck", dto);
+	}
+
+	@Override
+	public int getInfoCount(ReserveDto dto) {
+		return session.selectOne("reserve.getInfoCount", dto);
+	}
+
+	@Override
+	public List<ReserveDto> getInfoList2(ReserveDto dto) {
+		return session.selectList("reserve.getInfoList2");
+	}
+}//======== ReserveDaoImpl =========

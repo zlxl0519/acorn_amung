@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<form action="${pageContext.request.contextPath }/mypage/private/reserve/status.do" method="post" id="reserveForm">
+<form action="${pageContext.request.contextPath }/reserve/reserve.do" method="post" id="reserveForm">
 	<div class="left room-h4">
 		<h4>* 예약하실 룸을 먼저 선택해주세요.</h4>
 	</div>
@@ -149,9 +149,10 @@
 						<input data-ng-change="isChecked('dog')" 
 							data-ng-model="reserveData.dog_num"
 							type="radio"
+							id="dog{{tmp.num}}"
 							name="dog_num"
 							value="{{tmp.num}}" />
-						{{tmp.dname}}
+						<label for="dog{{tmp.num}}">{{tmp.dname}}</label>
 				</dd>
 			</dl>
 	</div>

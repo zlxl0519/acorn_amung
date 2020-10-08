@@ -1,6 +1,7 @@
 package com.five.amung.reserve.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +74,22 @@ public class ReserveServiceImpl implements ReserveService{
 	//예약현황
 	@Override
 	public void getList(HttpServletRequest request, ReserveDto dto) {
+		//session으로 회원 아이디를 불러온다.
+		String member_id=(String)request.getSession().getAttribute("id");
+		dto.setMember_id(member_id);
 		
+		//예약 리스트를 가져온다.
+		List<ReserveDto> reserveList=reserveDao.getInfoList(dto);
+		
+		// 해당 아이디로 예약 내역이 있는지 확인한다. 0이면 없음
+		int reserveCheck = reserveDao.getInfoCheck(dto);
+		if(reserveCheck != 0) {
+			request.setAttribute("isSuccess", true);
+		}else {
+			request.setAttribute("isSuccess", false);
+		}
+
+		request.setAttribute("reserveCheck", reserveCheck);
+		request.setAttribute("reserveList", reserveList);
 	}//====getList====
 }//======== ReserveServiceImpl ========

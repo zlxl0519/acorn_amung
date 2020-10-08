@@ -49,4 +49,16 @@ public interface ReserveDao {
 	//방 번호로 방 예약 상태를 yes 로 바꾼다.
 	public void updateYesRoomState(int roomNum);
 	
-}
+	//마이페이지 : 예약현황
+	public List<ReserveDto> getInfoList(ReserveDto dto);
+	
+	//마이페이지 : 예약현황
+	//검색한 아이디로 예약현황이 존재하는지 체크 없으면 0 출력
+	public int getInfoCheck(ReserveDto dto);
+	
+	//마이페이지 : 예약현황 state 값으로 갯수 알아내기
+	public int getInfoCount(ReserveDto dto);
+	
+	//
+	public List<ReserveDto> getInfoList2(ReserveDto dto);
+}//======== ReserveDao ========
