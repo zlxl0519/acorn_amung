@@ -56,6 +56,13 @@
 		from A_dogs
 		where member_id=#{member_id}
 	</select>
+	
+	<!-- 특정 회원의 강아지 수 가져오기 -->
+	<select id="getDogCount" parameterType="string" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM A_dogs
+		where member_id=#{member_id} 	
+	</select>
   
 	<select id="getData" parameterType="string" resultType="usersDto">
 		select id, pwd, email, profile, name, phone, to_char(regdate, 'yyyy.mm.dd hh24"시"mm"분"')as regdate
