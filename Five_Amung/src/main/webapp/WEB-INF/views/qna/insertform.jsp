@@ -25,6 +25,9 @@
 					</tr>
 			</table> 
 			<div>
+			<label>
+				<input type="checkbox" name="prv" value="1" /> 비밀글
+			</label>
 				<button id="submit" type="submit"  class="btn-default" onclick="submitContents(this);">등록</button>
 			</div>
 			</form>

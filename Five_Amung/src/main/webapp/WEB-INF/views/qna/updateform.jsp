@@ -45,6 +45,17 @@
 			</tr>
 			</table>
 			<div class="mt20 left">
+				<c:choose>
+					<c:when test="${dto.prv eq 1 }">
+						<input type="checkbox" name="prv" value="1" checked="checked"/> 비밀글
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="prv" value="1" /> 비밀글
+					</c:otherwise>
+				</c:choose>
+				<label>
+					
+				</label>
 				<button id="submit" type="submit" onclick="submitContents(this);">등록</button>
 			</div>
 		</form>
