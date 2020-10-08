@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<form action="reserve.do" method="post">
+<form action="${pageContext.request.contextPath }/mypage/private/reserve/status.do" method="post" id="reserveForm">
 	<div class="left room-h4">
 		<h4>* 예약하실 룸을 먼저 선택해주세요.</h4>
 	</div>
@@ -164,28 +164,17 @@
 
 <script>
 	//연락처 입력칸에 번호만 입력되도록한다. 
-	$("#phone2").on("keyup", function(){
+	$("#phone").on("keyup", function(){
 		$(this).val($(this).val().replace(/[^0-9]/g,""));
 	});
 	
 		
-	//반려견이름, 반려견종, 반려견나이, 체크인, 체크아웃 입력 안했을시 폼전송 막기
+	//방선택, 체크인날짜, 체크아웃 날짜, 입실시간, 퇴실시간, 투숙 강아지 선택, 예약자명, 휴대폰 번호 입력 안했을시 폼전송 막기
 	$("#reserveForm").on("submit", function(){
-		if($("#dogName").val()==""){
-			alert("반려견 이름을 입력해주세요");
-			$("#dogName").focus();
+		if($('input:radio[name="room_name"]').is(":checked")==false){
+			alert("방을 선택해 주세요");
 			return false;
-		
-		}else if($("#dogBreed").val()==""){
-			alert("반려견종을 입력해주세요");
-			$("#dogBreed").focus();
-			return false;
-		
-		}else if($("#dogAge").val()==""){
-			alert("반려견 나이를 입력해주세요");
-			$("#dogAge").focus();
-			return false;
-		
+			
 		}else if($("#checkin").val()==""){
 			alert("체크인 날짜를 입력해주세요");
 			$("#checkin").focus();
@@ -195,7 +184,31 @@
 			alert("체크아웃 날짜를 입력해주세요");
 			$("#checkout").focus();
 			return false;
+			
+		}else if($("#start_time").val()==""){
+			alert("입실시간을 선택해 주세요");
+			$("#start_time").focus();
+			return false;
+			
+		}else if($("#end_time").val()==""){
+			alert("퇴실시간을 선택해 주세요");
+			$("#end_time").focus();
+			return false;
+		}else if($('input:radio[name="dog_num"]').is(":checked")==false){
+			alert("투숙 강아지를 선택해 주세요");
+			return false;
+			
+		}else if($("#name").val()==""){
+			alert("예약자명을 입력해 주세요");
+			$("#name").focus();
+			return false;
+			
+		}else if($("#phone").val()==""){
+			alert("휴대폰 번호를 입력해 주세요");
+			$("#phone").focus();
+			return false;
 		}
+		
 	});
 
 	$(function(){

@@ -12,7 +12,6 @@
 			<strong class="f_blue f16"> FaQ</strong>
 		</a>
 		에서 확인해주요.
-		
 		</h3>
 	</div>
 	
@@ -20,31 +19,32 @@
 	<div class="search-form mt20">
 		<form action="qna_list.do" method="get">
 			<div class="search-wrap">
-	          <label for="condition">검색조건</label>
-	          <select name="condition" id="condition">
-				  <option value="title_content" <c:if  test="${condition eq 'title_content'  }">selected</c:if>>제목+내용</option>				
-	              <option value="title" <c:if  test="${condition eq 'title'  }">selected</c:if>>제목</option>
-	              <option value="writer" <c:if  test="${condition eq 'writer'  }">selected</c:if>>작성자</option>
-	          </select>
-	          <label for="keyword">
-	          		<input value="${keyword }" type="text"  name="keyword" placeholder="검색어를 입력하세요"/>
-	          		<button type="submit"class="btn-search"><i class="fas fa-search"></i></button>
-	          </label>
-	         </div>
-	     </form>   
-     </div>
-	
- 
+				<select name="condition" id="condition">
+					<option value="title_content"<c:if  test="${condition eq 'title_content'  }">selected</c:if>>제목+내용</option>
+					<option value="title"<c:if  test="${condition eq 'title'  }">selected</c:if>>제목</option>
+					<option value="writer"<c:if  test="${condition eq 'writer'  }">selected</c:if>>작성자</option>
+				</select> 
+				<label for="keyword"> 
+					<input value="${keyword }" type="text" name="keyword" placeholder="검색어를 입력하세요" />
+					<button type="submit" class="btn-search">
+						<i class="fas fa-search"></i>
+					</button>
+				</label>
+			</div>
+		</form>
+	</div>
+
+
 	<div class="table-wrap">
 			<table>
 			<colgroup>
-	        	<col width="100px"/>
-	        	<col width="50%"/>
-	        	<col width=""/>
-	       		<col width="200px"/>
-	        	<col width="100px"/>
-	   		</colgroup>
-				<thead>
+				<col width="100px" />
+				<col width="50%" />
+				<col width="" />
+				<col width="200px" />
+				<col width="100px" />
+			</colgroup>
+			<thead>
 					<tr>
 						<th>글번호</th>
 						<th>제목</th>
@@ -57,12 +57,14 @@
 					<c:forEach var="tmp" items="${list }">
 						<tr>
 							<td>${tmp.num }</td>
-							<td class="board_title left"><a href="content.do?num=${tmp.num }">
-								${tmp.title } [${tmp.comm}]
-								<c:if test="${tmp.done ne 0 }">
+							<td class="board_title left">
+								<a href="content.do?num=${tmp.num }">
+									${tmp.title } <span class="comment-icon">${tmp.comm}</span>
+									<c:if test="${tmp.done ne 0 }">
 									-답변완료
 								</c:if>
-							</a></td>
+								</a>
+							</td>
 							<td>${tmp.writer }</td>
 							<td>${tmp.regdate }</td>
 							<td>${tmp.hit }</td>
@@ -79,29 +81,37 @@
 				<a href="myqna.do"><button class="btn-out-b">내 글 보기</button></a>
 			</c:if>
 	  </div><!--left-->
-  
-    <!-- 페이징 처리 --> 
-    <div class="page-display">
-          <ul class="pagination pagination-sm">
-          <c:if test="${startPageNum ne 1 }">
-              <li class="page-item"><a class="page-link"  href="qna_list.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a></li>
-          </c:if>
-          <c:forEach var="i" begin="${startPageNum }"  end="${endPageNum }">
-              <c:choose>
-                   <c:when test="${i eq pageNum }">
-                        <li class="page-item active"><a  class="page-link" href="qna_list.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
-                   </c:when>
-                   <c:otherwise>
-                        <li class="page-item"><a  class="page-link" href="qna_list.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a></li>
-                   </c:otherwise>
-              </c:choose>
-          </c:forEach>
-          <c:if test="${endPageNum lt totalPageCount }">
-              <li class="page-item"><a class="page-link"  href="qna_list.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a></li>
-          </c:if>
-          </ul>     
-     </div>
-     
 
-</div>
+	<!-- 페이징 처리 -->
+	<div class="page-display">
+		<ul>
+			<c:if test="${startPageNum ne 1 }">
+				<li>
+					<a href="qna_list.do?pageNum=${startPageNum-1  }&condition=${condition }&keyword=${encodedK  }">Prev</a>
+				</li>
+			</c:if>
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						<li class="active">
+							<a href="qna_list.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li>
+							<a href="qna_list.do?pageNum=${i  }&condition=${condition }&keyword=${encodedK }">${i  }</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${endPageNum lt totalPageCount }">
+				<li>
+					<a href="qna_list.do?pageNum=${endPageNum+1  }&condition=${condition }&keyword=${encodedK  }">Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
+
+
+</div><!-- content -->
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
