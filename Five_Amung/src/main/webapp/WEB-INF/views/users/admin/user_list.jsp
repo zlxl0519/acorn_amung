@@ -27,7 +27,7 @@
 					<td>${tmp.email }</td>
 					<td>${tmp.phone }</td>
 					<td>${tmp.regdate }</td>
-					<td><a href="javascript:void(0);" onclick="PopupCenter('dog_info.do?member_id=${tmp.id }','팝업창', 700, 500);">x</a></td>
+					<td><a href="javascript:void(0);" onclick="PopupCenter('dog_info.do?member_id=${tmp.id }','팝업창', 700, 500);"><button>반려견 정보</button></a></td>
 				</tr>
 			</c:forEach>		
 		</tbody>

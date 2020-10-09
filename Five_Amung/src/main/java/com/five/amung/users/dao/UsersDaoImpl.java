@@ -59,7 +59,7 @@ public class UsersDaoImpl implements UsersDao{
 		return session.selectList("users.getDogList", member_id);
 	}
 	
-	
+
 	//==============================================================
 
 	@Override

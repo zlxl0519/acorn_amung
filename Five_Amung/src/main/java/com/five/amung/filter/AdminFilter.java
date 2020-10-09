@@ -35,12 +35,19 @@ public class AdminFilter implements Filter{
 		HttpSession session = req.getSession();
 		//로그인된 아이디가 있는지 얻어와본다.
 		String id=(String)session.getAttribute("id");
-		if(id!=null) {//로그인 됬을때 로그인 아이디를 비교한다.
+		
+		if(id != null) {
+			
 			if(id.equals("admin")) { //로그인된 상태
 				//요청의 흐름 계속 진행시키기
 				chain.doFilter(request, response);
+			}else{
+				HttpServletResponse res = (HttpServletResponse)response;
+				String cPath = req.getContextPath();
+				res.sendRedirect(cPath+"/index.jsp");
 			}
-		}else{
+			
+		}else {//로그인 안 된 상태
 			//원래 가려던 url정보 읽어오기
 			String url = req.getRequestURI();
 			
@@ -52,6 +59,7 @@ public class AdminFilter implements Filter{
 			if(query==null) {//전송 파라미터가 없다면
 				encodedUrl = URLEncoder.encode(url);
 				
+			
 			}else {
 				encodedUrl=URLEncoder.encode(url+"?"+query);
 			}
@@ -59,6 +67,7 @@ public class AdminFilter implements Filter{
 			HttpServletResponse res = (HttpServletResponse)response;
 			String cPath = req.getContextPath();
 			res.sendRedirect(cPath+"/users/loginform.do?url="+encodedUrl);
+			
 		}
 	}
 
