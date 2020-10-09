@@ -123,8 +123,11 @@
 
 <script>
 	function onDelete(num){
-		alert("예약을 취소하시겠습니까?");
-		location.href="delete.do?num="+num;
+	if (confirm("예약을 취소하시겠습니까?") == true) { //확인
+			location.href = "delete.do?num=" + num;
+		} else { //취소
+			return false;
+		}
 	}
 </script>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
