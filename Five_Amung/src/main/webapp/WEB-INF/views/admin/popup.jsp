@@ -6,7 +6,7 @@
 </style>
 <img src="${pageContext.request.contextPath }${dto.imagePath}"/>
 	
-<form action="${pageContext.request.contextPath }/admin/popup_save.do" method="post">
+<form action="${pageContext.request.contextPath }/popup_save.do" method="post">
 	<label>
 		<input type="checkbox" name="canPopup" value="no" />
 		하루 동안 팝업 띄우지 않기
