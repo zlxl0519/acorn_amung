@@ -1544,3 +1544,48 @@ input[name="checkout_date"]::placeholder {
 	background:#d6e7aa;
 	border-radius: 100%;
 }
+
+.on-menu-container {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+.on-menu-wrap{
+	position : relative;
+	width: 100px;
+	height:100px;
+}
+.on-menu-wrap .on-btn{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.on-menu-wrap i {
+	color: #5677f4;
+}
+.on-menu {
+	position: absolute;
+	top: 36px;
+	right: -18px;
+	background: #5677f4;
+	color: #fff;
+	padding: 13px 20px;
+	border-radius: 20rem;
+	font-size: 11pt;
+	box-shadow: 2px 2px 3px #d1d1d1;
+}
+
+.on-menu:after {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	right: 20px;
+	top: -18px;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(56, 77, 157, 0);
+	border-bottom-color: #5677f4;
+	border-width: 11px;
+}

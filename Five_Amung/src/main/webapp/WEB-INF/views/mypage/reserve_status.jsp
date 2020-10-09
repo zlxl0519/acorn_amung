@@ -4,8 +4,12 @@
 <%@include file="/../resources/header.jsp"%><!-- header -->
 <script>
 	document.title = "Amung' mypage"; 
+	var myApp=angular.module("myApp", ["ngRoute"]);
+	myApp.controller("reserveCtrl", function($scope, $http, $location){
+		
+	}
 </script>
-<div class="content">
+<div class="content" ng-app="myApp">
 <div class="sub-nav">
 		<div class="info-box">
 			<div class="profile-img">
@@ -40,7 +44,7 @@
 			</ul>
 		</div><!-- sub-nav-gnb -->
 	</div><!-- sub-nav -->
-	<div class="sub-content">
+	<div class="sub-content" ng-controller="reserveCtrl">
 		<c:choose>
 			<c:when test="${isSuccess eq true}">
 				<div>
@@ -51,7 +55,21 @@
 				<ul class="dog-list">
 					<c:forEach var="tmp" items="${reserveList }">
 					<li>
+						<c:if test="${tmp.state eq '예약대기중'}">
+						<div class="on-menu-container">
+							<div class="on-menu-wrap">
+								<a href="javascript:void(0)" class="on-btn">
+									<i class="fas fa-ellipsis-v"></i>
+								</a>
+								<a href="javascript:void(0)" class="on-menu" data-ng-if="isHidden">
+									예약취소
+								</a>
+							</div>
+						</div>
+							
+						</c:if>
 						<ul>
+						
 							<li>
 							예약자명 : ${tmp.name }
 							</li>
@@ -75,13 +93,6 @@
 							예약 현황 : ${tmp.state }
 							</li>
 						</ul>
-						
-						
-						
-						
-						
-						
-						
 					</li>
 					</c:forEach>
 				</ul>
