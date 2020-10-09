@@ -315,6 +315,7 @@ html, body {
 
 /*footer*/
 #wrap footer {
+	clear: both;
 	margin: 100px 0 0;
 	width: 100%;
 	display: inline-block;
@@ -324,6 +325,7 @@ html, body {
 
 #wrap footer>div {
 	width: 1281px;
+	background: #3f3f3f;
 }
 
 footer * {
@@ -827,7 +829,6 @@ footer .copyright {
 }
 
 .review-text .review-wrap {
-	height: 600px;
 	text-align: left;
 }
 
@@ -846,7 +847,7 @@ footer .copyright {
 }
 
 .review-text .review-wrap div textarea {
-	height: 423px;
+	height: 300px;
 }
 
 /*관리자*/
@@ -858,8 +859,8 @@ footer .copyright {
 	cursor: pointer;
 	border-radius: 10px;
 	display: inline-block;
-	width: 32%;
-	height: 500px;
+	width: 23%;
+	height: 300px;
 	background: #fff;
 	margin-right: 20px;
 	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
@@ -871,7 +872,7 @@ footer .copyright {
 
 .admin span {
 	position: relative;
-	margin: 90px 0 30px 0;
+	margin: 20px 0 30px 0;
 	display: inline-block;
 	text-align: center;
 	background: #ffe26a;
@@ -906,6 +907,13 @@ footer .copyright {
 
 .admin div:first-child p {
 	color: #8abcc3;
+}
+
+.admin div:nth-child(3) span {
+	background: #f3c7be;
+}
+.admin div:nth-child(3) p {
+	color: #f3c7be;
 }
 
 .admin div:last-child span {
@@ -1066,4 +1074,48 @@ footer .copyright {
 	font-size: 16px !important;
 	font-weight: 300;
 	line-height: 1.8em;
+}
+
+/* 강아지 정보 */
+.dog-list{
+	width: 100%;
+	text-align:left;
+}
+
+.dog-list>li{
+	display: inline-block;
+	width: 100%;
+	border-radius: 5px;
+	background: #fff;
+	padding: 30px;
+	margin-bottom: 20px;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.dog-list>li ul li {
+	line-height: 1.8em;
+}
+.dog-list>li ul li h2{
+	color: #97d2bf;
+}
+.dog-etc h4{
+	color: #97d2bf;
+	font-size: 17px;
+	font-weight: bold;
+}
+.dog-etc p, .dog-etc pre {
+	width: 100%;
+	background:#f0f0f0;
+	padding: 20px;
+	border-radius : 5px;
+}
+.info-hover{
+	display:none;
+}
+.dog-list>li:hover .info-hover{
+	position: absolute;
+	right : 30px;
+	top: 30px;
+	display: block;
 }

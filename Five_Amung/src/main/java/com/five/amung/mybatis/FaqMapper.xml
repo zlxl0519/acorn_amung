@@ -39,7 +39,7 @@
 	<insert id="insert" parameterType="faqDto">
 		insert into A_faq
 		(num, qst, ans, category)
-		values(faq_seq.NEXTVAL, #{qst}, #{ans}, #{category})
+		values(A_faq_seq.NEXTVAL, #{qst}, #{ans}, #{category})
 	</insert>
 
 </mapper>

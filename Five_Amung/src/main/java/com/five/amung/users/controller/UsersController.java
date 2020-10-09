@@ -61,7 +61,26 @@ public class UsersController {
 		Map<String, Object> map=usersService.saveProfileImage(request, image);
 		return map;
 	}
-	//회원 목록 보기 요청 처리
+	
+	//======운영자================
+	//회원리스트
+	@RequestMapping("/users/admin/user_list")
+	public ModelAndView getList(HttpServletRequest request, ModelAndView mView) {
+		usersService.getList(request);
+		mView.setViewName("users/admin/user_list");
+		return  mView;
+	}
+	
+	//강아지 리스트
+	@RequestMapping("/users/admin/dog_info")
+	@ResponseBody
+	public ModelAndView dogInfo(@RequestParam String member_id, ModelAndView mView, HttpServletRequest request) {
+		usersService.getDogList(member_id, request);
+		mView.addObject("id", member_id);
+		mView.setViewName("users/admin/dog_info");
+		return mView;
+	}
+	
 	
   //seunghui
 	//로그인폼 요청처리
@@ -248,4 +267,8 @@ public class UsersController {
 		mView.setViewName("mypage/update_infopwd");
 		return mView;
 	}//==== pwdUdate ==== 
+	
+	
+	
+	
 }//======== UsersController ========

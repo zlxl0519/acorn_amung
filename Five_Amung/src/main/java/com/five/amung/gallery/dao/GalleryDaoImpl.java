@@ -25,6 +25,7 @@ public class GalleryDaoImpl implements GalleryDao{
 	public void insert(GalleryDto dto) {
 		// TODO 게시물 추가
 		session.insert("gallery.insert", dto);
+
 	}
 
 	@Override
@@ -42,6 +43,7 @@ public class GalleryDaoImpl implements GalleryDao{
 	@Override
 	public void update(GalleryDto dto) {
 		// TODO 글 수정
+		
 		session.update("gallery.update", dto);
 	}
 

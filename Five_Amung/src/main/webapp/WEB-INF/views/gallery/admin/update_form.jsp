@@ -4,19 +4,20 @@
 <div class="content">
 	<h2>호텔 일상 | 글 작성</h2>
 	<div class="table-wrap boardList">
-		<form action="upload.do" method="post" enctype="multipart/form-data">
+		<form action="update.do?num=${dto.num }" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="num" value="${dto.num }"/>
 				<table>
 					<tbody>
 						<tr>
 							<th scope="row"><label for="caption">제목</label></th>
 							<td>
-								<input type="text" name="caption" id="caption" placeholder="제목을 입력해주세요." />
+								<input type="text" name="caption" id="caption" placeholder="제목을 입력해주세요." value="${dto.caption }"/>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row"><label for="subCaption">부제목</label></th>
 							<td>
-								<input type="text" name="subCaption" id="subCaption" placeholder="부제목을 입력해주세요." />
+								<input type="text" name="subCaption" id="subCaption" placeholder="부제목을 입력해주세요." value="${dto.subCaption }"/>
 							</td>
 						</tr>
 						<tr>
@@ -34,7 +35,7 @@
 								<label for="content">내용</label>
 							</th>
 							<td class="smart_content">
-								<textarea name="content" id="content" cols="30" rows="10"></textarea>
+								<textarea name="content" id="content" cols="30" rows="10">${dto.content }</textarea>
 							</td>
 						</tr>
 					</tbody>

@@ -10,11 +10,13 @@ public class UsersDto {
 	private String name;
 	private String phone;
 	private String regdate;
+	private int startRowNum;
+	private int endRowNum;
 	
 	public UsersDto() {}
 
 	public UsersDto(String id, String pwd, String newPwd, String email, String profile, String name, String phone,
-			String regdate) {
+			String regdate, int startRowNum, int endRowNum) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -24,6 +26,8 @@ public class UsersDto {
 		this.name = name;
 		this.phone = phone;
 		this.regdate = regdate;
+		this.startRowNum = startRowNum;
+		this.endRowNum = endRowNum;
 	}
 
 	public String getId() {
@@ -88,6 +92,22 @@ public class UsersDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+	public int getStartRowNum() {
+		return startRowNum;
+	}
+
+	public void setStartRowNum(int startRowNum) {
+		this.startRowNum = startRowNum;
+	}
+
+	public int getEndRowNum() {
+		return endRowNum;
+	}
+
+	public void setEndRowNum(int endRowNum) {
+		this.endRowNum = endRowNum;
 	}
 
 }

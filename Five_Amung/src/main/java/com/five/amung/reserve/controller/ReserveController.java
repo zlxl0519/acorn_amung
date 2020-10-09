@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,14 +17,16 @@ import com.five.amung.reserve.dto.ReserveDto;
 import com.five.amung.reserve.dto.RoomDto;
 import com.five.amung.reserve.dto.RoomPriceDto;
 import com.five.amung.reserve.service.ReserveService;
+import com.five.amung.users.service.UsersService;
 
 @Controller
 public class ReserveController {
 	@Autowired
 	private ReserveService reserveService;
-	
 	@Autowired
 	private DogsService dogsService;
+	@Autowired
+	private UsersService usersService;
 	
 	@RequestMapping("/reserve/reserve_home")
 	public ModelAndView reserveform(ModelAndView mView) {
@@ -65,23 +68,24 @@ public class ReserveController {
 		dto.setRoom_num(room_num);
 		
 		//방 예약 현황을 바꾸고 예약 DB 저장하기 (성공여부 담아서출력)
-		reserveService.reserve(request, dto);
+		reserveService.reserve(mView ,request, dto);
 		
-		//4. 예약정보 DB 에서 예약한 사항을 가져온다(예약자 아이디, 강아지번호, 방번호 로)
-		ReserveDto getDto=reserveService.getData(dto);
-		
-		//5. 방번호로 방 정보 가져오기
+		//4. 방번호로 방 정보 가져오기
 		RoomDto getRoomDto=reserveService.getRoomData(room_num);
 		mView.addObject("roomDto", getRoomDto);
-		mView.addObject("reserveDto", getDto);
+		
 		mView.setViewName("reserve/reserve");
 		return mView;
 	}
 	
-	// 리연 추가 - 20200923 일단 페이지만 추가함
+	// 리연 추가 - 
 	// 마이페이지 / 예약현황
 	@RequestMapping("/mypage/private/reserve/status")
-	public ModelAndView reserveStatus(HttpServletRequest request, ModelAndView mView) {
+	@ResponseBody
+	public ModelAndView reserveStatus(HttpServletRequest request, ReserveDto dto,
+			ModelAndView mView) {
+		usersService.getInfo(request.getSession(), mView);
+		reserveService.getList(request, dto);
 		mView.setViewName("mypage/reserve_status");
 		return mView;
 	}//==== reserveStatus ====

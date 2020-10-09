@@ -1,6 +1,7 @@
 package com.five.amung.gallery.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.five.amung.gallery.dto.GalleryCommentDto;
 import com.five.amung.gallery.dto.GalleryDto;
 import com.five.amung.gallery.service.GalleryService;
 
@@ -33,17 +35,9 @@ public class GalleryController {
 		return mView;
 	}
 	
-	@RequestMapping("/gallery/upload_form")
+	@RequestMapping("/gallery/admin/upload_form")
 	public String upload_form() {
-		return "gallery/upload_form";
-	}
-	
-	@RequestMapping(value="/gallery/upload", method=RequestMethod.POST)
-	public ModelAndView upload(GalleryDto dto, ModelAndView mView, HttpServletRequest request, 
-			HttpServletResponse response, @RequestParam MultipartFile image) throws IOException {
-		galleryService.saveContent(dto, request, response, image);
-		mView.setViewName("redirect:/gallery/list.do");
-		return mView;
+		return "gallery/admin/upload_form";
 	}
 	
 	@RequestMapping("/gallery/ajax_list")
@@ -61,6 +55,85 @@ public class GalleryController {
 		return mView;
 	}
 	
+	//=====================================운영자===========================================
 	
+	@RequestMapping("/gallery/admin/list_admin")
+	public ModelAndView list_admin(HttpServletRequest request, ModelAndView mView) {
+		galleryService.getAdminList(request);
+		mView.setViewName("gallery/admin/list_admin");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/ajax_list_admin")
+	@ResponseBody
+	public ModelAndView ajax_list_admin(@RequestParam int pageNum, HttpServletRequest request, ModelAndView mView) {
+		galleryService.getAjaxAdminList(pageNum, request);
+		mView.setViewName("gallery/admin/ajax_list_admin");
+		return mView;
+	}
+	
+	@RequestMapping(value="/gallery/admin/upload", method=RequestMethod.POST)
+	public ModelAndView upload(GalleryDto dto, ModelAndView mView, HttpServletRequest request, 
+			HttpServletResponse response, @RequestParam MultipartFile image) throws IOException {
+		galleryService.saveContent(dto, request, response, image);
+		mView.setViewName("redirect:/gallery/list.do");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/update_form")
+	public ModelAndView update_form(ModelAndView mView, HttpServletRequest request) {
+		galleryService.getDetail(request);
+		mView.setViewName("gallery/admin/update_form");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/update")
+	public ModelAndView update(GalleryDto dto, ModelAndView mView, HttpServletRequest request,
+			HttpServletResponse response, @RequestParam MultipartFile image) {
+		galleryService.updateContent(dto, request, response, image);
+		mView.setViewName("redirect:/gallery/admin/list_admin.do");
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/admin/delete")
+	public ModelAndView delete(int num, ModelAndView mView, HttpServletRequest request) {
+		galleryService.deleteContent(num, request);
+		mView.setViewName("redirect:/gallery/admin/list_admin.do");
+		return mView;
+	}
+	
+	
+	//=====================================댓글===========================================
+	
+	@RequestMapping(value= "/gallery/private/comment_insert", method= RequestMethod.POST)
+	public ModelAndView commentInsert(@RequestParam int ref_group,HttpServletRequest request, ModelAndView mView) {
+		galleryService.saveComment(request);
+		mView.setViewName("redirect:/gallery/content.do?num="+ref_group);
+		return mView;
+	}
+	
+	@RequestMapping("/gallery/private/comment_delete")
+	public ModelAndView commentDelete(@RequestParam int ref_group, HttpServletRequest request, ModelAndView mView) {
+		galleryService.deleteComment(request);
+		mView.setViewName("redirect:/gallery/content.do?num="+ref_group);
+		return mView;
+	}
+	
+	@RequestMapping(value="/gallery/private/comment_update", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> commentUpdate(GalleryCommentDto dto){
+		galleryService.updateComment(dto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("num", dto.getNum());
+		map.put("content", dto.getContent());
+		return map;
+	}
+	
+	@RequestMapping("/gallery/ajax_comment_list")
+	public ModelAndView ajaxCommentList(HttpServletRequest request, ModelAndView mView) {
+		galleryService.moreCommentList(request);
+		mView.setViewName("gallery/ajax_comment_list");
+		return mView;
+	}
 
 }

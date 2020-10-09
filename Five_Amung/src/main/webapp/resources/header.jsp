@@ -37,9 +37,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/angular-route.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cdd137b0b885c589d0ff1e9d01738a4"></script>
+
+
 <!-- jquery ui datepicker -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 </head>
 
 <body onload="javascript:scrollMenu();">
@@ -137,12 +139,12 @@
 								</a>
 								<ul class="dropdown">
 									<li>
-										<a href="${pageContext.request.contextPath }/guide/guide.do">
+										<a href="${pageContext.request.contextPath }/guide/guide.jsp">
 											Amung이용안내
 										</a>
 									</li>
 									<li>
-										<a href="${pageContext.request.contextPath }/guide/service.do">
+										<a href="${pageContext.request.contextPath }/guide/service.jsp">
 											AMung주요서비스
 										</a>
 									</li> 

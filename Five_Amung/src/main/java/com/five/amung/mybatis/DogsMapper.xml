@@ -12,9 +12,23 @@
 		from A_dogs
 		where member_id=#{member_id}
 	</select>
+	<select id="getCheck" parameterType="dogsDto" resultType="int">
+		select Count(*)
+		from A_dogs
+		where member_id=#{member_id}
+	</select>
 	<select id="getData" parameterType="int" resultType="dogsDto">
 		select num, member_id, dname, dage, breed, weight, neutral, gender, etc
 		from A_dogs
 		where num=#{num}
 	</select>
+	<select id="getDogsData" parameterType="dogsDto" resultType="dogsDto">
+		select num, member_id, dname, dage, breed, weight, neutral, gender, etc
+		from A_dogs
+		where member_id=#{member_id}
+	</select>
+	<delete id="delete" parameterType="dogsDto">
+		delete FROM A_dogs
+		WHERE num=#{num} and member_id=#{member_id}
+	</delete>
 </mapper>

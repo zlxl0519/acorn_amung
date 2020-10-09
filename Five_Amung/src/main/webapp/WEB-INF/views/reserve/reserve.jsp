@@ -9,33 +9,18 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${reserveDto eq null }">
+		<c:when test="${isSuccess }">
 			<script>
-				alert("예약이 실패했습니다");
+				alert("예약이 되었습니다.");
+				location.href="${pageContext.request.contextPath}/mypage/private/reserve/status.do";
 			</script>
 		</c:when>
 		<c:otherwise>
 			<script>
-				alert("예약 되었습니다");
+				alert("예약 실패했습니다.");
+				location.href="${pageContext.request.contextPath}/reserve/reserve_home.do";
 			</script>
-			<table>
-				<tr>
-					<th>예약한 방 이름</th>
-					<td>${roomDto.room_name }</td>
-				</tr>
-				<tr>
-					<th>체크인 날짜/시간</th>
-					<td>${reserveDto.checkin_date }/${reserveDto.start_time }</td>
-				</tr>
-				<tr>
-					<th>체크아웃 날짜/시간</th>
-					<td>${reserveDto.checkout_date }/${reserveDto.end_time }</td>
-				</tr>
-				<tr>
-					<th>결제 금액</th>
-					<td>${reserveDto.room_price }</td>
-				</tr>
-			</table>
+			
 		</c:otherwise>
 	</c:choose>
 </body>

@@ -1,5 +1,7 @@
 package com.five.amung.reserve.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,18 +41,91 @@ public class ReserveDaoImpl implements ReserveDao{
 	}
 
 	@Override
-	public void insertReserve(ReserveDto dto) {
-		session.insert("reserve.insertReserve", dto);
+	public boolean insertReserve(ReserveDto dto) {
+		int num=session.insert("reserve.insertReserve", dto);
+		if(num==1) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
-	public ReserveDto getData(ReserveDto dto) {
+	public ReserveDto getData(int num) {
 		
-		return session.selectOne("reserve.getData", dto);
+		return session.selectOne("reserve.getData", num);
 	}
 
 	@Override
 	public RoomDto getRoomData(int num) {
 		return session.selectOne("reserve.getRoomData", num);
 	}
-}
+
+	@Override
+	public List<ReserveDto> getList(ReserveDto dto) {
+		
+		return session.selectList("reserve.getList", dto);
+	}
+
+	@Override
+	public int getCount(ReserveDto dto) {
+		return session.selectOne("reserve.getCount", dto);
+	}
+
+	@Override
+	public boolean reserveCancle(int num) {
+		int successNum=session.update("reserve.reserveCancle", num);
+		if(successNum==1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public int getReserveRoomNum(int num) {
+		return session.selectOne("reserve.getReserveRoomNum", num);
+	}
+
+	@Override
+	public void updateNoRoomState(int roomNum) {
+		session.update("reserve.updateNoRoomState", roomNum);
+	}
+
+	@Override
+	public boolean reserveOk(int num) {
+		int successNum=session.update("reserve.reserveOk", num);
+		if(successNum==1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public void updateYesRoomState(int roomNum) {
+		session.update("reserve.updateYesRoomState", roomNum);
+	}
+
+	//리연추가
+	// 마이 페이지 : 예약현황
+	@Override
+	public List<ReserveDto> getInfoList(ReserveDto dto) {
+		return session.selectList("reserve.getInfoList", dto);
+	}//==== getInfoList ====
+
+	@Override
+	public int getInfoCheck(ReserveDto dto) {
+		return session.selectOne("reserve.getInfoCheck", dto);
+	}
+
+	@Override
+	public int getInfoCount(ReserveDto dto) {
+		return session.selectOne("reserve.getInfoCount", dto);
+	}
+
+	@Override
+	public List<ReserveDto> getInfoList2(ReserveDto dto) {
+		return session.selectList("reserve.getInfoList2");
+	}
+}//======== ReserveDaoImpl =========

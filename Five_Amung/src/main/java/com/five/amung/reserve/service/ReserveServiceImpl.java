@@ -1,6 +1,7 @@
 package com.five.amung.reserve.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,7 @@ public class ReserveServiceImpl implements ReserveService{
 	}
 	@Transactional
 	@Override
-	public void reserve(HttpServletRequest request, ReserveDto dto) {
+	public void reserve(ModelAndView mView, HttpServletRequest request, ReserveDto dto) {
 		//1. 예약자 아이디를 읽어와서 dto 에 저장한다.
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setMember_id(id);
@@ -61,12 +62,8 @@ public class ReserveServiceImpl implements ReserveService{
 		//3. 예약정보를 DB 에 저장한다.
 		//(예약자 아이디, 강아지 번호,방번호, 체크인날, 체크아웃날, 체크인시간, 
 		//체크아웃시간, 예약자명, 핸드폰번호, 결제금액, 예약날짜, 예약상태(대기중, 완료, 취소))
-		reserveDao.insertReserve(dto);
-	}
-	@Override
-	public ReserveDto getData(ReserveDto dto) {
-		
-		return reserveDao.getData(dto);
+		boolean isSuccess=reserveDao.insertReserve(dto);
+		mView.addObject("isSuccess", isSuccess);
 	}
 	@Override
 	public RoomDto getRoomData(int num) {
@@ -74,4 +71,25 @@ public class ReserveServiceImpl implements ReserveService{
 		return reserveDao.getRoomData(num);
 	}
 	
-}
+	//예약현황
+	@Override
+	public void getList(HttpServletRequest request, ReserveDto dto) {
+		//session으로 회원 아이디를 불러온다.
+		String member_id=(String)request.getSession().getAttribute("id");
+		dto.setMember_id(member_id);
+		
+		//예약 리스트를 가져온다.
+		List<ReserveDto> reserveList=reserveDao.getInfoList(dto);
+		
+		// 해당 아이디로 예약 내역이 있는지 확인한다. 0이면 없음
+		int reserveCheck = reserveDao.getInfoCheck(dto);
+		if(reserveCheck != 0) {
+			request.setAttribute("isSuccess", true);
+		}else {
+			request.setAttribute("isSuccess", false);
+		}
+
+		request.setAttribute("reserveCheck", reserveCheck);
+		request.setAttribute("reserveList", reserveList);
+	}//====getList====
+}//======== ReserveServiceImpl ========

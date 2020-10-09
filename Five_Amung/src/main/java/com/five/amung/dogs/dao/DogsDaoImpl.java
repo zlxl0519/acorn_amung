@@ -28,4 +28,20 @@ public class DogsDaoImpl implements DogsDao{
 	public DogsDto getData(int num) {
 		return session.selectOne("dogs.getData", num);
 	}
-}
+
+	@Override
+	public List<DogsDto> getDogsData(DogsDto dto) {
+		
+		return session.selectList("dogs.getDogsData", dto);
+	}
+
+	@Override
+	public int getCheck(DogsDto dto) {
+		return session.selectOne("dogs.getCheck", dto);
+	}
+
+	@Override
+	public void delete(DogsDto dto) {
+		session.delete("dogs.delete", dto);
+	}
+}// ======== DogsDaoImpl ========

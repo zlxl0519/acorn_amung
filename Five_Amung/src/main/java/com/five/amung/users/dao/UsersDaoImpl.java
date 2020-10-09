@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.five.amung.dogs.dto.DogsDto;
 import com.five.amung.users.dto.UsersDto;
 
 @Repository
@@ -35,6 +36,31 @@ public class UsersDaoImpl implements UsersDao{
 			return true;
 		}
 	}
+	
+	//==============================================================
+	
+	@Override
+	public List<UsersDto> getList(UsersDto dto) {
+		// TODO 회원 리스트
+		
+		return session.selectList("users.getList", dto);
+	}
+	
+	@Override
+	public int getCount(UsersDto dto) {
+		// TODO 전체 row의 갯수 리턴
+		return session.selectOne("users.getCount", dto);
+	}
+	
+	@Override
+	public List<DogsDto> getDogList(String member_id) {
+		// TODO 강아지 정보 리스트 가져오기
+		
+		return session.selectList("users.getDogList", member_id);
+	}
+	
+
+	//==============================================================
 
 	@Override
 	public UsersDto getData(String id) {
@@ -79,4 +105,6 @@ public class UsersDaoImpl implements UsersDao{
 	public void update(UsersDto dto) {
 		session.update("users.update", dto);
 	}//==== update ====
+
+
 }//======== UsersDaoImpl ========

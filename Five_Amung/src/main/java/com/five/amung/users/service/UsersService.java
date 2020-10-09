@@ -21,6 +21,9 @@ public interface UsersService {
 	public Map<String, Object> saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
 	//회원 목록 보기 요청 처리
+	public void getList(HttpServletRequest request);
+	//강아지 정보 가져오기
+	public void getDogList(String member_id, HttpServletRequest request);
 	
 	//로그인 처리
 	public void loginProcess(UsersDto dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, ModelAndView mView);
