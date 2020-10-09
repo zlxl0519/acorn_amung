@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${id}님의 반려견 정보</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/base.css">
+</head>
+<body>
 <h3>${id}님의 반려견 정보</h3>
 <table>
 	<thead>
@@ -31,3 +39,4 @@
 </table>
 
 <a href='javascript:window.close();'><button>닫기</button></a>
+</body>

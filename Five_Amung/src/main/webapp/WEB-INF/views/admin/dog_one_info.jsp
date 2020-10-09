@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>예약한 강아지 정보</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/base.css">
+</head>
+<body>
 <h3>강아지 정보</h3>
 <table>
 	<thead>
@@ -24,3 +33,5 @@
 		</tr>		
 	</tbody>
 </table>
+</body>
+</html>
