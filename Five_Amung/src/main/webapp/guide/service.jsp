@@ -85,6 +85,46 @@
 				</tr>
 			</tbody>
 		</table>
+		
+		<h3>룸 타입 및 몸무게에 따른 가격표</h3>
+		<p style="color:red;">* 1박 기준 입니다.</p>
+		<table>
+			<thaed>
+				<tr>
+					<th></th>
+					<th>스탠다드</th>
+					<th>디럭스</th>
+					<th>프리미엄</th>
+				</tr>
+			</thaed>
+			<tbody>
+				<tr>
+					<td>3kg 이하</td>
+					<td>30000 원</td>
+					<td>40000 원</td>
+					<td>60000 원</td>
+				</tr>
+				<tr>
+					<td>4kg ~ 6kg</td>
+					<td>35000 원</td>
+					<td>45000 원</td>
+					<td>65000 원</td>
+				</tr>
+				<tr>
+					<td>7kg ~ 9kg</td>
+					<td>40000 원</td>
+					<td>50000 원</td>
+					<td>70000 원</td>
+				</tr>
+				<tr>
+					<td>10kg 이상</td>
+					<td>45000 원</td>
+					<td>55000 원</td>
+					<td>75000 원</td>
+				</tr>
+			</tbody>
+		</table>
+		
 	</div>
 	
 <div class="content guide guide-room">
