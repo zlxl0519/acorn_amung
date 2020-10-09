@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.five.amung.admin.service.AdminService;
 import com.five.amung.dogs.dto.DogsDto;
 import com.five.amung.dogs.service.DogsService;
 import com.five.amung.reserve.dto.ReserveDto;
@@ -27,6 +28,9 @@ public class ReserveController {
 	private DogsService dogsService;
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	@RequestMapping("/reserve/reserve_home")
 	public ModelAndView reserveform(ModelAndView mView) {
@@ -89,4 +93,12 @@ public class ReserveController {
 		mView.setViewName("mypage/reserve_status");
 		return mView;
 	}//==== reserveStatus ====
+	
+	//
+	@RequestMapping("/mypage/private/reserve/delete")
+	public ModelAndView reserveCancle(ModelAndView mView, HttpServletRequest request) {
+		adminService.reserveCancle(mView, request);
+		mView.setViewName("redirect: /amung/mypage/private/reserve/status.do");
+		return mView;
+	}
 }//======== ReServeController ========

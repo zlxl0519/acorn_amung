@@ -37,6 +37,7 @@
 	</div>
 	<div onClick="location.href = '${pageContext.request.contextPath }/faq/faq_insertform.do'">
 		<span>
+		<i class="fas fa-question-circle"></i>
 		</span>
 		<p>faq 게시판 관리</p>
 	</div>

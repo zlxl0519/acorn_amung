@@ -104,6 +104,11 @@ table a:hover, table a:active {
 	margin-bottom: 20px !important;
 }
 
+.mt10 {
+	margin-top: 10px !important;
+}
+
+
 .mt20 {
 	margin-top: 20px !important;
 }
@@ -151,6 +156,9 @@ table a:hover, table a:active {
 .f_blue {
 	color: #96d2bf !important;
 }
+.f_blue2{
+	color: #7a7dff;
+}
 
 .f_red {
 	color: #fa2929 !important;
@@ -160,6 +168,9 @@ table a:hover, table a:active {
 	color: #d5e8aa !important;
 }
 
+.f_gr2{
+	color: #97d2bf!important;
+}
 .fr {
 	float: right;
 	border: 1px solid #f0f0f0;
@@ -235,7 +246,14 @@ button, a.btn-default, input[type="submit"], input[type="reset"], .btn-a
 	color: #fff;
 	font-weight: bold
 }
+.btn-mini{
+	padding: 9px 10px;
+}
 
+.btn-pink{
+	background: #e89381!important;
+	border: 1px solid #e89381;
+}
 .btn-y {
 	background: #fdf0bb !important;
 	color: #a2881e !important;
@@ -1486,8 +1504,10 @@ input[name="checkout_date"]::placeholder {
 }
 .dogs-select {
 	margin-left: 20px;
-	background:url("../img/main04.png") 33% top no-repeat #fff2c7;
-	background-size: cover;
+	/* background:url("../img/main04.png") 33% top no-repeat #fff2c7;
+	background-size: cover; */
+	background: #fff2c7;
+	
 	padding: 20px;
 	border-radius: 5px;
 	width: 457px;
@@ -1543,4 +1563,174 @@ input[name="checkout_date"]::placeholder {
 	padding: 5px 10px;
 	background:#d6e7aa;
 	border-radius: 100%;
+}
+
+.on-menu-container {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 3
+}
+.on-menu-wrap{
+	position : relative;
+	width: 100px;
+	height:100px;
+}
+.on-menu-wrap .on-btn{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.on-menu-wrap i {
+	color: #000;
+}
+
+.on-menu {
+	display: none;
+	position: absolute;
+	top: 36px;
+	right: -18px;
+	background: #000;
+	color: #fff;
+	padding: 13px 20px;
+	border-radius: 20rem;
+	font-size: 11pt;
+	box-shadow: 2px 2px 3px #d1d1d1;
+}
+
+.on-menu:after {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	right: 20px;
+	top: -18px;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(56, 77, 157, 0);
+	border-bottom-color: #000;
+	border-width: 11px;
+}
+
+.on-menu-wrap:hover .on-menu{
+	display:block;
+}
+
+.reserve-ul li{
+	color: #405b53;
+}
+
+.reserve-state{
+	position: absolute;
+	top: 0;
+	right : 0;
+	text-align: center;
+	height: 100%;
+	width: 200px;
+	background: #d6e7aa;
+	z-index: 1;
+	border-radius: 10px 0 0 10px;
+}
+.reserve-state.state-cancle{
+	background: #000;
+}
+.reserve-state.state-ok{
+	background: #aae9ef;
+}
+.reserve-state h6{
+	width: 100%;
+	font-family: 'yg-jalnan';
+	font-weight: bold;
+	font-size: 1.8em;
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-shadow: 0px 0px 2px rgb(214 214 214);;
+	line-height: 1.5em;
+}
+.mini-alram-wrap{
+	position: relative;
+}
+.mini-alram-wrap span{
+	width: 220px;
+	display: none;
+	position: absolute;
+	text-align: left;
+	top: 36px;
+	left: -5px;
+	background: #000;
+	color: #fff;
+	padding: 13px 20px;
+	border-radius: 20rem;
+	font-size: 11pt;
+	box-shadow: 2px 2px 3px #d1d1d1;
+	z-index: 2;
+}
+
+.mini-alram-wrap span:after {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	left: 20px;
+	top: -18px;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(56, 77, 157, 0);
+	border-bottom-color: #000;
+	border-width: 11px;
+}
+.mini-alram-wrap:hover span{
+	display: block
+}
+
+/*팝업*/
+.popup{
+	padding-bottom: 40px;
+}
+.popup img {
+	max-width: 100%;
+	height: auto;
+	
+}
+
+.popup-close {
+	text-align: right;
+	position: fixed;
+	bottom: 0;
+	width:100%;
+	height: 40px;
+	background: #484848;
+	color: #fff;
+	box-sizing: border-box;
+	padding: 5px 5px 0 0px;
+}
+.popup-close label{
+	color: #fff;
+	cursor:pointer;
+}
+.popup-close button{
+	background: #262626;
+	padding:0;
+	box-sizing: border-box;
+	border-radius: 0;
+	padding: 5px 10px;
+	margin-left: 10px;
+	box-shadow: inset 0px 0px 2px 0px rgb(0 0 0 / 41%);
+}
+.popup h3{
+	font-family: 'S-CoreDream-8Heavy';
+}
+
+.popup-table{
+	border-radius: 50%;
+	padding: 20px;
+}
+
+.popup-table{
+	
 }
