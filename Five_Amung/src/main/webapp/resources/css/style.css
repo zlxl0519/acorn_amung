@@ -160,6 +160,9 @@ table a:hover, table a:active {
 	color: #d5e8aa !important;
 }
 
+.f_gr2{
+	color: #97d2bf!important;
+}
 .fr {
 	float: right;
 	border: 1px solid #f0f0f0;
@@ -1549,6 +1552,7 @@ input[name="checkout_date"]::placeholder {
 	position: absolute;
 	right: 10px;
 	top: 10px;
+	z-index: 3
 }
 .on-menu-wrap{
 	position : relative;
@@ -1561,13 +1565,15 @@ input[name="checkout_date"]::placeholder {
 	right: 10px;
 }
 .on-menu-wrap i {
-	color: #5677f4;
+	color: #000;
 }
+
 .on-menu {
+	display: none;
 	position: absolute;
 	top: 36px;
 	right: -18px;
-	background: #5677f4;
+	background: #000;
 	color: #fff;
 	padding: 13px 20px;
 	border-radius: 20rem;
@@ -1586,6 +1592,45 @@ input[name="checkout_date"]::placeholder {
 	position: absolute;
 	pointer-events: none;
 	border-color: rgba(56, 77, 157, 0);
-	border-bottom-color: #5677f4;
+	border-bottom-color: #000;
 	border-width: 11px;
+}
+
+.on-menu-wrap:hover .on-menu{
+	display:block;
+}
+
+.reserve-ul li{
+	color: #405b53;
+}
+
+.reserve-state{
+	position: absolute;
+	top: 0;
+	right : 0;
+	text-align: center;
+	height: 100%;
+	width: 200px;
+	background: #d6e7aa;
+	z-index: 1;
+	border-radius: 10px 0 0 10px;
+}
+.reserve-state.state-cancle{
+	background: #000;
+}
+.reserve-state.state-ok{
+	background: #aae9ef;
+}
+.reserve-state h6{
+	width: 100%;
+	font-family: 'yg-jalnan';
+	font-weight: bold;
+	font-size: 1.8em;
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-shadow: 0px 0px 2px rgb(214 214 214);;
+	line-height: 1.5em;
 }

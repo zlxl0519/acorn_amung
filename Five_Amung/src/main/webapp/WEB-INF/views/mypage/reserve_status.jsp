@@ -4,12 +4,8 @@
 <%@include file="/../resources/header.jsp"%><!-- header -->
 <script>
 	document.title = "Amung' mypage"; 
-	var myApp=angular.module("myApp", ["ngRoute"]);
-	myApp.controller("reserveCtrl", function($scope, $http, $location){
-		
-	}
 </script>
-<div class="content" ng-app="myApp">
+<div class="content">
 <div class="sub-nav">
 		<div class="info-box">
 			<div class="profile-img">
@@ -44,11 +40,13 @@
 			</ul>
 		</div><!-- sub-nav-gnb -->
 	</div><!-- sub-nav -->
-	<div class="sub-content" ng-controller="reserveCtrl">
+	<div class="sub-content">
 		<c:choose>
 			<c:when test="${isSuccess eq true}">
 				<div>
-				<h2 class="mt20"><strong>전체 예약 : </strong>${reserveCheck }</h2>
+				<h2 class="mt20">
+					<strong>전체 예약 : </strong>${reserveCheck }
+				</h2>
 				
 				</div>
 				
@@ -61,38 +59,51 @@
 								<a href="javascript:void(0)" class="on-btn">
 									<i class="fas fa-ellipsis-v"></i>
 								</a>
-								<a href="javascript:void(0)" class="on-menu" data-ng-if="isHidden">
+								<a href="javascript:onDelete(${tmp.num })" class="on-menu">
 									예약취소
 								</a>
 							</div>
 						</div>
-							
 						</c:if>
-						<ul>
+						<ul class="reserve-ul">
 						
 							<li>
-							예약자명 : ${tmp.name }
+							예약자명 : <strong>${tmp.name }</strong>
 							</li>
 							<li>
-							연락처 : ${tmp.phone}
+							연락처 : <strong>${tmp.phone}</strong>
 							</li>
 							<li>
-							방이름 : ${tmp.room_name }
+							방이름 : <strong>${tmp.room_name } ROOM</strong>
 							</li>
 							<li>
-							투숙 기간 : ${tmp.checkin_date } ${tmp.start_time } ~ <br/>
-							${tmp.checkout_date } ${tmp.end_time }
+							투숙 기간 : <strong>${tmp.checkin_date } ${tmp.start_time }시 ~ <br/>
+							&emsp;&emsp;&emsp;&emsp;&nbsp; ${tmp.checkout_date } ${tmp.end_time }시</strong>
 							</li>
 							<li>
-							가격 : ${tmp.room_price }
+							가격 : <strong>${tmp.room_price } 원</strong>
 							</li>
 							<li>
-							예약 날짜 : ${tmp.regdate }
-							</li>
-							<li>
-							예약 현황 : ${tmp.state }
+							예약 날짜 : <strong>${tmp.regdate }</strong>
 							</li>
 						</ul>
+						<c:choose>
+							<c:when test="${tmp.state eq '예약대기중'}">
+								<div class="reserve-state">
+									<h6>대기중인<br/>예약입니다.</h6>
+								</div>
+							</c:when>
+							<c:when test="${tmp.state eq '예약취소' }">
+								<div class="reserve-state state-cancle">	
+									<h6>취소된<br/>예약입니다.</h6>
+								</div>
+							</c:when>
+							<c:when test="${tmp.state eq '예약확인' }">
+								<div class="reserve-state state-ok">	
+									<h6>예약 확인<br/>되었습니다.</h6>
+								</div>	
+							</c:when>
+						</c:choose>
 					</li>
 					</c:forEach>
 				</ul>
@@ -109,4 +120,11 @@
 		</c:choose>
 	</div> <!-- sub-content -->
 </div><!-- content -->
+
+<script>
+	function onDelete(num){
+		alert("예약을 취소하시겠습니까?");
+		location.href="delete.do?num="+num;
+	}
+</script>
 <%@include file="/../resources/footer.jsp"%><!-- footer -->
