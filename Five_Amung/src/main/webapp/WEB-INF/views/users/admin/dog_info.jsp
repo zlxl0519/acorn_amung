@@ -10,33 +10,38 @@
 	href="${pageContext.request.contextPath }/resources/css/base.css">
 </head>
 <body>
-<h3>${id}님의 반려견 정보</h3>
-<table>
-	<thead>
-		<tr>
-			<th scope="col">반려견 이름</th>
-			<th scope="col">반려견 나이</th>
-			<th scope="col">견종</th>
-			<th scope="col">몸무게</th>
-			<th scope="col">중성화 유무</th>
-			<th scope="col">성별</th>
-			<th scope="col">기타사항</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="tmp" items="${dogList }">
-			<tr>
-				<td>${tmp.dname }</td>
-				<td>${tmp.dage }</td>
-				<td>${tmp.breed }</td>
-				<td>${tmp.weight }</td>
-				<td>${tmp.neutral }</td>
-				<td>${tmp.gender }</td>
-				<td>${tmp.etc }</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-
-<a href='javascript:window.close();'><button>닫기</button></a>
+<div class="popup">
+	<h3>${id}님의 반려견 정보</h3>
+	<div class="popup-table">
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">반려견 이름</th>
+					<th scope="col">반려견 나이</th>
+					<th scope="col">견종</th>
+					<th scope="col">몸무게</th>
+					<th scope="col">중성화 유무</th>
+					<th scope="col">성별</th>
+					<th scope="col">기타사항</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="tmp" items="${dogList }">
+					<tr>
+						<td>${tmp.dname }</td>
+						<td>${tmp.dage }</td>
+						<td>${tmp.breed }</td>
+						<td>${tmp.weight }</td>
+						<td>${tmp.neutral }</td>
+						<td>${tmp.gender }</td>
+						<td>${tmp.etc }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div class="popup-close">
+		<a href='javascript:window.close();'><button>닫기</button></a>
+	</div>
+</div>
 </body>

@@ -1504,8 +1504,10 @@ input[name="checkout_date"]::placeholder {
 }
 .dogs-select {
 	margin-left: 20px;
-	background:url("../img/main04.png") 33% top no-repeat #fff2c7;
-	background-size: cover;
+	/* background:url("../img/main04.png") 33% top no-repeat #fff2c7;
+	background-size: cover; */
+	background: #fff2c7;
+	
 	padding: 20px;
 	border-radius: 5px;
 	width: 457px;
@@ -1687,10 +1689,13 @@ input[name="checkout_date"]::placeholder {
 }
 
 /*팝업*/
+.popup{
+	padding-bottom: 40px;
+}
 .popup img {
 	max-width: 100%;
 	height: auto;
-	padding-bottom: 40px;
+	
 }
 
 .popup-close {
@@ -1699,7 +1704,7 @@ input[name="checkout_date"]::placeholder {
 	bottom: 0;
 	width:100%;
 	height: 40px;
-	background: #97d2bf;
+	background: #484848;
 	color: #fff;
 	box-sizing: border-box;
 	padding: 5px 5px 0 0px;
@@ -1709,11 +1714,23 @@ input[name="checkout_date"]::placeholder {
 	cursor:pointer;
 }
 .popup-close button{
-	background: #8cc2b1;
+	background: #262626;
 	padding:0;
 	box-sizing: border-box;
 	border-radius: 0;
 	padding: 5px 10px;
 	margin-left: 10px;
 	box-shadow: inset 0px 0px 2px 0px rgb(0 0 0 / 41%);
+}
+.popup h3{
+	font-family: 'S-CoreDream-8Heavy';
+}
+
+.popup-table{
+	border-radius: 50%;
+	padding: 20px;
+}
+
+.popup-table{
+	
 }
