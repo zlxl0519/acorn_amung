@@ -5,12 +5,14 @@
 
 <div class="content">
 	<h2>호텔 일상</h2>
-		<div class="left">
-			<a href="${pageContext.request.contextPath }/gallery/admin/upload_form.do"
-				class="btn-a">
-				새 글 작성
-			</a>
-		</div>
+		<c:if test="${id eq 'admin'}">
+			<div class="left">
+				<a href="${pageContext.request.contextPath }/gallery/admin/upload_form.do"
+					class="btn-a">
+					새 글 작성
+				</a>
+			</div>
+		</c:if>
 		<ul class="gallery-list">
 			<c:forEach var="tmp" items="${list }">
 				<li>
