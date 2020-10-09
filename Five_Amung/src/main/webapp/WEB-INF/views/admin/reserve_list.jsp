@@ -28,7 +28,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th>예약 번호</th>
+					<th>예약<br/>번호</th>
 					<th>아이디</th>
 					<th>예약자명</th>
 					<th>휴대폰 번호</th>
