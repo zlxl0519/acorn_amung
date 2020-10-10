@@ -650,7 +650,6 @@ footer .copyright {
 	margin-bottom: 40px;
 	width: 100%;
 	display: inline-block;
-	cursor: pointer;
 }
 
 .review-ul li:last-child {
@@ -758,6 +757,20 @@ footer .copyright {
 	width: 800px;
 }
 
+.review-star {
+	position: absolute;
+	top: 40px;
+	right: 30px;
+}
+
+.review-star.con{
+	top: 30px;
+}
+.review-star p {
+	color: #97d2bf;
+	font-weight: bold;
+	font-size: 1.3em;
+}
 .c-review-wrap-con {
 	margin-top: 20px;
 	text-align: left;

@@ -9,22 +9,22 @@
 			<ul class="review-ul mt30 review-text">
 				<li>
 					<div class="review-wrap">
-						<div class="mt-20">
-			              <label for="writer">작성자</label>
-			              <input type="text"  value="${id }" disabled/>
-			         	</div>
-						<div class="mt20">
+					<div class="mt-20">
+						<label for="writer">작성자 : ${id }</label>
+						<input type="hidden" value="${id }" disabled />
+					</div>
+					<div class="mt20">
 							<label for="title">제목</label>
 							<input type="text" name="title" id="title" />
 						</div>
 						<div class="mt20">
 							<label for="rating">별점</label>
 							<select name="rating" id="rating">
-								<option value="1">★☆☆☆☆</option>
-								<option value="2">★★☆☆☆</option>
-								<option value="3">★★★☆☆</option>
-								<option value="4">★★★★☆</option>
 								<option value="5">★★★★★</option>
+								<option value="4">★★★★☆</option>
+								<option value="3">★★★☆☆</option>
+								<option value="2">★★☆☆☆</option>
+								<option value="1">★☆☆☆☆</option>
 							</select>
 						</div>
 						<div class="mt20">
@@ -39,19 +39,19 @@
 			</div>
 		</form>
 </div>
-	
+
 
 <script>
-	$("#submit").on("click", function(){
-	    if($("#title").val() == ""){
-	    	alert("제목을 입력해주세요");
-	    	$("#title").focus();
-		      return false;
-	    }else if($("#content").val() == ""){
-	    	alert("내용을 입력해주세요");
-	    	$("#content").focus();
-		      return false;
-	    }
+	$("#submit").on("click", function() {
+		if ($("#title").val() == "") {
+			alert("제목을 입력해주세요");
+			$("#title").focus();
+			return false;
+		} else if ($("#content").val() == "") {
+			alert("내용을 입력해주세요");
+			$("#content").focus();
+			return false;
+		}
 	});
 </script>
 

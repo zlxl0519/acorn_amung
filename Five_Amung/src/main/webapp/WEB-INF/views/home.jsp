@@ -101,6 +101,18 @@
 			<c:forEach var="i" begin="1" end="3">
 				<li>
 					<div class="review-wrap">
+						<!-- 별점 -->
+						<div class="review-star">
+							<p>★☆☆☆☆
+								<%-- <c:choose>
+									<c:when test="${tmp.rating eq 1 }">★☆☆☆☆</c:when>
+									<c:when test="${tmp.rating eq 2 }">★★☆☆☆</c:when>
+									<c:when test="${tmp.rating eq 3 }">★★★☆☆</c:when>
+									<c:when test="${tmp.rating eq 4 }">★★★★☆</c:when>
+									<c:when test="${tmp.rating eq 5 }">★★★★★</c:when>
+								</c:choose> --%>
+							</p>
+						</div>
 						<span class="review-date">2020년 09월 11일</span>
 						<div class="review-wrap-users">
 							<div class="review-profile">
