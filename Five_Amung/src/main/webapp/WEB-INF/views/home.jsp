@@ -81,7 +81,7 @@
 		<ul class="gallery-list">
 			<c:forEach var="tmp" items="${galleryList }" end="2">
 				<li>
-					<a href="${pageContext.request.contextPath }/content.do?num=${tmp.num }">
+					<a href="${pageContext.request.contextPath }/gallery/content.do?num=${tmp.num }">
 					<img
 						src="${pageContext.request.contextPath }${tmp.imagePath}" />
 					</a>
@@ -131,7 +131,7 @@
 						</div>
 						<!-- review-wrap-con -->
 						<div class="right mt20">
-							<a class="review-btn" href="#"> 더보기 </a>
+							<a class="review-btn" href="${pageContext.request.contextPath }/review/content.do?num=${tmp.num }"> 더보기 </a>
 						</div>
 					</div>
 					<!-- review-wrap -->
