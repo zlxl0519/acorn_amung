@@ -48,7 +48,7 @@
 												</c:if>
 											</a>
 										</c:if>
-										<c:if test="${tmp.writer ne id or id ne 'admin' }">
+										<c:if test="${tmp.writer ne id and id ne 'admin' }">
 											<a href="secret_content.do?num=${tmp.num }">
 												${tmp.title } <span class="comment-icon">${tmp.comm}</span>
 												<c:if test="${tmp.done ne 0 }">
