@@ -4,7 +4,9 @@
 	<select id="getList" parameterType="reviewDto" resultType="reviewDto">
 		select * from
 			(select result1.*, rownum as rnum
-				from (select num, writer, profile, title, rating, regdate, content
+				from (select num, writer, profile, title, rating,
+				TO_CHAR(regdate, 'YYYY"년"MM"월"DD"일"') AS regdate,
+				content
 					  from A_review
 					  order by num desc)
 				result1)

@@ -8,7 +8,9 @@
 			(select result1.*, rownum as rnum
 			from 
 				(SELECT num, writer, content, target_id, ref_group,
-					comment_group, deleted, A_gallery_comment.regdate, profile
+					comment_group, deleted, 
+					TO_CHAR(A_gallery_comment.regdate, 'YYYY"년"MM"월"DD"일"') AS regdate, 
+					profile
 				FROM A_gallery_comment
 				INNER JOIN A_member
 				ON A_gallery_comment.writer=A_member.id
