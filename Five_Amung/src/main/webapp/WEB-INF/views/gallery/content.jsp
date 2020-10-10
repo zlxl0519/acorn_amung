@@ -3,47 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@include file="/../resources/header.jsp"%><!-- header -->
-<style>
-	.comments ul{
-		padding: 0;
-		margin: 0;
-		list-style-type: none;
-	}
-	.comments dt{
-		margin-top: 5px;
-	}
-	.comments dd{
-		margin-left: 50px;
-	}
-	/* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
-	.comments .comment-form{
-		display: none;
-	}
-	/* 댓글 프로필 이미지를 작은 원형으로 만든다. */
-	.profile-image{
-		width: 50px;
-		height: 50px;
-		border: 1px solid #cecece;
-		border-radius: 50%;
-	}
-	.comment-form textarea{
-		width: 85%;
-		height: 100px;
-	}
-	pre {
-	  display: block;
-	  padding: 9.5px;
-	  margin: 0 0 10px;
-	  font-size: 13px;
-	  line-height: 1.42857143;
-	  color: #333333;
-	  word-break: break-all;
-	  word-wrap: break-word;
-	  background-color: #f5f5f5;
-	  border: 1px solid #ccc;
-	  border-radius: 4px;
-	}
-</style>
 <div class="content">
 <div class="table-wrap boardList">
 	<h2>호텔 일상</h2>
@@ -102,50 +61,72 @@
 </div><!-- bottom-list -->
 
 	<!-- ===================================================== 상세페이지 본문  =======================================================================-->
-	
-	
-	
-	<p>댓글 <strong>${totalRow }</strong></p>
-	
-	
-		<!-- ============================ 댓글 목록  =============================-->
+	<!-- ============================ 댓글 목록  =============================-->
 	<div class="comments">
-		<ul>
+		<div class="left">
+			<h4>
+				<i class="fas fa-comments"></i>
+				<strong>${totalRow }</strong>
+			</h4>
+		</div>
+		<ul class="comments-ul">
 			<c:forEach var="tmp" items="${commentList }">
 				<c:choose>
 					<c:when test="${tmp.deleted eq 'yes' }">
 						<li>삭제된 댓글 입니다.</li>
 					</c:when>
 					<c:otherwise>
-						<li id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if>>
-							<dl>
-								<dt>
-									<c:choose>
-										<c:when test="${empty tmp.profile }">
-											<svg class="profile-image"  width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					  							<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-											</svg>
-										</c:when>
-										<c:otherwise>
-											<img class="profile-image" 
-												src="${pageContext.request.contextPath }${tmp.profile }"/>
-										</c:otherwise>
-									</c:choose>
-									<span>${tmp.writer }</span>
+						<li id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">class='reply-wrap'</c:if>>
+							<c:if test="${tmp.num ne tmp.comment_group }">
+								<div class="reply-icon">
+									<i class="fa fa-share fa-flip-vertical re"></i>
+								</div>
+							</c:if>
+							<ul class="comment-box">
+								<li>
+									<div class="profile-image">
+										<c:choose>
+											<c:when test="${empty tmp.profile }">
+												<img id="profileImage"
+													src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
+											</c:when>
+											<c:otherwise>
+												<img class="profileImage" 
+													src="${pageContext.request.contextPath }${tmp.profile }"/>
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<span class="comment-writer">${tmp.writer }</span>
 									<c:if test="${tmp.num ne tmp.comment_group }">
 										@<i>${tmp.target_id }</i>
 									</c:if>
-									<span>${tmp.regdate }</span>
-									<a data-num="${tmp.num }" href="javascript:" class="reply-link">답글</a>
-									<c:if test="${tmp.writer eq id }">
-										| <a data-num="${tmp.num }" href="javascript:" class="comment-update-link">수정</a>
-										| <a data-num="${tmp.num }" href="javascript:" class="comment-delete-link">삭제</a>
-									</c:if>
-								</dt>
-								<dd>
-									<pre>${tmp.content }</pre>
-								</dd>
-							</dl>
+									<span class="comment-date">${tmp.regdate }</span>
+									<div class="comment-btn">
+										<a data-num="${tmp.num }" href="javascript:"
+											class="reply-link">
+											<i class="fas fa-comment"></i>
+											답글
+										</a> 
+										<c:if test="${tmp.writer eq id }">
+											<a data-num="${tmp.num }" href="javascript:"
+												class="comment-update-link">
+												<i class="fas fa-pen-square"></i>
+												수정
+											</a>
+											<a data-num="${tmp.num }" href="javascript:"
+												class="comment-delete-link">
+												<i class="fas fa-trash-alt"></i>
+											삭제
+											</a>
+										</c:if>
+									</div>
+									
+									
+									<div>
+										<pre>${tmp.content }</pre>
+									</div>
+								</li>
+							</ul>
 							<form class="comment-form re-insert-form" 
 								action="private/comment_insert.do" method="post">
 								<input type="hidden" name="ref_group"
@@ -173,26 +154,8 @@
 		</ul>
 	</div>
 	<!-- ============================ 댓글 목록  =============================-->
-	
-	
-	<!-- 위에 float:left 에 영향을 받지 않게 하기 위해  -->
-	<div class="clearfix"></div>
-
-
-	<!-- =================== 원글에 댓글을 작성하는 form  =====================-->
-	<form class="comment-form insert-form" action="private/comment_insert.do" method="post">
-		<!-- 원글의 글번호가 ref_group 번호가 된다. -->
-		<input type="hidden" name="ref_group" value="${dto.num }"/>
-		<!-- 원글의 작성자가 댓글의 수신자가 된다. -->
-		<input type="hidden" name="target_id" value="${dto.id }"/>
-		<textarea name="content"><c:if test="${empty sessionScope.id }">로그인이 필요합니다</c:if></textarea>
-		<button type="submit">등록</button>
-	</form>
-	<!-- =================== 원글에 댓글을 작성하는 form  =====================-->		
-
-	
 	<!-- ============== 댓글 페이징 넘버 start ================ -->
-	<div class="page-display">
+	<div class="page-display mt20">
 		<ul class="pagination pagination-sm">
 			<c:if test="${startPageNum ne 1 }">
 				<li class="page-item"><a class="page-link" href="content.do?num=${dto.num }&pageNum=${startPageNum-1 }">Prev</a></li>
@@ -214,8 +177,17 @@
 	</div>
 	<!-- ============== 댓글 페이징 넘버 end ================ -->
 
+	<!-- =================== 원글에 댓글을 작성하는 form  =====================-->
+	<form class="comment-form insert-form" action="private/comment_insert.do" method="post">
+		<!-- 원글의 글번호가 ref_group 번호가 된다. -->
+		<input type="hidden" name="ref_group" value="${dto.num }"/>
+		<!-- 원글의 작성자가 댓글의 수신자가 된다. -->
+		<input type="hidden" name="target_id" value="${dto.id }"/>
+		<textarea name="content" <c:if test="${empty sessionScope.id }">readonly</c:if>><c:if test="${empty sessionScope.id }">로그인이 필요합니다</c:if></textarea>
+		<button type="submit">등록</button>
+	</form>
+	<!-- =================== 원글에 댓글을 작성하는 form  =====================-->		
 
-	
 </div>	<!-- content -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
