@@ -45,7 +45,7 @@
 				<div class="review-wrap-users">
 					<div class="review-profile">
 						<c:choose>
-							<c:when test="${empty dto.profile }">
+							<c:when test="${empty tmp.profile }">
 								<img id="profileImage"
 									src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
 							</c:when>
