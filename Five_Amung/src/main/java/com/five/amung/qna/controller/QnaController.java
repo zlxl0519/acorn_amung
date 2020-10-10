@@ -132,7 +132,6 @@ public class QnaController {
 		return map;
 	}
 	
-	
 	@RequestMapping("/qna/ajax_comment_list")
 	public ModelAndView ajaxCommentList(HttpServletRequest request,
 			ModelAndView mView) {

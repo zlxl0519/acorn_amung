@@ -21,11 +21,11 @@
 					<div class="mt20">
 						<label for="rating">별점</label>
 						<select name="rating" id="rating">
-								<option value="5">★★★★★</option>
-								<option value="4">★★★★☆</option>
-								<option value="3">★★★☆☆</option>
-								<option value="2">★★☆☆☆</option>
-								<option value="1">★☆☆☆☆</option>
+							<option value="5" <c:if test="${dto.rating eq 5}">selected</c:if>>★★★★★</option>
+							<option value="4" <c:if test="${dto.rating eq 4}">selected</c:if>>★★★★☆</option>
+							<option value="3" <c:if test="${dto.rating eq 3}">selected</c:if>>★★★☆☆</option>
+							<option value="2" <c:if test="${dto.rating eq 2}">selected</c:if>>★★☆☆☆</option>
+							<option value="1" <c:if test="${dto.rating eq 1}">selected</c:if>>★☆☆☆☆</option>
 						</select>
 					</div>
 					<div class="mt20 mb20">

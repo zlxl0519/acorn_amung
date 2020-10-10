@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>\
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %> 
 <%@include file="/../resources/header.jsp"%><!-- header -->
 <div class="content">
@@ -174,6 +174,27 @@
 		<!-- 위에 float:left 에 영향을 받지 않게 하기 위해  -->
 		<div class="clearfix"></div>
 		
+		<div class="page-display mt20">
+		<ul class="pagination pagination-sm">
+			<c:if test="${startPageNum ne 1 }">
+				<li class="page-item"><a class="page-link" href="content.do?num=${dto.num }&pageNum=${startPageNum-1 }">Prev</a></li>
+			</c:if>
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						<li class="page-item active"><a class="page-link" href="content.do?num=${dto.num }&pageNum=${i }">${i }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="content.do?num=${dto.num }&pageNum=${i }">${i }</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${endPageNum lt totalPageCount }">
+				<li class="page-item"><a class="page-link" href="content.do?num=${dto.num }&pageNum=${endPageNum+1 }">Next</a></li>
+			</c:if>
+		</ul>	
+	</div>
+		
 		<!-- 원글에 댓글을 작성하는 form -->
 		<form class="comment-form insert-form" action="private/comment_insert.do" method="post">
 			<!-- 원글의 글번호가 ref_group 번호가 된다. -->
@@ -188,6 +209,7 @@
 	
 </div> <!-- content -->
 
+<script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
 	function deleteConfirm(){
 	    var isDelete=confirm("이 글을 삭제하시겠습니까?");
