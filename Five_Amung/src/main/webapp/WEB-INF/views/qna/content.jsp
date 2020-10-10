@@ -60,13 +60,13 @@
 			<tr>
 				<th>제목</th>
 				<td colspan="7">
+					<c:if test="${dto.prv eq 1 }">
+						<i class="fas fa-lock"></i>
+					</c:if>
 					${dto.title } 
-						<c:if test="${dto.done ne 0 }">
-							-답변완료
-						</c:if>
-						<c:if test="${dto.prv eq 1 }">
-							-비밀글
-						</c:if>
+					<c:if test="${dto.done ne 0 }">
+						<span class="done-icon ml20">답변완료</span>
+					</c:if>
 				</td>
 			</tr>
 			<tr>

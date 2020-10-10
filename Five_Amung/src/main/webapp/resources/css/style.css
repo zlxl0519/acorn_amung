@@ -1559,10 +1559,9 @@ input[name="checkout_date"]::placeholder {
 /* 댓글 갯수 */
 .comment-icon{
 	display:inline-block;
-	color:#fff!important;
-	padding: 5px 10px;
-	background:#d6e7aa;
-	border-radius: 100%;
+	color:#55a188!important;
+	font-weight: bold;
+	/* border-radius: 100%; */
 }
 
 .on-menu-container {
@@ -1753,4 +1752,11 @@ input[name="checkout_date"]::placeholder {
 	font-size: 2em;
 	padding: 0;
 	font-family: 'yg-jalnan';
+}
+.done-icon{
+	background: #e89381;
+	border-radius: 3px;
+	box-sizing: border-box;
+	color:#fff!important;
+	padding: 5px 10px;
 }
