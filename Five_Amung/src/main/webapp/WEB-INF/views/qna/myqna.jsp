@@ -39,12 +39,12 @@
 									<c:when test="${tmp.prv eq 1 }">
 										<c:if test="${tmp.writer eq id or id eq 'admin' }">
 											<a href="content.do?num=${tmp.num }">
+												<c:if test="${tmp.prv eq 1 }">
+												<i class="fas fa-lock"></i>
+												</c:if>
 												${tmp.title } <span class="comment-icon">${tmp.comm}</span>
 												<c:if test="${tmp.done ne 0 }">
-												-답변완료
-												</c:if>
-												<c:if test="${tmp.prv eq 1 }">
-												-비밀글
+												<span class="done-icon">답변완료</span>
 												</c:if>
 											</a>
 										</c:if>
@@ -52,20 +52,20 @@
 											<a href="secret_content.do?num=${tmp.num }">
 												${tmp.title } <span class="comment-icon">${tmp.comm}</span>
 												<c:if test="${tmp.done ne 0 }">
-												-답변완료
+												<span class="done-icon">답변완료</span>
 												</c:if>
-												-비밀글
+												<i class="fas fa-lock"></i>
 											</a>
 										</c:if>
 									</c:when>
 									<c:otherwise>
 										<a href="content.do?num=${tmp.num }">
-											${tmp.title } [${tmp.comm}]
-											<c:if test="${tmp.done ne 0 }">
-											-답변완료
-											</c:if>
 											<c:if test="${tmp.prv eq 1 }">
-											-비밀글
+											<i class="fas fa-lock"></i>
+											</c:if>
+											${tmp.title } <span class="comment-icon">${tmp.comm}</span>
+											<c:if test="${tmp.done ne 0 }">
+											<span class="done-icon">답변완료</span>
 											</c:if>
 										</a>
 									</c:otherwise>

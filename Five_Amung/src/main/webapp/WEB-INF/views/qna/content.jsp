@@ -2,47 +2,6 @@
     pageEncoding="UTF-8"%>\
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %> 
 <%@include file="/../resources/header.jsp"%><!-- header -->
-<style>
-   .comments ul{
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-   }
-   .comments dt{
-      margin-top: 5px;
-   }
-   .comments dd{
-      margin-left: 50px;
-   }
-   /* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
-   .comments .comment-form{
-      display: none;
-   }
-   /* 댓글 프로필 이미지를 작은 원형으로 만든다. */
-   .profile-image{
-      width: 50px;
-      height: 50px;
-      border: 1px solid #cecece;
-      border-radius: 50%;
-   }
-   .comment-form textarea{
-      width: 85%;
-      height: 100px;
-   }
-   pre {
-     display: block;
-     padding: 9.5px;
-     margin: 0 0 10px;
-     font-size: 13px;
-     line-height: 1.42857143;
-     color: #333333;
-     word-break: break-all;
-     word-wrap: break-word;
-     background-color: #f5f5f5;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-   }
-</style>
 <div class="content">
 	<h2>QnA 게시판</h2>	
 	<div class="table-wrap boardList bl2">
@@ -60,13 +19,13 @@
 			<tr>
 				<th>제목</th>
 				<td colspan="7">
+					<c:if test="${dto.prv eq 1 }">
+						<i class="fas fa-lock"></i>
+					</c:if>
 					${dto.title } 
-						<c:if test="${dto.done ne 0 }">
-							-답변완료
-						</c:if>
-						<c:if test="${dto.prv eq 1 }">
-							-비밀글
-						</c:if>
+					<c:if test="${dto.done ne 0 }">
+						<span class="done-icon ml20">답변완료</span>
+					</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -116,52 +75,76 @@
 		</div><!-- center -->  
 		
 		<!-- 댓글 목록 -->
-		<div class="comments">
-			<ul>
+		<div class="comments mt0">
+			<div class="left">
+				<h4>
+					<i class="fas fa-comments"></i>
+					<strong>${totalRow }</strong>
+				</h4>
+			</div>
+			<ul class="comments-ul">
 				<c:forEach var="tmp" items="${commentList }">
 					<c:choose>
 						<c:when test="${tmp.deleted eq 'yes' }">
-							<li>삭제된 댓글 입니다.</li>
 						</c:when>
 						<c:otherwise>
 							<li id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if>>
 								<c:if test="${tmp.num ne tmp.comment_group }">
-									└
+									<div class="reply-icon">
+										<i class="fa fa-share fa-flip-vertical re"></i>
+									</div>	
 								</c:if>
-								<dl>
-									<dt>
+								<ul class="comment-box">
+								<li>
+									<div class="profile-image">
 										<c:choose>
-											<c:when test="${not empty tmp.profile}">
-												<img id="profileImage" src="${pageContext.request.contextPath}${tmp.profile}"/>
+											<c:when test="${empty tmp.profile }">
+												<img id="profileImage"
+													src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
 											</c:when>
 											<c:otherwise>
-												<img id="profileImage" src="${pageContext.request.contextPath}/include/img/icon_user.png"/>
+												<img class="profileImage" 
+													src="${pageContext.request.contextPath }${tmp.profile }"/>
 											</c:otherwise>
 										</c:choose>
-										<c:choose>
-											<c:when test="${tmp.writer eq 'admin' }">
-												<span>관리자</span>
-											</c:when>
-											<c:otherwise>
-												<span>${tmp.writer }</span>
-											</c:otherwise>
-										</c:choose>
-										<c:if test="${tmp.num ne tmp.comment_group }">
-											<i>${tmp.target_id }</i>
-										</c:if>
-										<span>${tmp.regdate }</span>
-										<a data-num="${tmp.num }" href="javascript:" class="reply-link">답글</a>
+									</div>
+									<c:choose>
+										<c:when test="${tmp.writer eq 'admin' }">
+											<span class="comment-writer">관리자</span>
+										</c:when>
+										<c:otherwise>
+											<span class="comment-writer">>${tmp.writer }</span>
+										</c:otherwise>
+									</c:choose>
+									<span class="comment-date">${tmp.regdate }</span>
+									<div class="comment-btn">
+										<a data-num="${tmp.num }" href="javascript:"
+											class="reply-link">
+											<i class="fas fa-comment"></i>
+											답글
+										</a> 
 										<c:if test="${tmp.writer eq id }">
-											| <a data-num="${tmp.num }" href="javascript:" class="comment-update-link">수정</a>
+											<a data-num="${tmp.num }" href="javascript:"
+												class="comment-update-link">
+												<i class="fas fa-pen-square"></i>
+												수정
+											</a>
 										</c:if>
 										<c:if test="${tmp.writer eq id or id eq 'admin' }">
-											| <a data-num="${tmp.num }" href="javascript:" class="comment-delete-link">삭제</a>
+											<a data-num="${tmp.num }" href="javascript:"
+												class="comment-delete-link">
+												<i class="fas fa-trash-alt"></i>
+											삭제
+											</a>
 										</c:if>
-									</dt>
-									<dd>
+									</div>
+									
+									
+									<div>
 										<pre>${tmp.content }</pre>
-									</dd>
-								</dl>
+									</div>
+								</li>
+							</ul>
 								<form class="comment-form re-insert-form" 
 									action="private/comment_insert.do" method="post">
 									<input type="hidden" name="ref_group"

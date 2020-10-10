@@ -12,9 +12,21 @@
 
 	<ul class="review-ul">
 	<c:forEach var="tmp" items="${list }">
-				<li>
+			<li>
 			<div class="review-wrap">
-			<span class="review-date">
+			<!-- 별점 -->
+				<div class="review-star">
+					<p>
+						<c:choose>
+							<c:when test="${tmp.rating eq 1 }">★☆☆☆☆</c:when>
+							<c:when test="${tmp.rating eq 2 }">★★☆☆☆</c:when>
+							<c:when test="${tmp.rating eq 3 }">★★★☆☆</c:when>
+							<c:when test="${tmp.rating eq 4 }">★★★★☆</c:when>
+							<c:when test="${tmp.rating eq 5 }">★★★★★</c:when>
+						</c:choose>
+					</p>
+				</div>
+					<span class="review-date">
 					<!-- 
 						// - 를 기준으로 문자열 추출
 					    String regdate = tmp.getRegdate();
@@ -30,11 +42,13 @@
 				<div class="review-wrap-users">
 					<div class="review-profile">
 						<c:choose>
-							<c:when test="${not empty tmp.profile}">
-								<img id="profileImage" src="${pageContext.request.contextPath}${tmp.profile}"/>
+							<c:when test="${empty tmp.profile }">
+								<img id="profileImage"
+									src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
 							</c:when>
 							<c:otherwise>
-								<img id="profileImage" src="${pageContext.request.contextPath}/include/img/icon_user.png"/>
+								<img id="profileImage"
+									src="${pageContext.request.contextPath }${dto.profile}" />
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -48,18 +62,6 @@
 					<span>${tmp.title } <br/></span>
 					</div>
 				</div><!-- review-wrap-users -->
-				<!-- 별점 -->
-				<div>
-					<p>
-						<c:choose>
-							<c:when test="${tmp.rating eq 1 }">★☆☆☆☆</c:when>
-							<c:when test="${tmp.rating eq 2 }">★★☆☆☆</c:when>
-							<c:when test="${tmp.rating eq 3 }">★★★☆☆</c:when>
-							<c:when test="${tmp.rating eq 4 }">★★★★☆</c:when>
-							<c:when test="${tmp.rating eq 5 }">★★★★★</c:when>
-						</c:choose>
-					</p>
-				</div>
 				<div class="review-wrap-con mt30">
 					<p>${tmp.content }
 					</p>

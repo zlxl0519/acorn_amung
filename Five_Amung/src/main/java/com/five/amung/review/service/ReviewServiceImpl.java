@@ -38,6 +38,8 @@ public class ReviewServiceImpl implements ReviewService {
 		
 	    //EL에서 사용할 값을 미리 request에 담아두기
 	    request.setAttribute("list", list);
+	    //메인에서사용하기위함
+	    request.setAttribute("reviewList", list);
 	    request.setAttribute("pageNum", pageNum);
 	    request.setAttribute("totalPageCount", totalPageCount);
 	}

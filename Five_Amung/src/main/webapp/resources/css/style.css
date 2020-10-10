@@ -1559,10 +1559,9 @@ input[name="checkout_date"]::placeholder {
 /* 댓글 갯수 */
 .comment-icon{
 	display:inline-block;
-	color:#fff!important;
-	padding: 5px 10px;
-	background:#d6e7aa;
-	border-radius: 100%;
+	color:#55a188!important;
+	font-weight: bold;
+	/* border-radius: 100%; */
 }
 
 .on-menu-container {
@@ -1724,13 +1723,178 @@ input[name="checkout_date"]::placeholder {
 }
 .popup h3{
 	font-family: 'S-CoreDream-8Heavy';
+	font-size: 2em;
 }
-
+.popup-h{
+	padding: 20px;
+	text-align: left;
+}
 .popup-table{
 	border-radius: 50%;
-	padding: 20px;
+	padding: 0 20px;
 }
 
-.popup-table{
+.popup-dog{
+	padding: 0 20px;
+}
+
+.popup-dog ul{
+	border: 3px solid #000;
+	padding: 40px 40px;
+	border-radius: 20px;
+}
+.popup-dog ul li{
+	text-align: left;
+	line-height: 2em;
+}
+
+.popup-dog ul li h2{
+	font-size: 2em;
+	padding: 0;
+	font-family: 'yg-jalnan';
+}
+.done-icon{
+	background: #e89381;
+	border-radius: 3px;
+	box-sizing: border-box;
+	color:#fff!important;
+	padding: 5px 10px;
+}
+
+/* 댓글 */
+.comments .profile-image {
+	box-shadow: rgba(209, 209, 209, 0.68) 0px 0px 5px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 100%;
 	
+}
+.comments .profile-image img{
+	border-radius: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+/*ul 요소의 기본 스타일 제거*/
+.comments {
+	margin-top: 100px;
+}
+
+
+.comment-form textarea, .comment-form button {
+	float: left;
+}
+/*.reply-icon을 li 요소를 기준으로 배치하기*/
+.comments li {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.comments .comments-ul >li {
+	padding: 20px 0;
+	border-top: 1px solid #f1f1f1;
+	text-align: left;
+}
+.comments .comments-ul >li:first-child{
+	margin-top: 20px;
+}
+.comments .comments-ul >li:last-child {
+	border-bottom: 1px solid #f1f1f1;
+}
+
+.comment-box li{
+	position: relative;
+}
+.comment-writer{
+	font-weight: bold;
+}
+.comment-date
+{
+	position: absolute;
+	right: 0;
+	color: #bfbfbf;
+	
+}
+/*form*/
+.insert-form {
+	margin: 40px 0 100px 0;
+	padding: 0 0 50px 0;
+}
+
+.comment-form textarea {
+	width: 85%;
+	height: 100px;
+}
+s
+.comment-form textarea[readonly] {
+	background: #f0f0f0;
+}
+/* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
+.comments .comment-form {
+	display: none;
+	padding: 20px 0;
+	width: 100%;
+}
+
+.comment-form button {
+	width: 15%;
+	height: 100px;
+}
+
+.comments pre {
+	margin: 10px 0 0 0;
+	display: inline-block;
+	width: 100%;
+	padding: 20px;
+	font-size: 1em;
+	line-height: 1.5em;
+	color: #333333;
+	word-break: break-all;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	background-color: #ffffff;
+	box-shadow: rgb(0 0 0 / 8%) 0px 0px 5px;
+	border-radius: 4px;
+}
+
+.comments h4 {
+	display: inline-block;
+	text-align: left;
+	font-size: 2em;
+}
+.comments h4 i{
+	color: #addbc2;
+}
+.reply-wrap{
+	padding: 20px 0 20px 50px!important;
+}
+.reply-icon{
+	position: absolute;
+	top: 14px;
+	left: 11px;
+}
+.reply-icon i{
+	color: #bfbfbf;
+	font-size: 1.5em;
+}
+.comments .comments-ul >li:hover .comment-btn{
+	display: block;
+}
+.comment-btn{
+	display:none;
+	position: absolute;
+	right: 0;
+	top: 20px;
+}
+.comment-btn a{
+	margin-right: 5px;
+}
+.re-insert-form button{
+	background: #ffc4c5;
+}
+.update-form button{
+	background: #95dbff;
 }

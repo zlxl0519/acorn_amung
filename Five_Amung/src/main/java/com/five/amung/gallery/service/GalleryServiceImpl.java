@@ -67,6 +67,8 @@ public class GalleryServiceImpl implements GalleryService{
 		List<GalleryDto> list=galleryDao.getList(dto);
 		//2. 글 목록을 응답한다.
 		request.setAttribute("list", list);
+		//메인에서 사용하기 위함
+		request.setAttribute("galleryList", list);
 	    request.setAttribute("pageNum", pageNum);
 	    request.setAttribute("totalRow", totalRow);
 	    request.setAttribute("totalPageCount", totalPageCount);

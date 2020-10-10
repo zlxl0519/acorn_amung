@@ -11,8 +11,10 @@
 </head>
 <body>
 <div class="popup">
-	<h3>${id}님의 반려견 정보</h3>
-	<div class="popup-table">
+		<div class="popup-h">
+			<h3>${id}<strong>님의 반려견 정보</strong></h3>
+		</div>
+		<div class="table-wrap">
 		<table>
 			<thead>
 				<tr>
