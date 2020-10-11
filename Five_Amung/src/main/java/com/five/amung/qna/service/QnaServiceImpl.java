@@ -306,42 +306,5 @@ public class QnaServiceImpl implements QnaService {
 		qnaCommentDao.update(dto);
 	}
 
-	@Override
-	public void moreCommentList(HttpServletRequest request) {
-		//파라미터로 전달된 pageNum 과 ref_group 번호를 읽어온다. 
-		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
-		int ref_group=Integer.parseInt(request.getParameter("ref_group"));
-		
-		QnaDto dto=qnaDao.getData(ref_group);
-		request.setAttribute("dto", dto);
-		
-		/* 아래는 댓글 페이징 처리 관련 비즈니스 로직 입니다.*/
-		final int PAGE_ROW_COUNT=5;
-		
-		//보여줄 페이지 데이터의 시작 ResultSet row 번호
-		int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-		//보여줄 페이지 데이터의 끝 ResultSet row 번호
-		int endRowNum=pageNum*PAGE_ROW_COUNT;
-		
-		//전체 row 의 갯수를 읽어온다.
-		//자세히 보여줄 글의 번호가 ref_group  번호 이다. 
-		int totalRow=qnaCommentDao.getCount(ref_group);
-		//전체 페이지의 갯수 구하기
-		int totalPageCount=
-				(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-		
-		// QnaCommentDto 객체에 위에서 계산된 startRowNum 과 endRowNum 을 담는다.
-		QnaCommentDto commentDto=new QnaCommentDto();
-		commentDto.setStartRowNum(startRowNum);
-		commentDto.setEndRowNum(endRowNum);
-		//ref_group 번호도 담는다.
-		commentDto.setRef_group(ref_group);
-		
-		//DB 에서 댓글 목록을 얻어온다.
-		List<QnaCommentDto> commentList=qnaCommentDao.getList(commentDto);
-		//request 에 담아준다.
-		request.setAttribute("commentList", commentList);
-		request.setAttribute("totalPageCount", totalPageCount);	
-	}
-
+	
 }

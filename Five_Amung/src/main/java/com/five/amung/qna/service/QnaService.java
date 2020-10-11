@@ -35,7 +35,5 @@ public interface QnaService {
 	//댓글 수정
 	public void updateComment(QnaCommentDto dto);
 	
-	//댓글 추가 응답
-	public void moreCommentList(HttpServletRequest request);
 	
 }
