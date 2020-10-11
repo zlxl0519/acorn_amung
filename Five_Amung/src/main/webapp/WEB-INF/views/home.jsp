@@ -117,8 +117,16 @@
 						<span class="review-date">${tmp.regdate }</span>
 						<div class="review-wrap-users">
 							<div class="review-profile">
-								<img id="profileImage"
-									src="${pageContext.request.contextPath}/resources/img/icon_user.png" />
+								<c:choose>
+									<c:when test="${empty tmp.profile }">
+										<img id="profileImage"
+											src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
+									</c:when>
+									<c:otherwise>
+										<img id="profileImage"
+											src="${pageContext.request.contextPath }${tmp.profile}" />
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="review-users">
 								<p>${tmp.writer }</p>
