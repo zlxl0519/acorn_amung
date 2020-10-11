@@ -86,6 +86,7 @@
 				<c:forEach var="tmp" items="${commentList }">
 					<c:choose>
 						<c:when test="${tmp.deleted eq 'yes' }">
+							<li>삭제된 댓글 입니다.</li>
 						</c:when>
 						<c:otherwise>
 							<li id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if>>
@@ -171,8 +172,6 @@
 				</c:forEach>
 			</ul>
 		</div><!-- /.comments -->
-		<!-- 위에 float:left 에 영향을 받지 않게 하기 위해  -->
-		<div class="clearfix"></div>
 		
 		<div class="page-display mt20">
 		<ul class="pagination pagination-sm">
