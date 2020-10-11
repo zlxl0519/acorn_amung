@@ -212,7 +212,6 @@
 		}
 		
 	});
-
 	$(function(){
 		$("#checkin").datepicker({
 			minDate:0, //오늘포함한 이후 날짜만 활성화
@@ -252,7 +251,6 @@
 			}
 		});
 		
-
 	});
 	
 </script>
