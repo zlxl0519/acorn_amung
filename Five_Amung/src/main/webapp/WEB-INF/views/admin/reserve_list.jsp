@@ -4,7 +4,7 @@
 <jsp:include page="/resources/header.jsp"></jsp:include>
 <%--예약페이지--%>
 <div class="content">
-	<h2>관리자 : 예약 내역 리스트</h2>
+	<h2>운영관리 |예약 내역</h2>
 	<div class="search-form mt20">
 		<form action="${pageContext.request.contextPath	}/admin/reserve_list.do" method="get">
 			<div class="search-wrap">

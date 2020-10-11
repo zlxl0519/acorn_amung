@@ -32,7 +32,6 @@
 			<input type="number" id="location_left" name="location_left" value="${dto.location_left }"/>			
 		</li>
 		<li>
-		
 			<label for="image">업로드</label>
 			&nbsp;&nbsp;<input type="file" name="image" id="image" accept=".jpg, jpeg, .png, .JPG, .JPEG" />	
 		</li>
