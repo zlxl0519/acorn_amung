@@ -97,7 +97,7 @@
 									</a>
 									</li>
 									<li>
-									<a href="${pageContext.request.contextPath }/users/logout.do">
+									<a href="javascript:logout()">
 										로그아웃
 									</a>
 									</li>
@@ -185,4 +185,8 @@
 	$(".gnb-drop").hover(function(){
 		$(this).find("ul").stop().fadeToggle(300);
 	});
+	function logout(){
+		alert("로그 아웃 되었습니다");
+		location.href="${pageContext.request.contextPath }/users/logout.do";
+	}
 </script>
