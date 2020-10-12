@@ -32,15 +32,14 @@
 			<input type="number" id="location_left" name="location_left" value="${dto.location_left }"/>			
 		</li>
 		<li>
-		
 			<label for="image">업로드</label>
 			&nbsp;&nbsp;<input type="file" name="image" id="image" accept=".jpg, jpeg, .png, .JPG, .JPEG" />	
 		</li>
 	</ul>
 	</div>
-	<button type="submit" class="btn-default">등록</button>
+	<button type="submit" class="btn-a">등록</button>
+	<a class="btn-a btn-pink" href="${pageContext.request.contextPath }/admin/delete.do" >기존팝업 삭제</a>
 </form>
-	<a href="delete.do" ><button class="btn-default">기존팝업 삭제</button></a>
 </div>
 </div>
 <jsp:include page="/resources/footer.jsp"></jsp:include>

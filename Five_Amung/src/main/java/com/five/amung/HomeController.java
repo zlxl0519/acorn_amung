@@ -7,14 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.five.amung.gallery.service.GalleryService;
+import com.five.amung.notice.service.NoticeService;
 import com.five.amung.popup.dao.PopupDao;
 import com.five.amung.popup.dto.PopupDto;
+import com.five.amung.review.service.ReviewService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	private PopupDao popupDao;
+	
+	@Autowired
+	private GalleryService galleryService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping("/home")
 	public String home(HttpServletRequest request) {
@@ -34,8 +46,12 @@ public class HomeController {
 				}
 			}
 		}
+		
 		request.setAttribute("canPopup", canPopup);
 		
+		galleryService.getList(request);
+		noticeService.getList(request);
+		reviewService.getList(request);
 		return "home";
 	}
 }

@@ -39,10 +39,10 @@ public class UsersController {
 	//회원가입 완료 요청 처리(응답페이지 수정 必)
 	@RequestMapping("/users/signup")
 	public ModelAndView signup(@RequestParam String email01, @RequestParam String email02,
-			ModelAndView mView, UsersDto dto) {
+			ModelAndView mView, UsersDto dto, HttpServletRequest request) {
 		dto.setEmail(email01+"@"+email02);
-		usersService.addUser(dto);
-		mView.setViewName("redirect:/home.do");
+		usersService.addUser(dto, request);;
+		mView.setViewName("users/signup");
 		return mView;
 	}
 	

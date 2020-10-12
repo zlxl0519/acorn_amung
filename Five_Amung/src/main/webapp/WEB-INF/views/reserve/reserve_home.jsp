@@ -136,6 +136,7 @@
 			<li>예약 후 24시간 내에 입금하지 않으실 경우 자동으로 취소 처리 됩니다.</li>
 			<li>입금 후 취소 시 전화나 <a href="${pageContext.request.contextPath }/qna/list.do" class="f_red">QnA</a> 게시판에 비밀글로 남겨주세요.</li>
 			<li>마이페이지 내역에 강아지 정보가 없다면 강아지 정보를 입력해 주세요.</li>
+			<li>예약 중에 강아지 정보를 삭제하지 말아주세요!!</li>
 		</ol>
 	</div>
 		<ul class="round-nav"><!-- # 은 페이지 내에서의 이동 -->

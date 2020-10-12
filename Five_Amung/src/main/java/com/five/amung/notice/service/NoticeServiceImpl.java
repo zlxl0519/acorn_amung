@@ -98,6 +98,8 @@ public class NoticeServiceImpl implements NoticeService{
 		//EL에서 사용할 값을 미리 request에 담아두기
 		request.setAttribute("id", id);
 		request.setAttribute("list", list);
+		//메인에서 사용하기 위함
+		request.setAttribute("noticeList", list);
 		request.setAttribute("startPageNum", startPageNum);
 		request.setAttribute("endPageNum", endPageNum);
 		request.setAttribute("pageNum", pageNum);

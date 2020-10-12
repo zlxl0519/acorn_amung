@@ -54,16 +54,16 @@
 					어디에도 없는 프리미엄 반려견 호텔 서비스를 선사하는<br /> AMung의 새 소식과 공지사항을 알려드립니다.
 				</p>
 
-				<a href="${pageContext.request.contextPath }/notice/notice_list.jsp"
+				<a href="${pageContext.request.contextPath }/notice/list.do"
 					class="notice-plus"><span>+</span>더보기</a>
 			</div>
 			<div class="main-notice-list">
 				<ul>
-					<c:forEach var="i" begin="1" end="5">
+					<c:forEach var="tmp" items="${noticeList }" end="4">
 						<li>
-							<a href="#">
-								<span>[ 공지사항 ]
-								</span> 공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항
+							<a href="${pageContext.request.contextPath }/notice/detail.do?num=${tmp.num }">
+								<span>[ ${tmp.category } ]
+								</span> ${tmp.title }
 							</a>
 						</li>
 					</c:forEach>
@@ -74,17 +74,16 @@
 	
 	<section class="main-gallery-wrap">
 		<h6>
-			<a href="${pageContext.request.contextPath }/gallery/list.jsp">Amung의
+			<a href="${pageContext.request.contextPath }/gallery/list.do">Amung의
 				일상 <span class="f_gr">+</span>
 			</a>
 		</h6>
 		<ul class="gallery-list">
-			<c:forEach var="i" begin="1" end="3">
+			<c:forEach var="tmp" items="${galleryList }" end="2">
 				<li>
-					<a
-						href="">
-						<img
-							src="https://images.mypetlife.co.kr/content/uploads/2019/09/04222847/dog-panting.jpg" />
+					<a href="${pageContext.request.contextPath }/gallery/content.do?num=${tmp.num }">
+					<img
+						src="${pageContext.request.contextPath }${tmp.imagePath}" />
 					</a>
 				</li>
 			</c:forEach>
@@ -93,32 +92,54 @@
 
 	<section class="main-review">
 		<h6>
-			<a href="${pageContext.request.contextPath }/review/rev_list.jsp">Amung
+			<a href="${pageContext.request.contextPath }/review/rev_list.do">Amung
 				후기 <span class="f_gr">+</span>
 			</a>
 		</h6>
 		<ul class="review-ul">
-			<c:forEach var="i" begin="1" end="3">
+			<c:forEach var="tmp" items="${reviewList }" end="2">
 				<li>
 					<div class="review-wrap">
-						<span class="review-date">2020년 09월 11일</span>
+						<!-- 별점 -->
+						<div class="review-star">
+							<p>
+								<c:choose>
+									<c:when test="${tmp.rating eq 1 }">★☆☆☆☆</c:when>
+									<c:when test="${tmp.rating eq 2 }">★★☆☆☆</c:when>
+									<c:when test="${tmp.rating eq 3 }">★★★☆☆</c:when>
+									<c:when test="${tmp.rating eq 4 }">★★★★☆</c:when>
+									<c:otherwise>
+									★★★★★
+									</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
+						<span class="review-date">${tmp.regdate }</span>
 						<div class="review-wrap-users">
 							<div class="review-profile">
-								<img id="profileImage"
-									src="${pageContext.request.contextPath}/resources/img/icon_user.png" />
+								<c:choose>
+									<c:when test="${empty tmp.profile }">
+										<img id="profileImage"
+											src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
+									</c:when>
+									<c:otherwise>
+										<img id="profileImage"
+											src="${pageContext.request.contextPath }${tmp.profile}" />
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="review-users">
-								<p>익명의 리뷰어</p>
-								<span>제목 제목<br /></span>
+								<p>${tmp.writer }</p>
+								<span>${tmp.title }<br /></span>
 							</div>
 						</div>
 						<!-- review-wrap-users -->
 						<div class="review-wrap-con mt30">
-							<p>너무 좋아요 복 받으세요</p>
+							<p>${tmp.content }</p>
 						</div>
 						<!-- review-wrap-con -->
 						<div class="right mt20">
-							<a class="review-btn" href="#"> 더보기 </a>
+							<a class="review-btn" href="${pageContext.request.contextPath }/review/content.do?num=${tmp.num }"> 더보기 </a>
 						</div>
 					</div>
 					<!-- review-wrap -->
@@ -134,7 +155,7 @@
 
 	let canPopup = ${canPopup}
 	if(canPopup && ${not empty dto}){
-			window.open("admin/popup.do","${dto.title}","width=${dto.window_width},height=${dto.window_height},top=${dto.location_top},left=${dto.location_left}");	
+			window.open("${pageContext.request.contextPath }/popup.do","${dto.title}","width=${dto.window_width},height=${dto.window_height},top=${dto.location_top},left=${dto.location_left}");	
 	}
 </script>
 <%@include file="/resources/footer.jsp"%><!-- footer -->

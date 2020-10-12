@@ -63,6 +63,8 @@
 		</c:if>
 </div><!-- content -->
 <script>
+	
+	
 	var currentPage = 1;
 	var totalPageCount = ${totalPageCount};
 	

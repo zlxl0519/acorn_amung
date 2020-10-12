@@ -12,7 +12,7 @@
 			(SELECT
 				reserve.num as num,
 				reserve.member_id as member_id,
-				dogs.dname as dname, room.room_name as room_name,
+				room.room_name as room_name,
 				TO_CHAR(reserve.checkin_date, 'YYYY"년 "MM"월 "DD"일"') as checkin_date,
 				TO_CHAR(reserve.checkout_date, 'YYYY"년 "MM"월 "DD"일"') as checkout_date,
 				reserve.start_time as start_time,
@@ -23,8 +23,7 @@
 				TO_CHAR(reserve.regdate, 'YYYY"년 "MM"월 "DD"일 "HH24"시 "MI"분"') as regdate,
 				reserve.state as state,
 				reserve.dog_num as dog_num
-			FROM A_dogs dogs
-			INNER JOIN A_reserve reserve ON dogs.num = reserve.dog_num
+			FROM A_reserve reserve
 			INNER JOIN A_room room ON reserve.room_num = room.num
 			WHERE reserve.member_id=#{member_id}
 			

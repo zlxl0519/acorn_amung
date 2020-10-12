@@ -64,7 +64,7 @@ public class AdminController {
 	}
 	
 	//팝업창
-	@RequestMapping("/admin/popup")
+	@RequestMapping("/popup")
 	public ModelAndView popup(ModelAndView mView, HttpServletRequest request) {
 		
 		adminService.getPopupData(request);
@@ -73,7 +73,7 @@ public class AdminController {
 	}
 	
 	//일정시간동안 보이지 않기
-	@RequestMapping(value="/admin/popup_save", method=RequestMethod.POST)
+	@RequestMapping(value="/popup_save", method=RequestMethod.POST)
 	public ModelAndView popupSave(ModelAndView mView, HttpServletRequest request, 
 			HttpServletResponse response) {
 

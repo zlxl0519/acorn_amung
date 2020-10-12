@@ -5,6 +5,11 @@
 	<h2>QnA 작성하기</h2>
 	<div class="table-wrap boardList">
 		<form action="insert.do" method="post">
+			<div class="left mb20">
+				<label>
+					<input type="checkbox" name="prv" value="1" /> 비밀글
+				</label>
+			</div>
 			<table class="mb20">
 				<tbody>
 					<tr>
@@ -25,9 +30,7 @@
 					</tr>
 			</table> 
 			<div>
-			<label>
-				<input type="checkbox" name="prv" value="1" /> 비밀글
-			</label>
+			
 				<button id="submit" type="submit"  class="btn-default" onclick="submitContents(this);">등록</button>
 			</div>
 			</form>

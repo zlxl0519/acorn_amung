@@ -132,15 +132,6 @@ public class QnaController {
 		return map;
 	}
 	
-	
-	@RequestMapping("/qna/ajax_comment_list")
-	public ModelAndView ajaxCommentList(HttpServletRequest request,
-			ModelAndView mView) {
-		qnaService.moreCommentList(request);
-		mView.setViewName("qna/ajax_comment_list");
-		return mView;
-	}	
-	
 	//비밀글 
 	//글 작성하기 폼
 	@RequestMapping("/qna/secret_content")

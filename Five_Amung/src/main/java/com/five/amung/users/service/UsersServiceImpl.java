@@ -29,13 +29,14 @@ public class UsersServiceImpl implements UsersService{
 	private UsersDao usersDao;
 
 	@Override
-	public void addUser(UsersDto dto) {
+	public void addUser(UsersDto dto, HttpServletRequest request) {
 		// TODO 회원 가입 요청 처리
 		String inputPwd=dto.getPwd();
 		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
 		String encodedPwd=encoder.encode(inputPwd);
 		dto.setPwd(encodedPwd);
 		usersDao.insert(dto);
+		request.setAttribute("dto", dto);
 	}
 
 	@Override

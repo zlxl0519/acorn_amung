@@ -15,8 +15,17 @@
 			<ul class="review-ul">
 				<li>
 					<div class="review-wrap">
-					<div class="review-recommand">
-					</div>
+						<div class="review-star con">
+							<p>
+								<c:choose>
+									<c:when test="${dto.rating eq 1 }">★☆☆☆☆</c:when>
+									<c:when test="${dto.rating eq 2 }">★★☆☆☆</c:when>
+									<c:when test="${dto.rating eq 3 }">★★★☆☆</c:when>
+									<c:when test="${dto.rating eq 4 }">★★★★☆</c:when>
+									<c:when test="${dto.rating eq 5 }">★★★★★</c:when>
+								</c:choose>
+							</p>
+						</div>
 					<span class="review-date">
 							<!-- 
 								// - 를 기준으로 문자열 추출
@@ -34,15 +43,17 @@
 						<div class="review-wrap-users">
 							<div class="review-profile">
 								<c:choose>
-									<c:when test="${not empty dto.profile}">
-										<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}"/>
+									<c:when test="${empty dto.profile }">
+										<img id="profileImage"
+											src="${pageContext.request.contextPath }/resources/img/icon_user.png" />
 									</c:when>
 									<c:otherwise>
-										<img id="profileImage" src="${pageContext.request.contextPath}/include/img/icon_user.png"/>
+										<img id="profileImage"
+											src="${pageContext.request.contextPath }${dto.profile}" />
 									</c:otherwise>
 								</c:choose>
 							</div>
-							<div class="review-users">
+						<div class="review-users">
 							<p>
 								<c:choose>
 									<c:when test="${not empty dto.writer}">${dto.writer }</c:when>
@@ -53,21 +64,8 @@
 							</div>
 						</div><!-- review-wrap-users -->
 						<!-- 별점 -->
-						<div>
-							<p>
-								<c:choose>
-									<c:when test="${dto.rating eq 1 }">★☆☆☆☆</c:when>
-									<c:when test="${dto.rating eq 2 }">★★☆☆☆</c:when>
-									<c:when test="${dto.rating eq 3 }">★★★☆☆</c:when>
-									<c:when test="${dto.rating eq 4 }">★★★★☆</c:when>
-									<c:when test="${dto.rating eq 5 }">★★★★★</c:when>
-								</c:choose>
-							</p>
-						</div>
-						<div class="review-wrap-con mt30">
-							<p>
-								${dto.content }
-							</p>
+						<div class="c-review-wrap-con mt30">
+							<pre>${dto.content }</pre>
 						</div><!-- review-wrap-con -->
 					</div><!-- review-wrap -->
 				</li>
@@ -78,29 +76,25 @@
 		
 	</div><!-- content-review -->
 		
-			<!-- 로그인 중인 id가 글 작성 시의 id와 같을 때에만 수정, 삭제 기능 볼 수 있도록 -->
-				<div class="review-left">
-				<c:if test="${dto.writer eq id }">
-					<a href="private/updateform.do?num=${dto.num }" class="btn-a">수정</a>
-				</c:if>
-				<c:if test="${dto.writer eq id or id eq 'admin' }">
-					<a href="javascript:deleteConfirm();" class="btn-a btn-g">삭제</a>
-				</c:if>
-					
-			
-				</div>
-				<div class="center">
-					<a href="rev_list.do" class="review-btn2"><b>+</b> 전체 후기 보기</a>
-				</div>
-					
+	<!-- 로그인 중인 id가 글 작성 시의 id와 같을 때에만 수정, 삭제 기능 볼 수 있도록 -->
+		<div class="review-left">
+			<c:if test="${dto.writer eq id }">
+				<a href="private/updateform.do?num=${dto.num }" class="btn-a">수정</a>
+			</c:if>
+			<c:if test="${dto.writer eq id or id eq 'admin' }">
+				<a href="javascript:deleteConfirm();" class="btn-a btn-g">삭제</a>
+			</c:if>
+		</div>
+		<div class="center">
+			<a href="rev_list.do" class="review-btn2"><b>+</b> 전체 후기 보기</a>
+		</div>		
 </div><!-- content -->
 <script>
-	function deleteConfirm(){
-	    var isDelete=confirm("이 글을 삭제하시겠습니까?");
-	    if(isDelete){
-	        location.href="delete.do?num=${dto.num}";
-	    }
+	function deleteConfirm() {
+		var isDelete = confirm("이 글을 삭제하시겠습니까?");
+		if (isDelete) {
+			location.href = "delete.do?num=${dto.num}";
+		}
 	}
 </script>
-
 <%@include file="/../resources/footer.jsp"%><!-- footer -->

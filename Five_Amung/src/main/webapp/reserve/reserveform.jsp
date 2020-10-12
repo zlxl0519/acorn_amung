@@ -144,6 +144,7 @@
 			</h6>
 		</div>
 			<dl class="dogs-select">
+				<p style="color:red;">* 선택할 강아지가 없다면 강아지 정보를 먼저 저장해 주세요!!</p>
 				<dt>투숙 강아지 선택</dt>
 				<dd data-ng-repeat="tmp in dogList">
 						<input data-ng-change="isChecked('dog')" 
@@ -211,7 +212,6 @@
 		}
 		
 	});
-
 	$(function(){
 		$("#checkin").datepicker({
 			minDate:0, //오늘포함한 이후 날짜만 활성화
@@ -251,7 +251,6 @@
 			}
 		});
 		
-
 	});
 	
 </script>
