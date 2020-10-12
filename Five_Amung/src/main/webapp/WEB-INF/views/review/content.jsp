@@ -64,10 +64,8 @@
 							</div>
 						</div><!-- review-wrap-users -->
 						<!-- 별점 -->
-						<div class="review-wrap-con mt30">
-							<p class="review-webkit">
-								${dto.content }
-							</p>
+						<div class="c-review-wrap-con mt30">
+							<pre>${dto.content }</pre>
 						</div><!-- review-wrap-con -->
 					</div><!-- review-wrap -->
 				</li>
