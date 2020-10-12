@@ -44,7 +44,7 @@ public class AdminFilter implements Filter{
 			}else{
 				HttpServletResponse res = (HttpServletResponse)response;
 				String cPath = req.getContextPath();
-				res.sendRedirect(cPath+"/index.jsp");
+				res.sendRedirect(cPath+"/home.do");
 			}
 			
 		}else {//로그인 안 된 상태
