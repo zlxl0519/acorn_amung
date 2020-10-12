@@ -733,7 +733,9 @@ footer .copyright {
 	word-wrap: break-word;
 	line-height: 1.5em;
 }
-
+.review-wrap-con p.review-webkit{
+	display: inline-block;;
+}
 .review-btn {
 	background: rgb(250, 250, 252);
 	color: #97d2bf;
